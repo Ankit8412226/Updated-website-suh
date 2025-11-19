@@ -1,14 +1,22 @@
 "use client";
 
-import React, { useState } from "react";
 import axios from "axios";
+import { motion } from "framer-motion";
+import {
+  AlertCircle,
+  CheckCircle,
+  Loader,
+  Mail,
+  MapPin,
+  MessageCircle,
+  MessageSquare,
+  Phone,
+} from "lucide-react";
 import Image from "next/image";
+import { useState } from "react";
 import "react-phone-input-2/lib/style.css";
-import Button from "../../components/ui/button";
 import { Input } from "../../components/ui/input";
 import { Textarea } from "../../components/ui/textarea";
-import { motion } from "framer-motion";
-import { MessageSquare, CheckCircle, AlertCircle, Loader } from "lucide-react";
 
 function ContactFormSection() {
   // Form state management
@@ -27,6 +35,33 @@ function ContactFormSection() {
     isSuccess: false,
     message: "",
   });
+
+  const contactDetails = [
+    {
+      label: "Call us",
+      value: "+1 (415) 799-9007",
+      description: "North America",
+      icon: Phone,
+    },
+    {
+      label: "WhatsApp",
+      value: "+91 95757 12340",
+      description: "Instant project chat",
+      icon: MessageCircle,
+    },
+    {
+      label: "Email",
+      value: "hello@suhtech.com",
+      description: "24h response SLA",
+      icon: Mail,
+    },
+    {
+      label: "Offices",
+      value: "Pune • NYC",
+      description: "On-site workshops available",
+      icon: MapPin,
+    },
+  ];
 
   // Handle input changes
   const handleChange = (e) => {
@@ -165,8 +200,8 @@ function ContactFormSection() {
         </motion.div>
         <div className="container mx-auto mt-5">
           <div className="flex flex-col md:flex-row gap-8 md:gap-16">
-            {/* Left side - Image */}
-            <motion.div className="w-full md:w-1/2" variants={fadeIn}>
+            {/* Left side - Contact Details */}
+            <motion.div className="w-full md:w-1/2 space-y-6" variants={fadeIn}>
               <motion.div
                 className="relative h-full min-h-64 md:min-h-96"
                 whileHover={{
@@ -177,12 +212,66 @@ function ContactFormSection() {
               >
                 <Image
                   src="/images/WhatsApp_contact.jpg"
-                  alt="Diamond QR code fashion designs"
+                  alt="ArtofQR delivery pods collaborating"
                   width={500}
                   height={400}
                   className="rounded-lg object-cover w-full h-full max-h-125 shadow-lg border border-gray-100 dark:border-gray-700"
                 />
               </motion.div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {contactDetails.map(({ label, value, description, icon: Icon }) => {
+                  const isPhone = label === "Call us";
+                  const isWhatsApp = label === "WhatsApp";
+                  const isEmail = label === "Email";
+
+                  const getHref = () => {
+                    if (isPhone) return `tel:${value.replace(/\s/g, "")}`;
+                    if (isWhatsApp) return `https://wa.me/${value.replace(/[\s+]/g, "")}`;
+                    if (isEmail) return `mailto:${value}`;
+                    return "#";
+                  };
+
+                  const Component = (isPhone || isWhatsApp || isEmail) ? "a" : "div";
+
+                  return (
+                    <Component
+                      key={label}
+                      href={getHref()}
+                      target={isWhatsApp ? "_blank" : undefined}
+                      rel={isWhatsApp ? "noopener noreferrer" : undefined}
+                      className="rounded-2xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900/60 p-4 hover:border-blue-500 dark:hover:border-blue-400 hover:shadow-lg transition-all duration-300 cursor-pointer"
+                    >
+                      <div className="flex items-center gap-3">
+                        <div className="w-10 h-10 rounded-full bg-blue-100 dark:bg-blue-900/60 text-blue-600 dark:text-blue-400 flex items-center justify-center">
+                          <Icon size={18} />
+                        </div>
+                        <div>
+                          <p className="text-xs uppercase tracking-[0.3em] text-gray-500 dark:text-gray-400">
+                            {label}
+                          </p>
+                          <p className="text-base font-semibold text-gray-900 dark:text-white">
+                            {value}
+                          </p>
+                          <p className="text-xs text-gray-600 dark:text-gray-400">{description}</p>
+                        </div>
+                      </div>
+                    </Component>
+                  );
+                })}
+              </div>
+
+              <div className="rounded-2xl overflow-hidden border border-gray-100 dark:border-gray-800 shadow-lg">
+                <iframe
+                  title="ArtofQR HQ"
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3770.8584424944553!2d73.77911337535747!3d18.63069036431452!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2bfb1b7e3c6cb%3A0xc46b5e40b934df3!2sBaner%2C%20Pune%2C%20Maharashtra!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
+                  width="100%"
+                  height="220"
+                  loading="lazy"
+                  className="w-full"
+                  referrerPolicy="no-referrer-when-downgrade"
+                ></iframe>
+              </div>
             </motion.div>
 
             {/* Right side - Form */}
@@ -193,15 +282,16 @@ function ContactFormSection() {
                     className="text-2xl md:text-3xl font-bold mb-3 bg-gradient-to-r from-purple-600 to-blue-500 bg-clip-text text-transparent dark:from-purple-400 dark:to-blue-300"
                     variants={fadeDown}
                   >
-                    Questions About Custom Diamond QR Fashion?
+                    Tell us about your roadmap
                   </motion.h2>
                   <motion.p
                     className="text-gray-700 dark:text-gray-300 text-base"
                     variants={fadeUp}
                   >
-                    Whether you need help with your Diamond QR design, have
-                    questions about printing options, or want to discuss a bulk
-                    order, our team is ready to assist you.
+                    Share context on the product, integration, or marketing
+                    challenge you&apos;re facing. We reply within 24 hours with
+                    next steps, resourcing options, and a suggested workshop
+                    agenda.
                   </motion.p>
                 </motion.div>
 
@@ -295,7 +385,7 @@ function ContactFormSection() {
                         name="message"
                         value={formData.message}
                         onChange={handleChange}
-                        placeholder="Tell us about your Diamond QR code design idea or question"
+                        placeholder="Share goals, timelines, and the tech stack we should know about"
                         className={`p-3 rounded-md min-h-32 border-gray-200 dark:border-gray-700 dark:bg-gray-800/80 focus:border-purple-500 dark:focus:border-purple-400 focus:ring-2 focus:ring-purple-500/20 dark:focus:ring-purple-400/20 transition-all duration-300 ${
                           errors.message
                             ? "border-red-500 dark:border-red-500"
@@ -341,7 +431,7 @@ function ContactFormSection() {
                       ) : (
                         <>
                           <MessageSquare size={18} />
-                          <span>Send Message</span>
+                          <span>Send Project Brief</span>
                         </>
                       )}
                     </button>

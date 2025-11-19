@@ -74,7 +74,7 @@ function AboutWithVideoSection() {
     },
   };
   const handleButtonClick = () => {
-    router.push("/designer"); // Navigate to the text-to-Diamond QR page
+    router.push("/#contact");
   };
 
   return (
@@ -106,16 +106,16 @@ function AboutWithVideoSection() {
                     className="text-2xl sm:text-2xl md:text-2xl lg:text-4xl font-bold bg-gradient-to-r from-purple-600 to-blue-500 bg-clip-text text-transparent dark:from-purple-400 dark:to-blue-300 tracking-tight"
                     variants={fadeDown}
                   >
-                    More Than Meets the Eye
+                    Product Engineering with Enterprise Discipline
                   </motion.h2>
                   <motion.p
                     className="text-base md:text-lg text-gray-700 dark:text-gray-300 mt-4 max-w-lg mx-auto lg:mx-0"
                     variants={fadeUp}
                   >
-                    Every piece has layers. You see a pattern, a shape. Look
-                    closer—it&apos;s a message. Add a Diamond QR code, and
-                    suddenly, your art becomes a gateway to your world. A link
-                    to your work, your story, your next big idea.
+                    ArtofQR blends product strategists, designers, engineers,
+                    DevOps, and growth marketers into one pod. We align on
+                    measurable outcomes—faster releases, cleaner pipelines, and
+                    organic traffic that compounds month after month.
                   </motion.p>
 
                   <motion.div className="mt-2 sm:mt-4" variants={fadeUp}>
@@ -134,7 +134,7 @@ function AboutWithVideoSection() {
                       <Button
                         text={
                           <div className="flex items-center justify-center gap-2">
-                            <span>Watch How It Works</span>
+                            <span>Watch the Studio Reel</span>
                           </div>
                         }
                         className="w-full sm:w-auto h-12 flex items-center justify-center gap-2 shadow-lg bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 dark:from-blue-600 dark:to-purple-500 transition-all duration-300 cursor-pointer"
@@ -167,7 +167,7 @@ function AboutWithVideoSection() {
                   <div className="relative w-full h-[250px] sm:h-[300px] md:h-[250px] lg:h-[300px] overflow-hidden rounded-xl shadow-2xl border">
                     <Image
                       src="/images/about_img.png"
-                      alt="Diamond QR Design Process Video"
+                      alt="ArtofQR delivery studio"
                       fill
                       className="object-cover"
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 40vw"
@@ -230,16 +230,17 @@ function AboutWithVideoSection() {
                 className="text-xl sm:text-2xl md:text-3xl font-bold bg-gradient-to-r from-purple-600 to-blue-500 bg-clip-text text-transparent dark:from-purple-400 dark:to-blue-300 tracking-tight mb-4"
                 variants={fadeDown}
               >
-                Sustainable by Design
+                About ArtofQR
               </motion.h2>
               <motion.p
                 className="text-gray-700 dark:text-gray-300 text-sm sm:text-base md:text-lg max-w-3xl"
                 variants={fadeUp}
               >
-                We believe in less waste and more meaning. That&apos;s why we
-                offer the option to print your art on eco-friendly, GOTS and
-                GRS-certified clothing. No fast fashion, no throwaway
-                trends—just wearable self-expression with a purpose.
+                We are a remote-first product studio with delivery pods across
+                India, the EU, and North America. Our teams co-create with CTOs
+                and CMOs to launch revenue-ready software, modernize legacy
+                stacks, and run automated marketing engines that keep working
+                while you sleep.
               </motion.p>
             </motion.div>
 
@@ -267,13 +268,10 @@ function AboutWithVideoSection() {
                   Who We Are
                 </h3>
                 <p className="text-gray-700 dark:text-gray-300 text-base relative">
-                  Community of designers, engineers, typographers, and
-                  enthusiasts that bring you art that you can love. The purpose
-                  of Diamond QR.com is to build a community for people to
-                  express themselves without becoming a logo-wearing billboard.
-                  By making words into art we take what&apos;s important to us
-                  and allow it to have form. It&apos;s not branding, it&apos;s
-                  style
+                  Veteran builders behind fintech unicorns, SaaS exits, and
+                  award-winning brand sites. We bring product leadership, ISO
+                  grade security practices, and marketing intelligence into one
+                  engagement model so you never chase multiple vendors.
                 </p>
               </motion.div>
 
@@ -290,14 +288,12 @@ function AboutWithVideoSection() {
                 <div className="absolute -top-10 -right-10 w-32 h-32 bg-gradient-to-br from-purple-600/20 to-blue-500/20 rounded-full blur-xl" />
 
                 <h3 className="text-xl font-bold bg-gradient-to-r from-purple-600 to-blue-500 bg-clip-text text-transparent dark:from-purple-400 dark:to-blue-300 mb-4 relative">
-                  What&apos;s Our Vision
+                  Our Vision
                 </h3>
                 <p className="text-gray-700 dark:text-gray-300 text-base relative">
-                  To empower individuals to wear their identity and beliefs with
-                  pride—through art, not advertising. We envision a future where
-                  creativity, self-expression, and community-driven design shape
-                  how people connect and communicate, beyond brands and into
-                  something truly personal.
+                  To become the most trusted engineering desk for growth-stage
+                  teams that need reliable releases, airtight infrastructure,
+                  and SEO content engines built for intent-rich demand.
                 </p>
               </motion.div>
             </motion.div>
@@ -330,10 +326,10 @@ function AboutWithVideoSection() {
               >
                 {/* Card Template */}
                 {[
-                  { number: "3,500+", text: "Happy Customers" },
-                  { number: "$750K", text: "Seed Funding" },
-                  { number: "12", text: "Team Members" },
-                  { number: "40+", text: "Countries Served" },
+                  { number: "120+", text: "Digital launches" },
+                  { number: "48 hrs", text: "Average SLA response" },
+                  { number: "40%", text: "Avg. faster deployments" },
+                  { number: "6", text: "Global delivery hubs" },
                 ].map((item, index) => (
                   <motion.div
                     key={index}
@@ -391,9 +387,9 @@ function AboutWithVideoSection() {
                     Innovation
                   </h4>
                   <p className="text-gray-700 dark:text-gray-300 relative z-10">
-                    We're constantly pushing the boundaries of what's possible
-                    in wearable technology, seeking creative solutions to
-                    complex problems.
+                    We incubate internal accelerators for design systems,
+                    observability, and marketing automation so every client
+                    benefits on day one.
                   </p>
                 </motion.div>
                 <motion.div
@@ -413,11 +409,11 @@ function AboutWithVideoSection() {
                     />
                   </div>
                   <h4 className="font-semibold text-lg text-gray-900 dark:text-gray-100 mb-3 relative z-10">
-                    Integrity
+                    Security
                   </h4>
                   <p className="text-gray-700 dark:text-gray-300 relative z-10">
-                    We build trust through transparency, ethical practices, and
-                    a commitment to quality in every product we create.
+                    Every workflow respects SOC2-ready controls, audit-friendly
+                    documentation, and zero-trust infrastructure patterns.
                   </p>
                 </motion.div>
                 <motion.div
@@ -437,11 +433,11 @@ function AboutWithVideoSection() {
                     />
                   </div>
                   <h4 className="font-semibold text-lg text-gray-900 dark:text-gray-100 mb-3 relative z-10">
-                    Community
+                    Partnership
                   </h4>
                   <p className="text-gray-700 dark:text-gray-300 relative z-10">
-                    We believe in fostering connections through technology and
-                    supporting the creative entrepreneurs who use our platform.
+                    We embed with your squads, sharing rituals, OKRs, and
+                    on-call rotations so knowledge never leaves with individuals.
                   </p>
                 </motion.div>
               </div>
@@ -467,17 +463,15 @@ function AboutWithVideoSection() {
                 className="text-xl sm:text-2xl font-bold text-white mb-4 relative z-10"
                 variants={fadeDown}
               >
-                For the Creators, the Dreamers, the Doers
+                Ready to Launch the Next Release?
               </motion.h3>
               <motion.p
                 className="text-white/90 mb-6 max-w-2xl mx-auto relative z-10"
                 variants={fadeUp}
               >
-                Gen Z is rewriting the rules. Over half of us want to be
-                entrepreneurs, and all of us are juggling a million thoughts at
-                once. Creativity is our outlet. It&apos;s how we process, how we
-                share, how we breathe. Our designs are made for this
-                mindset—quick to create, easy to share, and deeply personal.
+                Ship a user-facing milestone in 90 days with an ArtofQR product
+                pod—PM, UX, engineering, QA, DevOps, and SEO riding the same
+                sprint cadence.
               </motion.p>
               <motion.div
                 className="mt-2 sm:mt-4 relative z-10"
@@ -497,7 +491,7 @@ function AboutWithVideoSection() {
                       <div className="flex items-center justify-center gap-2">
                         <Sparkles size={18} />
                         <span className="text-gray-800 dark:text-gray-100">
-                          Get Started
+                          Plan a Workshop
                         </span>
                       </div>
                     }

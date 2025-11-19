@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState, useRef } from "react";
 import Button from "@/components/ui/button";
-import { ArrowRight, Wand2 } from "lucide-react";
+import { ArrowRight, Sparkles } from "lucide-react";
 import { motion, useViewportScroll, useTransform } from "framer-motion";
 import { useRouter } from "next/navigation";
 
@@ -87,8 +87,12 @@ const HeroSection = () => {
     },
   };
 
-  const handleButtonClick = () => {
-    router.push("/designer");
+  const handleBookDemo = () => {
+    router.push("/contact");
+  };
+
+  const handleGetQuote = () => {
+    router.push("/services");
   };
 
   return (
@@ -110,24 +114,22 @@ const HeroSection = () => {
                 className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl xl:text-6xl font-bold bg-gradient-to-r from-purple-600 to-blue-500 bg-clip-text text-transparent dark:from-purple-400 dark:to-blue-300 leading-tight"
                 variants={fadeDown}
               >
-                Express Yourself. No Labels, Just Art.
+                Build Secure, SEO-Ready Digital Products Faster.
               </motion.h1>
 
               <motion.p
                 className="text-base md:text-lg text-gray-700 dark:text-gray-300 mt-6 max-w-lg mx-auto lg:mx-0"
                 variants={fadeUp}
               >
-                We live in a world where everyone is their own brand. But what
-                if self-expression wasn&apos;t about logos or labels? What if it
-                was about creating something uniquely yours? Our platform
-                transforms words into striking geometric art—Square Kufic meets
-                the Latin alphabet. Whether it&apos;s your name, a mantra, or a
-                secret message, craft it into a perfect square. Bold. Personal.
-                Yours.
+                We are an end-to-end IT partner for funded startups and digital
+                enterprises. From UX to infrastructure, our pods ship conversion
+                optimized web apps, native mobile experiences, automated CI/CD
+                pipelines, and measurable SEO growth—without disrupting your
+                roadmap.
               </motion.p>
 
               <motion.div
-                className="mt-8 max-w-xs sm:max-w-sm mx-auto lg:mx-0"
+                className="mt-8 flex flex-col sm:flex-row gap-4 max-w-xl mx-auto lg:mx-0"
                 variants={fadeUp}
               >
                 <motion.div
@@ -137,13 +139,14 @@ const HeroSection = () => {
                     transition: { type: "spring", stiffness: 400, damping: 20 },
                   }}
                   whileTap={{ scale: 0.98 }}
+                  className="flex-1"
                 >
                   <Button
-                    onClick={handleButtonClick}
+                    onClick={handleBookDemo}
                     text={
                       <div className="flex items-center justify-center gap-2 cursor-pointer">
-                        <Wand2 size={18} className="cursor-pointer" />
-                        <span>Design Your Diamond QR</span>
+                        <Sparkles size={18} className="cursor-pointer" />
+                        <span>Book a Demo</span>
                         <motion.div
                           animate={{
                             x: [0, 5, 0],
@@ -164,6 +167,46 @@ const HeroSection = () => {
                     className="flex items-center justify-center gap-2 shadow-lg bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 dark:from-blue-600 dark:to-purple-500 transition-all duration-300 cursor-pointer"
                   />
                 </motion.div>
+
+                <motion.div
+                  whileHover={{
+                    scale: 1.05,
+                    boxShadow: "0px 10px 25px rgba(0, 0, 0, 0.15)",
+                    transition: { type: "spring", stiffness: 400, damping: 20 },
+                  }}
+                  whileTap={{ scale: 0.98 }}
+                  className="flex-1"
+                >
+                  <Button
+                    onClick={handleGetQuote}
+                    text={
+                      <div className="flex items-center justify-center gap-2 cursor-pointer">
+                        <span className="text-blue-600 dark:text-blue-400 font-semibold">Get a Quote</span>
+                      </div>
+                    }
+                    width="w-full"
+                    height="h-12"
+                    className="flex items-center justify-center gap-2 shadow-lg bg-white dark:bg-gray-900 border-2 border-blue-600 dark:border-blue-500 hover:bg-blue-50 dark:hover:bg-gray-800 hover:border-blue-700 dark:hover:border-blue-400 transition-all duration-300 cursor-pointer"
+                  />
+                </motion.div>
+              </motion.div>
+
+              <motion.div
+                className="mt-8 grid grid-cols-2 sm:grid-cols-3 gap-4 text-sm text-gray-600 dark:text-gray-300"
+                variants={fadeUp}
+              >
+                {[
+                  "ISO 27001-ready delivery",
+                  "CNCF & AWS certified teams",
+                  "90-day release guarantee",
+                ].map((item) => (
+                  <div
+                    key={item}
+                    className="rounded-xl border border-gray-100 dark:border-gray-800 bg-white/70 dark:bg-gray-900/50 px-4 py-3 backdrop-blur-sm"
+                  >
+                    {item}
+                  </div>
+                ))}
               </motion.div>
             </motion.div>
           </motion.div>

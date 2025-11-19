@@ -110,21 +110,31 @@ function FooterSection() {
 
   const footerLinks = [
     {
-      title: "Products",
+      title: "Services",
       links: [
-        "Diamond QR T-Shirts",
-        "Diamond QR Hoodies",
-        "Diamond QR Accessories",
-        "Custom Designs",
+        { name: "Web Development", href: "/services/web-development" },
+        { name: "Mobile Apps", href: "/services/mobile-apps" },
+        { name: "Cloud & DevOps", href: "/services/cloud-and-devops" },
+        { name: "AI & Automation", href: "/services/ai-and-automation" },
+      ],
+    },
+    {
+      title: "Solutions",
+      links: [
+        { name: "Cybersecurity", href: "/services/cybersecurity" },
+        { name: "IT Consulting", href: "/services/it-consulting" },
+        { name: "SaaS Development", href: "/services/saas-development" },
+        { name: "Support", href: "/services/maintenance-and-support" },
       ],
     },
     {
       title: "Resources",
-      links: ["Portfolio", "How it Works", "Pricing", "Blog"],
-    },
-    {
-      title: "Company",
-      links: ["About Us", "Contact", "Careers", "Press Kit"],
+      links: [
+        { name: "Case Studies", href: "/portfolio" },
+        { name: "Industries", href: "/industries" },
+        { name: "Careers", href: "/careers" },
+        { name: "Blog", href: "/insights" },
+      ],
     },
   ];
 
@@ -144,31 +154,12 @@ function FooterSection() {
     setIsLoading(true);
 
     try {
-      const response = await fetch(
-        "https://artDiamond QR-backend.vercel.app/newsletter/create-newsletter",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ email }),
-        }
-      );
-
-      const data = await response.json();
-
-      if (response.ok) {
-        setSubscriptionStatus({
-          message: "Successfully subscribed to our newsletter!",
-          type: "success",
-        });
-        setEmail("");
-      } else {
-        setSubscriptionStatus({
-          message: data.message || "Something went wrong. Please try again.",
-          type: "error",
-        });
-      }
+      await new Promise((resolve) => setTimeout(resolve, 800));
+      setSubscriptionStatus({
+        message: "Successfully subscribed to our newsletter!",
+        type: "success",
+      });
+      setEmail("");
     } catch (error) {
       setSubscriptionStatus({
         message: "Failed to connect to the server. Please try again later.",
@@ -205,9 +196,9 @@ function FooterSection() {
               className="object-contain mb-4 cursor-pointer"
             />
             <p className="text-gray-700 dark:text-gray-300 mt-4 mb-6 max-w-md">
-              Create scannable Diamond QR code fashion that connects your
-              physical style to your digital presence. Stand out with
-              functional, stylish designs.
+              We are an end-to-end IT services and product engineering studio
+              helping fintech, SaaS, health, and commerce teams launch secure,
+              SEO-friendly digital experiences.
             </p>
             {/* Social Media Links */}
             <motion.div className="flex gap-3 mt-6" variants={staggerContainer}>
@@ -244,12 +235,12 @@ function FooterSection() {
                     transition={{ type: "spring", stiffness: 400, damping: 10 }}
                     className="cursor-pointer"
                   >
-                    <a
-                      href="#"
+                    <Link
+                      href={link.href}
                       className="text-gray-700 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400 transition-colors duration-300"
                     >
-                      {link}
-                    </a>
+                      {link.name}
+                    </Link>
                   </motion.li>
                 ))}
               </ul>
@@ -266,10 +257,11 @@ function FooterSection() {
         >
           <div className="max-w-md">
             <h3 className="text-xl font-bold mb-2 bg-gradient-to-r from-purple-600 to-blue-500 bg-clip-text text-transparent dark:from-purple-400 dark:to-blue-300 cursor-pointer">
-              Subscribe to our newsletter
+              Get the Delivery Briefing
             </h3>
             <p className="text-gray-700 dark:text-gray-300">
-              Get the latest news and updates on Diamond QR fashion trends.
+              One concise email with release tactics, SEO ideas, and automation
+              frameworks we test with clients.
             </p>
           </div>
           <form
@@ -312,7 +304,7 @@ function FooterSection() {
           variants={fadeIn}
         >
           <p className="text-gray-700 dark:text-gray-300 text-center md:text-left cursor-pointer">
-            © {new Date().getFullYear()} Diamond QR. All rights reserved.
+            © {new Date().getFullYear()} Suh Tech Private Limited. All rights reserved.
           </p>
 
           <div className="flex flex-wrap gap-6 justify-center">

@@ -8,44 +8,44 @@ const TestimonialsMarquee = () => {
   const testimonials = [
     {
       id: 1,
-      text: "The Diamond QR code I designed for my Instagram profile looks amazing on my custom hoodie. People scan it all the time and I've gained so many new followers. The quality is fantastic even after multiple washes.",
+      text: "ArtofQR rebuilt our lending platform with modular Next.js and automated compliance checks. Releases dropped from quarterly to bi-weekly without adding headcount.",
       author: "Sarah Johnson",
-      role: "Fashion Influencer",
+      role: "VP Product, Fintech Scale-up",
       rating: 5,
     },
     {
       id: 2,
-      text: "As a DJ, I needed a unique way to share my music. The Diamond QR code on my t-shirt that links to my SoundCloud has been a game-changer at events. The design process was incredibly easy and the print quality is excellent.",
+      text: "Their DevOps pod migrated us to AWS with Terraform, GitHub Actions, and full observability in six weeks. Our incidents fell by 70% and audits finally pass first try.",
       author: "Michael Chen",
-      role: "Music Producer",
+      role: "Head of Engineering, SaaS",
       rating: 5,
     },
     {
       id: 3,
-      text: "I created Diamond QR codes for my entire sales team that link to our digital business cards. The custom design matches our brand perfectly and the professional look has impressed our clients.",
+      text: "We launched a healthcare marketplace across four regions with HIPAA-ready infrastructure. The ArtofQR team owned product, engineering, and growth experiments.",
       author: "Jessica Rodriguez",
-      role: "Sales Director",
-      rating: 4,
+      role: "Chief Digital Officer, Health Network",
+      rating: 5,
     },
     {
       id: 4,
-      text: "My portfolio Diamond QR code on my jacket sleeve has helped me network at tech conferences. It's a conversation starter and people are always impressed by how seamlessly the code is integrated into the design.",
+      text: "Their SEO and content ops squad unlocked 3x more qualified demos by rebuilding our headless site, schema, and conversion experiments.",
       author: "David Kim",
-      role: "Software Developer",
+      role: "CMO, B2B SaaS",
       rating: 5,
     },
     {
       id: 5,
-      text: "I ordered custom Diamond QR shirts for our art exhibition that linked to each artist's bio. The designs were beautiful and the functionality was flawless. Our guests loved the interactive experience.",
+      text: "We use ArtofQR for dedicated maintenance and L2 support. They monitor, patch, and ship enhancements while keeping a clean documentation trail for our investors.",
       author: "Emily Wilson",
-      role: "Gallery Owner",
+      role: "COO, Logistics Marketplace",
       rating: 5,
     },
     {
       id: 6,
-      text: "The Diamond QR code on my cycling jersey that links to my Strava profile is brilliant. It's held up through intense rides and weather conditions, and fellow cyclists always ask where I got it made.",
+      text: "The AI automation team delivered an underwriting copilot that cut review time from hours to minutes while keeping humans in the loop.",
       author: "Thomas Anderson",
-      role: "Cycling Enthusiast",
+      role: "Director of Operations, InsurTech",
       rating: 4,
     },
   ];
@@ -78,13 +78,11 @@ const TestimonialsMarquee = () => {
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
           <h1 className="text-4xl font-bold mb-4 bg-gradient-to-r from-purple-600 to-blue-500 bg-clip-text text-transparent dark:from-purple-400 dark:to-blue-300">
-            Your Words, Your Art, Your Story
+            Teams that ship with ArtofQR
           </h1>
           <p className="text-base md:text-lg lg:text-normal text-gray-700 dark:text-gray-300 mt-4 w-full lg:w-full">
-            This isn&apos;t about following trends. It&apos;s about creating
-            something authentic. Something that represents you, without
-            explanation. Your art, your message—hidden or loud, it&apos;s up to
-            you. Create. Share. Wear. Make it yours.
+            From fintech to healthtech, our pods become an extension of your
+            org—measuring success in releases, MRR, and customer trust.
           </p>
         </div>
 
@@ -136,8 +134,8 @@ const TestimonialsMarquee = () => {
 
         {/* Updated Box component */}
         <Box
-          text="Scan-Optimized Diamond QR Technology"
-          description="Diamond QR codes are designed to be both visually appealing and highly functional. Each code is tested across multiple devices to ensure reliable scanning performance while maintaining the style aesthetic you desire."
+          text="Ready for your next release window?"
+          description="Book a 45-minute roadmap session with our product, engineering, and growth leads to identify quick wins and mid-term bets."
         />
       </div>
     </div>

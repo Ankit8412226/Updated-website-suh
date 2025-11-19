@@ -7,8 +7,8 @@ import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 
 const Box = ({
-  text = "Get Started With Exyntra Risk-free!",
-  description = "Exyntra combines data, personalization, and cross-channel experiences to unify analytics, data, and operations—all powered by AI. Register now with a zero-risk free trial.",
+  text = "Ship faster with ArtofQR product pods",
+  description = "Partner with a dedicated team across product, engineering, DevOps, and growth. We plug into your roadmap, automate delivery, and report progress weekly.",
 }) => {
   const router = useRouter();
 
@@ -23,7 +23,7 @@ const Box = ({
   };
 
   const handleButtonClick = () => {
-    router.push("/designer"); // Navigate to the text-to-Diamond QR page
+    router.push("/#contact");
   };
 
   return (
@@ -96,7 +96,7 @@ const Box = ({
               onClick={handleButtonClick}
               text={
                 <div className="flex items-center justify-center gap-2">
-                  <span>Create Now</span>
+                  <span>Book strategy call</span>
                   <motion.div
                     animate={{
                       x: [0, 5, 0],

@@ -121,34 +121,34 @@ function FAQSection() {
   // FAQ data
   const faqItems = [
     {
-      question: "How do  Diamond QR on clothing work?",
+      question: "How fast can you kick off a project?",
       answer:
-        "Diamond QR are printed using high-quality, durable ink that withstands washing and wear. When scanned with any smartphone camera, they direct to your customized digital profile, website, or social media page of your choice.",
+        "Discovery workshops begin within five business days. Once scope is agreed, your dedicated pod starts sprint one in under two weeks with a shared backlog and success metrics.",
     },
     {
-      question: "Are the Diamond QR washable?",
+      question: "Can you co-build with our internal team?",
       answer:
-        "Yes! Diamond QR are printed with specialized ink that remains scannable after multiple wash cycles. We recommend washing inside-out with cold water and avoiding harsh bleaching agents to maximize longevity.",
+        "Yes. We embed into your rituals, tools, and QA gates. Expect shared Slack channels, joint standups, paired programming, and transparent burndown charts.",
     },
     {
-      question: "Can I customize what my Diamond QR links to?",
+      question: "What DevOps and CI/CD support do you provide?",
       answer:
-        "Absolutely. During checkout, you'll create an account that allows you to set and update your Diamond QR destination anytime. Link to your portfolio, social media, business page, or even create a special landing page.",
+        "We provision cloud landing zones, set up GitHub Actions or GitLab pipelines, manage Kubernetes or serverless deployments, and configure observability with automated rollbacks.",
     },
     {
-      question: "What materials are your products made from?",
+      question: "How do you manage security and compliance?",
       answer:
-        "We use premium 100% organic cotton for our t-shirts and hoodies, ensuring both comfort and sustainability. Our accessories feature recycled materials wherever possible, aligning with our commitment to eco-friendly fashion.",
+        "Zero-trust architecture, secrets management, and infrastructure as code are standard. We deliver artifacts for SOC2, ISO 27001, HIPAA, and GDPR audits when required.",
     },
     {
-      question: "Do you offer international shipping?",
+      question: "Which engagement models are available?",
       answer:
-        "Yes, we ship worldwide! International orders typically arrive within 7-14 business days. Shipping costs vary by location and will be calculated at checkout.",
+        "Monthly pods, fixed-scope builds, or dedicated DevOps/SEO retainers. All options include weekly status notes, quarterly steering reviews, and shared OKRs.",
     },
     {
-      question: "What if my Diamond QR stops working?",
+      question: "Do you offer post-launch support?",
       answer:
-        "We stand behind our products with a lifetime Diamond QR guarantee. If your code ever stops scanning properly due to normal wear and tear, we'll replace your item free of charge.",
+        "Absolutely. Every go-live includes 30 days of hypercare plus optional 24/7 monitoring, feature grooming, SEO upkeep, and analytics reporting.",
     },
   ];
 
@@ -185,8 +185,8 @@ function FAQSection() {
             className="text-base md:text-lg text-gray-700 dark:text-gray-300 max-w-2xl mx-auto cursor-pointer"
             variants={fadeUp}
           >
-            Everything you need to know about our Diamond QR code fashion
-            products and services.
+            Answers about ArtofQR pods, delivery rituals, tooling, and ongoing
+            support.
           </motion.p>
         </motion.div>
 
@@ -268,11 +268,11 @@ function FAQSection() {
         >
           <motion.div className="mb-8" variants={fadeIn}>
             <h3 className="text-2xl font-semibold text-center bg-gradient-to-r from-purple-600 to-pink-500 bg-clip-text text-transparent mb-4">
-              Tell Us About You
+              Project Fit Snapshot
             </h3>
             <p className="text-gray-700 dark:text-gray-300 text-center">
-              Still have questions? We're here to help! Tell us about yourself
-              and we'll get back to you with personalized assistance.
+              Still exploring? Share a few details and we&apos;ll send a
+              readiness checklist plus recommended next steps.
             </p>
           </motion.div>
 
@@ -309,7 +309,7 @@ function FAQSection() {
               {/* Interest Field */}
               <div>
                 <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                  Your Interest
+                  Company / Team
                 </label>
                 <input
                   type="text"
@@ -318,14 +318,14 @@ function FAQSection() {
                   onChange={handleInputChange}
                   required
                   className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 dark:bg-gray-800 dark:text-white"
-                  placeholder="Fashion, Technology, etc."
+                  placeholder="Product org, marketing, platform, etc."
                 />
               </div>
 
               {/* Favorite Field */}
               <div>
                 <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                  Your Favorite
+                  Priority Focus
                 </label>
                 <input
                   type="text"
@@ -334,7 +334,7 @@ function FAQSection() {
                   onChange={handleInputChange}
                   required
                   className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 dark:bg-gray-800 dark:text-white"
-                  placeholder="Color, Food, Activity, etc."
+                  placeholder="Migration, launch, SEO, AI, etc."
                 />
               </div>
             </div>

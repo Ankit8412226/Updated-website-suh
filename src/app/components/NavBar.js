@@ -8,16 +8,13 @@ import ModeToggle from "@/components/ModeToggle";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import Logo from "../../../public/images/logo.png";
-import { useRouter } from "next/navigation";
-import DesignModal from "./DesignModal"; // Import the new DesignModal component
+import { useRouter, usePathname } from "next/navigation";
 
 function NavBar() {
   const [menu, setMenu] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const router = useRouter();
-  const [activeSection, setActiveSection] = useState("hero");
-  // New state for modal
-  const [designModalOpen, setDesignModalOpen] = useState(false);
+  const pathname = usePathname();
 
   // Handle scroll effect
   useEffect(() => {
@@ -33,44 +30,17 @@ function NavBar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Track active section based on scroll position - improved implementation
-  useEffect(() => {
-    const handleActiveSection = () => {
-      const sections = navItems.map((item) => item.id);
-
-      // Find the section closest to the top of the viewport
-      let currentSection = null;
-      let minDistance = Infinity;
-
-      sections.forEach((section) => {
-        const element = document.getElementById(section);
-        if (element) {
-          const rect = element.getBoundingClientRect();
-          const distance = Math.abs(rect.top);
-
-          // If this section is closer to the top than previous ones
-          if (distance < minDistance) {
-            minDistance = distance;
-            currentSection = section;
-          }
-        }
-      });
-
-      if (currentSection) {
-        setActiveSection(currentSection);
-      }
-    };
-
-    // Initial check
-    handleActiveSection();
-
-    window.addEventListener("scroll", handleActiveSection);
-    return () => window.removeEventListener("scroll", handleActiveSection);
-  }, []);
+  // Check if a nav item is active based on the current pathname
+  const isActive = (href) => {
+    if (href === "/") {
+      return pathname === "/";
+    }
+    return pathname.startsWith(href);
+  };
 
   // Disable body scroll when menu is open
   useEffect(() => {
-    if (menu || designModalOpen) {
+    if (menu) {
       document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "auto";
@@ -78,7 +48,7 @@ function NavBar() {
     return () => {
       document.body.style.overflow = "auto";
     };
-  }, [menu, designModalOpen]);
+  }, [menu]);
 
   const toggleMenu = () => {
     setMenu(!menu);
@@ -172,56 +142,25 @@ function NavBar() {
     },
   };
 
-  // Updated navItems array with new Design section
   const navItems = [
-    { name: "Home", id: "hero" },
-    { name: "About Us", id: "about" },
-    { name: "Design", id: "design" },
-    { name: "Contacts", id: "contact" },
+    { name: "Home", href: "/" },
+    { name: "Services", href: "/services" },
+    { name: "Industries", href: "/industries" },
+    { name: "Portfolio", href: "/portfolio" },
+    { name: "Insights", href: "/insights" },
+    { name: "Careers", href: "/careers" },
+    { name: "Contact", href: "/contact" },
   ];
-
-  // Handle modal functions
-  const openDesignModal = (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    setDesignModalOpen(true);
-    // Close mobile menu if open
-    if (menu) setMenu(false);
-  };
-
-  const closeDesignModal = () => {
-    setDesignModalOpen(false);
-  };
-
-  const handleGuidedDesign = () => {
-    closeDesignModal();
-    // Navigate to guided design flow
-    router.push("/#tellUsAboutYou");
-  };
-
-  const handleSkipDesign = () => {
-    closeDesignModal();
-    // Navigate directly to designer
-    router.push("/designer");
-  };
 
   const handleNavItemClick = (item) => {
     // Close mobile menu if open
     if (menu) setMenu(false);
 
-    // If the Design section is clicked, open the modal instead of navigating
-    if (item.id === "design") {
-      setDesignModalOpen(true);
-    } else {
-      // For all other items, navigate to home page with hash fragment
-      router.push(`/#${item.id}`);
-      // Update active section immediately
-      setActiveSection(item.id);
-    }
+    router.push(item.href);
   };
 
   const handleButtonClick = () => {
-    router.push("/designer"); // Navigate to the text-to-Diamond QR page
+    router.push("/contact");
   };
 
   return (
@@ -284,21 +223,17 @@ function NavBar() {
                   variants={textAnimationVariants}
                   whileHover="hover"
                   className={`cursor-pointer font-semibold transition-colors duration-300 py-1 px-2 ${
-                    activeSection === item.id
+                    isActive(item.href)
                       ? "text-blue-600 dark:text-blue-400"
                       : "text-gray-700 dark:text-gray-100"
                   }`}
-                  onClick={
-                    item.id === "design"
-                      ? openDesignModal
-                      : () => handleNavItemClick(item)
-                  }
+                  onClick={() => handleNavItemClick(item)}
                 >
                   {item.name}
                 </motion.p>
 
                 {/* Active indicator with fixed positioning */}
-                {activeSection === item.id && (
+                {isActive(item.href) && (
                   <motion.div
                     layoutId="activeIndicator"
                     className="h-0.5 bg-gradient-to-r from-blue-500 to-purple-600 absolute -bottom-1 left-0 w-full"
@@ -309,7 +244,7 @@ function NavBar() {
                 )}
 
                 {/* Hover indicator (only visible when not active) */}
-                {activeSection !== item.id && (
+                {!isActive(item.href) && (
                   <motion.div
                     initial={{ width: 0, opacity: 0 }}
                     whileHover={{ width: "100%", opacity: 1 }}
@@ -337,7 +272,7 @@ function NavBar() {
                 onClick={handleButtonClick}
                 text={
                   <div className="flex items-center justify-center gap-2 px-1">
-                    <span>Create Now</span>
+                    <span>Book Demo</span>
                     <motion.div
                       animate={{
                         x: [0, 5, 0],
@@ -408,11 +343,7 @@ function NavBar() {
                   custom={i}
                   variants={menuItemVariants}
                   className="mb-6 w-full text-center relative"
-                  onClick={
-                    item.id === "design"
-                      ? openDesignModal
-                      : () => handleNavItemClick(item)
-                  }
+                  onClick={() => handleNavItemClick(item)}
                 >
                   <motion.div
                     whileHover={{
@@ -421,7 +352,7 @@ function NavBar() {
                       transition: { duration: 0.2 },
                     }}
                     className={`cursor-pointer w-full text-xl sm:text-2xl font-semibold py-3 relative overflow-visible ${
-                      activeSection === item.id
+                      isActive(item.href)
                         ? "text-blue-600 dark:text-blue-400"
                         : "text-gray-700 dark:text-gray-100"
                     }`}
@@ -429,7 +360,7 @@ function NavBar() {
                     <span>{item.name}</span>
 
                     {/* Active indicator for mobile */}
-                    {activeSection === item.id && (
+                    {isActive(item.href) && (
                       <motion.span
                         layoutId="mobileActiveIndicator"
                         className="absolute -bottom-1 left-1/4 right-1/4 h-0.5 bg-gradient-to-r from-blue-500 to-purple-600"
@@ -440,7 +371,7 @@ function NavBar() {
                     )}
 
                     {/* Hover indicator for mobile (only visible when not active) */}
-                    {activeSection !== item.id && (
+                    {!isActive(item.href) && (
                       <motion.span
                         initial={{ width: 0, opacity: 0, x: "-50%" }}
                         whileHover={{ width: "50%", opacity: 1 }}
@@ -467,7 +398,7 @@ function NavBar() {
                     onClick={handleButtonClick}
                     text={
                       <div className="flex items-center justify-center gap-2 px-1">
-                        <span>Create Now</span>
+                        <span>Book Demo</span>
                         <motion.div
                           animate={{
                             x: [0, 5, 0],
@@ -494,17 +425,6 @@ function NavBar() {
         )}
       </AnimatePresence>
 
-      {/* Design Modal - Appears when Design nav item is clicked */}
-      <AnimatePresence>
-        {designModalOpen && (
-          <DesignModal
-            isOpen={designModalOpen}
-            onClose={closeDesignModal}
-            onGuideSelect={handleGuidedDesign}
-            onSkipSelect={handleSkipDesign}
-          />
-        )}
-      </AnimatePresence>
     </>
   );
 }

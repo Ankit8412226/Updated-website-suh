@@ -145,7 +145,7 @@ function Newsletter() {
       <AnimatePresence>
         {toast.visible && (
           <motion.div
-            className={`fixed top-4 right-4 z-50 max-w-md shadow-lg rounded-lg overflow-hidden flex items-center 
+            className={`fixed top-4 right-4 z-50 max-w-md shadow-lg rounded-lg overflow-hidden flex items-center
               ${
                 toast.type === "success"
                   ? "bg-green-50 dark:bg-green-900/30"
@@ -215,7 +215,7 @@ function Newsletter() {
             className="text-2xl sm:text-2xl md:text-2xl lg:text-4xl text-center font-bold bg-gradient-to-r from-purple-600 to-blue-500 bg-clip-text text-transparent dark:from-purple-400 dark:to-blue-300 tracking-tight"
             variants={fadeDown}
           >
-            Subscribe to Our Style Newsletter
+            Join the ArtofQR Delivery Briefing
           </motion.h2>
 
           <div className="flex flex-col md:flex-row items-center justify-between gap-6 lg:gap-16 mt-6 md:mt-12">
@@ -244,13 +244,10 @@ function Newsletter() {
                 className="text-base md:text-lg lg:text-normal text-gray-700 dark:text-gray-300 mt-4 w-full lg:w-full"
                 variants={fadeUp}
               >
-                Be the first to discover new Diamond QR design trends, limited
-                edition patterns, and exclusive tutorials for creating your own
-                custom Diamond QR codes for apparel. Our weekly newsletter
-                features design inspiration, promotional offers, and early
-                access to new customization tools. Join our community of
-                fashion-forward tech enthusiasts who express their unique style
-                through wearable Diamond QR designs.
+                Weekly notes on shipping software faster: CI/CD recipes,
+                high-converting UX patterns, SEO playbooks, and automation ideas
+                we test inside ArtofQR pods. No spam—just actionable insights
+                for CTOs, PMs, and growth leaders.
               </motion.p>
 
               <motion.div

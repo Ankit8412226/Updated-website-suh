@@ -1,82 +1,59 @@
-import { Geist_Mono } from "next/font/google";
+import { Geist_Mono, Inter, Poppins } from "next/font/google";
 import localFont from "next/font/local";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 
-// Load local font but do NOT apply globally
-
-// Keep Geist Mono as the global font
 const geistMono = Geist_Mono({
   subsets: ["latin"],
   variable: "--font-geist-mono",
 });
 
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+  display: "swap",
+});
+
+const poppins = Poppins({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-poppins",
+  display: "swap",
+});
+
 export const metadata = {
-  title: "Diamond QR | Custom QR Code T-Shirts, Mugs, Hoodies, Caps & More",
+  title: "Suh Tech Private Limited | Full-Stack IT Services, Product Engineering & DevOps",
   description:
-    "Design and buy Diamond-quality QR code graphics on T-shirts, mugs, hoodies, caps, and more. Featuring kufic patterns, text-based logos, and Printful-powered ecommerce printing.",
+    "Suh Tech Private Limited builds high-performing web and mobile apps, modernizes cloud infrastructure, automates CI/CD pipelines, and drives growth with SEO-focused digital products.",
   keywords: [
-    "diamond qr",
-    "diamond logo",
-    "diamond qr code",
-    "diamond style shirt",
-    "diamond kufic pattern",
-    "qr design",
-    "custom qr",
-    "qr t-shirt",
-    "qr code cap",
-    "qr mug",
-    "qr hoodie",
-    "qr code sweatshirt",
-    "text qr code",
-    "cufic design",
-    "typographic qr",
-    "islamic qr pattern",
-    "arabic calligraphy logo",
-    "qr tshirt india",
-    "buy qr tshirt online",
-    "ecommerce qr product",
-    "custom qr graphic hoodie",
-    "modern kufic calligraphy",
-    "qr code art hoodie",
-    "qr generator stylish",
-    "advanced qr print design",
-    "custom qr print mug",
-    "personalized qr t-shirt",
-    "qr code on bucket hat",
-    "qr text logo mug",
-    "order qr print",
-    "minimalist qr hoodie",
-    "qr arabic kufic",
-    "buy qr fashion cap",
-    "design logo kufi",
-    "custom kufic bucket hat",
-    "qr textile hoodie",
-    "fashion qr generator hoodie",
-    "qr hoodie printing",
-    "create qr with name hoodie",
-    "diamond qr printing",
-    "printful qr shirts",
-    "diamond qr mugs",
-    "diamond qr cap design",
-    "diamond ecommerce shop",
-    "diamond brand printing",
-    "diamond kufic tshirt",
-    // You can continue this with 800 similar pattern-based, product-inclusive, and diamond-branded keywords
+    "it services company",
+    "product engineering studio",
+    "devops automation partner",
+    "cicd implementation",
+    "cloud migration experts",
+    "custom web app development",
+    "mobile application development",
+    "ai and automation agency",
+    "managed it support",
+    "technology consulting",
+    "saas development team",
+    "seo friendly websites",
+    "kubernetes engineers",
+    "react node agency",
+    "aws certified partner",
   ],
   openGraph: {
-    title:
-      "Diamond QR | QR Fashion & Print Store – T-Shirts, Mugs, Hoodies, More",
+    title: "Suh Tech Private Limited | Digital Product & IT Services Agency",
     description:
-      "Design QR code graphics, kufic logos, and Diamond QR art for printing on T-shirts, mugs, hoodies, caps and more. Built with Printful and creativity.",
-    url: "https://www.diamondqr.com/",
-    siteName: "Diamond QR",
+      "Strategy-to-scale engineering partner for web, mobile, cloud, AI, and cybersecurity programs.",
+    url: "https://www.suhtech.com/",
+    siteName: "Suh Tech Private Limited",
     images: [
       {
-        url: "https://printful-upload.s3-accelerate.amazonaws.com/tmp/76d58afd9c3d88107f580c17ed2dff6e/unisex-v-neck-tee-white-front-681b54b0ec970.jpg",
+        url: "https://www.suhtech.com/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "Diamond QR Product Preview",
+        alt: "Suh Tech IT Services",
       },
     ],
     locale: "en_US",
@@ -84,12 +61,10 @@ export const metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Diamond QR | QR Design Fashion – T-Shirts, Hoodies, Mugs & More",
+    title: "Suh Tech Private Limited | Build Secure, Scalable Digital Products",
     description:
-      "Create and print QR code graphics on Diamond-quality merch. T-shirts, mugs, caps, hoodies, and more powered by Printful.",
-    images: [
-      "https://printful-upload.s3-accelerate.amazonaws.com/tmp/76d58afd9c3d88107f580c17ed2dff6e/unisex-v-neck-tee-white-front-681b54b0ec970.jpg",
-    ],
+      "Launch fast with dedicated pods for engineering, DevOps, SEO, and support.",
+    images: ["https://www.suhtech.com/og-image.jpg"],
   },
   icons: {
     icon: "/logoo.png",
@@ -101,12 +76,12 @@ export default function RootLayout({ children }) {
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${geistMono.variable}`} // Geist_Mono applied globally
+      className={`${geistMono.variable} ${inter.variable} ${poppins.variable}`}
     >
       <head />
-      <body className={`${geistMono.variable}`}>
-        {" "}
-        {/* myCustomFont not applied globally */}
+      <body
+        className={`${geistMono.variable} ${inter.variable} ${poppins.variable}`}
+      >
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
