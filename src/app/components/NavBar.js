@@ -6,7 +6,6 @@ import Link from "next/link";
 import Button from "../../components/ui/button";
 import ModeToggle from "@/components/ModeToggle";
 import Image from "next/image";
-import { motion, AnimatePresence } from "framer-motion";
 import Logo from "../../../public/images/logo.png";
 import { useRouter, usePathname } from "next/navigation";
 
@@ -35,7 +34,7 @@ function NavBar() {
     if (href === "/") {
       return pathname === "/";
     }
-    return pathname.startsWith(href);
+    return pathname?.startsWith(href);
   };
 
   // Disable body scroll when menu is open
@@ -54,94 +53,6 @@ function NavBar() {
     setMenu(!menu);
   };
 
-  // Animation variants
-  const navbarVariants = {
-    initial: { y: -100 },
-    animate: {
-      y: 0,
-      transition: {
-        type: "spring",
-        stiffness: 100,
-        damping: 20,
-      },
-    },
-    scrolled: {
-      y: 0,
-      boxShadow: "0 4px 20px rgba(0, 0, 0, 0.1)",
-      transition: {
-        type: "spring",
-        stiffness: 200,
-        damping: 30,
-      },
-    },
-  };
-
-  const menuItemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: (i) => ({
-      opacity: 1,
-      y: 0,
-      transition: {
-        delay: i * 0.1,
-        duration: 0.5,
-        type: "spring",
-        stiffness: 100,
-      },
-    }),
-  };
-
-  const mobileMenuVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        duration: 0.3,
-        staggerChildren: 0.1,
-        delayChildren: 0.2,
-      },
-    },
-    exit: {
-      opacity: 0,
-      transition: {
-        duration: 0.3,
-        staggerChildren: 0.05,
-        staggerDirection: -1,
-      },
-    },
-  };
-
-  const buttonHoverVariants = {
-    hover: {
-      scale: 1.03,
-      boxShadow: "0px 8px 20px rgba(0, 0, 0, 0.15)",
-      transition: { type: "spring", stiffness: 400, damping: 20 },
-    },
-    tap: {
-      scale: 0.98,
-    },
-  };
-
-  // Menu item text animation
-  const textAnimationVariants = {
-    hover: {
-      scale: 1.05,
-      color: "var(--color-primary)",
-      transition: { type: "spring", stiffness: 300, damping: 10 },
-    },
-  };
-
-  // Logo hover animation
-  const logoHoverVariants = {
-    hover: {
-      scale: 1.05,
-      transition: { type: "spring", stiffness: 400, damping: 10 },
-    },
-    tap: {
-      scale: 0.95,
-      transition: { type: "spring", stiffness: 400, damping: 10 },
-    },
-  };
-
   const navItems = [
     { name: "Home", href: "/" },
     { name: "Services", href: "/services" },
@@ -153,9 +64,7 @@ function NavBar() {
   ];
 
   const handleNavItemClick = (item) => {
-    // Close mobile menu if open
     if (menu) setMenu(false);
-
     router.push(item.href);
   };
 
@@ -165,266 +74,122 @@ function NavBar() {
 
   return (
     <>
-      {/* NAVBAR FOR ALL SCREEN SIZES */}
-      <motion.nav
-        variants={navbarVariants}
-        initial="initial"
-        animate={scrolled ? "scrolled" : "animate"}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          scrolled
-            ? "bg-white/95 dark:bg-gray-900/98 backdrop-blur-lg border-b border-gray-200/80 dark:border-gray-800/80"
-            : "bg-white/90 dark:bg-gray-900/90 backdrop-blur-md border-b border-gray-100/30 dark:border-gray-800/30"
+      <nav
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled
+          ? "bg-white/70 dark:bg-gray-900/80 backdrop-blur-3xl border-b border-gray-200/80 dark:border-gray-800/80"
+          : "bg-white/60 dark:bg-gray-900/70 backdrop-blur-3xl border-b border-gray-100/30 dark:border-gray-800/30"
         }`}
       >
         <div className="container mx-auto px-4 md:px-8 lg:px-24 flex justify-between items-center h-16 md:h-20">
-          {/* Fixed logo animation */}
-          <motion.div
-            variants={logoHoverVariants}
-            whileHover="hover"
-            whileTap="tap"
-            className="relative h-18 w-34 flex items-center"
-          >
-            {/* Add separate animation for the wiggle effect */}
-            <motion.div
-              className="w-full h-full"
-              whileHover={{
-                rotate: [0, -5, 5, 0],
-                transition: {
-                  type: "keyframes",
-                  duration: 0.5,
-                  ease: "easeInOut",
-                },
-              }}
-            >
-              <Link href="/" passHref>
-                <Image
-                  src={Logo}
-                  alt="logo"
-                  className="drop-shadow-md transition-all duration-300 object-contain"
-                  fill
-                  sizes="(max-width: 768px) (min-width:200px) 100px, 150px"
-                  priority
-                />
-              </Link>
-            </motion.div>
-          </motion.div>
+          {/* Logo (no animation) */}
+          <div className="relative h-18 w-34 flex items-center">
+            <Link href="/" className="block relative w-24 h-10 md:w-36 md:h-12">
+              <Image
+                src={Logo}
+                alt="logo"
+                className="drop-shadow-md transition-all duration-300 object-contain"
+                fill
+                sizes="(max-width: 768px) (min-width:200px) 100px, 150px"
+                priority
+              />
+            </Link>
+          </div>
 
           {/* Desktop Menu */}
           <div className="hidden md:flex items-center gap-8">
-            {navItems.map((item, i) => (
-              <motion.div
-                key={item.id}
-                initial={{ opacity: 0, y: -10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: i * 0.1 }}
-                className="relative group"
-              >
-                <motion.p
-                  variants={textAnimationVariants}
-                  whileHover="hover"
-                  className={`cursor-pointer font-semibold transition-colors duration-300 py-1 px-2 ${
-                    isActive(item.href)
-                      ? "text-blue-600 dark:text-blue-400"
-                      : "text-gray-700 dark:text-gray-100"
+            {navItems.map((item) => (
+              <div key={item.href} className="relative group">
+                <p
+                  className={`cursor-pointer font-semibold py-1 px-2 transition-colors duration-150 ${isActive(item.href)
+                    ? "text-blue-600 dark:text-blue-400"
+                    : "text-gray-700 dark:text-gray-100"
                   }`}
                   onClick={() => handleNavItemClick(item)}
                 >
                   {item.name}
-                </motion.p>
+                </p>
 
-                {/* Active indicator with fixed positioning */}
+                {/* Active indicator */}
                 {isActive(item.href) && (
-                  <motion.div
-                    layoutId="activeIndicator"
-                    className="h-0.5 bg-gradient-to-r from-blue-500 to-purple-600 absolute -bottom-1 left-0 w-full"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ duration: 0.3 }}
-                  />
+                  <div className="h-0.5 bg-gradient-to-r from-blue-500 to-purple-600 absolute -bottom-1 left-0 w-full" />
                 )}
-
-                {/* Hover indicator (only visible when not active) */}
-                {!isActive(item.href) && (
-                  <motion.div
-                    initial={{ width: 0, opacity: 0 }}
-                    whileHover={{ width: "100%", opacity: 1 }}
-                    transition={{ duration: 0.3 }}
-                    className="h-0.5 bg-gradient-to-r from-blue-500 to-purple-600 absolute -bottom-1 left-0"
-                  />
-                )}
-              </motion.div>
+              </div>
             ))}
 
-            <motion.div
-              whileHover={{ scale: 1.1, rotate: 360 }}
-              whileTap={{ scale: 0.95 }}
-              transition={{ duration: 0.5 }}
-            >
+            <div>
               <ModeToggle />
-            </motion.div>
+            </div>
 
-            <motion.div
-              variants={buttonHoverVariants}
-              whileHover="hover"
-              whileTap="tap"
-            >
+            <div className="w-4 md:w-6 lg:w-8 xl:w-10"></div>
+
+            <div className="">
               <Button
                 onClick={handleButtonClick}
                 text={
-                  <div className="flex items-center justify-center gap-2 px-1">
-                    <span>Book Demo</span>
-                    <motion.div
-                      animate={{
-                        x: [0, 5, 0],
-                        transition: {
-                          repeat: Infinity,
-                          duration: 1.5,
-                          ease: "easeOut",
-                          repeatDelay: 0.5,
-                        },
-                      }}
-                    >
-                      <ArrowRight size={16} />
-                    </motion.div>
+                  <div className="relative flex items-center w-40 h-12 sm:w-44 sm:h-14 rounded-full bg-white shadow-xl overflow-hidden pl-4 pr-1 gap-3">
+                    <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-600 opacity-0" />
+
+                    <span className="relative z-10 text-lg font-medium text-gray-800 flex-1">
+                      Contact Us
+                    </span>
+
+                    <div className="relative z-10 flex h-10 w-10 sm:h-12 sm:w-12 items-center justify-center rounded-full bg-blue-600">
+                      <ArrowRight size={20} strokeWidth={3} className="text-white" />
+                    </div>
                   </div>
                 }
-                width="w-38"
-                height="h-10"
-                className="flex items-center justify-center shadow-lg bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 dark:from-blue-600 dark:to-purple-500 transition-all duration-300"
+                className="flex items-center justify-centerm rounded-full shadow-lg bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 dark:from-blue-600 dark:to-purple-500 transition-all duration-300"
               />
-            </motion.div>
+            </div>
           </div>
 
           {/* Mobile Menu Toggle */}
           <div className="flex md:hidden items-center gap-4">
-            <motion.div
-              whileHover={{ scale: 1.1, rotate: 360 }}
-              whileTap={{ scale: 0.95 }}
-              transition={{ duration: 0.5 }}
-            >
+            <div>
               <ModeToggle />
-            </motion.div>
-            <motion.button
-              whileHover={{
-                scale: 1.1,
-                backgroundColor: "rgba(59, 130, 246, 0.1)",
-              }}
-              whileTap={{ scale: 0.9 }}
+            </div>
+            <button
               onClick={toggleMenu}
               className="text-gray-700 dark:text-white focus:outline-none p-2 rounded-full bg-gray-100/70 dark:bg-gray-800/50 backdrop-blur-sm transition-colors duration-300"
               aria-label={menu ? "Close menu" : "Open menu"}
             >
               {menu ? <X size={22} /> : <Menu size={22} />}
-            </motion.button>
+            </button>
           </div>
         </div>
-      </motion.nav>
+      </nav>
 
-      {/* FULL SCREEN MOBILE MENU - with fixes for scrolling issues */}
-      <AnimatePresence>
-        {menu && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            className="fixed inset-0 bg-white/95 dark:bg-gray-900/98 backdrop-blur-lg z-40 flex flex-col items-center justify-center overflow-y-auto pt-20 pb-12"
-          >
-            <motion.div
-              variants={mobileMenuVariants}
-              initial="hidden"
-              animate="visible"
-              exit="exit"
-              className="w-full max-w-md px-6 sm:px-8 py-4 flex flex-col items-center"
-            >
-              {navItems.map((item, i) => (
-                <motion.div
-                  key={item.id}
-                  custom={i}
-                  variants={menuItemVariants}
-                  className="mb-6 w-full text-center relative"
-                  onClick={() => handleNavItemClick(item)}
-                >
-                  <motion.div
-                    whileHover={{
-                      scale: 1.05,
-                      color: "var(--color-primary)",
-                      transition: { duration: 0.2 },
-                    }}
-                    className={`cursor-pointer w-full text-xl sm:text-2xl font-semibold py-3 relative overflow-visible ${
-                      isActive(item.href)
-                        ? "text-blue-600 dark:text-blue-400"
-                        : "text-gray-700 dark:text-gray-100"
-                    }`}
-                  >
-                    <span>{item.name}</span>
+      {/* FULL SCREEN MOBILE MENU (no motion) */}
+      {menu && (
+        <div className="fixed inset-0 bg-white/95 dark:bg-gray-900/98 backdrop-blur-lg z-40 flex flex-col items-center justify-center overflow-y-auto pt-20 pb-12">
+          <div className="w-full max-w-md px-6 sm:px-8 py-4 flex flex-col items-center">
+            {navItems.map((item) => (
+              <div key={item.href} className="mb-6 w-full text-center relative" onClick={() => handleNavItemClick(item)}>
+                <div className={`cursor-pointer w-full text-xl sm:text-2xl font-semibold py-3 ${isActive(item.href)
+                  ? "text-blue-600 dark:text-blue-400"
+                  : "text-gray-700 dark:text-gray-100"
+                }`}>
+                  <span>{item.name}</span>
 
-                    {/* Active indicator for mobile */}
-                    {isActive(item.href) && (
-                      <motion.span
-                        layoutId="mobileActiveIndicator"
-                        className="absolute -bottom-1 left-1/4 right-1/4 h-0.5 bg-gradient-to-r from-blue-500 to-purple-600"
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ duration: 0.3 }}
-                      />
-                    )}
+                  {isActive(item.href) && (
+                    <span className="absolute -bottom-1 left-1/4 right-1/4 h-0.5 bg-gradient-to-r from-blue-500 to-purple-600" />
+                  )}
+                </div>
+              </div>
+            ))}
 
-                    {/* Hover indicator for mobile (only visible when not active) */}
-                    {!isActive(item.href) && (
-                      <motion.span
-                        initial={{ width: 0, opacity: 0, x: "-50%" }}
-                        whileHover={{ width: "50%", opacity: 1 }}
-                        transition={{ duration: 0.3 }}
-                        className="absolute -bottom-1 left-1/2 h-0.5 bg-gradient-to-r from-blue-500 to-purple-600"
-                      />
-                    )}
-                  </motion.div>
-                </motion.div>
-              ))}
-
-              <motion.div
-                variants={menuItemVariants}
-                custom={5}
-                className="mt-8 w-full"
-              >
-                <motion.div
-                  variants={buttonHoverVariants}
-                  whileHover="hover"
-                  whileTap="tap"
-                  className="flex justify-center"
-                >
-                  <Button
-                    onClick={handleButtonClick}
-                    text={
-                      <div className="flex items-center justify-center gap-2 px-1">
-                        <span>Book Demo</span>
-                        <motion.div
-                          animate={{
-                            x: [0, 5, 0],
-                            transition: {
-                              repeat: Infinity,
-                              duration: 1.5,
-                              ease: "easeOut",
-                              repeatDelay: 0.5,
-                            },
-                          }}
-                        >
-                          <ArrowRight size={16} />
-                        </motion.div>
-                      </div>
-                    }
-                    width="w-full max-w-xs"
-                    height="h-12"
-                    className="flex items-center justify-center shadow-lg bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 dark:from-blue-600 dark:to-purple-500 transition-all duration-300"
-                  />
-                </motion.div>
-              </motion.div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
+            <div className="mt-8 w-full flex justify-center">
+              <Button
+                onClick={handleButtonClick}
+                text={<div className="flex items-center justify-center gap-2 px-1"><span>Book Demo</span><ArrowRight size={16} /></div>}
+                width="w-full max-w-xs"
+                height="h-12"
+                className="flex items-center justify-center shadow-lg bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 dark:from-blue-600 dark:to-purple-500 transition-all duration-300"
+              />
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 }
