@@ -3,6 +3,8 @@ import Link from "next/link";
 import NavBar from "./components/NavBar";
 import HeroSection from "./components/HeroSection";
 import FooterSection from "./components/FooterSection";
+import WhyChooseUsSection from "./components/WhyChooseUs";
+import CoreValues from "./components/CoreValues"
 
 // Dynamically import non-critical components
 const VideoSection = dynamic(() => import("./components/VedioSection"), {
@@ -29,7 +31,8 @@ export default function Home() {
         <section id="hero">
           <HeroSection />
         </section>
-        <VideoSection />
+        {/* <VideoSection /> */}
+        <CoreValues/>
         <ServicesSection />
         <TechStackSection />
         <PortfolioSection />
@@ -56,6 +59,7 @@ export default function Home() {
         <TestimonialsPage />
         <BlogResourcesSection />
         <CareersSection />
+        <WhyChooseUsSection />
         <NewsletterSection />
         <section id="contact">
           <ContactFormSection />
