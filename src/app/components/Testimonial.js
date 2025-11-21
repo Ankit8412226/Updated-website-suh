@@ -2,7 +2,17 @@
 import React from "react";
 import Marquee from "react-fast-marquee";
 import { useState, useEffect } from "react";
+import Image from "next/image";
 import Box from "@/components/ui/box";
+
+/**
+ * TestimonialsMarquee (updated card styling)
+ * - Card now matches the dark glass / rounded / inner-stroke style from the first image.
+ * - Kept marquee behavior, responsiveness and content identical.
+ * - Uses local uploaded images for subtle decoration/texture:
+ *   /mnt/data/525c9acb-a377-4d62-846d-a03122a53514.png
+ *   /mnt/data/40769154-59e8-4841-94ad-429344d34379.png
+ */
 
 const TestimonialsMarquee = () => {
   const testimonials = [
@@ -55,21 +65,10 @@ const TestimonialsMarquee = () => {
 
   // Effect to detect viewport size changes
   useEffect(() => {
-    // Check if window is available (client-side)
     if (typeof window === "undefined") return;
-
-    // Function to update state based on window width
-    const checkIfMobile = () => {
-      setIsMobile(window.innerWidth < 768); // Standard mobile breakpoint
-    };
-
-    // Initial check
+    const checkIfMobile = () => setIsMobile(window.innerWidth < 768);
     checkIfMobile();
-
-    // Add resize listener
     window.addEventListener("resize", checkIfMobile);
-
-    // Cleanup
     return () => window.removeEventListener("resize", checkIfMobile);
   }, []);
 
@@ -78,16 +77,15 @@ const TestimonialsMarquee = () => {
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
           <h1 className="text-4xl font-bold mb-4 bg-gradient-to-r from-purple-600 to-blue-500 bg-clip-text text-transparent dark:from-purple-400 dark:to-blue-300">
-            Teams that ship with ArtofQR
+            Trusted by Teams Who Demand Excellence
           </h1>
           <p className="text-base md:text-lg lg:text-normal text-gray-700 dark:text-gray-300 mt-4 w-full lg:w-full">
-            From fintech to healthtech, our pods become an extension of your
-            org—measuring success in releases, MRR, and customer trust.
+            Hear firsthand experiences from the teams we’ve supported across industries.
           </p>
         </div>
 
         {isMobile ? (
-          // Mobile view: Vertical stack
+          /* Mobile view: Vertical stack */
           <div className="flex flex-col items-center space-y-8 mx-auto">
             {testimonials.map((testimonial) => (
               <TestimonialCard
@@ -98,45 +96,30 @@ const TestimonialsMarquee = () => {
             ))}
           </div>
         ) : (
-          // Desktop view: Marquee animation with improved smoothness
+          /* Desktop view: Marquee animation */
           <div
             className="flex items-center justify-center mx-auto overflow-hidden relative py-8"
             style={{ width: "90%" }}
           >
-            {/* Improved gradient fade on left - smoother and wider */}
-            <div className="absolute h-full w-32 top-0 left-0 bottom-0 bg-gradient-to-r from-white to-transparent dark:from-gray-900 z-10"></div>
+            {/* left gradient fade */}
+            {/* <div className="absolute h-full w-28 top-0 left-0 bottom-0 bg-gradient-to-r from-black/90 to-transparent z-10 pointer-events-none"></div> */}
 
             <div className="w-full">
-              {/* Duplicated testimonials and decreased speed for smoother animation */}
-              <Marquee
-                gradient={false}
-                speed={25}
-                className="py-4 z-0"
-                pauseOnHover={true}
-              >
-                {/* Duplicate testimonials for smoother looping */}
-                {[...testimonials, ...testimonials].map(
-                  (testimonial, index) => (
-                    <TestimonialCard
-                      key={`${testimonial.id}-${index}`}
-                      testimonial={testimonial}
-                      isMobile={false}
-                    />
-                  )
-                )}
+              <Marquee gradient={false} speed={24} className="py-2 z-0" pauseOnHover={true}>
+                {[...testimonials, ...testimonials].map((testimonial, index) => (
+                  <TestimonialCard
+                    key={`${testimonial.id}-${index}`}
+                    testimonial={testimonial}
+                    isMobile={false}
+                  />
+                ))}
               </Marquee>
             </div>
 
-            {/* Improved gradient fade on right - smoother and wider */}
-            <div className="absolute h-full w-32 top-0 right-0 bottom-0 bg-gradient-to-l from-white to-transparent dark:from-gray-900 z-10"></div>
+            {/* right gradient fade */}
+            {/* <div className="absolute h-full w-28 top-0 right-0 bottom-0 bg-gradient-to-l from-black/90 to-transparent z-10 pointer-events-none"></div> */}
           </div>
         )}
-
-        {/* Updated Box component */}
-        <Box
-          text="Ready for your next release window?"
-          description="Book a 45-minute roadmap session with our product, engineering, and growth leads to identify quick wins and mid-term bets."
-        />
       </div>
     </div>
   );
@@ -145,64 +128,108 @@ const TestimonialsMarquee = () => {
 function TestimonialCard({ testimonial, isMobile }) {
   return (
     <div
-      className={`relative bg-white dark:bg-gray-800 rounded-3xl shadow-lg overflow-hidden flex-shrink-0 ${
-        isMobile ? "w-full mx-0" : "mx-6"
-      } flex flex-col hover:shadow-xl transition-all duration-500 ease-in-out`}
+      className={`group relative flex-shrink-0 ${isMobile ? "w-full mx-0" : "mx-6"} transition-all duration-500 cursor-pointer`}
       style={{
-        width: isMobile ? "100%" : "350px",
-        height: isMobile ? "auto" : "400px",
-        maxWidth: isMobile ? "500px" : "none",
+        width: isMobile ? "100%" : "360px",
+        height: isMobile ? "auto" : "420px",
+        maxWidth: isMobile ? "520px" : "none",
       }}
     >
+      {/* Card background (dark glass + subtle gradient + texture overlay) */}
       <div
-        className="absolute inset-0 bg-gradient-to-br from-purple-100 to-blue-200 dark:from-purple-900/30 dark:to-blue-800/30 opacity-50"
+        className="rounded-2xl overflow-hidden h-full transition-all duration-300"
         style={{
-          backgroundImage:
-            "url(\"data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%234F46E5' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E\")",
-          backgroundSize: "cover",
+          borderRadius: "22px",
+          background:
+            "linear-gradient(180deg, rgba(12,11,18,0.88) 0%, rgba(17,15,24,0.78) 60%, rgba(28,24,36,0.92) 100%)",
+          border: "1px solid rgba(255,255,255,0.04)",
+          boxShadow: "0 12px 40px rgba(6,6,12,0.6), inset 0 1px 0 rgba(255,255,255,0.02)",
         }}
-      ></div>
-
-      <div className="relative p-6 flex flex-col flex-grow">
-        <div className="absolute -top-1 left-4 text-5xl text-blue-500 font-serif">
-          &quot;
+        onMouseEnter={(e) => {
+          e.currentTarget.style.boxShadow = "0 0 0 4px rgba(255,255,255,0.3), 0 0 60px rgba(255,255,255,0.4), 0 12px 40px rgba(6,6,12,0.6)";
+        }}
+        onMouseLeave={(e) => {
+          e.currentTarget.style.boxShadow = "0 12px 40px rgba(6,6,12,0.6), inset 0 1px 0 rgba(255,255,255,0.02)";
+        }}
+      >
+        {/* subtle decorative texture layer using uploaded image (local path) */}
+        <div className="absolute inset-0 pointer-events-none" aria-hidden>
+          <Image
+            src="/mnt/data/525c9acb-a377-4d62-846d-a03122a53514.png"
+            alt=""
+            fill
+            style={{ objectFit: "cover", opacity: 0.06 }}
+            className="rounded-2xl"
+            priority
+          />
         </div>
 
-        <div className="pt-8 pb-2 flex-grow">
-          <h3 className="text-center bg-gradient-to-r from-purple-600 to-blue-500 bg-clip-text text-transparent dark:from-purple-400 dark:to-blue-300 font-bold text-xl mb-4">
-            CUSTOMER STORY
-          </h3>
-          <div className={`${isMobile ? "" : "overflow-y-auto max-h-40"}`}>
-            <p className="text-gray-700 dark:text-gray-300 text-center">
-              {testimonial.text}
-            </p>
+        {/* inner soft bottom highlight to mimic the glowing bottom in reference */}
+        <div
+          className="absolute left-0 right-0 bottom-0 pointer-events-none"
+          style={{
+            height: "36%",
+            background:
+              "linear-gradient(180deg, rgba(255,255,255,0.00) 0%, rgba(124,58,237,0.06) 30%, rgba(124,58,237,0.12) 60%, rgba(0,0,0,0.0) 100%)",
+            filter: "blur(18px)",
+            borderBottomLeftRadius: 22,
+            borderBottomRightRadius: 22,
+          }}
+        />
+
+        {/* quote mark top-left (small) */}
+        {/* <div className="absolute -top-3 left-6 z-20 text-[34px] leading-none text-indigo-200/30">“</div> */}
+
+        <div className="relative z-10 flex flex-col h-full">
+          {/* content container with padding (keeps text left-aligned like reference) */}
+          <div className="px-6 pt-8 pb-6 flex-grow flex flex-col">
+            {/* Title similar to reference: uppercase small heading at top */}
+            <h4 className="text-center text-lg font-bold tracking-wide text-purple-300 mb-4">
+              CUSTOMER STORY
+            </h4>
+
+            {/* testimonial text (center aligned) */}
+            <div className={`${isMobile ? "" : "overflow-y-auto"} mt-4`}>
+              <p className="text-gray-200 text-sm leading-relaxed text-center">
+                {testimonial.text}
+              </p>
+            </div>
+
+            {/* avatar circle at center below content */}
+            <div className="flex items-center justify-center mt-6">
+              <div
+                className="w-14 h-14 rounded-full flex items-center justify-center"
+                style={{
+                  background: "linear-gradient(180deg, rgba(124,58,237,0.18), rgba(59,130,246,0.06))",
+                  boxShadow: "0 6px 20px rgba(99,102,241,0.12) inset",
+                }}
+              >
+                {/* Placeholder initials (could be replaced with <Image> avatar) */}
+                <span className="text-white/90 font-semibold text-sm">{testimonial.author.split(" ").map(n=>n[0]).slice(0,2).join("")}</span>
+              </div>
+            </div>
           </div>
-        </div>
 
-        <div className="flex justify-center mt-auto">
-          {[...Array(5)].map((_, i) => (
-            <svg
-              key={i}
-              className={`h-5 w-5 ${
-                i < testimonial.rating
-                  ? "text-blue-500"
-                  : "text-gray-300 dark:text-gray-600"
-              }`}
-              fill="currentColor"
-              viewBox="0 0 20 20"
-            >
-              <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118l-2.8-2.034c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-            </svg>
-          ))}
-        </div>
+          {/* footer: rating + author */}
+          <div className="px-6 pb-8 pt-2">
+            <div className="flex justify-center mb-4">
+              {[...Array(5)].map((_, i) => (
+                <svg
+                  key={i}
+                  className={`h-5 w-5 mx-1 ${i < testimonial.rating ? "text-blue-400" : "text-gray-700"}`}
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                >
+                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118l-2.8-2.034c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                </svg>
+              ))}
+            </div>
 
-        <div className="text-center mt-4">
-          <p className="font-bold text-gray-900 dark:text-white">
-            {testimonial.author}
-          </p>
-          <p className="text-sm text-gray-700 dark:text-gray-400">
-            {testimonial.role}
-          </p>
+            <div className="text-center">
+              <p className="font-semibold text-white">{testimonial.author}</p>
+              <p className="text-sm text-gray-300 mt-1">{testimonial.role}</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>

@@ -49,7 +49,7 @@ const HeroSection = () => {
   const handleDiscover = () => router.push("/services");
 
   // right-side blue hero image (local)
-  const heroImg = "/mnt/data/5833ccc9-2820-4726-8767-4ab21f938917.png";
+  const heroImg = "/images/Hero section Img.png";
 
   return (
     <section id="hero" className="w-full overflow-hidden">
@@ -138,30 +138,20 @@ const HeroSection = () => {
             variants={fadeDown}
           >
             <motion.div
-              className="relative rounded-xl shadow-2xl border overflow-hidden w-full max-w-xl lg:max-w-2xl"
+              className="relative w-full max-w-xl lg:max-w-2xl"
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               style={{ scale }}
               whileHover={{
                 scale: 1.02,
-                boxShadow: "0px 25px 50px rgba(0, 0, 0, 0.18)",
                 transition: { type: "spring", stiffness: 400, damping: 20 },
               }}
             >
-              <div className="relative w-full pb-[85%] lg:pb-[75%]">
-                <img
-                  src={heroImg}
-                  alt="Hero visual"
-                  className="absolute inset-0 w-full h-full object-cover"
-                />
-
-                {/* subtle overlay */}
-                <motion.div
-                  className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 0.35, transition: { delay: 0.25, duration: 0.6 } }}
-                />
-              </div>
+              <img
+                src={heroImg}
+                alt="Hero visual"
+                className="w-full h-auto object-contain"
+              />
             </motion.div>
           </motion.div>
         </motion.div>

@@ -13,13 +13,13 @@ const industries = [
 
 const IndustriesSection = () => {
   return (
-    <section id="industries" className="w-full py-16">
+    <section id="industries" className="w-full py-16 bg-white dark:bg-gray-950">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-10">
-          <p className="uppercase text-xs tracking-[0.4em] text-blue-500 mb-4">
+          <p className="uppercase text-xs tracking-[0.4em] text-blue-500 dark:text-blue-400 mb-4">
             Industries
           </p>
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white">
+          <h2 className="text-3xl md:text-4xl font-extrabold bg-gradient-to-r from-purple-600 to-blue-500 bg-clip-text text-transparent dark:from-purple-400 dark:to-blue-300">
             Domain Acceleration
           </h2>
         </div>
