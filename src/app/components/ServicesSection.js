@@ -13,6 +13,7 @@ import {
   Smartphone,
 } from "lucide-react";
 import Link from "next/link";
+import { useState } from "react";
 
 const services = [
   {
@@ -73,85 +74,123 @@ const services = [
   },
 ];
 
-const ServicesSection = () => {
+export default function ServicesSection() {
+  const [showAll, setShowAll] = useState(false);
+
+  const visibleServices = showAll ? services : services.slice(0, 3);
+
   const fadeIn = {
     hidden: { opacity: 0, y: 20 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] },
+      transition: { duration: 0.6 },
     },
   };
 
   return (
-    <section
-      id="services"
-      className="w-full py-16 lg:py-24 overflow-hidden"
-    >
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="w-full py-20 lg:py-28" id="services">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-10">
+
+        {/* Top Section */}
         <motion.div
-          className="text-center mb-12"
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
+          viewport={{ once: true }}
           variants={fadeIn}
+          className="grid grid-cols-1 lg:grid-cols-2 gap-32 items-center mb-16"
         >
-          <p className="uppercase text-xs tracking-[0.4em] text-blue-500 mb-4">
-            Services
-          </p>
-          <h2 className="text-3xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-purple-600 to-blue-500 bg-clip-text text-transparent dark:from-purple-400 dark:to-blue-300">
-            From Discovery to Scale
-          </h2>
-          <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+          <div>
+            <p className="uppercase text-xs tracking-[0.4em] text-blue-500 mb-4">
+              Services
+            </p>
+
+            <h2 className="
+              text-4xl md:text-6xl font-medium leading-tight
+              bg-gradient-to-r from-purple-600 to-blue-500 bg-clip-text text-transparent
+              dark:from-purple-400 dark:to-blue-300
+            ">
+              From Discovery to Scale
+            </h2>
+          </div>
+
+          <p className="text-lg text-gray-600 dark:text-gray-400 max-w-lg mt-10">
             Dedicated pods keep design, engineering, DevOps, and growth in sync.
-            Pick the capability you need or run a managed roadmap across all 8
-            tracks.
+            Pick the capability you need or run a managed roadmap across all 8 tracks.
           </p>
         </motion.div>
 
+        {/* Service Cards */}
         <motion.div
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
           initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.1 }}
+          animate="visible"
+          variants={fadeIn}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7 mb-10"
         >
-          {services.map((service, index) => {
+          {visibleServices.map((service, i) => {
             const Icon = service.icon;
+
             return (
               <motion.div
                 key={service.slug}
                 variants={fadeIn}
-                transition={{ delay: index * 0.05 }}
-                whileHover={{
-                  y: -6,
-                  boxShadow: "0px 20px 30px rgba(15, 23, 42, 0.08)",
-                }}
-                className="rounded-2xl border border-gray-100 dark:border-gray-800 bg-white/80 dark:bg-gray-900/50 backdrop-blur-xl p-6 flex flex-col gap-4"
+                transition={{ delay: i * 0.05 }}
+                whileHover={{ y: -6 }}
+                className="
+                  p-10 h-[400px] flex flex-col justify-between rounded-3xl transition-all
+                  bg-white border border-gray-200 shadow-sm text-gray-900
+                  dark:bg-gray-900/40 dark:border-gray-800 dark:backdrop-blur-xl
+                  dark:text-white dark:shadow-lg dark:hover:shadow-blue-900/10
+                  hover:border-blue-400 dark:hover:border-blue-500/40
+                "
               >
-                <div className="w-12 h-12 rounded-xl bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-300 flex items-center justify-center">
-                  <Icon size={22} />
+                <div className="w-14 h-14 rounded-full bg-blue-100 text-blue-600 dark:bg-blue-900/30 dark:text-blue-300 flex items-center justify-center mb-10">
+                  <Icon size={24} />
                 </div>
-                <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
+
+                <h3 className="text-2xl font-semibold">
                   {service.title}
                 </h3>
-                <p className="text-gray-600 dark:text-gray-300 text-sm flex-1">
+
+                <p className="text-gray-600 dark:text-gray-400 text-sm mb-5">
                   {service.description}
                 </p>
+
                 <Link
                   href={`/services/${service.slug}`}
-                  className="inline-flex items-center gap-2 text-blue-600 dark:text-blue-300 font-semibold hover:gap-3 transition-all text-sm"
+                  className="inline-flex items-center gap-2 text-blue-600 dark:text-blue-300 font-medium group"
                 >
-                  Learn more
-                  <ArrowUpRight size={16} />
+                  Read More
+                  <ArrowUpRight className="group-hover:translate-x-1 transition" size={16} />
                 </Link>
               </motion.div>
             );
           })}
         </motion.div>
+
+        {/* View All Button */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.3 }}
+          className="flex justify-start"
+        >
+          <button
+            onClick={() => setShowAll(!showAll)}
+            className="
+              px-8 py-3 rounded-full font-medium transition-all
+              bg-white border border-blue-500 text-blue-600 shadow-sm
+              hover:bg-blue-50 hover:border-blue-600
+
+              dark:bg-blue-900/30 dark:border-blue-800/40 dark:text-blue-300
+              dark:hover:bg-blue-900/50 dark:hover:border-blue-600/60
+            "
+          >
+            {showAll ? "Show Less" : "View All"}
+          </button>
+        </motion.div>
+
       </div>
     </section>
   );
-};
-
-export default ServicesSection;
-
+}
