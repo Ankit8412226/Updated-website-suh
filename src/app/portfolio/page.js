@@ -1,106 +1,58 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Link from "next/link";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
 import NavBar from "../components/NavBar";
 import FooterSection from "../components/FooterSection";
-import { ArrowUpRight } from "lucide-react";
 
-const portfolioProjects = [
+const exampleImages = [
+  "/mnt/data/1e3e0ce4-749c-4196-9c54-620fb17507c6.png",
+  "/mnt/data/34b06152-d26c-4278-b47a-77edbb24d17e.png",
+  "/mnt/data/1e3e0ce4-749c-4196-9c54-620fb17507c6.png",
+];
+
+const caseStudies = [
   {
-    slug: "fintech-lending-cloud",
-    title: "Fintech Lending Cloud",
-    industry: "FinTech",
-    client: "Leading Digital Lending Platform",
-    thumbnail: "Modernized lending infrastructure for compliance and scale",
-    problem:
-      "Monolithic app blocked new feature releases and compliance updates.",
-    solution:
-      "Rebuilt as modular Next.js + Nest.js platform with Terraform-managed AWS landing zone and SOC2 ready audit trails.",
-    impact: "32% faster loan approvals, 99.98% uptime, +68% organic traffic.",
-    tech: ["Next.js", "Nest.js", "AWS", "Terraform", "Elastic"],
-    duration: "6 months",
-    team: "8 engineers + PM",
+    title: "Construction Company Website",
+    year: "©2025 - Opndoo Studio",
+    subtitle: "A responsive website for a construction brand with strong visual identity.",
+    image: exampleImages[0],
   },
   {
-    slug: "ai-claims-automation",
-    title: "AI Claims Automation",
-    industry: "InsurTech",
-    client: "Mid-Market Insurance Carrier",
-    thumbnail: "LLM-powered claims processing with 8x speed improvement",
-    problem:
-      "Manual claim review introduced 10 day backlogs and higher error rates.",
-    solution:
-      "Fine-tuned LLM pipeline with document intelligence, human-in-the-loop QA, and ServiceNow integration.",
-    impact: "8x faster claim triage and 27% lower operating costs.",
-    tech: ["Python", "LangChain", "Azure OpenAI", "ServiceNow"],
-    duration: "4 months",
-    team: "5 engineers + data scientist",
+    title: "Consulting Agency Website",
+    year: "©2025 - Opndoo Studio",
+    subtitle: "High-conversion marketing site for a consulting agency with case studies and team pages.",
+    image: exampleImages[1],
   },
   {
-    slug: "healthcare-marketplace",
-    title: "Healthcare Marketplace",
-    industry: "HealthTech",
-    client: "Regional Healthcare Network",
-    thumbnail: "HIPAA-compliant marketplace with native apps",
-    problem:
-      "Legacy PHP portal couldn't handle new locations or HIPAA compliant messaging.",
-    solution:
-      "Migrated to headless CMS + GraphQL API with React Native apps, encrypted messaging, and observability stack.",
-    impact:
-      "4 new regions launched in 6 weeks, 120% YoY bookings, zero P1 incidents.",
-    tech: ["React Native", "GraphQL", "Kubernetes", "Datadog"],
-    duration: "8 months",
-    team: "12 engineers + designers",
+    title:
+      "Arog – Post-Hospital Care Platform with Extended Title to Demo Truncation",
+    year: "©2025 - Opndoo Studio",
+    subtitle:
+      "A digital platform that helps patients navigate post-hospital care, appointment scheduling, and follow-ups. This description is intentionally long to demonstrate truncation with ellipsis in the UI.",
+    image: exampleImages[2],
   },
   {
-    slug: "ecommerce-replatform",
-    title: "E-Commerce Replatform",
-    industry: "Retail",
-    client: "Multi-Brand Fashion Retailer",
-    thumbnail: "Headless commerce with personalization engine",
-    problem:
-      "Legacy Magento site had poor mobile performance and couldn't support personalization.",
-    solution:
-      "Built Next.js storefront with Shopify Plus backend, integrated recommendation engine and A/B testing framework.",
-    impact: "45% mobile conversion lift, 2.1s average page load, 3x faster releases.",
-    tech: ["Next.js", "Shopify Plus", "Algolia", "Vercel"],
-    duration: "5 months",
-    team: "6 engineers + UX designer",
+    title:
+      "Arog – Post-Hospital Care Platform with Extended Title to Demo Truncation",
+    year: "©2025 - Opndoo Studio",
+    subtitle:
+      "A digital platform that helps patients navigate post-hospital care, appointment scheduling, and follow-ups. This description is intentionally long to demonstrate truncation with ellipsis in the UI.",
+    image: exampleImages[2],
   },
   {
-    slug: "devops-transformation",
-    title: "DevOps Transformation",
-    industry: "SaaS",
-    client: "B2B Analytics Platform",
-    thumbnail: "Zero-downtime deployment with GitOps automation",
-    problem:
-      "Manual deployments caused frequent outages and slowed feature velocity.",
-    solution:
-      "Implemented Kubernetes with ArgoCD, Terraform IaC, automated testing pipeline, and comprehensive monitoring.",
-    impact: "99.99% uptime, 12x faster deployments, 80% reduction in incidents.",
-    tech: ["Kubernetes", "ArgoCD", "Terraform", "GitHub Actions"],
-    duration: "3 months",
-    team: "3 DevOps engineers",
-  },
-  {
-    slug: "mobile-banking-app",
-    title: "Mobile Banking App",
-    industry: "FinTech",
-    client: "Digital-First Bank",
-    thumbnail: "Secure banking app with biometric authentication",
-    problem:
-      "Existing app had poor UX, security concerns, and couldn't support new financial products.",
-    solution:
-      "Built native iOS/Android apps with React Native, implemented secure authentication, real-time notifications, and modular architecture.",
-    impact: "4.8 star rating, 200k+ downloads in 3 months, 92% feature adoption.",
-    tech: ["React Native", "Node.js", "PostgreSQL", "AWS"],
-    duration: "7 months",
-    team: "10 engineers + product designer",
+    title:
+      "Arog – Post-Hospital Care Platform with Extended Title to Demo Truncation",
+    year: "©2025 - Opndoo Studio",
+    subtitle:
+      "A digital platform that helps patients navigate post-hospital care, appointment scheduling, and follow-ups. This description is intentionally long to demonstrate truncation with ellipsis in the UI.",
+    image: exampleImages[2],
   },
 ];
 
 export default function PortfolioPage() {
+  const router = useRouter();
   const fadeIn = {
     hidden: { opacity: 0, y: 20 },
     visible: {
@@ -111,7 +63,7 @@ export default function PortfolioPage() {
   };
 
   return (
-    <main className="min-h-screen bg-background text-foreground">
+    <main className="min-h-screen bg-white dark:bg-gray-950">
       <NavBar />
       <div className="mt-16 md:mt-20 lg:mt-24 px-4 md:px-8 lg:px-24">
         <section className="py-16 lg:py-24">
@@ -123,73 +75,73 @@ export default function PortfolioPage() {
               viewport={{ once: true, amount: 0.2 }}
               variants={fadeIn}
             >
-              <p className="uppercase text-xs tracking-[0.4em] text-blue-500 mb-4">
-                Portfolio
+              <p className="uppercase text-xs tracking-[0.4em] text-gray-500 dark:text-gray-400 mb-4">
+                Work Showcase
               </p>
-              <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6">
-                Case Studies with Business Impact
+              <h1 className="text-4xl md:text-5xl font-extrabold mb-6 bg-gradient-to-r from-purple-600 to-blue-500 bg-clip-text text-transparent dark:from-purple-400 dark:to-blue-300">
+                Case Studies & Success Stories
               </h1>
               <p className="text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-                We document every engagement like a product lab: baseline
-                metrics, sprint-by-sprint releases, and board-ready reporting.
+                We build solutions that deliver results. Here's a selection of our most impactful projects.
               </p>
             </motion.div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-              {portfolioProjects.map((project, index) => (
-                <motion.div
-                  key={project.slug}
-                  variants={fadeIn}
-                  initial="hidden"
-                  whileInView="visible"
+            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
+              {caseStudies.map((study, idx) => (
+                <motion.article
+                  key={study.title + idx}
+                  className="rounded-2xl bg-white dark:bg-gray-900 shadow-md dark:shadow-none overflow-hidden"
+                  initial={{ opacity: 0, y: 12 }}
+                  whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, amount: 0.2 }}
-                  transition={{ delay: index * 0.1 }}
+                  transition={{ duration: 0.5, delay: idx * 0.06 }}
+                  whileHover={{ y: -6, boxShadow: "0 20px 40px rgba(15,23,42,0.08)" }}
                 >
-                  <Link href={`/portfolio/${project.slug}`}>
-                    <motion.div
-                      className="h-full rounded-3xl border border-gray-100 dark:border-gray-800 bg-white/80 dark:bg-gray-900/50 backdrop-blur-xl p-6 flex flex-col gap-4 cursor-pointer"
-                      whileHover={{
-                        y: -8,
-                        boxShadow: "0px 25px 40px rgba(15, 23, 42, 0.12)",
+                  {/* Image top */}
+                  <div className="relative w-full aspect-[16/10] md:aspect-[12/7]">
+                    <Image
+                      src={study.image}
+                      alt={study.title}
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    />
+                  </div>
+
+                  {/* Content area */}
+                  <div className="p-6 bg-white dark:bg-gray-50/0">
+                    {/* small meta (year / studio) */}
+                    <div className="text-xs text-gray-500 mb-2">{study.year}</div>
+
+                    {/* Title - clamp to 2 lines with ellipsis */}
+                    <h3
+                      className="text-2xl font-semibold text-gray-900 dark:text-white leading-tight"
+                      style={{
+                        display: "-webkit-box",
+                        WebkitLineClamp: 2,
+                        WebkitBoxOrient: "vertical",
+                        overflow: "hidden",
+                        textOverflow: "ellipsis",
                       }}
-                      transition={{ duration: 0.3 }}
                     >
-                      <div className="flex items-center justify-between text-sm uppercase tracking-[0.2em] text-gray-400">
-                        <span>{project.industry}</span>
-                        <ArrowUpRight size={20} className="text-blue-500" />
-                      </div>
-                      <h3 className="text-2xl font-semibold text-gray-900 dark:text-white">
-                        {project.title}
-                      </h3>
-                      <p className="text-sm text-gray-500 dark:text-gray-400">
-                        {project.thumbnail}
-                      </p>
-                      <p className="text-sm text-gray-600 dark:text-gray-300 flex-1">
-                        {project.problem}
-                      </p>
-                      <div className="pt-2">
-                        <p className="text-sm font-semibold text-blue-600 dark:text-blue-400 mb-3">
-                          {project.impact}
-                        </p>
-                        <div className="flex flex-wrap gap-2">
-                          {project.tech.slice(0, 4).map((item) => (
-                            <span
-                              key={item}
-                              className="text-xs font-semibold px-3 py-1 rounded-full bg-blue-50 text-blue-700 dark:bg-blue-900/40 dark:text-blue-200"
-                            >
-                              {item}
-                            </span>
-                          ))}
-                          {project.tech.length > 4 && (
-                            <span className="text-xs font-semibold px-3 py-1 rounded-full bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-300">
-                              +{project.tech.length - 4} more
-                            </span>
-                          )}
-                        </div>
-                      </div>
-                    </motion.div>
-                  </Link>
-                </motion.div>
+                      {study.title}
+                    </h3>
+
+                    {/* subtitle / short description - clamp to 3 lines */}
+                    <p
+                      className="mt-3 text-gray-600 dark:text-gray-300 text-sm"
+                      style={{
+                        display: "-webkit-box",
+                        WebkitLineClamp: 3,
+                        WebkitBoxOrient: "vertical",
+                        overflow: "hidden",
+                        textOverflow: "ellipsis",
+                      }}
+                    >
+                      {study.subtitle}
+                    </p>
+                  </div>
+                </motion.article>
               ))}
             </div>
           </div>

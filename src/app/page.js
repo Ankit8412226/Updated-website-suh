@@ -10,6 +10,7 @@ import CoreValues from "./components/CoreValues"
 const VideoSection = dynamic(() => import("./components/VedioSection"), {
   loading: () => <div className="h-64 animate-pulse bg-gray-100 dark:bg-gray-800" />,
 });
+const AboutUsSection = dynamic(() => import("./components/AboutUs"));
 const ServicesSection = dynamic(() => import("./components/ServicesSection"));
 const TechStackSection = dynamic(() => import("./components/TechStackSection"));
 const PortfolioSection = dynamic(() => import("./components/PortfolioSection"));
@@ -32,7 +33,11 @@ export default function Home() {
           <HeroSection />
         </section>
         {/* <VideoSection /> */}
+
         <CoreValues/>
+
+        <AboutUsSection />
+
         <ServicesSection />
         <TechStackSection />
         <PortfolioSection />
