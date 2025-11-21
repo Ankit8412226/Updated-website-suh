@@ -1,55 +1,16 @@
 "use client";
 
-import React, { useEffect, useState, useRef } from "react";
+import React from "react";
 import Button from "@/components/ui/button";
-import { ArrowRight, Sparkles } from "lucide-react";
-import { motion, useViewportScroll, useTransform } from "framer-motion";
+import { ArrowRight } from "lucide-react";
+import { motion, useTransform, useViewportScroll } from "framer-motion";
 import { useRouter } from "next/navigation";
 
 const HeroSection = () => {
-  const [isInView, setIsInView] = useState(true);
-  const videoRef = useRef(null);
-  const sectionRef = useRef(null);
   const router = useRouter();
   const { scrollY } = useViewportScroll();
   const scale = useTransform(scrollY, [0, 200], [1, 0.98]);
 
-  // Improved intersection observer for video visibility
-  useEffect(() => {
-    if (!sectionRef.current || !videoRef.current) return;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const [entry] = entries;
-        setIsInView(entry.isIntersecting);
-      },
-      { threshold: 0.1 } // Trigger when at least 10% of the element is visible
-    );
-
-    observer.observe(sectionRef.current);
-    return () => observer.disconnect();
-  }, []);
-
-  // Better video playback control
-  useEffect(() => {
-    if (!videoRef.current) return;
-
-    if (isInView) {
-      const playPromise = videoRef.current.play();
-      if (playPromise !== undefined) {
-        playPromise.catch((error) => {
-          console.log("Video play failed:", error);
-        });
-      }
-    } else {
-      // Only pause if the video is actually playing
-      if (!videoRef.current.paused) {
-        videoRef.current.pause();
-      }
-    }
-  }, [isInView]);
-
-  // Animation variants
   const fadeUp = {
     hidden: { opacity: 0, y: 40 },
     visible: {
@@ -80,23 +41,18 @@ const HeroSection = () => {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: {
-        staggerChildren: 0.15,
-        delayChildren: 0.2,
-      },
+      transition: { staggerChildren: 0.15, delayChildren: 0.2 },
     },
   };
 
-  const handleBookDemo = () => {
-    router.push("/contact");
-  };
+  const handleBookDemo = () => router.push("/contact");
+  const handleDiscover = () => router.push("/services");
 
-  const handleGetQuote = () => {
-    router.push("/services");
-  };
+  // right-side blue hero image (local)
+  const heroImg = "/mnt/data/5833ccc9-2820-4726-8767-4ab21f938917.png";
 
   return (
-    <div id="hero" className="w-full overflow-hidden" ref={sectionRef}>
+    <section id="hero" className="w-full overflow-hidden">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-20">
         <motion.div
           className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center"
@@ -104,120 +60,85 @@ const HeroSection = () => {
           initial="hidden"
           animate="visible"
         >
-          {/* Left column - Text content */}
+          {/* LEFT: now matches blue layout exactly (heading, subtitle, two pill buttons) */}
           <motion.div
-            className="order-2 lg:order-1 mt-8 lg:mt-0 text-center lg:text-left"
+            className="order-2 lg:order-1 mt-8 lg:mt-0 text-left"
             variants={fadeIn}
           >
-            <motion.div className="relative">
+            <motion.div className="relative max-w-2xl" variants={fadeDown}>
+              {/* small rounded tag */}
+              <div className="inline-block mb-6">
+                <span className="inline-flex items-center px-4 py-2 rounded-full bg-gray-900/10 dark:bg-white/10 backdrop-blur-sm text-sm font-medium text-gray-900 dark:text-white">
+                  Our Integrated IT Solutions
+                </span>
+              </div>
+
+              {/* main heading (split lines to match blue mock) */}
               <motion.h1
                 className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl xl:text-6xl font-bold bg-gradient-to-r from-purple-600 to-blue-500 bg-clip-text text-transparent dark:from-purple-400 dark:to-blue-300 leading-tight"
                 variants={fadeDown}
               >
-                Build Secure, SEO-Ready Digital Products Faster.
+                 Build Secure,
+                <br />
+                SEO-Ready Digital
+                <br />
+                Products Faster.
               </motion.h1>
 
+              {/* sub paragraph */}
               <motion.p
-                className="text-base md:text-lg text-gray-700 dark:text-gray-300 mt-6 max-w-lg mx-auto lg:mx-0"
+                className="ext-base md:text-lg text-gray-700 dark:text-gray-300 mt-6 max-w-xl"
                 variants={fadeUp}
               >
-                We are an end-to-end IT partner for funded startups and digital
-                enterprises. From UX to infrastructure, our pods ship conversion
+   We are an end-to-end IT partner for funded startups and digital enterprises. From UX to infrastructure, our pods ship conversion
                 optimized web apps, native mobile experiences, automated CI/CD
                 pipelines, and measurable SEO growth—without disrupting your
                 roadmap.
               </motion.p>
 
+              {/* Buttons — pill style matching blue image */}
               <motion.div
-                className="mt-8 flex flex-col sm:flex-row gap-4 max-w-xl mx-auto lg:mx-0"
+                className="mt-8 flex flex-col sm:flex-row gap-4"
                 variants={fadeUp}
               >
-                <motion.div
-                  whileHover={{
-                    scale: 1.05,
-                    boxShadow: "0px 10px 25px rgba(0, 0, 0, 0.15)",
-                    transition: { type: "spring", stiffness: 400, damping: 20 },
-                  }}
-                  whileTap={{ scale: 0.98 }}
-                  className="flex-1"
-                >
-                  <Button
+                {/* Primary gradient pill */}
+                <div className="flex-1 max-w-xs">
+                  <button
                     onClick={handleBookDemo}
-                    text={
-                      <div className="flex items-center justify-center gap-2 cursor-pointer">
-                        <Sparkles size={18} className="cursor-pointer" />
-                        <span>Book a Demo</span>
-                        <motion.div
-                          animate={{
-                            x: [0, 5, 0],
-                            transition: {
-                              repeat: Infinity,
-                              duration: 1.5,
-                              ease: "easeOut",
-                              repeatDelay: 0.5,
-                            },
-                          }}
-                        >
-                          <ArrowRight size={18} />
-                        </motion.div>
-                      </div>
-                    }
-                    width="w-full"
-                    height="h-12"
-                    className="flex items-center justify-center gap-2 shadow-lg bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 dark:from-blue-600 dark:to-purple-500 transition-all duration-300 cursor-pointer"
-                  />
-                </motion.div>
-
-                <motion.div
-                  whileHover={{
-                    scale: 1.05,
-                    boxShadow: "0px 10px 25px rgba(0, 0, 0, 0.15)",
-                    transition: { type: "spring", stiffness: 400, damping: 20 },
-                  }}
-                  whileTap={{ scale: 0.98 }}
-                  className="flex-1"
-                >
-                  <Button
-                    onClick={handleGetQuote}
-                    text={
-                      <div className="flex items-center justify-center gap-2 cursor-pointer">
-                        <span className="text-blue-600 dark:text-blue-400 font-semibold">Get a Quote</span>
-                      </div>
-                    }
-                    width="w-full"
-                    height="h-12"
-                    className="flex items-center justify-center gap-2 shadow-lg bg-white dark:bg-gray-900 border-2 border-blue-600 dark:border-blue-500 hover:bg-blue-50 dark:hover:bg-gray-800 hover:border-blue-700 dark:hover:border-blue-400 transition-all duration-300 cursor-pointer"
-                  />
-                </motion.div>
-              </motion.div>
-
-              <motion.div
-                className="mt-8 grid grid-cols-2 sm:grid-cols-3 gap-4 text-sm text-gray-600 dark:text-gray-300"
-                variants={fadeUp}
-              >
-                {[
-                  "ISO 27001-ready delivery",
-                  "CNCF & AWS certified teams",
-                  "90-day release guarantee",
-                ].map((item) => (
-                  <div
-                    key={item}
-                    className="rounded-xl border border-gray-100 dark:border-gray-800 bg-white/70 dark:bg-gray-900/50 px-4 py-3 backdrop-blur-sm"
+                    className="w-full h-12 rounded-full bg-gradient-to-r from-purple-600 to-blue-500 dark:from-purple-400 dark:to-blue-300 text-white font-semibold flex items-center justify-center gap-3 shadow-lg hover:brightness-105 transition"
+                    aria-label="Free Consultation"
                   >
-                    {item}
-                  </div>
-                ))}
+                    <span className="text-base">Free Consultation</span>
+                    <span className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-white/20">
+                      <ArrowRight size={14} color="white" />
+                    </span>
+                  </button>
+                </div>
+
+                {/* Secondary white pill */}
+                <div className="flex-1 max-w-xs">
+                  <button
+                    onClick={handleDiscover}
+                    className="w-full h-12 rounded-full bg-white dark:bg-gray-800 text-slate-900 dark:text-white font-medium flex items-center justify-center gap-3 border-2 border-transparent hover:shadow-md transition"
+                    aria-label="Discover More"
+                  >
+                    <span className="text-base">Discover More</span>
+                    <span className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-gradient-to-r from-purple-600 to-blue-500 dark:from-purple-400 dark:to-blue-300 text-white">
+                      <ArrowRight size={14} color="white" />
+                    </span>
+                  </button>
+                </div>
               </motion.div>
             </motion.div>
           </motion.div>
 
-          {/* Right column - Video with improved container */}
+          {/* RIGHT: image frame (kept same as previous blue-style image container) */}
           <motion.div
-            className="order-1 lg:order-2 flex justify-center cursor-pointer"
+            className="order-1 lg:order-2 flex justify-center items-center"
             variants={fadeDown}
           >
             <motion.div
-              className="relative rounded-xl shadow-2xl border overflow-hidden w-full"
+              className="relative rounded-xl shadow-2xl border overflow-hidden w-full max-w-xl lg:max-w-2xl"
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               style={{ scale }}
@@ -227,36 +148,25 @@ const HeroSection = () => {
                 transition: { type: "spring", stiffness: 400, damping: 20 },
               }}
             >
-              {/* Adjusted container to preserve video proportions */}
-              <div className="relative w-full pb-[56.25%]">
-                <video
-                  ref={videoRef}
-                  className="absolute inset-0 w-full h-full object-contain"
-                  autoPlay
-                  muted
-                  loop
-                  playsInline
-                  preload="auto"
-                >
-                  <source src="/images/banner original.mp4" type="video/mp4" />
-                  Your browser does not support the video tag.
-                </video>
+              <div className="relative w-full pb-[85%] lg:pb-[75%]">
+                <img
+                  src={heroImg}
+                  alt="Hero visual"
+                  className="absolute inset-0 w-full h-full object-cover"
+                />
 
-                {/* Video overlay with gradient */}
+                {/* subtle overlay */}
                 <motion.div
                   className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none"
                   initial={{ opacity: 0 }}
-                  animate={{
-                    opacity: 0.6,
-                    transition: { delay: 0.4, duration: 0.8 },
-                  }}
+                  animate={{ opacity: 0.35, transition: { delay: 0.25, duration: 0.6 } }}
                 />
               </div>
             </motion.div>
           </motion.div>
         </motion.div>
       </div>
-    </div>
+    </section>
   );
 };
 
