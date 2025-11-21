@@ -6,14 +6,23 @@ import Link from "next/link";
 import Button from "../../components/ui/button";
 import ModeToggle from "@/components/ModeToggle";
 import Image from "next/image";
-import Logo from "../../../public/images/logo.png";
+import Logo from "../../../public/icons/suhlogo.svg"
+import Logo2 from "../../../public/icons/SUH_TECH_WEBHeader_LOGO (11).svg"
 import { useRouter, usePathname } from "next/navigation";
+import { useTheme } from "next-themes";
 
 function NavBar() {
   const [menu, setMenu] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const router = useRouter();
   const pathname = usePathname();
+  const { theme, resolvedTheme } = useTheme();
+
+  // Handle mounting to avoid hydration mismatch
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   // Handle scroll effect
   useEffect(() => {
@@ -54,13 +63,13 @@ function NavBar() {
   };
 
   const navItems = [
-    { name: "Home", href: "/" },
+    // { name: "Home", href: "/" },
+    { name: "About Us", href: "/industries" },
     { name: "Services", href: "/services" },
-    { name: "Industries", href: "/industries" },
     { name: "Portfolio", href: "/portfolio" },
     { name: "Insights", href: "/insights" },
     { name: "Careers", href: "/careers" },
-    { name: "Contact", href: "/contact" },
+    { name: "Contact Us", href: "/contact" },
   ];
 
   const handleNavItemClick = (item) => {
@@ -84,14 +93,16 @@ function NavBar() {
           {/* Logo (no animation) */}
           <div className="relative h-18 w-34 flex items-center">
             <Link href="/" className="block relative w-24 h-10 md:w-36 md:h-12">
-              <Image
-                src={Logo}
-                alt="logo"
-                className="drop-shadow-md transition-all duration-300 object-contain"
-                fill
-                sizes="(max-width: 768px) (min-width:200px) 100px, 150px"
-                priority
-              />
+              {mounted && (
+                <Image
+                  src={(resolvedTheme === 'dark' || theme === 'dark') ? Logo : Logo2}
+                  alt="logo"
+                  className="drop-shadow-md transition-all duration-300 object-contain"
+                  fill
+                  sizes="(max-width: 768px) (min-width:200px) 100px, 150px"
+                  priority
+                />
+              )}
             </Link>
           </div>
 
@@ -123,23 +134,15 @@ function NavBar() {
             <div className="w-4 md:w-6 lg:w-8 xl:w-10"></div>
 
             <div className="">
-              <Button
+              <button
                 onClick={handleButtonClick}
-                text={
-                  <div className="relative flex items-center w-40 h-12 sm:w-44 sm:h-14 rounded-full bg-white shadow-xl overflow-hidden pl-4 pr-1 gap-3">
-                    <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-600 opacity-0" />
-
-                    <span className="relative z-10 text-lg font-medium text-gray-800 flex-1">
-                      Contact Us
-                    </span>
-
-                    <div className="relative z-10 flex h-10 w-10 sm:h-12 sm:w-12 items-center justify-center rounded-full bg-blue-600">
-                      <ArrowRight size={20} strokeWidth={3} className="text-white" />
-                    </div>
-                  </div>
-                }
-                className="flex items-center justify-centerm rounded-full shadow-lg bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 dark:from-blue-600 dark:to-purple-500 transition-all duration-300"
-              />
+                className="w-full h-12 rounded-full bg-gray-100 dark:bg-gray-800 text-slate-900 dark:text-white font-medium flex items-center justify-center gap-3 border-2 border-transparent hover:shadow-md transition px-6"
+              >
+                <span className="text-base">Book Demo</span>
+                <span className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-gradient-to-r from-purple-600 to-blue-500 dark:from-purple-400 dark:to-blue-300 text-white">
+                  <ArrowRight size={14} color="white" />
+                </span>
+              </button>
             </div>
           </div>
 

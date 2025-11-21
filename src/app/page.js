@@ -22,7 +22,7 @@ const BlogResourcesSection = dynamic(() => import("./components/BlogResourcesSec
 const CareersSection = dynamic(() => import("./components/CareersSection"));
 const NewsletterSection = dynamic(() => import("../app/components/NewsLetters"));
 const ContactFormSection = dynamic(() => import("./components/ContactForm"));
-const FAQSection = dynamic(() => import("./components/Faq"));
+// const FAQSection = dynamic(() => import("./components/Faq"));
 
 export default function Home() {
   return (
@@ -34,13 +34,13 @@ export default function Home() {
         </section>
         {/* <VideoSection /> */}
 
-        <CoreValues/>
+        {/* <CoreValues/> */}
 
         <AboutUsSection />
 
         <ServicesSection />
         <TechStackSection />
-        <PortfolioSection />
+        {/* <PortfolioSection /> */}
         <section className="py-16 bg-gradient-to-br from-blue-50 to-purple-50 dark:from-blue-950/20 dark:to-purple-950/20 rounded-3xl my-12">
           <div className="container mx-auto text-center px-4">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
@@ -62,14 +62,14 @@ export default function Home() {
         <PricingSection />
         <IndustriesSection />
         <TestimonialsPage />
-        <BlogResourcesSection />
-        <CareersSection />
+        {/* <BlogResourcesSection /> */}
+        {/* <CareersSection />x */}
         <WhyChooseUsSection />
-        <NewsletterSection />
+        {/* <NewsletterSection /> */}
         <section id="contact">
           <ContactFormSection />
         </section>
-        <FAQSection />
+        {/* <FAQSection /> */}
         <FooterSection />
       </div>
     </main>

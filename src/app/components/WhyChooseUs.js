@@ -68,13 +68,14 @@ export default function WhyChooseUsSection() {
           transition={{ duration: 0.6 }}
           className="text-gray-700 dark:text-gray-300"
         >
-          <p className="uppercase tracking-[0.3em] text-blue-500 text-sm mb-3">
+          <p className="uppercase tracking-[0.3em] text-gray-500 dark:text-gray-400 text-sm mb-3">
             Why Choose Us
           </p>
 
           <h2 className="
-            text-4xl md:text-5xl font-bold 
-            text-gray-900 dark:text-white 
+            text-4xl md:text-5xl font-extrabold 
+            bg-gradient-to-r from-purple-600 to-blue-500 bg-clip-text text-transparent 
+            dark:from-purple-400 dark:to-blue-300 
             leading-tight mb-8
           ">
             Built on Trust, <br /> Driven by Results
