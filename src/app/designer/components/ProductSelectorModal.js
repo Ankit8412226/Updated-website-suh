@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "next/image";
 import { Check } from "lucide-react";
 
 const ProductSelectorModal = ({
@@ -14,6 +15,8 @@ const ProductSelectorModal = ({
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
       <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg max-w-2xl w-full max-h-[80vh] overflow-auto">
+        
+        {/* HEADER */}
         <div className="p-6 border-b border-gray-200 dark:border-gray-700 flex justify-between items-center">
           <h3 className="text-lg font-medium text-gray-800 dark:text-gray-200">
             Select Products for Your Design
@@ -25,6 +28,8 @@ const ProductSelectorModal = ({
             &times;
           </button>
         </div>
+
+        {/* CONTENT */}
         <div className="p-6">
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
             {productOptions.map((product) => (
@@ -37,22 +42,29 @@ const ProductSelectorModal = ({
                     : "border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600"
                 }`}
               >
+                {/* IMAGE FIXED */}
                 <div className="relative w-full aspect-square bg-gray-100 dark:bg-gray-700 rounded-md mb-2 overflow-hidden">
-                  <img
+                  <Image
                     src={product.image}
                     alt={product.name}
-                    className="w-full h-full object-cover"
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 50vw, 33vw"
                   />
+
                   {selectedProducts.includes(product.id) && (
                     <div className="absolute top-2 right-2 w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center">
                       <Check size={14} className="text-white" />
                     </div>
                   )}
                 </div>
+
+                {/* TITLE + PRICE */}
                 <div className="flex items-center justify-between">
                   <div className="text-sm font-medium text-gray-800 dark:text-gray-200">
                     {product.name}
                   </div>
+
                   <div className="text-sm text-gray-600 dark:text-gray-400">
                     ${product.price.toFixed(2)}
                   </div>
@@ -60,6 +72,8 @@ const ProductSelectorModal = ({
               </div>
             ))}
           </div>
+
+          {/* FOOTER BUTTONS */}
           <div className="flex justify-between mt-6">
             <button
               onClick={onClose}
@@ -67,6 +81,7 @@ const ProductSelectorModal = ({
             >
               Cancel
             </button>
+
             <button
               onClick={addSelectedToCart}
               disabled={selectedProducts.length === 0}

@@ -5,6 +5,8 @@ import HeroSection from "./components/HeroSection";
 import FooterSection from "./components/FooterSection";
 import WhyChooseUsSection from "./components/WhyChooseUs";
 import CoreValues from "./components/CoreValues"
+import CtaBanner from "./components/CtaBanner";
+import CtaSecondaryBanner from "./components/CtaSecondaryBanner";
 
 // Dynamically import non-critical components
 const VideoSection = dynamic(() => import("./components/VedioSection"), {
@@ -35,33 +37,16 @@ export default function Home() {
         {/* <VideoSection /> */}
 
         <CoreValues/>
-
         <AboutUsSection />
-
         <ServicesSection />
         <TechStackSection />
-        <PortfolioSection />
-        <section className="py-16 bg-gradient-to-br from-blue-50 to-purple-50 dark:from-blue-950/20 dark:to-purple-950/20 rounded-3xl my-12">
-          <div className="container mx-auto text-center px-4">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
-              See Our Work in Action
-            </h2>
-            <p className="text-lg text-gray-600 dark:text-gray-300 mb-8 max-w-2xl mx-auto">
-              Explore detailed case studies with metrics, timelines, and
-              real-world impact across industries.
-            </p>
-            <Link
-              href="/portfolio"
-              className="inline-block px-8 py-4 rounded-xl bg-gradient-to-r from-blue-500 to-purple-600 text-white font-semibold hover:from-blue-600 hover:to-purple-700 transition-all duration-300 shadow-lg"
-            >
-              View Full Portfolio
-            </Link>
-          </div>
-        </section>
+        {/* <PortfolioSection /> */}
+        <CtaBanner/>
         <ProcessSection />
         <PricingSection />
         <IndustriesSection />
         <TestimonialsPage />
+        <CtaSecondaryBanner/>
         <BlogResourcesSection />
         <CareersSection />
         <WhyChooseUsSection />

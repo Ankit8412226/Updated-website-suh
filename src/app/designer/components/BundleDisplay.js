@@ -1,4 +1,7 @@
+"use client";
+
 import React from "react";
+import Image from "next/image";
 import { Package, X } from "lucide-react";
 
 const BundleDisplay = ({ bundleItems, removeBundle }) => {
@@ -16,6 +19,7 @@ const BundleDisplay = ({ bundleItems, removeBundle }) => {
             </p>
           </div>
         </div>
+
         <button
           onClick={removeBundle}
           className="text-gray-400 hover:text-red-500"
@@ -30,23 +34,29 @@ const BundleDisplay = ({ bundleItems, removeBundle }) => {
             key={`bundle-item-${index}`}
             className="flex flex-col border border-gray-200 dark:border-gray-700 rounded-md overflow-hidden bg-white dark:bg-gray-800"
           >
-            <div className="h-32 overflow-hidden">
-              <img
+            {/* FIXED IMAGE */}
+            <div className="h-32 overflow-hidden relative">
+              <Image
                 src={item.image}
                 alt={item.name}
-                className="w-full h-full object-cover"
+                fill
+                className="object-cover"
+                sizes="(max-width: 640px) 100vw, 33vw"
               />
             </div>
+
             <div className="p-3">
               <p className="font-medium text-gray-800 dark:text-gray-200 text-sm">
                 {item.name}
               </p>
+
               <div className="flex justify-between items-center mt-1">
                 <p className="text-xs text-gray-600 dark:text-gray-400">
                   Size: {item.size}
                 </p>
                 <p className="text-xs font-medium text-orange-500">$33.00</p>
               </div>
+
               {item.designText && (
                 <p className="text-xs text-gray-500 dark:text-gray-400 mt-1 truncate">
                   Design: {item.designText}
