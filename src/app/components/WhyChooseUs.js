@@ -1,7 +1,7 @@
 "use client";
 
-import { useState } from "react";
-import { motion } from "framer-motion";
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import Image from "next/image";
 
@@ -31,30 +31,50 @@ export default function WhyChooseUsSection() {
     },
   ];
 
+  //  Auto Rotate Smooth Accordion
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setOpen((prev) => (prev + 1) % items.length);
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <section className="w-full py-20 lg:py-28">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-10 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      <div className="
+        container mx-auto px-4 sm:px-6 lg:px-10 
+        grid grid-cols-1 lg:grid-cols-2 gap-12 items-start
+      ">
 
         {/* LEFT IMAGE */}
-
         <motion.div
           initial={{ opacity: 0, x: -30 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="relative rounded-3xl overflow-hidden shadow-xl 
-                     bg-white/80 dark:bg-gray-900/40 
-                     border border-gray-200 dark:border-gray-800"
+          className="
+            relative rounded-3xl overflow-hidden shadow-xl 
+            bg-white/80 dark:bg-gray-900/40 
+            border border-gray-200 dark:border-gray-800
+            h-[520px]
+          "
         >
-          <Image
-            src="/images/whyChoose.png"
-            alt="Team Image"
-            width={800}
-            height={650}
-            className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
-          />
+          <motion.div
+            whileHover={{ scale: 1.05 }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+            className="w-full h-full"
+          >
+            <Image
+              src="/images/Why choose us.png"
+              alt="Team Image"
+              width={800}
+              height={650}
+              className="w-full h-full object-cover"
+            />
+          </motion.div>
 
-          {/* Gradient Overlay */}
+          {/* Subtle Top Gradient */}
           <div className="absolute inset-0 bg-gradient-to-t 
                           from-black/40 via-black/10 to-transparent 
                           opacity-60 pointer-events-none" />
@@ -88,42 +108,44 @@ export default function WhyChooseUsSection() {
                 key={index}
                 className="
                   rounded-2xl p-5 backdrop-blur-xl transition-all
-
                   bg-white border border-gray-200 shadow-sm
                   dark:bg-gray-900/40 dark:border-gray-800
                 "
               >
                 <button
                   onClick={() => setOpen(open === index ? null : index)}
-                  className="
-                    w-full flex items-center justify-between text-left 
-                    text-gray-900 dark:text-white 
-                    text-lg font-medium
-                  "
+                  className="w-full flex items-center justify-between text-left 
+                  text-gray-900 dark:text-white text-lg font-medium"
                 >
                   {item.title}
 
                   {open === index ? (
-                    <ChevronUp className="text-gray-500 dark:text-gray-400" size={20} />
+                    <ChevronUp size={20} className="text-gray-500 dark:text-gray-400" />
                   ) : (
-                    <ChevronDown className="text-gray-500 dark:text-gray-400" size={20} />
+                    <ChevronDown size={20} className="text-gray-500 dark:text-gray-400" />
                   )}
                 </button>
 
-                {open === index && (
-                  <motion.p
-                    initial={{ opacity: 0, y: -6 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.3 }}
-                    className="text-gray-600 dark:text-gray-400 text-sm mt-3 leading-relaxed"
-                  >
-                    {item.content}
-                  </motion.p>
-                )}
+                <AnimatePresence>
+                  {open === index && (
+                    <motion.div
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: "auto" }}
+                      exit={{ opacity: 0, height: 0 }}
+                      transition={{ duration: 0.35, ease: "easeOut" }}
+                      className="overflow-hidden"
+                    >
+                      <p className="text-gray-600 dark:text-gray-400 text-sm mt-3 leading-relaxed">
+                        {item.content}
+                      </p>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </div>
             ))}
           </div>
         </motion.div>
+
       </div>
     </section>
   );

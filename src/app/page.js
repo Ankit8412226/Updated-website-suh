@@ -5,6 +5,8 @@ import HeroSection from "./components/HeroSection";
 import FooterSection from "./components/FooterSection";
 import WhyChooseUsSection from "./components/WhyChooseUs";
 import CoreValues from "./components/CoreValues"
+import CtaBanner from "./components/CtaBanner";
+import CtaSecondaryBanner from "./components/CtaSecondaryBanner";
 
 // Dynamically import non-critical components
 const VideoSection = dynamic(() => import("./components/VedioSection"), {
@@ -37,7 +39,6 @@ export default function Home() {
         {/* <CoreValues/> */}
 
         <AboutUsSection />
-
         <ServicesSection />
         <TechStackSection />
         {/* <PortfolioSection /> */}
