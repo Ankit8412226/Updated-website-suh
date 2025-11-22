@@ -12,6 +12,9 @@ import {
   CheckCircle,
   AlertCircle,
 } from "lucide-react";
+import { useTheme } from "next-themes";
+import Logo from "../../../public/icons/suhlogo.svg"
+import Logo2 from "../../../public/icons/SUH_TECH_WEBHeader_LOGO (11).svg"
 
 // Tooltip Component
 const SubscriptionTooltip = ({ message, type, show }) => {
@@ -62,6 +65,13 @@ function FooterSection() {
   });
   const [isLoading, setIsLoading] = useState(false);
   const [showTooltip, setShowTooltip] = useState(false);
+  const [mounted, setMounted] = useState(false);
+  const { theme, resolvedTheme } = useTheme();
+
+  // Handle mounting to avoid hydration mismatch
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   // Auto-hide tooltip after success
   useEffect(() => {
@@ -188,13 +198,15 @@ function FooterSection() {
             className="col-span-2 sm:col-span-2 md:col-span-3 lg:col-span-2"
             variants={fadeIn}
           >
-            <Image
-              src="/images/logo.png"
-              alt="Diamond QR"
-              width={200}
-              height={200}
-              className="object-contain mb-4 cursor-pointer"
-            />
+            {mounted && (
+              <Image
+                src={(resolvedTheme === 'dark' || theme === 'dark') ? Logo : Logo2}
+                alt="Diamond QR"
+                width={200}
+                height={200}
+                className="object-contain mb-5 cursor-pointer"
+              />
+            )}
             <p className="text-gray-700 dark:text-gray-300 mt-4 mb-6 max-w-md">
               We are an end-to-end IT services and product engineering studio
               helping fintech, SaaS, health, and commerce teams launch secure,
@@ -248,14 +260,14 @@ function FooterSection() {
           ))}
         </motion.div>
 
-        <Separator className="bg-gray-200 dark:bg-gray-800" />
+        {/* <Separator className="bg-gray-200 dark:bg-gray-800" /> */}
 
         {/* Newsletter */}
-        <motion.div
+        {/* <motion.div
           className="py-8 flex flex-col md:flex-row justify-between items-center gap-4"
           variants={fadeIn}
-        >
-          <div className="max-w-md">
+        > */}
+          {/* <div className="max-w-md">
             <h3 className="text-xl font-bold mb-2 bg-gradient-to-r from-purple-600 to-blue-500 bg-clip-text text-transparent dark:from-purple-400 dark:to-blue-300 cursor-pointer">
               Get the Delivery Briefing
             </h3>
@@ -263,12 +275,12 @@ function FooterSection() {
               One concise email with release tactics, SEO ideas, and automation
               frameworks we test with clients.
             </p>
-          </div>
-          <form
+          </div> */}
+          {/* <form
             onSubmit={handleSubscribe}
             className="flex flex-col w-full md:w-auto relative"
-          >
-            <div className="flex w-full">
+          > */}
+            {/* <div className="flex w-full">
               <input
                 type="email"
                 value={email}
@@ -285,16 +297,16 @@ function FooterSection() {
               >
                 {isLoading ? "Subscribing..." : "Subscribe"}
               </button>
-            </div>
+            </div> */}
 
             {/* Tooltip */}
-            <SubscriptionTooltip
+            {/* <SubscriptionTooltip
               message={subscriptionStatus.message}
               type={subscriptionStatus.type}
               show={showTooltip}
             />
-          </form>
-        </motion.div>
+          </form> */}
+        {/* </motion.div> */}
 
         <Separator className="bg-gray-200 dark:bg-gray-800" />
 

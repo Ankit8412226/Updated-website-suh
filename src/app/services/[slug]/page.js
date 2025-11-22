@@ -386,7 +386,7 @@ async function ServiceDetailPage({ params }) {
             {infoBlocks(data.process, "Process playbook")}
             {infoBlocks(data.technologies, "Tech we rely on")}
           </div>
-          <div className="space-y-8 rounded-3xl border border-gray-100 dark:border-gray-800 bg-white/80 dark:bg-gray-900/50 p-6">
+          {/* <div className="space-y-8 rounded-3xl border border-gray-100 dark:border-gray-800 bg-white/80 dark:bg-gray-900/50 p-6">
             <h3 className="text-lg font-semibold">Pricing snapshots</h3>
             <ul className="space-y-3 text-sm text-gray-700 dark:text-gray-300">
               {data.pricing.map((line) => (
@@ -396,7 +396,7 @@ async function ServiceDetailPage({ params }) {
                 </li>
               ))}
             </ul>
-          </div>
+          </div> */}
         </div>
       </section>
 

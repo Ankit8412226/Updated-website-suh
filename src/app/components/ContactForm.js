@@ -1,449 +1,230 @@
 "use client";
 
-import axios from "axios";
 import { motion } from "framer-motion";
-import {
-  AlertCircle,
-  CheckCircle,
-  Loader,
-  Mail,
-  MapPin,
-  MessageCircle,
-  MessageSquare,
-  Phone,
-} from "lucide-react";
-import Image from "next/image";
-import { useState } from "react";
-import "react-phone-input-2/lib/style.css";
-import { Input } from "../../components/ui/input";
-import { Textarea } from "../../components/ui/textarea";
+import { Phone, Mail, MapPin } from "lucide-react";
 
-function ContactFormSection() {
-  // Form state management
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    subject: "",
-    message: "",
-  });
-
-  // Form validation and submission state
-  const [errors, setErrors] = useState({});
-  const [formStatus, setFormStatus] = useState({
-    isSubmitting: false,
-    isSubmitted: false,
-    isSuccess: false,
-    message: "",
-  });
-
-  const contactDetails = [
-    {
-      label: "Call us",
-      value: "+1 (415) 799-9007",
-      description: "North America",
-      icon: Phone,
-    },
-    {
-      label: "WhatsApp",
-      value: "+91 95757 12340",
-      description: "Instant project chat",
-      icon: MessageCircle,
-    },
-    {
-      label: "Email",
-      value: "hello@suhtech.com",
-      description: "24h response SLA",
-      icon: Mail,
-    },
-    {
-      label: "Offices",
-      value: "Pune • NYC",
-      description: "On-site workshops available",
-      icon: MapPin,
-    },
-  ];
-
-  // Handle input changes
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-    // Clear error when user starts typing
-    if (errors[name]) {
-      setErrors((prev) => ({ ...prev, [name]: "" }));
-    }
-  };
-
-  // Validate form
-  const validateForm = () => {
-    const newErrors = {};
-
-    if (!formData.name.trim()) {
-      newErrors.name = "Name is required";
-    }
-
-    if (!formData.email.trim()) {
-      newErrors.email = "Email is required";
-    } else if (!/^\S+@\S+\.\S+$/.test(formData.email)) {
-      newErrors.email = "Please enter a valid email";
-    }
-
-    if (!formData.message.trim()) {
-      newErrors.message = "Message is required";
-    }
-
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
-
-  // Handle form submission
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    if (!validateForm()) {
-      return;
-    }
-
-    setFormStatus({
-      isSubmitting: true,
-      isSubmitted: false,
-      isSuccess: false,
-      message: "",
-    });
-
-    try {
-      // Updated endpoint to match the required URL
-      const response = await axios.post(
-        "https://artQR-backend.vercel.app/contact/SubmitContact",
-        formData
-      );
-
-      setFormStatus({
-        isSubmitting: false,
-        isSubmitted: true,
-        isSuccess: true,
-        message:
-          response.data.message || "Your message has been sent successfully!",
-      });
-      // Reset form
-      setFormData({ name: "", email: "", subject: "", message: "" });
-    } catch (error) {
-      console.error("Error submitting form:", error);
-      setFormStatus({
-        isSubmitting: false,
-        isSubmitted: true,
-        isSuccess: false,
-        message:
-          error.response?.data?.error ||
-          "Failed to send message. Please try again.",
-      });
-    }
-  };
-
-  // Animation variants consistent with previous components
-  const fadeUp = {
-    hidden: { opacity: 0, y: 40 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] },
-    },
-  };
-
-  const fadeDown = {
-    hidden: { opacity: 0, y: -40 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] },
-    },
-  };
-
-  const fadeIn = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] },
-    },
-  };
-
-  const staggerContainer = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.15,
-        delayChildren: 0.2,
-      },
-    },
-  };
-
-  const formFieldVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] },
-    },
-  };
-
+export default function ContactSection() {
   return (
-    <div id="contact" className="w-full flex justify-center overflow-hidden">
-      <motion.section
-        className="w-full max-w-[1350px] py-8 md:py-12 px-4"
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.2 }}
-        variants={staggerContainer}
-      >
-        <motion.div className="flex flex-col items-center" variants={fadeDown}>
-          {/* <Header subtitle="We're Here to Help" /> */}
-        </motion.div>
-        <div className="container mx-auto mt-5">
-          <div className="flex flex-col md:flex-row gap-8 md:gap-16">
-            {/* Left side - Contact Details */}
-            <motion.div className="w-full md:w-1/2 space-y-6" variants={fadeIn}>
-              <motion.div
-                className="relative h-full min-h-64 md:min-h-96"
-                whileHover={{
-                  scale: 1.02,
-                  boxShadow: "0px 20px 40px rgba(0, 0, 0, 0.15)",
-                  transition: { type: "spring", stiffness: 300, damping: 20 },
-                }}
+    <section
+      className="
+        relative py-24 px-6 md:px-10 overflow-hidden
+        bg-gradient-to-b from-[#f6f4ff] via-[#f4f3ff] to-[#f2f1ff]
+        dark:from-[#060615] dark:via-[#08081c] dark:to-[#09091f]
+      "
+    >
+      {/* Pink planet glow */}
+      <div
+        className="
+          absolute bottom-[-120px] left-[-120px] w-[420px] h-[420px]
+          bg-gradient-to-tr from-fuchsia-400/500 to-purple-400/100
+          blur-[140px] rounded-full pointer-events-none
+          dark:from-fuchsia-500/60 dark:to-purple-500/40
+        "
+      />
+
+      {/* Noise texture */}
+      <div
+        className="
+          absolute inset-0 opacity-[0.25] pointer-events-none
+          bg-[url('https://grainy-gradients.vercel.app/noise.svg')]
+          mix-blend-soft-light
+          dark:opacity-[0.15]
+        "
+      ></div>
+
+      <div className="relative max-w-7xl mx-auto">
+        {/* Header */}
+        <div className="text-center mb-16">
+          <h2 className="text-4xl md:text-5xl font-extrabold mb-4">
+            <span className="bg-gradient-to-r from-purple-600 to-blue-500 bg-clip-text text-transparent dark:from-purple-400 dark:to-blue-300">
+              Got questions?
+            </span>{" "}
+            <span className="text-gray-600 dark:text-gray-300">
+              We're <br/> always here to help
+            </span>
+          </h2>
+
+          <p className="text-gray-600 dark:text-gray-400 max-w-xl mx-auto">
+            We're open to feedback, collabs, or curious minds. Drop us a message.
+          </p>
+        </div>
+
+        {/* Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+          {/* LEFT SIDE INFO */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="space-y-10"
+          >
+            {/* Phone */}
+            <div className="flex items-start gap-6">
+              <div
+                className="
+                  w-12 h-12 rounded-xl flex items-center justify-center
+                  bg-purple-500/15 text-purple-600
+                  dark:bg-purple-600/20 dark:text-purple-400
+                "
               >
-                <Image
-                  src="/images/WhatsApp_contact.jpg"
-                  alt="ArtofQR delivery pods collaborating"
-                  width={500}
-                  height={400}
-                  className="rounded-lg object-cover w-full h-full max-h-125 shadow-lg border border-gray-100 dark:border-gray-700"
-                />
-              </motion.div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {contactDetails.map(({ label, value, description, icon: Icon }) => {
-                  const isPhone = label === "Call us";
-                  const isWhatsApp = label === "WhatsApp";
-                  const isEmail = label === "Email";
-
-                  const getHref = () => {
-                    if (isPhone) return `tel:${value.replace(/\s/g, "")}`;
-                    if (isWhatsApp) return `https://wa.me/${value.replace(/[\s+]/g, "")}`;
-                    if (isEmail) return `mailto:${value}`;
-                    return "#";
-                  };
-
-                  const Component = (isPhone || isWhatsApp || isEmail) ? "a" : "div";
-
-                  return (
-                    <Component
-                      key={label}
-                      href={getHref()}
-                      target={isWhatsApp ? "_blank" : undefined}
-                      rel={isWhatsApp ? "noopener noreferrer" : undefined}
-                      className="rounded-2xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900/60 p-4 hover:border-blue-500 dark:hover:border-blue-400 hover:shadow-lg transition-all duration-300 cursor-pointer"
-                    >
-                      <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-full bg-blue-100 dark:bg-blue-900/60 text-blue-600 dark:text-blue-400 flex items-center justify-center">
-                          <Icon size={18} />
-                        </div>
-                        <div>
-                          <p className="text-xs uppercase tracking-[0.3em] text-gray-500 dark:text-gray-400">
-                            {label}
-                          </p>
-                          <p className="text-base font-semibold text-gray-900 dark:text-white">
-                            {value}
-                          </p>
-                          <p className="text-xs text-gray-600 dark:text-gray-400">{description}</p>
-                        </div>
-                      </div>
-                    </Component>
-                  );
-                })}
+                <Phone size={22} />
               </div>
-
-              <div className="rounded-2xl overflow-hidden border border-gray-100 dark:border-gray-800 shadow-lg">
-                <iframe
-                  title="ArtofQR HQ"
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3770.8584424944553!2d73.77911337535747!3d18.63069036431452!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2bfb1b7e3c6cb%3A0xc46b5e40b934df3!2sBaner%2C%20Pune%2C%20Maharashtra!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
-                  width="100%"
-                  height="220"
-                  loading="lazy"
-                  className="w-full"
-                  referrerPolicy="no-referrer-when-downgrade"
-                ></iframe>
+              <div>
+                <h4 className="text-gray-900 dark:text-white font-semibold text-lg">
+                  Phone Number
+                </h4>
+                <p className="text-gray-600 dark:text-gray-400">(316) 555-0116</p>
               </div>
-            </motion.div>
+            </div>
 
-            {/* Right side - Form */}
-            <motion.div className="w-full md:w-1/2" variants={fadeUp}>
-              <div className="flex flex-col gap-8">
-                <motion.div variants={fadeUp}>
-                  <motion.h2
-                    className="text-2xl md:text-3xl font-bold mb-3 bg-gradient-to-r from-purple-600 to-blue-500 bg-clip-text text-transparent dark:from-purple-400 dark:to-blue-300"
-                    variants={fadeDown}
-                  >
-                    Tell us about your roadmap
-                  </motion.h2>
-                  <motion.p
-                    className="text-gray-700 dark:text-gray-300 text-base"
-                    variants={fadeUp}
-                  >
-                    Share context on the product, integration, or marketing
-                    challenge you&apos;re facing. We reply within 24 hours with
-                    next steps, resourcing options, and a suggested workshop
-                    agenda.
-                  </motion.p>
-                </motion.div>
+            {/* Email */}
+            <div className="flex items-start gap-6">
+              <div
+                className="
+                  w-12 h-12 rounded-xl flex items-center justify-center
+                  bg-blue-500/15 text-blue-600
+                  dark:bg-blue-600/20 dark:text-blue-300
+                "
+              >
+                <Mail size={22} />
+              </div>
+              <div>
+                <h4 className="text-gray-900 dark:text-white font-semibold text-lg">
+                  Email Support
+                </h4>
+                <p className="text-gray-600 dark:text-gray-400">
+                  support@coinnect.com
+                </p>
+              </div>
+            </div>
 
-                {/* Status message */}
-                {formStatus.isSubmitted && (
-                  <motion.div
-                    initial={{ opacity: 0, y: -10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className={`p-4 rounded-md ${
-                      formStatus.isSuccess
-                        ? "bg-green-50 text-green-700 border border-green-200 dark:bg-green-900/20 dark:text-green-300 dark:border-green-800"
-                        : "bg-red-50 text-red-700 border border-red-200 dark:bg-red-900/20 dark:text-red-300 dark:border-red-800"
-                    }`}
-                  >
-                    <div className="flex items-center gap-2">
-                      {formStatus.isSuccess ? (
-                        <CheckCircle size={18} />
-                      ) : (
-                        <AlertCircle size={18} />
-                      )}
-                      <span>{formStatus.message}</span>
-                    </div>
-                  </motion.div>
-                )}
+            {/* Location */}
+            <div className="flex items-start gap-6">
+              <div
+                className="
+                  w-12 h-12 rounded-xl flex items-center justify-center
+                  bg-cyan-500/15 text-cyan-600
+                  dark:bg-cyan-500/20 dark:text-cyan-300
+                "
+              >
+                <MapPin size={22} />
+              </div>
+              <div>
+                <h4 className="text-gray-900 dark:text-white font-semibold text-lg">
+                  Head Quarter
+                </h4>
+                <p className="text-gray-600 dark:text-gray-400">
+                  3517 W. Gray St. Utica, Pennsylvania 57867
+                </p>
+              </div>
+            </div>
+          </motion.div>
 
-                <motion.form
-                  onSubmit={handleSubmit}
-                  className="flex flex-col gap-6"
-                  variants={staggerContainer}
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={{ once: true, amount: 0.1 }}
+          {/* RIGHT FORM */}
+          <div className="flex justify-center lg:justify-end">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="
+                relative p-8 md:p-10 rounded-3xl overflow-hidden
+                border border-white/20 dark:border-white/10
+                bg-white/80 dark:bg-white/[0.05]
+                backdrop-blur-2xl shadow-2xl
+                w-full max-w-md
+              "
+            >
+              {/* Bottom Purple Glow */}
+              <div
+                className="
+                  absolute bottom-[-250px] left-[120px] w-[420px] h-[420px]
+                  bg-gradient-to-tr from-fuchsia-400/200 to-purple-400/40
+                  blur-[140px] rounded-full pointer-events-none
+                  dark:from-fuchsia-500/60 dark:to-purple-500/40
+                "
+              />
+
+              <form className="space-y-6 relative z-10">
+
+                {/* Name */}
+                <div>
+                  <label className="text-gray-700 dark:text-gray-300 text-sm mb-1 block">
+                    Name
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="Pedro Fernandez"
+                    className="
+                      w-full px-4 py-3 rounded-xl
+                      bg-purple-50/60 border border-purple-200 text-gray-900
+                      placeholder-gray-400
+                      focus:outline-none focus:ring-2 focus:ring-purple-500/40
+
+                      dark:bg-[#1A1F2E]/60 dark:border-white/10 dark:text-white
+                      dark:placeholder-gray-400
+                    "
+                  />
+                </div>
+
+                {/* Email */}
+                <div>
+                  <label className="text-gray-700 dark:text-gray-300 text-sm mb-1 block">
+                    Email
+                  </label>
+                  <input
+                    type="email"
+                    placeholder="fernandezpedro@mail.com"
+                    className="
+                      w-full px-4 py-3 rounded-xl
+                      bg-purple-50/60 border border-purple-200 text-gray-900
+                      placeholder-gray-400
+                      focus:outline-none focus:ring-2 focus:ring-purple-500/40
+
+                      dark:bg-[#1A1F2E]/60 dark:border-white/10 dark:text-white
+                      dark:placeholder-gray-400
+                    "
+                  />
+                </div>
+
+                {/* Message */}
+                <div>
+                  <label className="text-gray-700 dark:text-gray-300 text-sm mb-1 block">
+                    Message
+                  </label>
+                  <textarea
+                    rows={5}
+                    placeholder="Write your message"
+                    className="
+                      w-full px-4 py-3 rounded-xl resize-none
+                      bg-purple-50/60 border border-purple-200 text-gray-900
+                      placeholder-gray-400
+                      focus:outline-none focus:ring-2 focus:ring-purple-500/40
+
+                      dark:bg-[#1A1F2E]/60 dark:border-white/10 dark:text-white
+                      dark:placeholder-gray-400
+                    "
+                  ></textarea>
+                </div>
+
+                {/* Button */}
+                <button
+                  type="submit"
+                  className="
+                    w-full py-4 rounded-xl text-white font-semibold
+                    bg-gradient-to-r from-purple-600 to-fuchsia-500
+                    hover:from-purple-700 hover:to-fuchsia-600
+                    transition shadow-[0_0_25px_rgba(180,50,255,0.4)]
+                  "
                 >
-                  <motion.div
-                    className="flex flex-col gap-4"
-                    variants={staggerContainer}
-                  >
-                    <motion.div variants={formFieldVariants}>
-                      <Input
-                        type="text"
-                        name="name"
-                        value={formData.name}
-                        onChange={handleChange}
-                        placeholder="Your Name"
-                        className={`p-3 rounded-md border-gray-200 dark:border-gray-700 dark:bg-gray-800/80 focus:border-purple-500 dark:focus:border-purple-400 focus:ring-2 focus:ring-purple-500/20 dark:focus:ring-purple-400/20 transition-all duration-300 ${
-                          errors.name
-                            ? "border-red-500 dark:border-red-500"
-                            : ""
-                        }`}
-                      />
-                      {errors.name && (
-                        <p className="text-red-500 text-sm mt-1">
-                          {errors.name}
-                        </p>
-                      )}
-                    </motion.div>
+                  Send Message
+                </button>
 
-                    <motion.div variants={formFieldVariants}>
-                      <Input
-                        type="email"
-                        name="email"
-                        value={formData.email}
-                        onChange={handleChange}
-                        placeholder="Email Address"
-                        className={`p-3 rounded-md border-gray-200 dark:border-gray-700 dark:bg-gray-800/80 focus:border-purple-500 dark:focus:border-purple-400 focus:ring-2 focus:ring-purple-500/20 dark:focus:ring-purple-400/20 transition-all duration-300 ${
-                          errors.email
-                            ? "border-red-500 dark:border-red-500"
-                            : ""
-                        }`}
-                      />
-                      {errors.email && (
-                        <p className="text-red-500 text-sm mt-1">
-                          {errors.email}
-                        </p>
-                      )}
-                    </motion.div>
-
-                    <motion.div variants={formFieldVariants}>
-                      <Input
-                        type="text"
-                        name="subject"
-                        value={formData.subject}
-                        onChange={handleChange}
-                        placeholder="Subject"
-                        className="p-3 rounded-md border-gray-200 dark:border-gray-700 dark:bg-gray-800/80 focus:border-purple-500 dark:focus:border-purple-400 focus:ring-2 focus:ring-purple-500/20 dark:focus:ring-purple-400/20 transition-all duration-300"
-                      />
-                    </motion.div>
-
-                    <motion.div variants={formFieldVariants}>
-                      <Textarea
-                        name="message"
-                        value={formData.message}
-                        onChange={handleChange}
-                        placeholder="Share goals, timelines, and the tech stack we should know about"
-                        className={`p-3 rounded-md min-h-32 border-gray-200 dark:border-gray-700 dark:bg-gray-800/80 focus:border-purple-500 dark:focus:border-purple-400 focus:ring-2 focus:ring-purple-500/20 dark:focus:ring-purple-400/20 transition-all duration-300 ${
-                          errors.message
-                            ? "border-red-500 dark:border-red-500"
-                            : ""
-                        }`}
-                      />
-                      {errors.message && (
-                        <p className="text-red-500 text-sm mt-1">
-                          {errors.message}
-                        </p>
-                      )}
-                    </motion.div>
-                  </motion.div>
-
-                  {/* Submit Button */}
-                  <motion.div
-                    variants={fadeUp}
-                    whileHover={
-                      !formStatus.isSubmitting
-                        ? {
-                            scale: 1.03,
-                            transition: {
-                              type: "spring",
-                              stiffness: 400,
-                              damping: 20,
-                            },
-                          }
-                        : {}
-                    }
-                    whileTap={!formStatus.isSubmitting ? { scale: 0.98 } : {}}
-                  >
-                    {/* Replace the Button component with a standard button */}
-                    <button
-                      type="submit"
-                      disabled={formStatus.isSubmitting}
-                      className="w-full h-12 flex items-center justify-center gap-2 bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 dark:from-blue-600 dark:to-purple-500 dark:hover:from-blue-500 dark:hover:to-purple-400 text-white shadow-lg rounded-md transition-all duration-300 disabled:opacity-70 disabled:cursor-not-allowed"
-                    >
-                      {formStatus.isSubmitting ? (
-                        <>
-                          <Loader size={18} className="animate-spin" />
-                          <span>Sending...</span>
-                        </>
-                      ) : (
-                        <>
-                          <MessageSquare size={18} />
-                          <span>Send Project Brief</span>
-                        </>
-                      )}
-                    </button>
-                  </motion.div>
-                </motion.form>
-              </div>
+              </form>
             </motion.div>
           </div>
+
         </div>
-      </motion.section>
-    </div>
+      </div>
+    </section>
   );
 }
-
-export default ContactFormSection;
