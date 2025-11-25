@@ -1,50 +1,16 @@
 "use client";
 
 import React from "react";
-import Button from "@/components/ui/button";
-import { ArrowRight } from "lucide-react";
-import { motion, useTransform, useViewportScroll } from "framer-motion";
+import { ArrowRight, Sparkles } from "lucide-react";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 
 const HeroSection = () => {
   const router = useRouter();
-  const { scrollY } = useViewportScroll();
-  const scale = useTransform(scrollY, [0, 200], [1, 0.98]);
-
-  const fadeUp = {
-    hidden: { opacity: 0, y: 40 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] },
-    },
-  };
-
-  const fadeDown = {
-    hidden: { opacity: 0, y: -40 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] },
-    },
-  };
-
-  const fadeIn = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] },
-    },
-  };
-
-  const staggerContainer = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { staggerChildren: 0.15, delayChildren: 0.2 },
-    },
-  };
+  const { scrollY } = useScroll();
+  const scale = useTransform(scrollY, [0, 200], [1, 0.95]);
+  const opacity = useTransform(scrollY, [0, 200], [1, 0.8]);
 
   const handleBookDemo = () => router.push("/contact");
   const handleDiscover = () => router.push("/services");
@@ -53,100 +19,94 @@ const HeroSection = () => {
   const heroImg = "/images/Hero section Img.png";
 
   return (
-    <section id="hero" className="w-full overflow-hidden">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-20">
+    <section id="hero" className="relative w-full overflow-hidden pt-20 lg:pt-32 pb-16 lg:pb-24">
+      {/* Background Elements */}
+      <div className="absolute inset-0 -z-10 overflow-hidden">
+        <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-purple-500/20 blur-[120px] animate-pulse" />
+        <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] rounded-full bg-blue-500/20 blur-[120px] animate-pulse delay-1000" />
+      </div>
+
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
-          className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center"
-          variants={staggerContainer}
+          className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center"
           initial="hidden"
           animate="visible"
+          variants={{
+            hidden: { opacity: 0 },
+            visible: {
+              opacity: 1,
+              transition: { staggerChildren: 0.15 }
+            }
+          }}
         >
-          {/* LEFT */}
-          <motion.div
-            className="order-2 lg:order-1 mt-8 lg:mt-0 text-left"
-            variants={fadeIn}
-          >
-            <motion.div className="relative max-w-2xl" variants={fadeDown}>
-              <div className="inline-block mb-6">
-                <span className="inline-flex items-center px-4 py-2 rounded-full bg-gray-900/10 dark:bg-white/10 backdrop-blur-sm text-sm font-medium text-gray-900 dark:text-white">
-                  Our Integrated IT Solutions
+          {/* LEFT CONTENT */}
+          <motion.div className="order-2 lg:order-1 text-left relative z-10">
+            <motion.div
+              variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/50 dark:bg-white/5 backdrop-blur-md border border-gray-200 dark:border-white/10 mb-8 shadow-sm"
+            >
+              <Sparkles size={16} className="text-purple-600 dark:text-purple-400" />
+              <span className="text-sm font-medium text-gray-800 dark:text-gray-200">
+                Next-Gen IT Solutions
+              </span>
+            </motion.div>
+
+            <motion.h1
+              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-gray-900 dark:text-white leading-[1.1] mb-6"
+              variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}
+            >
+              Build Secure, <br />
+              <span className="bg-gradient-to-r from-purple-600 via-blue-600 to-cyan-500 bg-clip-text text-transparent animate-gradient">
+                Future-Ready
+              </span> <br />
+              Digital Products.
+            </motion.h1>
+
+            <motion.p
+              className="text-lg md:text-xl text-gray-600 dark:text-gray-300 mb-8 max-w-xl leading-relaxed"
+              variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}
+            >
+              We transform ambitious ideas into scalable technology. From AI-driven platforms to seamless mobile experiences, we engineer growth.
+            </motion.p>
+
+            <motion.div
+              className="flex flex-col sm:flex-row gap-4"
+              variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}
+            >
+              <button
+                onClick={handleBookDemo}
+                className="group relative px-8 py-4 rounded-full bg-gray-900 dark:bg-white text-white dark:text-gray-900 font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 overflow-hidden"
+              >
+                <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-blue-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <span className="relative flex items-center gap-2 group-hover:text-white transition-colors">
+                  Start Your Project <ArrowRight size={18} />
                 </span>
-              </div>
+              </button>
 
-              <motion.h1
-                className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl xl:text-6xl font-bold bg-gradient-to-r from-purple-600 to-blue-500 bg-clip-text text-transparent dark:from-purple-400 dark:to-blue-300 leading-tight"
-                variants={fadeDown}
+              <button
+                onClick={handleDiscover}
+                className="px-8 py-4 rounded-full bg-white dark:bg-white/5 border border-gray-200 dark:border-white/10 text-gray-900 dark:text-white font-semibold hover:bg-gray-50 dark:hover:bg-white/10 transition-all duration-300 flex items-center justify-center gap-2"
               >
-                Build Secure,
-                <br />
-                SEO-Ready Digital
-                <br />
-                Products Faster.
-              </motion.h1>
-
-              <motion.p
-                className="ext-base md:text-lg text-gray-700 dark:text-gray-300 mt-6 max-w-xl"
-                variants={fadeUp}
-              >
-                We are an end-to-end IT partner for funded startups and digital
-                enterprises. From UX to infrastructure, our pods ship conversion
-                optimized web apps, native mobile experiences, automated CI/CD
-                pipelines, and measurable SEO growth—without disrupting your
-                roadmap.
-              </motion.p>
-
-              <motion.div
-                className="mt-8 flex flex-col sm:flex-row gap-4"
-                variants={fadeUp}
-              >
-                <div className="flex-1 max-w-xs">
-                  <button
-                    onClick={handleBookDemo}
-                    className="w-full h-12 rounded-full bg-gradient-to-r from-purple-600 to-blue-500 dark:from-purple-400 dark:to-blue-300 text-white font-semibold flex items-center justify-center gap-3 shadow-lg hover:brightness-105 transition"
-                  >
-                    <span className="text-base">Free Consultation</span>
-                    <span className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-white/20">
-                      <ArrowRight size={14} color="white" />
-                    </span>
-                  </button>
-                </div>
-
-                <div className="flex-1 max-w-xs">
-                  <button
-                    onClick={handleDiscover}
-                    className="w-full h-12 rounded-full bg-white dark:bg-gray-800 text-slate-900 dark:text-white font-medium flex items-center justify-center gap-3 border-2 border-transparent hover:shadow-md transition"
-                  >
-                    <span className="text-base">Discover More</span>
-                    <span className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-gradient-to-r from-purple-600 to-blue-500 dark:from-purple-400 dark:to-blue-300 text-white">
-                      <ArrowRight size={14} color="white" />
-                    </span>
-                  </button>
-                </div>
-              </motion.div>
+                View Services
+              </button>
             </motion.div>
           </motion.div>
 
-          {/* RIGHT — FIXED IMAGE */}
+          {/* RIGHT IMAGE */}
           <motion.div
-            className="order-1 lg:order-2 flex justify-center items-center"
-            variants={fadeDown}
+            className="order-1 lg:order-2 relative"
+            style={{ scale, opacity }}
+            variants={{ hidden: { opacity: 0, scale: 0.9 }, visible: { opacity: 1, scale: 1 } }}
           >
-            <motion.div
-              className="relative w-full max-w-xl lg:max-w-2xl"
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              style={{ scale }}
-              whileHover={{
-                scale: 1.02,
-                transition: { type: "spring", stiffness: 400, damping: 20 },
-              }}
-            >
+            <div className="relative z-10 w-full h-auto drop-shadow-2xl">
               <img
                 src={heroImg}
-                alt="Hero visual"
-                className="w-full h-auto object-contain"
+                alt="Hero Visual"
+                className="w-full h-auto object-contain transform hover:scale-105 transition-transform duration-700 ease-out"
               />
-            </motion.div>
+            </div>
+            {/* Decorative circle behind image */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-gradient-to-tr from-purple-500/10 to-blue-500/10 rounded-full blur-3xl -z-10" />
           </motion.div>
         </motion.div>
       </div>

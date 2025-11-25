@@ -1,20 +1,22 @@
 "use client";
-import Link from "next/link";
-import React, { useState, useEffect } from "react";
-import Image from "next/image";
-import { Separator } from "../../components/ui/separator";
-import { motion, AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import {
+  AlertCircle,
+  ArrowRight,
+  CheckCircle,
   Github,
-  Twitter,
   Instagram,
   Linkedin,
-  CheckCircle,
-  AlertCircle,
+  Mail,
+  Twitter
 } from "lucide-react";
 import { useTheme } from "next-themes";
-import Logo from "../../../public/icons/suhlogo.svg"
-import Logo2 from "../../../public/icons/SUH_TECH_WEBHeader_LOGO (11).svg"
+import Image from "next/image";
+import Link from "next/link";
+import { useEffect, useState } from "react";
+import Logo2 from "../../../public/icons/SUH_TECH_WEBHeader_LOGO (11).svg";
+import Logo from "../../../public/icons/suhlogo.svg";
+import { Separator } from "../../components/ui/separator";
 
 // Tooltip Component
 const SubscriptionTooltip = ({ message, type, show }) => {
@@ -27,26 +29,24 @@ const SubscriptionTooltip = ({ message, type, show }) => {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -10 }}
-          className={`absolute -top-12 left-0 right-0 mx-auto max-w-xs p-3 rounded-md shadow-lg flex items-center gap-2 ${
-            type === "success"
-              ? "bg-green-50 dark:bg-green-900/30 border border-green-200 dark:border-green-800"
-              : "bg-red-50 dark:bg-red-900/30 border border-red-200 dark:border-red-800"
-          }`}
+          className={`absolute -top-16 left-0 right-0 mx-auto max-w-xs p-3 rounded-lg shadow-xl flex items-center gap-3 backdrop-blur-md border ${type === "success"
+              ? "bg-green-50/90 dark:bg-green-900/50 border-green-200 dark:border-green-800"
+              : "bg-red-50/90 dark:bg-red-900/50 border-red-200 dark:border-red-800"
+            }`}
         >
           {type === "success" ? (
             <CheckCircle
-              className="text-green-500 dark:text-green-400"
-              size={16}
+              className="text-green-600 dark:text-green-400 shrink-0"
+              size={20}
             />
           ) : (
-            <AlertCircle className="text-red-500 dark:text-red-400" size={16} />
+            <AlertCircle className="text-red-600 dark:text-red-400 shrink-0" size={20} />
           )}
           <span
-            className={`text-sm ${
-              type === "success"
-                ? "text-green-700 dark:text-green-300"
-                : "text-red-700 dark:text-red-300"
-            }`}
+            className={`text-sm font-medium ${type === "success"
+                ? "text-green-800 dark:text-green-200"
+                : "text-red-800 dark:text-red-200"
+              }`}
           >
             {message}
           </span>
@@ -57,29 +57,25 @@ const SubscriptionTooltip = ({ message, type, show }) => {
 };
 
 function FooterSection() {
-  // State for email input and subscription status
   const [email, setEmail] = useState("");
   const [subscriptionStatus, setSubscriptionStatus] = useState({
     message: "",
-    type: "", // "success" or "error"
+    type: "",
   });
   const [isLoading, setIsLoading] = useState(false);
   const [showTooltip, setShowTooltip] = useState(false);
   const [mounted, setMounted] = useState(false);
   const { theme, resolvedTheme } = useTheme();
 
-  // Handle mounting to avoid hydration mismatch
   useEffect(() => {
     setMounted(true);
   }, []);
 
-  // Auto-hide tooltip after success
   useEffect(() => {
     if (subscriptionStatus.type === "success" && subscriptionStatus.message) {
       setShowTooltip(true);
       const timer = setTimeout(() => {
         setShowTooltip(false);
-        // Clear the message after the tooltip disappears
         setTimeout(() => {
           setSubscriptionStatus({ message: "", type: "" });
         }, 300);
@@ -90,32 +86,11 @@ function FooterSection() {
     }
   }, [subscriptionStatus]);
 
-  // Animation variants
-  const fadeIn = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] },
-    },
-  };
-
-  const staggerContainer = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.1,
-      },
-    },
-  };
-
   const socialLinks = [
-    { icon: <Github size={20} />, label: "Github" },
-    { icon: <Twitter size={20} />, label: "Twitter" },
-    { icon: <Instagram size={20} />, label: "Instagram" },
-    { icon: <Linkedin size={20} />, label: "LinkedIn" },
+    { icon: <Github size={20} />, label: "Github", href: "#" },
+    { icon: <Twitter size={20} />, label: "Twitter", href: "#" },
+    { icon: <Instagram size={20} />, label: "Instagram", href: "#" },
+    { icon: <Linkedin size={20} />, label: "LinkedIn", href: "#" },
   ];
 
   const footerLinks = [
@@ -148,11 +123,8 @@ function FooterSection() {
     },
   ];
 
-  // Newsletter subscription handler
   const handleSubscribe = async (e) => {
     e.preventDefault();
-
-    // Basic email validation
     if (!email || !/^\S+@\S+\.\S+$/.test(email)) {
       setSubscriptionStatus({
         message: "Please enter a valid email address",
@@ -162,7 +134,6 @@ function FooterSection() {
     }
 
     setIsLoading(true);
-
     try {
       await new Promise((resolve) => setTimeout(resolve, 800));
       setSubscriptionStatus({
@@ -172,7 +143,7 @@ function FooterSection() {
       setEmail("");
     } catch (error) {
       setSubscriptionStatus({
-        message: "Failed to connect to the server. Please try again later.",
+        message: "Failed to connect. Please try again.",
         type: "error",
       });
     } finally {
@@ -181,162 +152,123 @@ function FooterSection() {
   };
 
   return (
-    <motion.section
-      className="flex flex-col gap-6 w-full mt-20 md:mt-40 py-10"
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, amount: 0.1 }}
-    >
+    <footer className="relative bg-gray-50 dark:bg-gray-900/50 pt-20 pb-10 overflow-hidden">
+      {/* Decorative background */}
+      <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-gray-200 dark:via-gray-800 to-transparent" />
+
       <div className="container mx-auto px-4">
-        {/* Main Footer Content */}
-        <motion.div
-          className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 sm:gap-8 mb-12"
-          variants={staggerContainer}
-        >
-          {/* Logo and Description - Full width on smallest screens */}
-          <motion.div
-            className="col-span-2 sm:col-span-2 md:col-span-3 lg:col-span-2"
-            variants={fadeIn}
-          >
-            {mounted && (
-              <Image
-                src={(resolvedTheme === 'dark' || theme === 'dark') ? Logo : Logo2}
-                alt="Diamond QR"
-                width={200}
-                height={200}
-                className="object-contain mb-5 cursor-pointer"
-              />
-            )}
-            <p className="text-gray-700 dark:text-gray-300 mt-4 mb-6 max-w-md">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 mb-16">
+          {/* Brand Column */}
+          <div className="lg:col-span-4">
+            <Link href="/" className="inline-block mb-6">
+              {mounted && (
+                <Image
+                  src={(resolvedTheme === 'dark' || theme === 'dark') ? Logo : Logo2}
+                  alt="Suh Tech Logo"
+                  width={180}
+                  height={60}
+                  className="object-contain"
+                />
+              )}
+            </Link>
+            <p className="text-gray-600 dark:text-gray-400 mb-8 leading-relaxed">
               We are an end-to-end IT services and product engineering studio
               helping fintech, SaaS, health, and commerce teams launch secure,
               SEO-friendly digital experiences.
             </p>
-            {/* Social Media Links */}
-            <motion.div className="flex gap-3 mt-6" variants={staggerContainer}>
+            <div className="flex gap-4">
               {socialLinks.map((social, index) => (
-                <motion.a
+                <a
                   key={index}
-                  href="#"
-                  className="p-2 bg-gray-100 dark:bg-gray-800 rounded-full text-gray-700 dark:text-gray-300 hover:bg-gradient-to-r hover:from-purple-600 hover:to-blue-500 hover:text-white transform transition-all duration-300 hover:scale-110 cursor-pointer"
-                  variants={fadeIn}
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.95 }}
+                  href={social.href}
+                  className="w-10 h-10 flex items-center justify-center rounded-full bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:bg-primary hover:text-white dark:hover:bg-primary dark:hover:text-white transition-all duration-300 shadow-sm hover:shadow-md hover:-translate-y-1"
                 >
                   {social.icon}
-                </motion.a>
+                </a>
               ))}
-            </motion.div>
-          </motion.div>
+            </div>
+          </div>
 
-          {/* Footer Links - Responsive layout for all screen sizes */}
-          {footerLinks.map((section, index) => (
-            <motion.div
-              key={index}
-              variants={fadeIn}
-              className="col-span-1 mt-6 sm:mt-0"
-            >
-              <h3 className="font-bold text-lg mb-3 bg-gradient-to-r from-purple-600 to-blue-500 bg-clip-text text-transparent dark:from-purple-400 dark:to-blue-300 cursor-pointer">
-                {section.title}
-              </h3>
-              <ul className="space-y-2">
-                {section.links.map((link, linkIndex) => (
-                  <motion.li
-                    key={linkIndex}
-                    whileHover={{ x: 5 }}
-                    transition={{ type: "spring", stiffness: 400, damping: 10 }}
-                    className="cursor-pointer"
-                  >
-                    <Link
-                      href={link.href}
-                      className="text-gray-700 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400 transition-colors duration-300"
-                    >
-                      {link.name}
-                    </Link>
-                  </motion.li>
-                ))}
-              </ul>
-            </motion.div>
-          ))}
-        </motion.div>
-
-        {/* <Separator className="bg-gray-200 dark:bg-gray-800" /> */}
-
-        {/* Newsletter */}
-        {/* <motion.div
-          className="py-8 flex flex-col md:flex-row justify-between items-center gap-4"
-          variants={fadeIn}
-        > */}
-          {/* <div className="max-w-md">
-            <h3 className="text-xl font-bold mb-2 bg-gradient-to-r from-purple-600 to-blue-500 bg-clip-text text-transparent dark:from-purple-400 dark:to-blue-300 cursor-pointer">
-              Get the Delivery Briefing
-            </h3>
-            <p className="text-gray-700 dark:text-gray-300">
-              One concise email with release tactics, SEO ideas, and automation
-              frameworks we test with clients.
-            </p>
-          </div> */}
-          {/* <form
-            onSubmit={handleSubscribe}
-            className="flex flex-col w-full md:w-auto relative"
-          > */}
-            {/* <div className="flex w-full">
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="Your email address"
-                className="p-3 rounded-l-md border border-gray-200 dark:border-gray-700 dark:bg-gray-800 focus:border-purple-500 focus:outline-none focus:ring-2 focus:ring-purple-500/20 transition-all duration-300 w-full md:w-64"
-              />
-              <button
-                type="submit"
-                disabled={isLoading}
-                className={`bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 dark:from-blue-600 dark:to-purple-500 text-white px-4 py-2 rounded-r-md transition-all duration-300 ${
-                  isLoading ? "opacity-70 cursor-not-allowed" : "cursor-pointer"
-                }`}
-              >
-                {isLoading ? "Subscribing..." : "Subscribe"}
-              </button>
-            </div> */}
-
-            {/* Tooltip */}
-            {/* <SubscriptionTooltip
-              message={subscriptionStatus.message}
-              type={subscriptionStatus.type}
-              show={showTooltip}
-            />
-          </form> */}
-        {/* </motion.div> */}
-
-        <Separator className="bg-gray-200 dark:bg-gray-800" />
-
-        {/* Copyright */}
-        <motion.div
-          className="pt-6 pb-8 flex flex-col md:flex-row justify-between items-center gap-4"
-          variants={fadeIn}
-        >
-          <p className="text-gray-700 dark:text-gray-300 text-center md:text-left cursor-pointer">
-            © {new Date().getFullYear()} Suh Tech Private Limited. All rights reserved.
-          </p>
-
-          <div className="flex flex-wrap gap-6 justify-center">
-            {[
-              { label: "Privacy Policy", href: "/privacy-policy" },
-              { label: "Terms of Service", href: "/terms-conditions" },
-            ].map((item, index) => (
-              <motion.div key={index} whileHover={{ scale: 1.05 }}>
-                <Link
-                  href={item.href}
-                  className="text-gray-700 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400 transition-colors duration-300 text-sm cursor-pointer"
-                >
-                  {item.label}
-                </Link>
-              </motion.div>
+          {/* Links Columns */}
+          <div className="lg:col-span-5 grid grid-cols-2 sm:grid-cols-3 gap-8">
+            {footerLinks.map((section, index) => (
+              <div key={index}>
+                <h3 className="font-bold text-gray-900 dark:text-white mb-6">
+                  {section.title}
+                </h3>
+                <ul className="space-y-4">
+                  {section.links.map((link, linkIndex) => (
+                    <li key={linkIndex}>
+                      <Link
+                        href={link.href}
+                        className="text-gray-600 dark:text-gray-400 hover:text-primary dark:hover:text-primary transition-colors text-sm"
+                      >
+                        {link.name}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             ))}
           </div>
-        </motion.div>
+
+          {/* Newsletter Column */}
+          <div className="lg:col-span-3">
+            <div className="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-sm border border-gray-100 dark:border-gray-700">
+              <h3 className="font-bold text-gray-900 dark:text-white mb-2 flex items-center gap-2">
+                <Mail size={18} className="text-primary" />
+                Stay Updated
+              </h3>
+              <p className="text-sm text-gray-600 dark:text-gray-400 mb-6">
+                Get the latest tech trends and company updates delivered to your inbox.
+              </p>
+
+              <form onSubmit={handleSubscribe} className="relative">
+                <div className="relative">
+                  <input
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="Enter your email"
+                    className="w-full px-4 py-3 rounded-xl bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all text-sm"
+                  />
+                  <button
+                    type="submit"
+                    disabled={isLoading}
+                    className="absolute right-2 top-1.5 p-1.5 rounded-lg bg-primary text-white hover:bg-primary/90 transition-colors disabled:opacity-50"
+                  >
+                    {isLoading ? (
+                      <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                    ) : (
+                      <ArrowRight size={18} />
+                    )}
+                  </button>
+                </div>
+                <SubscriptionTooltip
+                  message={subscriptionStatus.message}
+                  type={subscriptionStatus.type}
+                  show={showTooltip}
+                />
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <Separator className="bg-gray-200 dark:bg-gray-800 mb-8" />
+
+        <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-500 dark:text-gray-400">
+          <p>© {new Date().getFullYear()} Suh Tech Private Limited. All rights reserved.</p>
+          <div className="flex gap-8">
+            <Link href="/privacy-policy" className="hover:text-primary transition-colors">
+              Privacy Policy
+            </Link>
+            <Link href="/terms-conditions" className="hover:text-primary transition-colors">
+              Terms of Service
+            </Link>
+          </div>
+        </div>
       </div>
-    </motion.section>
+    </footer>
   );
 }
 
