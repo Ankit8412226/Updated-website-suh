@@ -192,7 +192,7 @@ export default function Ecosystem() {
         </div>
 
         {/* Desktop: Orbital/Circular Layout */}
-        <div className="hidden lg:block relative w-full max-w-6xl mx-auto px-8" style={{ minHeight: '850px', paddingTop: '3rem', paddingBottom: '5rem' }}>
+        <div className="hidden lg:block relative w-full max-w-5xl mx-auto px-4" style={{ height: '600px' }}>
           {/* Center Core */}
           <motion.div
             className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20"
@@ -205,7 +205,7 @@ export default function Ecosystem() {
               {/* Outer pulsing ring */}
               <motion.div
                 className="absolute inset-0 rounded-full border-2 border-purple-500/30"
-                style={{ width: 280, height: 280, left: '50%', top: '50%', transform: 'translate(-50%, -50%)' }}
+                style={{ width: 180, height: 180, left: '50%', top: '50%', transform: 'translate(-50%, -50%)' }}
                 animate={{
                   scale: [1, 1.15, 1],
                   opacity: [0.3, 0.6, 0.3]
@@ -228,13 +228,13 @@ export default function Ecosystem() {
                   scale: { duration: 4, repeat: Infinity, ease: "easeInOut" }
                 }}
                 className="absolute inset-0 rounded-full bg-gradient-to-r from-purple-500 via-blue-500 to-cyan-500 blur-2xl opacity-30"
-                style={{ width: 240, height: 240, left: '-50%', top: '-50%', transform: 'translate(50%, 50%)' }}
+                style={{ width: 160, height: 160, left: '-50%', top: '-50%', transform: 'translate(50%, 50%)' }}
               />
 
               {/* Main center circle */}
               <motion.div
-                className="relative bg-white dark:bg-gray-950 rounded-full p-10 shadow-2xl border-4 border-purple-500/20"
-                style={{ width: 240, height: 240 }}
+                className="relative bg-white dark:bg-gray-950 rounded-full p-6 shadow-2xl border-4 border-purple-500/20"
+                style={{ width: 160, height: 160 }}
                 whileHover={{ scale: 1.05, borderColor: 'rgba(168, 85, 247, 0.6)' }}
                 animate={{
                   boxShadow: [
@@ -254,12 +254,12 @@ export default function Ecosystem() {
                     animate={{ rotate: [0, 10, -10, 0] }}
                     transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
                   >
-                    <Zap className="w-16 h-16 text-purple-500 mb-3" strokeWidth={1.5} />
+                    <Zap className="w-12 h-12 text-purple-500 mb-2" strokeWidth={1.5} />
                   </motion.div>
-                  <h3 className="text-xl font-bold text-center bg-gradient-to-r from-purple-600 to-blue-500 bg-clip-text text-transparent">
+                  <h3 className="text-base font-bold text-center bg-gradient-to-r from-purple-600 to-blue-500 bg-clip-text text-transparent">
                     Full Stack
                   </h3>
-                  <p className="text-xs text-gray-500 dark:text-gray-400 text-center mt-2">
+                  <p className="text-xs text-gray-500 dark:text-gray-400 text-center mt-1">
                     Solutions
                   </p>
                 </div>
@@ -310,7 +310,8 @@ export default function Ecosystem() {
             {/* Background connection lines */}
             {techCategories.map((_, index) => {
               const angle = (index * 60 - 90) * (Math.PI / 180);
-              const radius = 38; // Fixed radius for equidistant cards
+              // Frontend (0) and Mobile (3) use 45%, others use 42%
+              const radius = (index === 0 || index === 3) ? 45 : 42;
               const x1 = 50; // Center point
               const y1 = 50;
               const x2 = 50 + radius * Math.cos(angle); // Card center point
@@ -389,7 +390,7 @@ export default function Ecosystem() {
             <motion.circle
               cx="50%"
               cy="50%"
-              r="38%"
+              r="42%"
               fill="none"
               stroke="url(#lineGradient)"
               strokeWidth="1"
@@ -401,13 +402,18 @@ export default function Ecosystem() {
             />
           </svg>
 
-          {/* Tech Category Cards - Orbital Layout */}
+          {/* Tech Category Nodes - Orbital Layout */}
           {techCategories.map((category, index) => {
             const IconComponent = category.icon;
             const angle = (index * 60 - 90) * (Math.PI / 180); // 360/6 = 60 degrees apart
-            const radius = 38; // FIXED radius for equidistant spacing - matches line radius exactly
+            // Frontend (0) and Mobile (3) use 45%, others use 42%
+            const radius = (index === 0 || index === 3) ? 45 : 42;
             const x = 50 + radius * Math.cos(angle);
             const y = 50 + radius * Math.sin(angle);
+
+            // Determine tooltip position based on node location
+            const isTop = y < 50;
+            const tooltipPosition = isTop ? 'bottom' : 'top';
 
             return (
               <motion.div
@@ -419,8 +425,8 @@ export default function Ecosystem() {
                   transform: 'translate(-50%, -50%)',
                   zIndex: 10
                 }}
-                initial={{ scale: 0, opacity: 0, rotateY: -90 }}
-                whileInView={{ scale: 1, opacity: 1, rotateY: 0 }}
+                initial={{ scale: 0, opacity: 0 }}
+                whileInView={{ scale: 1, opacity: 1 }}
                 viewport={{ once: true }}
                 transition={{
                   duration: 0.6,
@@ -428,180 +434,149 @@ export default function Ecosystem() {
                   type: "spring",
                   stiffness: 100
                 }}
-                whileHover={{ scale: 1.1, zIndex: 50, y: -8 }}
               >
-                <div className={`relative group cursor-pointer`}>
-                  {/* Connection Point Indicator - Behind Card */}
+                <div className="relative group cursor-pointer">
+                  {/* Connection Point Glow */}
                   <motion.div
                     className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 -z-10"
-                    initial={{ scale: 0 }}
-                    whileInView={{ scale: 1 }}
-                    transition={{ delay: 0.6 + index * 0.15, type: "spring" }}
-                  >
-                    {/* Outer ring */}
-                    <motion.div
-                      className={`w-8 h-8 rounded-full border-2 border-gradient-to-r ${category.color}`}
-                      style={{
-                        borderImage: `linear-gradient(135deg, var(--tw-gradient-stops)) 1`,
-                      }}
-                      animate={{
-                        scale: [1, 1.3, 1],
-                        opacity: [0.4, 0.7, 0.4]
-                      }}
-                      transition={{
-                        duration: 2.5,
-                        repeat: Infinity,
-                        ease: "easeInOut",
-                        delay: index * 0.4
-                      }}
-                    />
-                    {/* Inner dot */}
-                    <motion.div
-                      className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-gradient-to-r ${category.color}`}
-                      animate={{
-                        scale: [1, 1.4, 1],
-                        opacity: [0.6, 1, 0.6]
-                      }}
-                      transition={{
-                        duration: 2,
-                        repeat: Infinity,
-                        ease: "easeInOut",
-                        delay: index * 0.4
-                      }}
-                    />
-                  </motion.div>
-
-                  {/* Animated Glow Effect */}
-                  <motion.div
-                    className={`absolute inset-0 rounded-3xl bg-gradient-to-br ${category.color} blur-2xl opacity-0 group-hover:opacity-50 transition-opacity duration-500`}
                     animate={{
-                      scale: [1, 1.08, 1],
+                      scale: [1, 1.5, 1],
+                      opacity: [0.2, 0.5, 0.2]
                     }}
                     transition={{
                       duration: 3,
                       repeat: Infinity,
-                      ease: "easeInOut"
+                      ease: "easeInOut",
+                      delay: index * 0.4
                     }}
-                  />
+                  >
+                    <div className={`w-20 h-20 rounded-full bg-gradient-to-r ${category.color} blur-2xl`} />
+                  </motion.div>
 
-                  {/* Card */}
-                  <div className={`relative bg-white/95 dark:bg-gray-950/95 rounded-3xl p-6 shadow-2xl border-2 border-gray-200/50 dark:border-gray-800/50 group-hover:border-transparent transition-all duration-300 w-56 backdrop-blur-md`}>
-                    {/* Gradient Border on Hover */}
-                    <motion.div
-                      className={`absolute inset-0 rounded-3xl bg-gradient-to-br ${category.color} opacity-0 group-hover:opacity-15 transition-opacity duration-300`}
-                      initial={{ opacity: 0 }}
-                      whileHover={{ opacity: 0.15 }}
-                    />
-
+                  {/* Compact Node */}
+                  <motion.div
+                    className={`relative bg-white/98 dark:bg-gray-900/98 rounded-2xl p-3 shadow-2xl border-2 border-gray-200/60 dark:border-gray-700/60 group-hover:border-transparent transition-all duration-300 backdrop-blur-lg`}
+                    whileHover={{ scale: 1.2, zIndex: 100 }}
+                    animate={{
+                      boxShadow: [
+                        '0 8px 20px rgba(0,0,0,0.08)',
+                        '0 12px 30px rgba(0,0,0,0.12)',
+                        '0 8px 20px rgba(0,0,0,0.08)'
+                      ]
+                    }}
+                    transition={{
+                      boxShadow: { duration: 3, repeat: Infinity, ease: "easeInOut" },
+                      scale: { duration: 0.3 }
+                    }}
+                  >
                     {/* Top accent line */}
                     <motion.div
-                      className={`absolute top-0 left-1/2 -translate-x-1/2 h-1 bg-gradient-to-r ${category.color} rounded-full`}
-                      initial={{ width: 0 }}
-                      whileInView={{ width: "60%" }}
-                      transition={{ delay: 0.8 + index * 0.15, duration: 0.6 }}
+                      className={`absolute top-0 left-1/2 -translate-x-1/2 w-2/3 h-1 bg-gradient-to-r ${category.color} rounded-full`}
+                      animate={{
+                        width: ['66%', '80%', '66%']
+                      }}
+                      transition={{
+                        duration: 2,
+                        repeat: Infinity,
+                        ease: "easeInOut"
+                      }}
                     />
 
-                    {/* Shine Effect */}
+                    {/* Icon Container with Better Styling */}
                     <motion.div
-                      className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent rounded-3xl"
-                      initial={{ x: '-100%' }}
-                      whileHover={{ x: '200%' }}
-                      transition={{ duration: 0.8 }}
+                      className={`inline-flex p-3.5 rounded-2xl bg-gradient-to-br ${category.color} shadow-lg relative mb-2 group-hover:shadow-2xl transition-shadow`}
+                      whileHover={{
+                        rotate: [0, -5, 5, -5, 0],
+                        scale: 1.1
+                      }}
+                      animate={{
+                        boxShadow: [
+                          '0 8px 16px rgba(0,0,0,0.15)',
+                          '0 12px 24px rgba(0,0,0,0.20)',
+                          '0 8px 16px rgba(0,0,0,0.15)'
+                        ]
+                      }}
+                      transition={{
+                        boxShadow: { duration: 2.5, repeat: Infinity, ease: "easeInOut" },
+                        rotate: { duration: 0.5 },
+                        scale: { duration: 0.3 }
+                      }}
+                    >
+                      {/* Icon glow */}
+                      <div className={`absolute inset-0 rounded-2xl bg-gradient-to-br ${category.color} blur-md opacity-60`} />
+                      <IconComponent className="w-7 h-7 text-white relative z-10" strokeWidth={2.5} />
+                    </motion.div>
+
+                    {/* Category Name */}
+                    <h3 className="text-xs font-bold text-gray-900 dark:text-white text-center leading-tight">
+                      {category.name}
+                    </h3>
+                  </motion.div>
+
+                  {/* Tooltip Card - Appears on Hover */}
+                  <motion.div
+                    className={`absolute ${tooltipPosition === 'top' ? 'bottom-full mb-4' : 'top-full mt-4'} left-1/2 -translate-x-1/2 opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-opacity duration-300`}
+                    style={{ zIndex: 1000 }}
+                    initial={{ y: tooltipPosition === 'top' ? 10 : -10, opacity: 0 }}
+                    whileHover={{ y: 0, opacity: 1 }}
+                  >
+                    {/* Arrow pointing to node */}
+                    <div
+                      className={`absolute ${tooltipPosition === 'top' ? '-bottom-2' : '-top-2'} left-1/2 -translate-x-1/2 w-4 h-4 bg-white dark:bg-gray-950 border-2 ${tooltipPosition === 'top' ? 'border-t-gray-200 dark:border-t-gray-800 border-l-gray-200 dark:border-l-gray-800 border-b-transparent border-r-transparent' : 'border-b-gray-200 dark:border-b-gray-800 border-r-gray-200 dark:border-r-gray-800 border-t-transparent border-l-transparent'} rotate-45`}
                     />
 
-                    <div className="relative z-10 flex flex-col items-center text-center">
-                      {/* Icon with Enhanced Animation */}
-                      <motion.div
-                        className={`inline-flex p-4 rounded-2xl bg-gradient-to-br ${category.color} mb-4 shadow-lg relative`}
-                        whileHover={{
-                          rotate: [0, -8, 8, -8, 0],
-                          scale: 1.15
-                        }}
-                        transition={{ duration: 0.6 }}
-                        animate={{
-                          boxShadow: [
-                            '0 10px 20px rgba(0,0,0,0.1)',
-                            '0 15px 30px rgba(0,0,0,0.15)',
-                            '0 10px 20px rgba(0,0,0,0.1)'
-                          ]
-                        }}
-                      >
-                        {/* Icon glow ring */}
-                        <motion.div
-                          className={`absolute inset-0 rounded-2xl bg-gradient-to-br ${category.color} blur-md opacity-50`}
-                          animate={{
-                            scale: [1, 1.2, 1],
-                            opacity: [0.3, 0.6, 0.3]
-                          }}
-                          transition={{
-                            duration: 2,
-                            repeat: Infinity,
-                            ease: "easeInOut"
-                          }}
-                        />
-                        <IconComponent className="w-7 h-7 text-white relative z-10" strokeWidth={2} />
-                      </motion.div>
+                    {/* Tooltip Card */}
+                    <div className={`relative bg-white dark:bg-gray-950 rounded-2xl p-6 shadow-2xl border-2 border-gray-200 dark:border-gray-800 w-64 backdrop-blur-lg`}>
+                      {/* Gradient overlay */}
+                      <div className={`absolute inset-0 rounded-2xl bg-gradient-to-br ${category.color} opacity-5`} />
 
-                      {/* Title */}
-                      <motion.h3
-                        className="text-xl font-bold mb-3 text-gray-900 dark:text-white"
-                        initial={{ opacity: 0, y: 10 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.9 + index * 0.15 }}
-                      >
-                        {category.name}
-                      </motion.h3>
-
-                      {/* Divider */}
+                      {/* Shine effect */}
                       <motion.div
-                        className={`w-12 h-0.5 bg-gradient-to-r ${category.color} rounded-full mb-3`}
-                        initial={{ width: 0 }}
-                        whileInView={{ width: 48 }}
-                        transition={{ delay: 1 + index * 0.15, duration: 0.5 }}
+                        className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent rounded-2xl"
+                        animate={{ x: ['-100%', '200%'] }}
+                        transition={{
+                          duration: 3,
+                          repeat: Infinity,
+                          repeatDelay: 2,
+                          ease: "easeInOut"
+                        }}
                       />
 
-                      {/* Technologies List */}
-                      <div className="space-y-2 w-full">
-                        {category.technologies.slice(0, 3).map((tech, i) => (
-                          <motion.div
-                            key={i}
-                            initial={{ opacity: 0, x: -15 }}
-                            whileInView={{ opacity: 1, x: 0 }}
-                            transition={{
-                              delay: 1.1 + index * 0.15 + i * 0.06,
-                              type: "spring",
-                              stiffness: 100
-                            }}
-                            className="text-sm text-gray-600 dark:text-gray-400 flex items-center justify-center gap-2"
-                          >
-                            <motion.div
-                              animate={{
-                                scale: [1, 1.3, 1],
-                                opacity: [0.7, 1, 0.7]
-                              }}
-                              transition={{
-                                duration: 2,
-                                repeat: Infinity,
-                                delay: i * 0.4
-                              }}
-                              className={`w-1.5 h-1.5 rounded-full bg-gradient-to-r ${category.color} shadow-sm`}
-                            />
-                            <span className="font-medium">{tech}</span>
-                          </motion.div>
-                        ))}
-                        {category.technologies.length > 3 && (
-                          <motion.div
-                            initial={{ opacity: 0 }}
-                            whileInView={{ opacity: 1 }}
-                            transition={{ delay: 1.3 + index * 0.15 }}
-                            className={`text-xs font-semibold bg-gradient-to-r ${category.color} bg-clip-text text-transparent mt-2`}
-                          >
-                            +{category.technologies.length - 3} more
-                          </motion.div>
-                        )}
+                      <div className="relative z-10">
+                        {/* Title */}
+                        <h4 className="text-lg font-bold mb-3 text-gray-900 dark:text-white text-center">
+                          {category.name}
+                        </h4>
+
+                        {/* Divider */}
+                        <div className={`w-16 h-0.5 bg-gradient-to-r ${category.color} rounded-full mx-auto mb-4`} />
+
+                        {/* Technologies */}
+                        <div className="space-y-2.5">
+                          {category.technologies.map((tech, i) => (
+                            <div
+                              key={i}
+                              className="text-sm text-gray-700 dark:text-gray-300 flex items-center gap-2.5 bg-gray-50 dark:bg-gray-900/50 rounded-lg px-3 py-2"
+                            >
+                              <motion.div
+                                animate={{
+                                  scale: [1, 1.3, 1],
+                                  opacity: [0.6, 1, 0.6]
+                                }}
+                                transition={{
+                                  duration: 2,
+                                  repeat: Infinity,
+                                  delay: i * 0.2
+                                }}
+                                className={`w-2 h-2 rounded-full bg-gradient-to-r ${category.color} flex-shrink-0`}
+                              />
+                              <span className="font-medium">{tech}</span>
+                            </div>
+                          ))}
+                        </div>
                       </div>
                     </div>
-                  </div>
+                  </motion.div>
                 </div>
               </motion.div>
             );
