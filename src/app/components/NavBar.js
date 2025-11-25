@@ -56,7 +56,7 @@ function NavBar() {
     { name: "Portfolio", href: "/portfolio" },
     { name: "Insights", href: "/insights" },
     { name: "Careers", href: "/careers" },
-    { name: "Contact Us", href: "/contact" },
+
   ];
 
   const handleNavItemClick = (item) => {
@@ -70,8 +70,8 @@ function NavBar() {
     <>
       <nav
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled
-            ? "bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-gray-200/50 dark:border-gray-800/50 shadow-sm"
-            : "bg-transparent border-b border-transparent"
+          ? "bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-gray-200/50 dark:border-gray-800/50 shadow-sm"
+          : "bg-transparent border-b border-transparent"
           }`}
       >
         <div className="container mx-auto px-4 md:px-8 lg:px-24 flex justify-between items-center h-20">
@@ -97,8 +97,8 @@ function NavBar() {
                 key={item.href}
                 href={item.href}
                 className={`relative text-sm font-medium transition-colors hover:text-primary ${isActive(item.href)
-                    ? "text-primary font-semibold"
-                    : "text-gray-600 dark:text-gray-300"
+                  ? "text-primary font-semibold"
+                  : "text-gray-600 dark:text-gray-300"
                   }`}
               >
                 {item.name}
@@ -113,12 +113,20 @@ function NavBar() {
 
             <div className="flex items-center gap-4">
               <ModeToggle />
-              <button
-                onClick={handleButtonClick}
-                className="hidden lg:flex items-center gap-2 px-6 py-2.5 rounded-full bg-primary text-primary-foreground font-medium hover:opacity-90 transition-opacity shadow-lg shadow-primary/20"
-              >
-                Book Demo <ArrowRight size={16} />
-              </button>
+              <div className="hidden lg:flex items-center gap-3">
+                <button
+                  onClick={() => router.push("/contact")}
+                  className="px-5 py-2.5 rounded-full border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-200 font-medium hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
+                >
+                  Let's Connect
+                </button>
+                <button
+                  onClick={handleButtonClick}
+                  className="flex items-center gap-2 px-6 py-2.5 rounded-full bg-primary text-primary-foreground font-medium hover:opacity-90 transition-opacity shadow-lg shadow-primary/20"
+                >
+                  Book Demo <ArrowRight size={16} />
+                </button>
+              </div>
             </div>
           </div>
 
@@ -155,8 +163,17 @@ function NavBar() {
                 </div>
               ))}
               <button
+                onClick={() => {
+                  setMenu(false);
+                  router.push("/contact");
+                }}
+                className="mt-4 w-full py-4 rounded-xl border border-gray-200 dark:border-gray-800 text-gray-900 dark:text-white font-bold text-lg flex items-center justify-center gap-2 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
+              >
+                Let's Connect
+              </button>
+              <button
                 onClick={handleButtonClick}
-                className="mt-4 w-full py-4 rounded-xl bg-primary text-primary-foreground font-bold text-lg flex items-center justify-center gap-2"
+                className="w-full py-4 rounded-xl bg-primary text-primary-foreground font-bold text-lg flex items-center justify-center gap-2"
               >
                 Book Demo <ArrowRight size={20} />
               </button>

@@ -1,5 +1,6 @@
 import dynamic from "next/dynamic";
 import Link from "next/link";
+import Ecosystem from "./components/Ecosystem";
 import FooterSection from "./components/FooterSection";
 import HeroSection from "./components/HeroSection";
 import NavBar from "./components/NavBar";
@@ -23,10 +24,14 @@ const CareersSection = dynamic(() => import("./components/CareersSection"));
 const NewsletterSection = dynamic(() => import("../app/components/NewsLetters"));
 const ContactFormSection = dynamic(() => import("./components/ContactForm"));
 const FAQSection = dynamic(() => import("./components/Faq"));
+const ProjectModal = dynamic(() => import("./components/ProjectModal"));
+
+
 
 export default function Home() {
   return (
     <main className="bg-white dark:bg-black selection:bg-purple-500/30">
+      <ProjectModal />
       <NavBar />
 
       {/* Hero & Stats */}
@@ -66,6 +71,7 @@ export default function Home() {
         <ProcessSection />
         <PricingSection />
         <IndustriesSection />
+        <Ecosystem />
         <TestimonialsPage />
         {/* <BlogResourcesSection /> */}
         {/* <CareersSection /> */}
