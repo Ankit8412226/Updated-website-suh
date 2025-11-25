@@ -1,140 +1,199 @@
 "use client";
 
-import React from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { useRef } from "react";
 
-const defaultIcons = [
-  { src: "/icons/react-svgrepo-com (1).svg", label: "React" },
-  { src: "/icons/Next Js.svg", label: "Next.js" },
-  { src: "/icons/node-js-svgrepo-com (2).svg", label: "Node.js" },
-  { src: "/icons/python-svgrepo-com.svg", label: "Python" },
-  { src: "/icons/aws-svgrepo-com (2).svg", label: "AWS" },
-  { src: "/icons/mongodb (1).svg", label: "MongoDB" },
-  { src: "/icons/Postgresql.svg", label: "Postgres" },
-  { src: "/icons/redis.svg", label: "Redis" },
-  { src: "/icons/Docker.svg", label: "Docker" },
-  { src: "/icons/kubernetes.svg", label: "Kubernetes" },
-  { src: "/icons/tensorflow.svg", label: "TensorFlow" },
-  { src: "/icons/openai.svg", label: "OpenAI" },
+const technologies = [
+  {
+    category: "Frontend",
+    items: [
+      { src: "/icons/react-svgrepo-com (1).svg", label: "React" },
+      { src: "/icons/Next Js.svg", label: "Next.js" },
+    ],
+  },
+  {
+    category: "Backend",
+    items: [
+      { src: "/icons/node-js-svgrepo-com (2).svg", label: "Node.js" },
+      { src: "/icons/python-svgrepo-com.svg", label: "Python" },
+    ],
+  },
+  {
+    category: "Cloud & Infrastructure",
+    items: [
+      { src: "/icons/aws-svgrepo-com (2).svg", label: "AWS" },
+      { src: "/icons/Docker.svg", label: "Docker" },
+      { src: "/icons/kubernetes.svg", label: "Kubernetes" },
+    ],
+  },
+  {
+    category: "Databases",
+    items: [
+      { src: "/icons/mongodb (1).svg", label: "MongoDB" },
+      { src: "/icons/Postgresql.svg", label: "Postgres" },
+      { src: "/icons/redis.svg", label: "Redis" },
+    ],
+  },
+  {
+    category: "AI & Machine Learning",
+    items: [
+      { src: "/icons/tensorflow.svg", label: "TensorFlow" },
+      { src: "/icons/openai.svg", label: "OpenAI" },
+    ],
+  },
 ];
 
-export default function TechStackSection({ icons = defaultIcons }) {
+export default function TechStackSection() {
+  const sectionRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"],
+  });
+
+  // Parallax effects for background elements
+  const y1 = useTransform(scrollYProgress, [0, 1], [0, -100]);
+  const y2 = useTransform(scrollYProgress, [0, 1], [0, 100]);
+  const opacity = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0, 1, 1, 0]);
+
+  const fadeIn = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.6 },
+    },
+  };
+
   return (
-    <section id="tech" className="w-full py-20 bg-white dark:bg-gray-950">
-      <div className="container mx-auto px-6 lg:px-24">
-        
+    <section ref={sectionRef} id="tech" className="w-full py-20 lg:py-28 relative overflow-hidden">
+      {/* Animated Background Elements with Parallax */}
+      <motion.div
+        style={{ y: y1, opacity }}
+        className="absolute top-[10%] left-[5%] w-72 h-72 rounded-full bg-purple-500/10 dark:bg-purple-500/20 blur-[100px] pointer-events-none"
+      />
+      <motion.div
+        style={{ y: y2, opacity }}
+        className="absolute bottom-[10%] right-[5%] w-96 h-96 rounded-full bg-blue-500/10 dark:bg-blue-500/20 blur-[120px] pointer-events-none"
+      />
+
+      <div className="container mx-auto px-4 sm:px-6 lg:px-10 relative z-10">
+        {/* Header Section */}
         <motion.div
-          initial={{ opacity: 0, y: 8 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial="hidden"
+          whileInView="visible"
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-20"
+          variants={fadeIn}
+          className="text-center mb-16"
         >
-          <p className="uppercase text-xs tracking-[0.4em]  text-blue-500  dark: text-blue-600  mb-4">
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="uppercase text-xs tracking-[0.4em] text-blue-500 dark:text-blue-400 mb-4"
+          >
             Technologies
-          </p>
+          </motion.p>
 
-          <h2 className="text-3xl md:text-4xl font-extrabold mb-3 bg-gradient-to-r from-purple-600 to-blue-500 bg-clip-text text-transparent dark:from-purple-400 dark:to-blue-300">
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="text-4xl md:text-6xl font-medium leading-tight bg-gradient-to-r from-purple-600 to-blue-500 bg-clip-text text-transparent dark:from-purple-400 dark:to-blue-300 mb-4"
+          >
             Proven Platforms & Tooling
-          </h2>
+          </motion.h2>
 
-          <p className="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto"
+          >
             Cloud-native, AI-ready, and performance tuned from day one.
-          </p>
+          </motion.p>
         </motion.div>
 
-        {/* MAIN CARD */}
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="relative rounded-3xl p-1"
-        >
-          {/* OUTER GLOW */}
-          <div
-            aria-hidden
-            className="absolute inset-0 rounded-3xl pointer-events-none"
-            style={{
-              boxShadow:
-                "0 40px 100px rgba(139,92,246,0.15), inset 0 0 60px rgba(139,92,246,0.08)",
-              filter: "blur(6px)",
-            }}
-          />
+        {/* Technologies Grid */}
+        <div className="space-y-8">
+          {technologies.map((category, categoryIndex) => (
+            <motion.div
+              key={category.category}
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.6, delay: categoryIndex * 0.1 }}
+              whileHover={{ scale: 1.01 }}
+              className="
+                p-8 rounded-3xl transition-all
+                bg-white border border-gray-200 shadow-sm
+                dark:bg-gray-900/40 dark:border-gray-800 dark:backdrop-blur-xl
+                hover:border-blue-400 dark:hover:border-blue-500/40
+                dark:shadow-lg dark:hover:shadow-blue-900/10
+              "
+            >
+              {/* Category Title */}
+              <motion.h3
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: categoryIndex * 0.1 + 0.2 }}
+                className="text-2xl font-semibold text-gray-900 dark:text-white mb-6"
+              >
+                {category.category}
+              </motion.h3>
 
-          {/* INNER PANEL WITH BORDER */}
-          <div
-            className="relative rounded-2xl bg-gradient-to-br from-gray-50 to-gray-100 dark:from-[#050709] dark:to-[#0a0b0e] border"
-            style={{
-              borderColor: "rgba(139,92,246,0.2)",
-              boxShadow:
-                "inset 0 0 40px rgba(0,0,0,0.02), inset 0 0 15px rgba(139,92,246,0.04)",
-            }}
-          >
-            <div className="relative p-10 md:p-12">
-              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-y-10 gap-x-10 justify-items-center">
-
-                {icons.map((icon, idx) => (
+              {/* Technology Items */}
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6">
+                {category.items.map((tech, techIndex) => (
                   <motion.div
-                    key={icon.label}
-                    initial={{ opacity: 0, y: 10 }}
-                    whileInView={{ opacity: 1, y: 0 }}
+                    key={tech.label}
+                    initial={{ opacity: 0, scale: 0.8, rotateY: -90 }}
+                    whileInView={{ opacity: 1, scale: 1, rotateY: 0 }}
                     viewport={{ once: true }}
-                    transition={{ duration: 0.4, delay: idx * 0.03 }}
-                    whileHover={{
-                      scale: 1.06,
-                      y: -6,
-                      boxShadow: "0 0 25px rgba(139,92,246,0.25)",
+                    transition={{
+                      duration: 0.6,
+                      delay: categoryIndex * 0.1 + techIndex * 0.08,
+                      type: "spring",
+                      stiffness: 100,
                     }}
-                    className="flex flex-col items-center"
+                    whileHover={{
+                      y: -8,
+                      scale: 1.08,
+                      rotateZ: 5,
+                      transition: { duration: 0.3 },
+                    }}
+                    className="flex flex-col items-center gap-3 p-4 rounded-2xl bg-gray-50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700/50 transition-all hover:border-blue-400 dark:hover:border-blue-500/50 hover:shadow-lg hover:shadow-blue-500/20 group cursor-pointer"
                   >
-                    {/* SINGLE ICON BOX */}
-                    <div
-                      className="relative w-24 h-24 md:w-28 md:h-28 rounded-xl flex items-center justify-center p-4 bg-white/50 dark:bg-white/5 border border-purple-500/20 dark:border-purple-400/20"
-                      style={{
-                        borderRadius: 16,
-                        boxShadow:
-                          "0 10px 20px rgba(0,0,0,0.08), inset 0 0 20px rgba(139,92,246,0.06)",
-                      }}
+                    {/* Icon Container */}
+                    <motion.div
+                      whileHover={{ rotate: 360 }}
+                      transition={{ duration: 0.6 }}
+                      className="w-16 h-16 flex items-center justify-center rounded-xl bg-white dark:bg-gray-900/50 border border-gray-200 dark:border-gray-700 shadow-sm group-hover:shadow-lg group-hover:shadow-blue-500/30 transition-all"
                     >
                       <Image
-                        src={icon.src}
-                        alt={icon.label}
-                        fill
+                        src={tech.src}
+                        alt={tech.label}
+                        width={40}
+                        height={40}
                         className="object-contain"
                       />
-                    </div>
+                    </motion.div>
 
-                    <p className="mt-3 text-gray-700 dark:text-gray-200 text-sm font-medium">
-                      {icon.label}
-                    </p>
+                    {/* Tech Label */}
+                    <span className="text-sm font-medium text-gray-700 dark:text-gray-300 text-center group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                      {tech.label}
+                    </span>
                   </motion.div>
                 ))}
-
               </div>
-            </div>
-          </div>
-        </motion.div>
+            </motion.div>
+          ))}
+        </div>
       </div>
     </section>
   );
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
