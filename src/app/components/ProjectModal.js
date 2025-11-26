@@ -83,7 +83,7 @@ const ProjectModal = () => {
             onClick={(e) => e.stopPropagation()}
           >
             {/* Decorative Background */}
-            <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-br from-purple-600 to-blue-600 opacity-10" />
+            <div className="absolute top-0 left-0 w-full h-32 opacity-10" />
             <div className="absolute -top-10 -right-10 w-40 h-40 bg-purple-500/20 rounded-full blur-3xl" />
             <div className="absolute -bottom-10 -left-10 w-40 h-40 bg-blue-500/20 rounded-full blur-3xl" />
 
