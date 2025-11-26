@@ -2,7 +2,7 @@ import NavBar from "../components/NavBar";
 import FooterSection from "../components/FooterSection";
 import IndustriesSection from "../components/IndustriesSection";
 import CoreValue from "../../app/components/CoreValues"
-
+import OurTeam from "../../app/components/OurTeam"
 export const metadata = {
   title: "Industries We Serve | ArtofQR",
   description:
@@ -15,6 +15,9 @@ export default function IndustriesPage() {
       <NavBar />
       <div className="mt-16 md:mt-20 lg:mt-24">
         <CoreValue />
+      </div>
+      <div className="mt-16 md:mt-20 lg:mt-24">
+        <OurTeam/>
       </div>
       <div className="mt-16 md:mt-20 lg:mt-24">
         <IndustriesSection />
