@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+
 import Image from "next/image";
 import Button from "../../components/ui/button"; // adjust path if needed
 import { motion } from "framer-motion";
@@ -12,7 +13,7 @@ export default function AboutSection() {
   const router = useRouter();
 
   const handleLearnMore = () => {
-    router.push("/contact");
+    router.push("/industries");
   };
 
   return (
