@@ -4,6 +4,7 @@ import {
   AlertCircle,
   ArrowRight,
   CheckCircle,
+  Facebook,
   Github,
   Instagram,
   Linkedin,
@@ -87,10 +88,10 @@ function FooterSection() {
   }, [subscriptionStatus]);
 
   const socialLinks = [
-    { icon: <Github size={20} />, label: "Github", href: "#" },
-    { icon: <Twitter size={20} />, label: "Twitter", href: "#" },
     { icon: <Instagram size={20} />, label: "Instagram", href: "#" },
+    // { icon: <Twitter size={20} />, label: "Twitter", href: "#" },
     { icon: <Linkedin size={20} />, label: "LinkedIn", href: "#" },
+    { icon: <Facebook size={20} />, label: "Facebook", href: "#" },
   ];
 
   const footerLinks = [

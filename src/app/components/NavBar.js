@@ -122,7 +122,7 @@ function NavBar() {
                 </button>
                 <button
                   onClick={handleButtonClick}
-                  className="flex items-center gap-2 px-6 py-2.5 rounded-full bg-primary text-primary-foreground font-medium hover:opacity-90 transition-opacity shadow-lg shadow-primary/20"
+                  className="flex items-center gap-2 px-6 py-2.5 rounded-full bg-gradient-to-r from-purple-600 to-blue-600 text-white font-medium shadow-lg hover:shadow-xl transition-all duration-300"
                 >
                   Book Demo <ArrowRight size={16} />
                 </button>
@@ -173,9 +173,12 @@ function NavBar() {
               </button>
               <button
                 onClick={handleButtonClick}
-                className="w-full py-4 rounded-xl bg-primary text-primary-foreground font-bold text-lg flex items-center justify-center gap-2"
+                className="w-full py-4 rounded-xl bg-gradient-to-r from-purple-600 to-blue-600 text-white font-bold text-lg shadow-lg"
+                aria-label="Book Demo"
               >
-                Book Demo <ArrowRight size={20} />
+                <span className="flex items-center justify-center gap-2">
+                  Book Demo <ArrowRight size={20} />
+                </span>
               </button>
             </div>
           </motion.div>
