@@ -46,7 +46,8 @@ export default function Home() {
 
         <AboutUsSection />
         <ServicesSection />
-        <TechStackSection />
+           <Ecosystem />
+        {/* <TechStackSection /> */}
 
         {/* Portfolio CTA */}
         <section className="relative py-20 overflow-hidden rounded-3xl bg-gray-900 text-white">
@@ -71,7 +72,7 @@ export default function Home() {
         <ProcessSection />
         <PricingSection />
         <IndustriesSection />
-        <Ecosystem />
+     
         <TestimonialsPage />
         {/* <BlogResourcesSection /> */}
         {/* <CareersSection /> */}

@@ -4,6 +4,7 @@ import {
   AlertCircle,
   ArrowRight,
   CheckCircle,
+  Facebook,
   Github,
   Instagram,
   Linkedin,
@@ -87,10 +88,10 @@ function FooterSection() {
   }, [subscriptionStatus]);
 
   const socialLinks = [
-    { icon: <Github size={20} />, label: "Github", href: "#" },
-    { icon: <Twitter size={20} />, label: "Twitter", href: "#" },
-    { icon: <Instagram size={20} />, label: "Instagram", href: "#" },
-    { icon: <Linkedin size={20} />, label: "LinkedIn", href: "#" },
+    { icon: <Instagram size={20} />, label: "Instagram", href: "https://www.instagram.com/suhtechpvtltd/" },
+    // { icon: <Twitter size={20} />, label: "Twitter", href: "#" },
+    { icon: <Linkedin size={20} />, label: "LinkedIn", href: "https://www.linkedin.com/company/suh-tech/" },
+    { icon: <Facebook size={20} />, label: "Facebook", href: "https://www.facebook.com/profile.php?id=61571524414304#" },
   ];
 
   const footerLinks = [

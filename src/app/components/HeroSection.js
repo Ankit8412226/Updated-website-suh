@@ -16,10 +16,10 @@ const HeroSection = () => {
   const handleDiscover = () => router.push("/services");
 
   // right-side blue hero image (local)
-  const heroImg = "/images/Hero section Img.png";
+  const heroImg = "/images/Hero section Img (2).png";
 
   return (
-    <section id="hero" className="relative w-full overflow-hidden pt-20 lg:pt-32 pb-16 lg:pb-24">
+    <section id="hero" className="relative w-full overflow-hidden pt-12 lg:pt-20 pb-16 lg:pb-24">
       {/* Background Elements */}
       <div className="absolute inset-0 -z-10 overflow-hidden">
         <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-purple-500/20 blur-[120px] animate-pulse" />
@@ -75,10 +75,10 @@ const HeroSection = () => {
             >
               <button
                 onClick={handleBookDemo}
-                className="group relative px-8 py-4 rounded-full bg-gray-900 dark:bg-white text-white dark:text-gray-900 font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 overflow-hidden"
+                className="group relative px-8 py-4 rounded-full bg-gradient-to-r from-purple-600 to-blue-600 text-white font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 overflow-hidden"
               >
-                <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-blue-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                <span className="relative flex items-center gap-2 group-hover:text-white transition-colors">
+                <div className="absolute inset-0 bg-white opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <span className="relative flex items-center gap-2 group-hover:text-black transition-colors">
                   Start Your Project <ArrowRight size={18} />
                 </span>
               </button>

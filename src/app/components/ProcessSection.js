@@ -1,7 +1,7 @@
 "use client";
 import { motion } from "framer-motion";
 import { Code, FileSearch, Lightbulb, Palette, Rocket, TestTube, Wrench } from "lucide-react";
-
+// import  images from "next/images";
 const steps = [
   {
     title: "Requirement Analysis",
@@ -153,7 +153,7 @@ export default function ProcessSection() {
                       <motion.div
                         whileHover={{ scale: 1.05, rotateY: 5 }}
                         transition={{ duration: 0.3 }}
-                        className={`rounded-3xl overflow-hidden shadow-2xl bg-gradient-to-br ${step.color} p-1`}
+                        className="rounded-3xl overflow-hidden shadow-2xl bg-gradient-to-r from-purple-600 via-blue-600 to-cyan-500 p-1"
                       >
                         <div className="bg-white dark:bg-gray-950 rounded-3xl p-8 h-full relative overflow-hidden">
                           <motion.div
@@ -232,7 +232,7 @@ export default function ProcessSection() {
                       <motion.div
                         whileHover={{ scale: 1.05, rotateY: -5 }}
                         transition={{ duration: 0.3 }}
-                        className={`rounded-3xl overflow-hidden shadow-2xl bg-gradient-to-br ${step.color} p-1`}
+                        className="rounded-3xl overflow-hidden shadow-2xl bg-gradient-to-r from-purple-600 via-blue-600 to-cyan-500 p-1"
                       >
                         <div className="bg-white dark:bg-gray-950 rounded-3xl p-8 h-full relative overflow-hidden">
                           <motion.div
@@ -342,7 +342,7 @@ export default function ProcessSection() {
                     whileInView={{ opacity: 1, scale: 1 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.5, delay: 0.3 }}
-                    className={`rounded-3xl overflow-hidden shadow-2xl bg-gradient-to-br ${step.color} p-1 ml-6`}
+                    className="rounded-3xl overflow-hidden shadow-2xl bg-gradient-to-r from-purple-600 via-blue-600 to-cyan-500 p-1 ml-6"
                   >
                     <div className="bg-white dark:bg-gray-950 rounded-3xl p-6 relative overflow-hidden">
                       <motion.div

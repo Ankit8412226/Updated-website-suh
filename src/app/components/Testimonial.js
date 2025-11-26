@@ -137,19 +137,15 @@ function TestimonialCard({ testimonial, isMobile }) {
     >
       {/* Card background (dark glass + subtle gradient + texture overlay) */}
       <div
-        className="rounded-2xl overflow-hidden h-full transition-all duration-300"
+        className="rounded-2xl overflow-hidden h-full transition-all duration-300 bg-gradient-to-br from-purple-500/10 via-transparent to-blue-500/10 dark:from-purple-400/10 dark:via-transparent dark:to-blue-300/10 border border-white/20 dark:border-gray-800/40 shadow-lg dark:shadow-[0_12px_40px_rgba(6,6,12,0.6)]"
         style={{
           borderRadius: "22px",
-          background:
-            "linear-gradient(180deg, rgba(12,11,18,0.88) 0%, rgba(17,15,24,0.78) 60%, rgba(28,24,36,0.92) 100%)",
-          border: "1px solid rgba(255,255,255,0.04)",
-          boxShadow: "0 12px 40px rgba(6,6,12,0.6), inset 0 1px 0 rgba(255,255,255,0.02)",
         }}
         onMouseEnter={(e) => {
-          e.currentTarget.style.boxShadow = "0 0 0 4px rgba(255,255,255,0.3), 0 0 60px rgba(255,255,255,0.4), 0 12px 40px rgba(6,6,12,0.6)";
+          e.currentTarget.style.boxShadow = "0 0 0 4px rgba(255,255,255,0.3), 0 0 60px rgba(255,255,255,0.4)";
         }}
         onMouseLeave={(e) => {
-          e.currentTarget.style.boxShadow = "0 12px 40px rgba(6,6,12,0.6), inset 0 1px 0 rgba(255,255,255,0.02)";
+          e.currentTarget.style.boxShadow = "";
         }}
       >
         {/* subtle decorative texture layer using uploaded image (local path) */}
@@ -184,13 +180,13 @@ function TestimonialCard({ testimonial, isMobile }) {
           {/* content container with padding (keeps text left-aligned like reference) */}
           <div className="px-6 pt-8 pb-6 flex-grow flex flex-col">
             {/* Title similar to reference: uppercase small heading at top */}
-            <h4 className="text-center text-lg font-bold tracking-wide text-purple-300 mb-4">
+            <h4 className="text-center text-lg font-bold tracking-wide text-purple-600 dark:text-purple-300 mb-4">
               CUSTOMER STORY
             </h4>
 
             {/* testimonial text (center aligned) */}
             <div className={`${isMobile ? "" : "overflow-y-auto"} mt-4`}>
-              <p className="text-gray-200 text-sm leading-relaxed text-center">
+              <p className="text-gray-800 dark:text-gray-200 text-sm leading-relaxed text-center">
                 {testimonial.text}
               </p>
             </div>
@@ -205,7 +201,7 @@ function TestimonialCard({ testimonial, isMobile }) {
                 }}
               >
                 {/* Placeholder initials (could be replaced with <Image> avatar) */}
-                <span className="text-white/90 font-semibold text-sm">{testimonial.author.split(" ").map(n=>n[0]).slice(0,2).join("")}</span>
+                <span className="text-gray-900 dark:text-white/90 font-semibold text-sm">{testimonial.author.split(" ").map(n=>n[0]).slice(0,2).join("")}</span>
               </div>
             </div>
           </div>
@@ -216,7 +212,7 @@ function TestimonialCard({ testimonial, isMobile }) {
               {[...Array(5)].map((_, i) => (
                 <svg
                   key={i}
-                  className={`h-5 w-5 mx-1 ${i < testimonial.rating ? "text-blue-400" : "text-gray-700"}`}
+                  className={`h-5 w-5 mx-1 ${i < testimonial.rating ? "text-blue-600 dark:text-blue-400" : "text-gray-400 dark:text-gray-700"}`}
                   fill="currentColor"
                   viewBox="0 0 20 20"
                 >
@@ -226,8 +222,8 @@ function TestimonialCard({ testimonial, isMobile }) {
             </div>
 
             <div className="text-center">
-              <p className="font-semibold text-white">{testimonial.author}</p>
-              <p className="text-sm text-gray-300 mt-1">{testimonial.role}</p>
+              <p className="font-semibold text-gray-900 dark:text-white">{testimonial.author}</p>
+              <p className="text-sm text-gray-600 dark:text-gray-300 mt-1">{testimonial.role}</p>
             </div>
           </div>
         </div>
