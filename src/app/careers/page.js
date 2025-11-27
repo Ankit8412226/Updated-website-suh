@@ -6,6 +6,9 @@ export const metadata = {
   title: "Careers at ArtofQR | Join Our Team",
   description:
     "Build your career at ArtofQR. Work on challenging projects with cutting-edge technologies. We're hiring engineers, designers, and product leaders.",
+      icons: {
+    icon: "/icons/SUHTechLogo (1).svg",
+  },
 };
 
 export default function CareersPage() {

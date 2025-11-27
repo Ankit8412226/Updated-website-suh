@@ -6,6 +6,9 @@ export const metadata = {
   title: "Contact Us | ArtofQR",
   description:
     "Get in touch with ArtofQR. Book a consultation, request a quote, or discuss your project. We're ready to help transform your business.",
+      icons: {
+    icon: "/icons/SUHTechLogo (1).svg",
+  },
 };
 
 export default function ContactPage() {

@@ -1,5 +1,6 @@
 "use client";
 import { motion } from "framer-motion";
+import { useRouter } from "next/navigation";
 import { Cloud, Code, Database, Globe, Lock, Server, Smartphone, Zap } from "lucide-react";
 
 const techCategories = [
@@ -48,6 +49,8 @@ const techCategories = [
 ];
 
 export default function Ecosystem() {
+  const router = useRouter();
+
   return (
     <section className="relative min-h-screen bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-950 text-gray-900 dark:text-white overflow-hidden py-20 md:py-32">
       {/* Background Grid */}
@@ -737,6 +740,7 @@ export default function Ecosystem() {
           </motion.div>
 
           <motion.button
+            onClick={() => router.push('/services')}
             whileHover={{
               scale: 1.08,
               boxShadow: "0 25px 35px -10px rgba(168, 85, 247, 0.4), 0 15px 15px -10px rgba(59, 130, 246, 0.4)"
@@ -752,7 +756,7 @@ export default function Ecosystem() {
                 ease: "easeInOut"
               }
             }}
-            className="relative px-10 py-5 bg-gradient-to-r from-purple-600 via-indigo-600 to-blue-500 text-white rounded-full font-bold text-lg shadow-xl hover:shadow-2xl transition-all duration-300 flex items-center gap-3 mx-auto overflow-hidden group"
+            className="relative px-10 py-5 bg-gradient-to-r from-purple-600 via-indigo-600 to-blue-500 text-white rounded-full font-bold text-lg shadow-xl hover:shadow-2xl transition-all duration-300 flex items-center gap-3 mx-auto overflow-hidden group cursor-pointer"
           >
             {/* Shimmer Effect */}
             <motion.div

@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useRouter } from "next/navigation";
 
 const openings = [
   {
@@ -41,6 +42,8 @@ const openings = [
 ];
 
 const CareersSection = () => {
+  const router = useRouter();
+
   return (
     <section id="careers" className="w-full py-16">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -76,7 +79,10 @@ const CareersSection = () => {
               <p className="text-sm text-gray-600 dark:text-gray-300 flex-1">
                 {job.summary}
               </p>
-              <button className="mt-2 px-6 py-2.5 rounded-full bg-white dark:bg-gray-900 text-blue-600 dark:text-blue-400 border-2 border-blue-600 dark:border-blue-500 hover:bg-blue-50 dark:hover:bg-gray-800 hover:border-blue-700 dark:hover:border-blue-400 transition-all duration-300 font-semibold text-sm">
+              <button 
+                onClick={() => router.push('/contact')}
+                className="mt-2 px-6 py-2.5 rounded-full bg-white dark:bg-gray-900 text-blue-600 dark:text-blue-400 border-2 border-blue-600 dark:border-blue-500 hover:bg-blue-50 dark:hover:bg-gray-800 hover:border-blue-700 dark:hover:border-blue-400 transition-all duration-300 font-semibold text-sm"
+              >
                 Apply Now
               </button>
             </motion.div>

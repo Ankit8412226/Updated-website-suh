@@ -67,7 +67,7 @@ export const metadata = {
     images: ["https://www.suhtech.com/og-image.jpg"],
   },
   icons: {
-    icon: "/logoo.png",
+    icon: "/icons/SUHTechLogo (1).svg",
   },
 };
 

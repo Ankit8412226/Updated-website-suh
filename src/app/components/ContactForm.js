@@ -73,7 +73,7 @@ export default function ContactSection() {
                 <h4 className="text-gray-900 dark:text-white font-semibold text-lg">
                   Phone Number
                 </h4>
-                <p className="text-gray-600 dark:text-gray-400">(316) 555-0116</p>
+                <p className="text-gray-600 dark:text-gray-400">8298252909</p>
               </div>
             </div>
 
@@ -93,7 +93,7 @@ export default function ContactSection() {
                   Email Support
                 </h4>
                 <p className="text-gray-600 dark:text-gray-400">
-                  support@coinnect.com
+                  info@suhtech.top
                 </p>
               </div>
             </div>
@@ -114,7 +114,7 @@ export default function ContactSection() {
                   Head Quarter
                 </h4>
                 <p className="text-gray-600 dark:text-gray-400">
-                  3517 W. Gray St. Utica, Pennsylvania 57867
+                  Ithums Galleria Alpha 2 Floor 8th-40 201310
                 </p>
               </div>
             </div>

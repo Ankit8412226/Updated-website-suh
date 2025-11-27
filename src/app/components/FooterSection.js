@@ -117,7 +117,7 @@ function FooterSection() {
       title: "Resources",
       links: [
         { name: "Case Studies", href: "/portfolio" },
-        { name: "Industries", href: "/industries" },
+        { name: "About us", href: "/industries" },
         { name: "Careers", href: "/careers" },
         { name: "Blog", href: "/insights" },
       ],

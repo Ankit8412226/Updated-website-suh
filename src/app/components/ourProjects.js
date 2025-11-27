@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 const exampleImages = [
   "/images/Orga.png",
@@ -16,28 +17,34 @@ const ourProjects = [
     subtitle:
       "Smart HR, Projects, Support & Finance — All in One Unified Platform",
     image: exampleImages[0],
+    slug: "orga-employee-management",
   },
   {
     title: "SkillGuru – LMS Platform",
     subtitle:
       "Empowering Continuous Learning & Skill Development",
     image: exampleImages[1],
+    slug: "skillguru-lms-platform",
   },
   {
     title: "BotBridge – Support Automation Platform",
     subtitle:
       "Smarter Customer Support with AI-Driven Chat & Ticketing",
     image: exampleImages[2],
+    slug: "botbridge-support-automation",
   },
   {
     title: "Viraj Jewellers – Website Development (Client Project)",
     subtitle:
       "Elegant Website for a Luxury Jewellery Brand",
     image: exampleImages[3],
+    slug: "viraj-jewellers-website",
   },
 ];
 
 export default function OurProjectsSection() {
+  const router = useRouter();
+
   const fadeIn = {
     hidden: { opacity: 0, y: 20 },
     visible: {
@@ -75,12 +82,13 @@ export default function OurProjectsSection() {
           {ourProjects.map((study, idx) => (
             <motion.article
               key={study.title + idx}
-              className="rounded-2xl bg-white dark:bg-gray-900 shadow-md dark:shadow-none overflow-hidden"
+              className="rounded-2xl bg-white dark:bg-gray-900 shadow-md dark:shadow-none overflow-hidden cursor-pointer"
               initial={{ opacity: 0, y: 12 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.5, delay: idx * 0.06 }}
               whileHover={{ y: -6, boxShadow: "0 20px 40px rgba(15,23,42,0.08)" }}
+              onClick={() => router.push(`/portfolio/${study.slug}`)}
             >
               <div className="relative w-full aspect-[16/10] md:aspect-[12/7]">
                 <Image

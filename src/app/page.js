@@ -7,6 +7,16 @@ import NavBar from "./components/NavBar";
 import StatsSection from "./components/StatsSection";
 import WhyChooseUsSection from "./components/WhyChooseUs";
 
+
+export const metadata = {
+  title: "Home at ArtofQR | Join Our Team",
+  description:
+    "Build your career at ArtofQR. Work on challenging projects with cutting-edge technologies. We're hiring engineers, designers, and product leaders.",
+  icons: {
+    icon: "/icons/SUHTechLogo (1).svg",
+  },
+};
+
 // Dynamically import non-critical components
 const VideoSection = dynamic(() => import("./components/VedioSection"), {
   loading: () => <div className="h-64 animate-pulse bg-gray-100 dark:bg-gray-800" />,
@@ -33,6 +43,7 @@ export default function Home() {
     <main className="bg-white dark:bg-black selection:bg-purple-500/30">
       <ProjectModal />
       <NavBar />
+
 
       {/* Hero & Stats */}
       <div className="pt-20">

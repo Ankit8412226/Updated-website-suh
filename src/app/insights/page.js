@@ -6,6 +6,9 @@ export const metadata = {
   title: "Insights & Resources | ArtofQR",
   description:
     "Technical articles, case studies, and industry insights from our engineering team. Learn about modern web development, DevOps, AI, and cloud architecture.",
+      icons: {
+    icon: "/icons/SUHTechLogo (1).svg",
+  },
 };
 
 export default function InsightsPage() {

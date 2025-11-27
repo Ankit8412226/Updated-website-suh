@@ -7,7 +7,7 @@ import Button from "../../components/ui/button"; // adjust path if needed
 import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
 
-const heroImagePath = "/images/About us (3).png";
+const heroImagePath = "/download (2) 1.svg";
 
 export default function AboutSection() {
   const router = useRouter();
@@ -35,10 +35,10 @@ export default function AboutSection() {
             initial={{ opacity: 0, scale: 0.98 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5 }}
-            className="relative flex justify-center lg:justify-start order-1 lg:order-1"
+            className="relative flex justify-center order-1 lg:order-1"
           >
             {/* Card container to keep image and overlay elements (no decorative background) */}
-            <div className="relative w-full max-w-[550px] aspect-square rounded-3xl overflow-hidden">
+            <div className="relative w-full max-w-[400px] aspect-square rounded-3xl overflow-hidden">
               <Image
                 src={heroImagePath}
                 alt="about hero"
