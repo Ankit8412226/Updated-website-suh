@@ -1,9 +1,16 @@
-"use client";
-
 import { motion } from "framer-motion";
 import NavBar from "../components/NavBar";
 import FooterSection from "../components/FooterSection";
 import OurProject from "../../app/components/ourProjects";
+
+export const metadata = {
+  title: "Portfolio at ArtofQR | Join Our Team",
+  description:
+    "Build your career at ArtofQR. Work on challenging projects with cutting-edge technologies. We're hiring engineers, designers, and product leaders.",
+  icons: {
+    icon: "/icons/SUHTechLogo (1).svg",
+  },
+};
 
 export default function PortfolioPage() {
   return (

@@ -437,6 +437,7 @@ export async function generateMetadata({ params }) {
   if (!data) {
     return {
       title: "ArtofQR Services",
+      
     };
   }
   return {

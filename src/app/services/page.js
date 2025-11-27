@@ -1,9 +1,16 @@
-"use client";
-
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import NavBar from "../components/NavBar";
 import FooterSection from "../components/FooterSection";
+
+export const metadata = {
+  title: "Services at ArtofQR | Join Our Team",
+  description:
+    "Build your career at ArtofQR. Work on challenging projects with cutting-edge technologies. We're hiring engineers, designers, and product leaders.",
+  icons: {
+    icon: "/icons/SUHTechLogo (1).svg",
+  },
+};
 
 const services = [
   {

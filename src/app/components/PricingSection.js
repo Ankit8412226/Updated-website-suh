@@ -2,10 +2,11 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { Check } from "lucide-react";
 
 export default function PricingSection() {
+  const router = useRouter();
   const [activeCard, setActiveCard] = useState("enterprise");
   const [expanded, setExpanded] = useState({});
 
@@ -95,11 +96,11 @@ export default function PricingSection() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-10 relative z-10">
         {/* HEADER */}
         <div className="text-center mb-12">
-          <p className="inline-block px-6 py-1 rounded-full text-base font-medium border border-gray-700/40 dark:border-gray-300/40 text-gray-700 dark:text-gray-300 mb-4">
+          <p className="inline-block px-6 py-1 rounded-full text-base font-medium border border-blue-500/40 dark:border-blue-400/40 text-blue-500 dark:text-blue-400 mb-4">
             Pricing
           </p>
 
-          <h2 className="text-4xl md:text-5xl font-medium text-gray-900 dark:text-white leading-tight mb-4">
+          <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-purple-600 to-blue-500 bg-clip-text text-transparent dark:from-purple-400 dark:to-blue-300 leading-tight mb-4">
             Choose the Plan That Fits You
           </h2>
 
@@ -184,11 +185,11 @@ export default function PricingSection() {
 
                   {/* BUY BUTTON */}
                   <div className="mt-2">
-                    <Link
-                      href="#"
+                    <button
+                      onClick={() => router.push('/contact')}
                       className={`
                         relative inline-flex items-center justify-center w-full px-6 py-3 
-                        rounded-lg font-semibold transition-all overflow-hidden
+                        rounded-lg font-semibold transition-all overflow-hidden cursor-pointer
                         ${
                           isActive
                             ? "bg-gradient-to-r from-purple-600 to-blue-500 text-white shadow-lg"
@@ -197,7 +198,7 @@ export default function PricingSection() {
                       `}
                     >
                       <span className="relative z-10 flex items-center">Buy now →</span>
-                    </Link>
+                    </button>
                   </div>
                 </div>
 
