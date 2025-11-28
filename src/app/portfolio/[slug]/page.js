@@ -129,7 +129,7 @@ const projectCatalog = {
     primaryLink: "https://www.suhtech.shop/",
 
     overviewBody:
-      "BotBridge is an AI-driven support automation system that reduces support load, improves ticket resolution time, and enhances customer experience with smart workflows.",
+      "BotBridge is an AI-driven support automation platform designed to streamline customer service operations and reduce manual support workload. It intelligently handles customer queries through smart workflows, automated responses, and context-aware routing, enabling faster issue resolution and improved consistency across support channels.By reducing response times and minimizing repetitive tasks, BotBridge enhances agent productivity and delivers a more efficient, customer-centric support experience. ",
     overviewGoals: [], // optional
     overviewImage: "/images/Botbridge.png",
 
@@ -172,9 +172,9 @@ const projectCatalog = {
     primaryLink: "https://www.suhtech.in/",
 
     overviewBody:
-      "SkillGuru is a modern learning management system created for ed-tech, training institutes, and organizations that want to deliver structured courses, certifications, and student progress tracking.",
+      "SkillGuru is a comprehensive and scalable Learning Management System (LMS) designed for ed-tech platforms, training institutes, and organizations aiming to deliver high-quality digital learning experiences. It enables the creation and management of structured courses, certifications, and assessments while providing real-time student progress tracking and performance analytics.The platform supports role-based access for administrators, instructors, and learners, ensuring smooth course management and secure data handling.",
     overviewGoals: [],
-    overviewImage: "/images/Orga.png",
+    overviewImage: "/images/Skillguru.png",
 
     problemIntro: "SkillGuru addresses key challenges in traditional learning setups:",
     problems: [
@@ -259,12 +259,12 @@ async function PortfolioDetailPage({ params }) {
         
         {/* Content */}
         <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-12">
-          <Link
+          {/* <Link
             href="/portfolio"
             className="inline-block mb-6 text-xs uppercase tracking-[0.35em] text-blue-300 hover:text-blue-200 transition-colors"
           >
             ← Portfolio
-          </Link>
+          </Link> */}
 
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight bg-gradient-to-r from-purple-400 via-blue-300 to-cyan-400 bg-clip-text text-transparent">
@@ -277,6 +277,8 @@ async function PortfolioDetailPage({ params }) {
               {data.primaryCta && (
                 <Link
                   href={data.primaryLink || "#"}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="group relative px-8 py-4 rounded-full bg-gradient-to-r from-purple-600 to-blue-600 text-white font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 overflow-hidden"
                 >
                   <div className="absolute inset-0 bg-white opacity-0 group-hover:opacity-20 transition-opacity duration-300" />
@@ -284,12 +286,19 @@ async function PortfolioDetailPage({ params }) {
                 </Link>
               )}
               {data.secondaryCta && (
-                <Link
-                  href={data.secondaryLink || "#"}
-                  className="px-8 py-4 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white font-semibold hover:bg-white/20 transition-all duration-300"
-                >
-                  {data.secondaryCta}
-                </Link>
+                (() => {
+                  const link = data.secondaryLink || "#";
+                  const isExternal = /^https?:\/\//i.test(link) || /^\/\//.test(link) ? true : false;
+                  return (
+                    <Link
+                      href={link}
+                      {...(isExternal ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                      className="px-8 py-4 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white font-semibold hover:bg-white/20 transition-all duration-300"
+                    >
+                      {data.secondaryCta}
+                    </Link>
+                  );
+                })()
               )}
             </div>
           </div>
@@ -303,7 +312,7 @@ async function PortfolioDetailPage({ params }) {
           {/* PROJECT OVERVIEW */}
           <section className="max-w-6xl mx-auto">
             <div className="text-center mb-12">
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-purple-600 to-blue-500 bg-clip-text text-transparent dark:from-purple-400 dark:to-blue-300">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-purple-600 to-blue-500 bg-clip-text text-transparent dark:from-purple-400 dark:to-blue-300 leading-tight">
                 Project Overview
               </h2>
             </div>
@@ -400,7 +409,7 @@ async function PortfolioDetailPage({ params }) {
           {/* TECHNOLOGY USED */}
           <section className="max-w-6xl mx-auto">
             <div className="text-center mb-12">
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-purple-600 to-blue-500 bg-clip-text text-transparent dark:from-purple-400 dark:to-blue-300">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-purple-600 to-blue-500 bg-clip-text text-transparent dark:from-purple-400 dark:to-blue-300 leading-tight">
                 Technology Used
               </h2>
               {data.technologiesIntro && (

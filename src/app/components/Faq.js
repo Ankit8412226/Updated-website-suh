@@ -88,9 +88,9 @@ function FAQSection() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="mb-12"
+              className="mb-12 text-left md:text-center lg:text-left"
             >
-              <h2 className="text-3xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent leading-tight" style={{ lineHeight: '1.1' }}>
                 Frequently Asked Questions
               </h2>
               <p className="text-lg text-gray-600 dark:text-gray-300">
@@ -165,7 +165,7 @@ function FAQSection() {
                     onChange={handleInputChange}
                     required
                     className="w-full px-4 py-3 rounded-xl bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all"
-                    placeholder="John Doe"
+                    placeholder="Mayank jha"
                   />
                 </div>
 
@@ -180,7 +180,7 @@ function FAQSection() {
                     onChange={handleInputChange}
                     required
                     className="w-full px-4 py-3 rounded-xl bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all"
-                    placeholder="Product org, marketing..."
+                    placeholder="Suh pvt limited, marketing..."
                   />
                 </div>
 
@@ -206,7 +206,7 @@ function FAQSection() {
                 )}
 
                 {submitError && (
-                  <div className="flex items-center gap-2 text-red-600 text-sm bg-red-50 dark:bg-red-900/20 p-3 rounded-lg">
+                  <div className="flex items-center gap-2 text-red-500 dark:text-red-400 text-sm p-3 rounded-lg border border-red-200 dark:border-red-800">
                     <AlertCircle size={16} /> {submitError}
                   </div>
                 )}

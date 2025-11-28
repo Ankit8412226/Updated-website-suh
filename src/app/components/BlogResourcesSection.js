@@ -39,16 +39,16 @@ const BlogResourcesSection = () => {
             <p className="uppercase text-xs tracking-[0.4em] text-blue-500 mb-4">
               Insights
             </p>
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 dark:text-white">
               Playbooks, Tutorials & Warnings
             </h2>
           </div>
-          <Link
+          {/* <Link
             href="#"
             className="text-blue-600 dark:text-blue-300 font-semibold text-sm underline underline-offset-4"
           >
             View all resources
-          </Link>
+          </Link> */}
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">

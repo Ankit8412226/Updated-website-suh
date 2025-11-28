@@ -80,7 +80,7 @@ const CareersSection = () => {
                 {job.summary}
               </p>
               <button 
-                onClick={() => router.push('/contact')}
+                onClick={() => window.open(`mailto:hr@suhtech.top?subject=Application for ${job.title}&body=Hi,%0D%0A%0D%0AI am interested in applying for the ${job.title} position.%0D%0A%0D%0APlease find my details below:%0D%0A%0D%0AThank you for your consideration.%0D%0A%0D%0ABest regards`, '_self')}
                 className="mt-2 px-6 py-2.5 rounded-full bg-white dark:bg-gray-900 text-blue-600 dark:text-blue-400 border-2 border-blue-600 dark:border-blue-500 hover:bg-blue-50 dark:hover:bg-gray-800 hover:border-blue-700 dark:hover:border-blue-400 transition-all duration-300 font-semibold text-sm"
               >
                 Apply Now

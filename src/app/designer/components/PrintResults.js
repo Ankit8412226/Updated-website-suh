@@ -89,14 +89,45 @@ const PrintResults = ({
       if (secondBucketProducts.length > 0) buckets.push(secondBucketProducts);
       setProductBuckets(buckets);
 
-      mockups.forEach((product) => {
-        const productId = product.product_id;
-        const defaultVariant = getDefaultVariant(product);
-        if (defaultVariant && !selectedVariants[productId]) {
-          handleVariantChange(productId, defaultVariant);
-        }
+      // Initialize default variants/prices/sizes for products without selection
+      setSelectedVariants((prev) => {
+        const next = { ...prev };
+        mockups.forEach((product) => {
+          const productId = product.product_id;
+          const defaultVariant = getDefaultVariant(product);
+          if (defaultVariant && !next[productId]) {
+            next[productId] = defaultVariant;
+          }
+        });
+        return next;
+      });
+
+      // Initialize variantPrices and variantSizes from mockups
+      setVariantPrices((prev) => {
+        const next = { ...prev };
+        mockups.forEach((product) => {
+          const productId = product.product_id;
+          const defaultVariant = getDefaultVariant(product);
+          if (defaultVariant && product.pricing?.variants?.[defaultVariant]) {
+            next[productId] = product.pricing.variants[defaultVariant].price;
+          }
+        });
+        return next;
+      });
+
+      setVariantSizes((prev) => {
+        const next = { ...prev };
+        mockups.forEach((product) => {
+          const productId = product.product_id;
+          const defaultVariant = getDefaultVariant(product);
+          if (defaultVariant && product.pricing?.variants?.[defaultVariant]) {
+            next[productId] = product.pricing.variants[defaultVariant].size;
+          }
+        });
+        return next;
       });
     }
+    // only rerun when mockupUrl changes
   }, [mockupUrl]);
 
   const handleAddBucketToCart = (bucket) => {

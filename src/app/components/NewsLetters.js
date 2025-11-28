@@ -191,7 +191,7 @@ function Newsletter() {
               </div>
               <button
                 onClick={hideToast}
-                className="p-1 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+                className="p-1 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors cursor-pointer"
               >
                 <X
                   className={`h-5 w-5 ${
@@ -212,7 +212,7 @@ function Newsletter() {
           variants={staggerContainer}
         >
           <motion.h2
-            className="text-2xl sm:text-2xl md:text-2xl lg:text-4xl text-center font-bold bg-gradient-to-r from-purple-600 to-blue-500 bg-clip-text text-transparent dark:from-purple-400 dark:to-blue-300 tracking-tight"
+            className="text-3xl sm:text-4xl md:text-5xl text-center font-bold bg-gradient-to-r from-purple-600 to-blue-500 bg-clip-text text-transparent dark:from-purple-400 dark:to-blue-300 tracking-tight"
             variants={fadeDown}
           >
             Join the ArtofQR Delivery Briefing

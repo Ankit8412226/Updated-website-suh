@@ -44,36 +44,34 @@ export default function Home() {
       <ProjectModal />
       <NavBar />
 
-
       {/* Hero & Stats */}
       <div className="pt-20">
         <HeroSection />
         <StatsSection />
       </div>
 
-      <div className="px-4 md:px-8 lg:px-24 space-y-20 lg:space-y-32 pb-20">
-        {/* <VideoSection /> */}
-        {/* <CoreValues/> */}
-
+      {/* Main Content with Consistent Spacing */}
+      <div className="space-y-12 md:space-y-16 lg:space-y-20 px-4 md:px-6 lg:px-8 pb-8 md:pb-12">
         <AboutUsSection />
+        
         <ServicesSection />
-           <Ecosystem />
-        {/* <TechStackSection /> */}
+        
+        <Ecosystem />
 
         {/* Portfolio CTA */}
-        <section className="relative py-20 overflow-hidden rounded-3xl bg-gray-900 text-white">
+        <section className="relative py-12 md:py-16 lg:py-20 overflow-hidden rounded-3xl bg-gray-900 text-white">
           <div className="absolute inset-0 bg-gradient-to-br from-purple-900/50 to-blue-900/50" />
-          <div className="container mx-auto text-center px-4 relative z-10">
-            <h2 className="text-3xl md:text-5xl font-bold mb-6">
+          <div className="container mx-auto text-center px-6 md:px-8 lg:px-12 relative z-10">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 md:mb-6">
               See Our Work in Action
             </h2>
-            <p className="text-lg text-gray-300 mb-10 max-w-2xl mx-auto">
+            <p className="text-base md:text-lg text-gray-300 mb-8 md:mb-10 max-w-2xl mx-auto leading-relaxed">
               Explore detailed case studies with metrics, timelines, and
               real-world impact across industries.
             </p>
             <Link
               href="/portfolio"
-              className="inline-flex items-center px-8 py-4 rounded-full bg-white text-gray-900 font-bold hover:bg-gray-100 transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1"
+              className="inline-flex items-center px-6 md:px-8 py-3 md:py-4 rounded-full bg-white text-gray-900 font-bold hover:bg-gray-100 transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1 cursor-pointer"
             >
               View Full Portfolio
             </Link>
@@ -81,22 +79,24 @@ export default function Home() {
         </section>
 
         <ProcessSection />
+        
         <PricingSection />
+        
         <IndustriesSection />
-     
+        
         <TestimonialsPage />
-        {/* <BlogResourcesSection /> */}
-        {/* <CareersSection /> */}
+        
         <WhyChooseUsSection />
-        {/* <NewsletterSection /> */}
 
         <section id="contact">
           <ContactFormSection />
         </section>
 
         <FAQSection />
-        <FooterSection />
       </div>
+      
+      {/* Footer moved outside main content container */}
+      <FooterSection />
     </main>
   );
 }
