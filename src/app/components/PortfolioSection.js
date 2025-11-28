@@ -156,7 +156,7 @@ export default function PortfolioSection() {
         <div className="mt-10 flex justify-center">
           <button
             onClick={handleViewAll}
-            className="rounded-full bg-gradient-to-r from-purple-600 to-blue-500 dark:from-purple-400 dark:to-blue-300 text-white px-6 py-3 font-semibold shadow-lg hover:brightness-105 transition"
+            className="rounded-full bg-gradient-to-r from-purple-600 to-blue-500 dark:from-purple-400 dark:to-blue-300 text-white px-6 py-3 font-semibold shadow-lg hover:brightness-105 transition cursor-pointer"
           >
             View all
           </button>

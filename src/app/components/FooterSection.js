@@ -4,12 +4,12 @@ import {
   AlertCircle,
   ArrowRight,
   CheckCircle,
-  Facebook,
-  Github,
   Instagram,
   Linkedin,
+  Facebook,
+  Youtube,
+  MessageSquare,
   Mail,
-  Twitter
 } from "lucide-react";
 import { useTheme } from "next-themes";
 import Image from "next/image";
@@ -17,11 +17,10 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import Logo2 from "../../../public/icons/SUH_TECH_WEBHeader_LOGO (11).svg";
 import Logo from "../../../public/icons/suhlogo.svg";
-import { Separator } from "../../components/ui/separator";
 
 // Tooltip Component
 const SubscriptionTooltip = ({ message, type, show }) => {
-  if (!show) return null;
+  if (!show || !message) return null;
 
   return (
     <AnimatePresence>
@@ -30,10 +29,11 @@ const SubscriptionTooltip = ({ message, type, show }) => {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -10 }}
-          className={`absolute -top-16 left-0 right-0 mx-auto max-w-xs p-3 rounded-lg shadow-xl flex items-center gap-3 backdrop-blur-md border ${type === "success"
+          className={`absolute -top-16 left-0 right-0 mx-auto max-w-xs p-3 rounded-lg shadow-xl flex items-center gap-3 backdrop-blur-md border ${
+            type === "success"
               ? "bg-green-50/90 dark:bg-green-900/50 border-green-200 dark:border-green-800"
               : "bg-red-50/90 dark:bg-red-900/50 border-red-200 dark:border-red-800"
-            }`}
+          }`}
         >
           {type === "success" ? (
             <CheckCircle
@@ -41,13 +41,17 @@ const SubscriptionTooltip = ({ message, type, show }) => {
               size={20}
             />
           ) : (
-            <AlertCircle className="text-red-600 dark:text-red-400 shrink-0" size={20} />
+            <AlertCircle
+              className="text-red-600 dark:text-red-400 shrink-0"
+              size={20}
+            />
           )}
           <span
-            className={`text-sm font-medium ${type === "success"
+            className={`text-sm font-medium ${
+              type === "success"
                 ? "text-green-800 dark:text-green-200"
                 : "text-red-800 dark:text-red-200"
-              }`}
+            }`}
           >
             {message}
           </span>
@@ -73,25 +77,47 @@ function FooterSection() {
   }, []);
 
   useEffect(() => {
-    if (subscriptionStatus.type === "success" && subscriptionStatus.message) {
+    if (subscriptionStatus.message) {
       setShowTooltip(true);
-      const timer = setTimeout(() => {
-        setShowTooltip(false);
-        setTimeout(() => {
-          setSubscriptionStatus({ message: "", type: "" });
-        }, 300);
-      }, 5000);
-      return () => clearTimeout(timer);
-    } else if (subscriptionStatus.message) {
-      setShowTooltip(true);
+      if (subscriptionStatus.type === "success") {
+        const timer = setTimeout(() => {
+          setShowTooltip(false);
+          setTimeout(
+            () => setSubscriptionStatus({ message: "", type: "" }),
+            300
+          );
+        }, 5000);
+        return () => clearTimeout(timer);
+      }
     }
   }, [subscriptionStatus]);
 
   const socialLinks = [
-    { icon: <Instagram size={20} />, label: "Instagram", href: "https://www.instagram.com/suhtechpvtltd/" },
-    // { icon: <Twitter size={20} />, label: "Twitter", href: "#" },
-    { icon: <Linkedin size={20} />, label: "LinkedIn", href: "https://www.linkedin.com/company/suh-tech/" },
-    { icon: <Facebook size={20} />, label: "Facebook", href: "https://www.facebook.com/profile.php?id=61571524414304#" },
+    {
+      icon: <Instagram size={20} />,
+      label: "Instagram",
+      href: "https://www.instagram.com/suhtechpvtltd/",
+    },
+    {
+      icon: <Linkedin size={20} />,
+      label: "LinkedIn",
+      href: "https://www.linkedin.com/company/suh-tech/",
+    },
+    {
+      icon: <Facebook size={20} />,
+      label: "Facebook",
+      href: "https://www.facebook.com/profile.php?id=61571524414304#",
+    },
+    {
+      icon: <Youtube size={20} />,
+      label: "YouTube",
+      href: "#",
+    },
+    {
+      icon: <MessageSquare size={20} />,
+      label: "Quora",
+      href: "https://www.quora.com/profile/Suh-Tech",
+    },
   ];
 
   const footerLinks = [
@@ -153,36 +179,42 @@ function FooterSection() {
   };
 
   return (
-    <footer className="relative bg-gray-50 dark:bg-gray-900/50 pt-20 pb-10 overflow-hidden">
+    <footer className="relative bg-gray-50 dark:bg-gray-900/50 pt-12 md:pt-16 pb-6 overflow-hidden">
       {/* Decorative background */}
       <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-gray-200 dark:via-gray-800 to-transparent" />
 
-      <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 mb-16">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-left md:text-center lg:text-left">
+        {/* Main Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-12 mb-10 md:mb-12">
           {/* Brand Column */}
-          <div className="lg:col-span-4">
-            <Link href="/" className="inline-block mb-6">
+          <div className="md:col-span-2 lg:col-span-4">
+            <Link href="/" className="inline-block mb-5 sm:mb-6">
               {mounted && (
                 <Image
-                  src={(resolvedTheme === 'dark' || theme === 'dark') ? Logo : Logo2}
+                  src={
+                    resolvedTheme === "dark" || theme === "dark" ? Logo : Logo2
+                  }
                   alt="Suh Tech Logo"
                   width={180}
                   height={60}
-                  className="object-contain"
+                  className="object-contain w-36 sm:w-44 md:w-48 h-auto"
                 />
               )}
             </Link>
-            <p className="text-gray-600 dark:text-gray-400 mb-8 leading-relaxed">
+            <p className="text-gray-600 dark:text-gray-400 mb-6 sm:mb-8 leading-relaxed text-sm sm:text-base max-w-md md:mx-auto lg:mx-0 md:text-center lg:text-left">
               We are an end-to-end IT services and product engineering studio
               helping fintech, SaaS, health, and commerce teams launch secure,
               SEO-friendly digital experiences.
             </p>
-            <div className="flex gap-4">
+            <div className="flex flex-wrap gap-3 md:justify-center lg:justify-start">
               {socialLinks.map((social, index) => (
                 <a
                   key={index}
                   href={social.href}
-                  className="w-10 h-10 flex items-center justify-center rounded-full bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:bg-primary hover:text-white dark:hover:bg-primary dark:hover:text-white transition-all duration-300 shadow-sm hover:shadow-md hover:-translate-y-1"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-9 h-9 sm:w-10 sm:h-10 flex items-center justify-center rounded-full bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:bg-primary hover:text-white dark:hover:bg-primary dark:hover:text-white transition-all duration-300 shadow-sm hover:shadow-md hover:-translate-y-1"
+                  aria-label={social.label}
                 >
                   {social.icon}
                 </a>
@@ -191,18 +223,18 @@ function FooterSection() {
           </div>
 
           {/* Links Columns */}
-          <div className="lg:col-span-5 grid grid-cols-2 sm:grid-cols-3 gap-8">
+          <div className="md:col-span-1 lg:col-span-5 grid grid-cols-2 sm:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
             {footerLinks.map((section, index) => (
-              <div key={index}>
-                <h3 className="font-bold text-gray-900 dark:text-white mb-6">
+              <div key={index} className="md:text-center lg:text-left">
+                <h3 className="font-semibold sm:font-bold text-gray-900 dark:text-white mb-3 sm:mb-4 text-sm sm:text-base">
                   {section.title}
                 </h3>
-                <ul className="space-y-4">
+                <ul className="space-y-2.5 sm:space-y-3">
                   {section.links.map((link, linkIndex) => (
                     <li key={linkIndex}>
                       <Link
                         href={link.href}
-                        className="text-gray-600 dark:text-gray-400 hover:text-primary dark:hover:text-primary transition-colors text-sm"
+                        className="text-gray-600 dark:text-gray-400 hover:text-primary dark:hover:text-primary transition-colors text-xs sm:text-sm"
                       >
                         {link.name}
                       </Link>
@@ -214,14 +246,15 @@ function FooterSection() {
           </div>
 
           {/* Newsletter Column */}
-          <div className="lg:col-span-3">
-            <div className="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-sm border border-gray-100 dark:border-gray-700">
-              <h3 className="font-bold text-gray-900 dark:text-white mb-2 flex items-center gap-2">
+          <div className="md:col-span-1 lg:col-span-3">
+            <div className="bg-white dark:bg-gray-800 rounded-2xl p-4 sm:p-5 md:p-6 shadow-sm border border-gray-100 dark:border-gray-700">
+              <h3 className="font-semibold sm:font-bold text-gray-900 dark:text-white mb-2 flex items-center gap-2 text-sm sm:text-base">
                 <Mail size={18} className="text-primary" />
                 Stay Updated
               </h3>
-              <p className="text-sm text-gray-600 dark:text-gray-400 mb-6">
-                Get the latest tech trends and company updates delivered to your inbox.
+              <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400 mb-4 sm:mb-5">
+                Get the latest tech trends, case studies, and product updates
+                from Suh Tech.
               </p>
 
               <form onSubmit={handleSubscribe} className="relative">
@@ -231,17 +264,17 @@ function FooterSection() {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="Enter your email"
-                    className="w-full px-4 py-3 rounded-xl bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all text-sm"
+                    className="w-full px-3 sm:px-4 py-2.5 sm:py-3 rounded-xl bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all text-xs sm:text-sm"
                   />
                   <button
                     type="submit"
                     disabled={isLoading}
-                    className="absolute right-2 top-1.5 p-1.5 rounded-lg bg-primary text-white hover:bg-primary/90 transition-colors disabled:opacity-50"
+                    className="absolute right-1.5 sm:right-2 top-1/2 -translate-y-1/2 p-1.5 sm:p-1.5 rounded-lg bg-primary text-white hover:bg-primary/90 transition-colors disabled:opacity-50 cursor-pointer"
                   >
                     {isLoading ? (
-                      <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                      <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
                     ) : (
-                      <ArrowRight size={18} />
+                      <ArrowRight size={16} />
                     )}
                   </button>
                 </div>
@@ -255,17 +288,27 @@ function FooterSection() {
           </div>
         </div>
 
-        <Separator className="bg-gray-200 dark:bg-gray-800 mb-8" />
-
-        <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-500 dark:text-gray-400">
-          <p>© {new Date().getFullYear()} Suh Tech Private Limited. All rights reserved.</p>
-          <div className="flex gap-8">
-            <Link href="/privacy-policy" className="hover:text-primary transition-colors">
-              Privacy Policy
-            </Link>
-            <Link href="/terms-conditions" className="hover:text-primary transition-colors">
-              Terms of Service
-            </Link>
+        {/* Bottom Bar */}
+        <div className="border-t border-gray-200 dark:border-gray-800 pt-4 sm:pt-6 pb-3 sm:pb-4">
+          <div className="flex flex-col sm:flex-row justify-between items-center gap-3 sm:gap-4 text-xs sm:text-sm text-gray-500 dark:text-gray-400">
+            <p className="text-center sm:text-left">
+              © {new Date().getFullYear()} Suh Tech Private Limited. All rights
+              reserved.
+            </p>
+            <div className="flex gap-3 sm:gap-6">
+              <Link
+                href="/privacy-policy"
+                className="hover:text-primary transition-colors"
+              >
+                Privacy Policy
+              </Link>
+              <Link
+                href="/terms-conditions"
+                className="hover:text-primary transition-colors"
+              >
+                Terms of Service
+              </Link>
+            </div>
           </div>
         </div>
       </div>

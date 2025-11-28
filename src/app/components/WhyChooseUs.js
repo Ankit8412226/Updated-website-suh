@@ -38,13 +38,13 @@ export default function WhyChooseUsSection() {
     }, 3000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [items.length]);
 
   return (
-    <section className="w-full py-20 lg:py-28">
+    <section className="w-full py-12 md:py-16 lg:py-20">
       <div className="
         container mx-auto px-4 sm:px-6 lg:px-10 
-        grid grid-cols-1 lg:grid-cols-2 gap-12 items-start
+        grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-10 lg:gap-12 items-start
       ">
 
         {/* LEFT IMAGE */}
@@ -86,9 +86,9 @@ export default function WhyChooseUsSection() {
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-gray-700 dark:text-gray-300"
+          className="text-gray-700 dark:text-gray-300 text-left md:text-center lg:text-left"
         >
-          <p className="uppercase tracking-[0.3em] text-gray-500 dark:text-gray-400 text-sm mb-3">
+          <p className="uppercase tracking-[0.3em] text-blue-500 dark:text-blue-400 text-sm mb-3">
             Why Choose Us
           </p>
 
@@ -102,7 +102,7 @@ export default function WhyChooseUsSection() {
           </h2>
 
           {/* Accordion */}
-          <div className="space-y-4">
+          <div className="space-y-4 text-left">
             {items.map((item, index) => (
               <div
                 key={index}
@@ -115,7 +115,7 @@ export default function WhyChooseUsSection() {
                 <button
                   onClick={() => setOpen(open === index ? null : index)}
                   className="w-full flex items-center justify-between text-left 
-                  text-gray-900 dark:text-white text-lg font-medium"
+                  text-gray-900 dark:text-white text-lg font-medium cursor-pointer"
                 >
                   {item.title}
 

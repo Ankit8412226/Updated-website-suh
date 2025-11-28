@@ -54,7 +54,7 @@ export default function OurValueSection() {
 
         {/* Heading */}
         <div className="text-center mb-14">
-          <h2 className="text-4xl md:text-5xl font-bold 
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold 
             bg-gradient-to-r from-purple-600 to-blue-500 
             bg-clip-text text-transparent dark:from-purple-400 
             dark:to-blue-300 leading-tight">

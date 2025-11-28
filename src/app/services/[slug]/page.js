@@ -321,6 +321,47 @@ const serviceCatalog = {
       },
     ],
   },
+  "startup-solutions": {
+    title: "Startup Solutions",
+    subtitle: "Transform ideas into scalable digital products with growth-focused technology.",
+    overview:
+      "We help startups transform ideas into scalable digital products. From MVP development and frontend integration to performance-optimized web solutions, we support startups with fast, reliable, and growth-oriented technology.",
+    outcomes: [
+      "Rapid MVP development with market validation features",
+      "Scalable architecture that grows with your user base",
+      "Cost-effective solutions optimized for startup budgets",
+    ],
+    process: [
+      "Idea validation and market research analysis",
+      "MVP scoping and technical architecture design",
+      "Agile development with weekly iterations",
+      "Launch preparation and go-to-market support",
+    ],
+    technologies: [
+      "React",
+      "Next.js",
+      "Node.js",
+      "MongoDB",
+      "Firebase",
+      "Vercel",
+      "Stripe",
+    ],
+    pricing: [
+      "MVP development from $25k",
+      "Startup development pod from $8k/mo",
+      "Technical advisory from $3k/mo",
+    ],
+    faqs: [
+      {
+        q: "Do you work with early-stage startups?",
+        a: "Yes, we specialize in helping startups from idea to market, with flexible engagement models.",
+      },
+      {
+        q: "Can you help with funding pitch preparation?",
+        a: "We provide technical documentation, architecture diagrams, and demo preparation for investor meetings.",
+      },
+    ],
+  },
 };
 
 const infoBlocks = (items, title) => (

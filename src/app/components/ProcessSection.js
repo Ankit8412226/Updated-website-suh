@@ -56,10 +56,10 @@ const steps = [
 
 export default function ProcessSection() {
   return (
-    <section className="relative min-h-screen bg-gradient-to-b from-white to-gray-50 dark:from-gray-950 dark:to-gray-900 text-gray-900 dark:text-white overflow-hidden py-32">
-      <div className="container mx-auto px-6 lg:px-20">
+    <section className="relative min-h-screen bg-gradient-to-b from-white to-gray-50 dark:from-gray-950 dark:to-gray-900 text-gray-900 dark:text-white overflow-hidden py-16 md:py-32">
+      <div className="container mx-auto px-4 md:px-6 lg:px-20">
         {/* Header */}
-        <div className="text-center mb-32">
+        <div className="text-left md:text-center mb-12 md:mb-32">
           <motion.p
             initial={{ opacity: 0, y: -20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -74,7 +74,7 @@ export default function ProcessSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="text-5xl md:text-7xl font-bold bg-gradient-to-r from-purple-600 to-blue-500 bg-clip-text text-transparent dark:from-purple-400 dark:to-blue-300"
+            className="text-3xl sm:text-4xl md:text-5xl font-bold bg-gradient-to-r from-purple-600 to-blue-500 bg-clip-text text-transparent dark:from-purple-400 dark:to-blue-300"
           >
             How We Build
           </motion.h2>
@@ -83,7 +83,7 @@ export default function ProcessSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="mt-6 text-gray-600 dark:text-gray-400 text-lg max-w-2xl mx-auto"
+            className="mt-6 text-gray-600 dark:text-gray-400 text-base md:text-lg max-w-2xl md:mx-auto"
           >
             Our battle-tested 7-step process ensures your project succeeds from concept to launch.
           </motion.p>
@@ -101,7 +101,7 @@ export default function ProcessSection() {
             return (
               <motion.div
                 key={i}
-                className="relative mb-32 last:mb-0"
+                className="relative mb-16 md:mb-32 last:mb-0"
                 initial={{ opacity: 0, y: 50 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-100px" }}
@@ -289,7 +289,7 @@ export default function ProcessSection() {
                 {/* Mobile Layout */}
                 <div className="lg:hidden">
                   <motion.div
-                    className="flex gap-6 mb-6"
+                    className="flex gap-4 mb-4"
                     initial={{ opacity: 0, x: -30 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
@@ -300,19 +300,19 @@ export default function ProcessSection() {
                       whileInView={{ scale: 1 }}
                       viewport={{ once: true }}
                       transition={{ duration: 0.4, delay: 0.2, type: "spring" }}
-                      className={`flex-shrink-0 w-16 h-16 rounded-full bg-gradient-to-br ${step.color} flex items-center justify-center shadow-lg`}
+                      className={`flex-shrink-0 w-14 h-14 rounded-full bg-gradient-to-br ${step.color} flex items-center justify-center shadow-lg`}
                     >
-                      <span className="text-2xl font-bold text-white">
+                      <span className="text-lg font-bold text-white">
                         {i + 1}
                       </span>
                     </motion.div>
-                    <div>
+                    <div className="flex-1">
                       <motion.span
                         initial={{ opacity: 0 }}
                         whileInView={{ opacity: 1 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.4, delay: 0.3 }}
-                        className="inline-block px-4 py-2 bg-purple-50 dark:bg-purple-500/10 text-purple-600 dark:text-purple-400 rounded-full text-sm font-medium mb-2"
+                        className="inline-block px-3 py-1 bg-purple-50 dark:bg-purple-500/10 text-purple-600 dark:text-purple-400 rounded-full text-xs font-medium mb-2"
                       >
                         {step.subtitle}
                       </motion.span>
@@ -321,7 +321,7 @@ export default function ProcessSection() {
                         whileInView={{ opacity: 1 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.5, delay: 0.4 }}
-                        className="text-3xl font-bold mb-3 text-gray-900 dark:text-white"
+                        className="text-2xl font-bold mb-2 text-gray-900 dark:text-white"
                       >
                         {step.title}
                       </motion.h3>
@@ -330,7 +330,7 @@ export default function ProcessSection() {
                         whileInView={{ opacity: 1 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.5, delay: 0.5 }}
-                        className="text-base leading-relaxed text-gray-700 dark:text-gray-300"
+                        className="text-sm leading-relaxed text-gray-700 dark:text-gray-300"
                       >
                         {step.description}
                       </motion.p>
@@ -342,9 +342,9 @@ export default function ProcessSection() {
                     whileInView={{ opacity: 1, scale: 1 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.5, delay: 0.3 }}
-                    className="rounded-3xl overflow-hidden shadow-2xl bg-gradient-to-r from-purple-600 via-blue-600 to-cyan-500 p-1 ml-6"
+                    className="rounded-2xl overflow-hidden shadow-lg bg-gradient-to-r from-purple-600 via-blue-600 to-cyan-500 p-1 ml-6"
                   >
-                    <div className="bg-white dark:bg-gray-950 rounded-3xl p-6 relative overflow-hidden">
+                    <div className="bg-white dark:bg-gray-950 rounded-2xl p-4 relative overflow-hidden">
                       <motion.div
                         className="absolute inset-0 opacity-10"
                         animate={{ rotate: 360 }}
@@ -358,16 +358,16 @@ export default function ProcessSection() {
                           whileInView={{ scale: 1, rotate: 0 }}
                           viewport={{ once: true }}
                           transition={{ duration: 0.5, delay: 0.4, type: "spring" }}
-                          className={`inline-flex p-4 rounded-2xl bg-gradient-to-br ${step.color} shadow-lg`}
+                          className={`inline-flex p-3 rounded-xl bg-gradient-to-br ${step.color} shadow-lg`}
                         >
-                          <IconComponent className="w-8 h-8 text-white" strokeWidth={1.5} />
+                          <IconComponent className="w-6 h-6 text-white" strokeWidth={1.5} />
                         </motion.div>
                         <motion.div
                           initial={{ opacity: 0 }}
                           whileInView={{ opacity: 0.3 }}
                           viewport={{ once: true }}
                           transition={{ duration: 0.5, delay: 0.5 }}
-                          className={`text-6xl font-black bg-gradient-to-br ${step.color} bg-clip-text text-transparent opacity-30`}
+                          className={`text-4xl font-black bg-gradient-to-br ${step.color} bg-clip-text text-transparent opacity-30`}
                         >
                           {(i + 1).toString().padStart(2, "0")}
                         </motion.div>

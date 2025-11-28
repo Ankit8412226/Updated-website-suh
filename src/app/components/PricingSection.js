@@ -100,7 +100,7 @@ export default function PricingSection() {
             Pricing
           </p>
 
-          <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-purple-600 to-blue-500 bg-clip-text text-transparent dark:from-purple-400 dark:to-blue-300 leading-tight mb-4">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold bg-gradient-to-r from-purple-600 to-blue-500 bg-clip-text text-transparent dark:from-purple-400 dark:to-blue-300 leading-tight mb-4">
             Choose the Plan That Fits You
           </h2>
 
@@ -253,7 +253,7 @@ export default function PricingSection() {
         {/* FOOTER TEXT BELOW CARDS */}
         <div className="text-left pl-6 mt-12 space-y-2">
           <p className="text-gray-700 dark:text-gray-300 text-base">
-            18% GST Applicable On All Orders (Updated on 16/10/2025)
+            GST Applicable On All Orders (Updated on 16/10/2025)
           </p>
           <p className="text-gray-700 dark:text-gray-300 text-base">
             Contact us for the latest pricing and package details tailored to your requirements.

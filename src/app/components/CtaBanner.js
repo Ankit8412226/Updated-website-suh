@@ -44,7 +44,7 @@ export default function CtaBanner() {
             Workflow Management
           </p>
 
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
             See Our Work in Action
           </h2>
 

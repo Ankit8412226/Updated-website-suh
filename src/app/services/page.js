@@ -61,6 +61,13 @@ const services = [
     summary:
       "24/7 monitoring, performance tuning, feature upgrades, and experience optimization.",
   },
+  {
+    title: "Startup Solutions",
+    slug: "startup-solutions",
+    summary:
+      "We help startups transform ideas into scalable digital products. From MVP development and frontend integration to performance-optimized web solutions, we support startups with fast, reliable, and growth-oriented technology.",
+  },
+  
 ];
 
 export default function ServicesPage() {
@@ -92,7 +99,7 @@ export default function ServicesPage() {
             >
               <div className="flex items-center justify-between">
                 <h2 className="text-2xl font-semibold">{service.title}</h2>
-                <ArrowUpRight className="text-blue-500" size={20} />
+                {/* <ArrowUpRight className="text-blue-500" size={20} /> */}
               </div>
               <p className="text-sm text-gray-600 dark:text-gray-300 flex-1">
                 {service.summary}
