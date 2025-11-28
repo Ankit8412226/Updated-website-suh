@@ -36,24 +36,37 @@ const FoundersVision = () => {
         animate={{ opacity: 1 }}
         transition={{ duration: 0.8 }}
       >
-        {/* Background image */}
+        {/* Background image: light and dark variants */}
+        {/* Light-mode background (visible when not .dark) */}
         <div
-          className="absolute inset-0 bg-cover bg-center"
-          style={{ 
-            backgroundImage: "url('/asset 27.svg')",
+          className="absolute inset-0 bg-cover bg-center block dark:hidden"
+          style={{
+            backgroundImage: "url('/images/Founder%27s%20vision%20bg-light%20theme.png')",
             backgroundSize: "cover",
             backgroundPosition: "center",
-            backgroundRepeat: "no-repeat"
+            backgroundRepeat: "no-repeat",
           }}
         />
-        {/* Overlay */}
-        <div className="absolute inset-0 bg-slate-900/70" />
+
+        {/* Dark-mode background (visible when .dark is present) */}
+        <div
+          className="absolute inset-0 bg-cover bg-center hidden dark:block"
+          style={{
+            backgroundImage: "url('/images/Founder%27s%20vision%20bg-dark%20theme.png')",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            backgroundRepeat: "no-repeat",
+          }}
+        />
+
+        {/* Overlays: keep strong dark overlay in dark mode, none in light so image shows fully */}
+        <div className="absolute inset-0 hidden dark:block bg-slate-900/70" />
 
         {/* Content */}
         <div className="relative z-10 flex h-full items-center justify-center px-4 sm:px-6">
           <div className="text-center max-w-3xl">
             <motion.h1
-              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-white leading-[1.1] mb-6"
+              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.1] mb-6 text-slate-900 dark:text-white"
               variants={fadeUp}
               initial="hidden"
               animate="visible"
@@ -64,7 +77,7 @@ const FoundersVision = () => {
               </span>
             </motion.h1>
             <motion.p
-              className="text-lg md:text-xl text-slate-200 leading-relaxed max-w-2xl mx-auto"
+              className="text-lg md:text-xl leading-relaxed max-w-2xl mx-auto text-slate-700 dark:text-slate-200"
               variants={fadeUp}
               initial="hidden"
               animate="visible"

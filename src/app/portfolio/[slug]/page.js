@@ -247,26 +247,14 @@ async function PortfolioDetailPage({ params }) {
       {/* HERO SECTION WITH BACKGROUND IMAGE */}
       <section className="relative pt-24 pb-20 mt-16 md:mt-20 lg:mt-24 overflow-hidden">
         {/* Background Image with Overlay */}
-        {/* Light-mode background (visible when not .dark) */}
-        <div
-          className="absolute inset-0 bg-cover bg-center bg-fixed block dark:hidden"
-          style={{
-            backgroundImage: "url('/images/Founder%27s%20vision%20bg-light%20theme.png')",
+        <div 
+          className="absolute inset-0 bg-cover bg-center bg-fixed"
+          style={{ 
+            backgroundImage: "url('/bgimage.jpg')",
             backgroundSize: "cover",
             backgroundPosition: "center",
           }}
         />
-
-        {/* Dark-mode background (visible when .dark is present on root) */}
-        <div
-          className="absolute inset-0 bg-cover bg-center bg-fixed hidden dark:block"
-          style={{
-            backgroundImage: "url('/images/Founder%27s%20vision%20bg-dark%20theme.png')",
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-          }}
-        />
-
         <div className="absolute inset-0 bg-slate-900/70" />
         
         {/* Content */}
