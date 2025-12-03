@@ -16,6 +16,15 @@ export const metadata = {
     "enterprise solutions",
     "it consulting services",
     "software development services",
+    // Long-tail keywords for Delhi NCR
+    "web development services in delhi ncr",
+    "devops automation services noida",
+    "cloud infrastructure setup delhi",
+    "ci/cd pipeline services gurgaon",
+    "mobile app development company delhi ncr",
+    "enterprise web solutions delhi",
+    "it consulting services in noida",
+    "custom software development delhi",
   ],
   openGraph: {
     title: "IT Services - Web Development & DevOps | SUH Tech Private Limited",

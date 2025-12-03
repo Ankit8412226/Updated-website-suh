@@ -11,6 +11,15 @@ export const metadata = {
     "devops consulting contact",
     "web app development quote",
     "it services consultation",
+    // Long-tail keywords for Delhi NCR
+    "contact web development company delhi",
+    "devops consulting services contact noida",
+    "web app development quote delhi ncr",
+    "it services consultation gurgaon",
+    "free consultation web development delhi",
+    "devops services inquiry noida",
+    "web development company contact delhi ncr",
+    "get quote for web app development delhi",
   ],
   openGraph: {
     title: "Contact Us - Web Development & DevOps Services | SUH Tech",

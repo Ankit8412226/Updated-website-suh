@@ -65,6 +65,27 @@ export const metadata = {
     "database optimization",
     "performance optimization",
     "scalable web applications",
+    // Long-tail keywords for Delhi NCR
+    "web app development company in delhi ncr",
+    "devops services provider in noida",
+    "custom web application development delhi",
+    "react development company in gurgaon",
+    "next.js development services delhi",
+    "ci/cd pipeline automation services ncr",
+    "kubernetes deployment services delhi",
+    "docker containerization services noida",
+    "cloud infrastructure setup delhi ncr",
+    "microservices architecture development delhi",
+    "full stack web development company ncr",
+    "node.js backend development services delhi",
+    "enterprise web application development delhi",
+    "scalable web app development services ncr",
+    "devops consulting services in delhi",
+    "aws devops services provider delhi ncr",
+    "jenkins ci/cd setup services delhi",
+    "terraform infrastructure automation delhi",
+    "web app development cost in delhi",
+    "best web development company in noida",
   ],
   authors: [{ name: "SUH Tech Private Limited" }],
   creator: "SUH Tech Private Limited",
@@ -133,9 +154,40 @@ export default function RootLayout({ children }) {
       "@type": "PostalAddress",
       "streetAddress": "Ithums Galleria Alpha 2 Floor 8th-40",
       "addressLocality": "Noida",
+      "addressRegion": "Delhi NCR",
       "postalCode": "201310",
       "addressCountry": "IN"
     },
+    "areaServed": [
+      {
+        "@type": "City",
+        "name": "Delhi"
+      },
+      {
+        "@type": "City",
+        "name": "Noida"
+      },
+      {
+        "@type": "City",
+        "name": "Gurgaon"
+      },
+      {
+        "@type": "City",
+        "name": "Ghaziabad"
+      },
+      {
+        "@type": "GeoCircle",
+        "geoMidpoint": {
+          "@type": "GeoCoordinates",
+          "latitude": "28.5355",
+          "longitude": "77.3910"
+        },
+        "geoRadius": {
+          "@type": "Distance",
+          "name": "Delhi NCR"
+        }
+      }
+    ],
     "contactPoint": {
       "@type": "ContactPoint",
       "telephone": "+91-8298252909",
