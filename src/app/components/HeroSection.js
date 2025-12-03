@@ -94,17 +94,21 @@ const HeroSection = () => {
 
           {/* RIGHT IMAGE */}
           <motion.div
-            className="order-2 lg:order-2 relative max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl mx-auto"
+            className="order-2 lg:order-2 relative w-full max-w-4xl mx-auto"
             style={{ scale, opacity }}
             variants={{ hidden: { opacity: 0, scale: 0.9 }, visible: { opacity: 1, scale: 1 } }}
           >
             <div className="relative z-10 w-full h-auto drop-shadow-2xl">
-              <img
+              <Image
                 src={heroImg}
                 alt="Hero Visual"
+                width={1200}    
+                height={1200}    
+                priority
                 className="w-full h-auto object-contain transform hover:scale-105 transition-transform duration-700 ease-out"
               />
             </div>
+
             {/* Decorative circle behind image */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-gradient-to-tr from-purple-500/10 to-blue-500/10 rounded-full blur-3xl -z-10" />
           </motion.div>
