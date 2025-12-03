@@ -3,9 +3,26 @@ import FooterSection from "../components/FooterSection";
 import NavBar from "../components/NavBar";
 
 export const metadata = {
-  title: "Portfolio at ArtofQR | Join Our Team",
+  title: "Portfolio - Web App Development & DevOps Projects | SUH Tech",
   description:
-    "Build your career at ArtofQR. Work on challenging projects with cutting-edge technologies. We're hiring engineers, designers, and product leaders.",
+    "Explore SUH Tech Private Limited's portfolio of successful web application development and DevOps projects. Case studies showcasing scalable web apps, cloud infrastructure, CI/CD automation, and enterprise solutions delivered to clients worldwide.",
+  keywords: [
+    "web app development portfolio",
+    "devops project case studies",
+    "successful web applications",
+    "cloud migration projects",
+    "CI/CD implementation examples",
+    "enterprise software solutions",
+  ],
+  openGraph: {
+    title: "Portfolio - Web App Development & DevOps Projects | SUH Tech",
+    description:
+      "Explore our portfolio of successful web application development and DevOps projects.",
+    url: "https://www.suhtech.top/portfolio",
+  },
+  alternates: {
+    canonical: "https://www.suhtech.top/portfolio",
+  },
   icons: {
     icon: "/icons/SUHTechLogo (1).svg",
   },

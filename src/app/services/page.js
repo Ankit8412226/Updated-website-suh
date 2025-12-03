@@ -4,9 +4,28 @@ import NavBar from "../components/NavBar";
 import FooterSection from "../components/FooterSection";
 
 export const metadata = {
-  title: "Services at ArtofQR | Join Our Team",
+  title: "IT Services - Web Development & DevOps Solutions | SUH Tech",
   description:
-    "Build your career at ArtofQR. Work on challenging projects with cutting-edge technologies. We're hiring engineers, designers, and product leaders.",
+    "Comprehensive IT services by SUH Tech Private Limited: Web application development, DevOps automation, cloud infrastructure, CI/CD pipelines, mobile app development, and enterprise solutions. Expert team delivering scalable technology solutions.",
+  keywords: [
+    "web development services",
+    "devops services",
+    "cloud infrastructure",
+    "CI/CD automation",
+    "mobile app development",
+    "enterprise solutions",
+    "it consulting services",
+    "software development services",
+  ],
+  openGraph: {
+    title: "IT Services - Web Development & DevOps | SUH Tech Private Limited",
+    description:
+      "Comprehensive IT services: Web app development, DevOps automation, cloud infrastructure, and enterprise solutions.",
+    url: "https://www.suhtech.top/services",
+  },
+  alternates: {
+    canonical: "https://www.suhtech.top/services",
+  },
   icons: {
     icon: "/icons/SUHTechLogo (1).svg",
   },
@@ -67,7 +86,7 @@ const services = [
     summary:
       "We help startups transform ideas into scalable digital products. From MVP development and frontend integration to performance-optimized web solutions, we support startups with fast, reliable, and growth-oriented technology.",
   },
-  
+
 ];
 
 export default function ServicesPage() {

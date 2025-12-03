@@ -248,16 +248,16 @@ async function PortfolioDetailPage({ params }) {
       {/* HERO SECTION WITH BACKGROUND IMAGE */}
       <section className="relative pt-24 pb-20 mt-16 md:mt-20 lg:mt-24 overflow-hidden">
         {/* Background Image with Overlay */}
-        <div 
+        <div
           className="absolute inset-0 bg-cover bg-center bg-fixed"
-          style={{ 
+          style={{
             backgroundImage: "url('/bgimage.jpg')",
             backgroundSize: "cover",
             backgroundPosition: "center",
           }}
         />
         <div className="absolute inset-0 bg-slate-900/70" />
-        
+
         {/* Content */}
         <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-12">
           {/* <Link
@@ -309,7 +309,7 @@ async function PortfolioDetailPage({ params }) {
       {/* MAIN BODY */}
       <section className="py-20 bg-gray-50 dark:bg-gray-900">
         <div className="container mx-auto px-4 sm:px-6 lg:px-12 space-y-20">
-          
+
           {/* PROJECT OVERVIEW */}
           <section className="max-w-6xl mx-auto">
             <div className="text-center mb-12">
@@ -317,7 +317,7 @@ async function PortfolioDetailPage({ params }) {
                 Project Overview
               </h2>
             </div>
-            
+
             <div className="grid gap-10 lg:grid-cols-2 items-start">
               <div className="bg-white dark:bg-gray-800 rounded-3xl p-8 shadow-lg border border-gray-100 dark:border-gray-700">
                 <p className="text-base md:text-lg text-gray-700 dark:text-gray-200 leading-relaxed mb-6">
@@ -347,9 +347,9 @@ async function PortfolioDetailPage({ params }) {
                     src={data.overviewImage}
                     alt={data.title}
                     fill
-                    className="object-cover" 
+                    className="object-cover"
                     sizes="100vw"
-                    priority={true}      
+                    priority={true}
                   />
                 </div>
 
@@ -489,14 +489,34 @@ export async function generateMetadata({ params }) {
 
   if (!data) {
     return {
-      title: "Portfolio | ArtofQR",
+      title: "Portfolio | SUH Tech Private Limited",
+      description: "Web application development and DevOps project portfolio by SUH Tech Private Limited.",
       icons: { icon: "/icons/SUHTechLogo (1).svg" },
+      alternates: {
+        canonical: `https://www.suhtech.top/portfolio/${slug}`,
+      },
     };
   }
 
   return {
-    title: `${data.title} | ArtofQR Portfolio`,
-    description: data.subtitle,
+    title: `${data.title} - Portfolio | SUH Tech Private Limited`,
+    description: `${data.subtitle} - Case study of ${data.title.toLowerCase()} project by SUH Tech Private Limited. Expert web app development and DevOps solutions.`,
+    keywords: [
+      data.title.toLowerCase(),
+      "web app development",
+      "devops project",
+      "case study",
+      "portfolio",
+      "SUH Tech",
+    ],
+    openGraph: {
+      title: `${data.title} - Portfolio | SUH Tech Private Limited`,
+      description: data.subtitle,
+      url: `https://www.suhtech.top/portfolio/${slug}`,
+    },
+    alternates: {
+      canonical: `https://www.suhtech.top/portfolio/${slug}`,
+    },
     icons: { icon: "/icons/SUHTechLogo (1).svg" },
   };
 }

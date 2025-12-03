@@ -477,13 +477,32 @@ export async function generateMetadata({ params }) {
   const data = serviceCatalog[slug];
   if (!data) {
     return {
-      title: "ArtofQR Services",
-      
+      title: "IT Services | SUH Tech Private Limited",
+      description: "Professional IT services including web application development and DevOps solutions by SUH Tech Private Limited.",
+      alternates: {
+        canonical: `https://www.suhtech.top/services/${slug}`,
+      },
     };
   }
   return {
-    title: `${data.title} | ArtofQR`,
-    description: data.subtitle,
+    title: `${data.title} Services | SUH Tech Private Limited`,
+    description: `${data.subtitle} - Expert ${data.title.toLowerCase()} services by SUH Tech Private Limited. Professional IT services provider specializing in web app development and DevOps.`,
+    keywords: [
+      data.title.toLowerCase(),
+      "web development",
+      "devops services",
+      "it services",
+      "software development",
+      "SUH Tech",
+    ],
+    openGraph: {
+      title: `${data.title} Services | SUH Tech Private Limited`,
+      description: data.subtitle,
+      url: `https://www.suhtech.top/services/${slug}`,
+    },
+    alternates: {
+      canonical: `https://www.suhtech.top/services/${slug}`,
+    },
   };
 }
 

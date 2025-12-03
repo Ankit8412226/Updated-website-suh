@@ -3,10 +3,27 @@ import FooterSection from "../components/FooterSection";
 import CareersSection from "../components/CareersSection";
 
 export const metadata = {
-  title: "Careers at ArtofQR | Join Our Team",
+  title: "Careers - Join SUH Tech | Web Development & DevOps Jobs",
   description:
-    "Build your career at ArtofQR. Work on challenging projects with cutting-edge technologies. We're hiring engineers, designers, and product leaders.",
-      icons: {
+    "Join SUH Tech Private Limited - Leading IT services company. Career opportunities in web application development, DevOps engineering, cloud infrastructure, and software engineering. Work on cutting-edge projects with expert teams.",
+  keywords: [
+    "web developer jobs",
+    "devops engineer jobs",
+    "software engineer careers",
+    "it services careers",
+    "web development jobs",
+    "cloud engineer positions",
+    "full stack developer jobs",
+  ],
+  openGraph: {
+    title: "Careers at SUH Tech Private Limited | Web Development & DevOps Jobs",
+    description: "Join our team of expert web developers and DevOps engineers. Build your career with SUH Tech.",
+    url: "https://www.suhtech.top/careers",
+  },
+  alternates: {
+    canonical: "https://www.suhtech.top/careers",
+  },
+  icons: {
     icon: "/icons/SUHTechLogo (1).svg",
   },
 };

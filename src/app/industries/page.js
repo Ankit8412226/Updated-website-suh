@@ -5,10 +5,26 @@ import IndustriesSection from "../components/IndustriesSection";
 // import OurTeam from "../../app/components/OurTeam"
 import FoundersVision from "../components/Founder-vision";
 export const metadata = {
-  title: "About Us We Serve | ArtofQR",
+  title: "Industries We Serve - Web Development & DevOps Solutions | SUH Tech",
   description:
-    "Specialized technology solutions for FinTech, HealthTech, InsurTech, E-commerce, and more. Deep domain expertise meets engineering excellence.",
-      icons: {
+    "SUH Tech Private Limited provides specialized web application development and DevOps solutions for FinTech, HealthTech, InsurTech, E-commerce, SaaS, and enterprise sectors. Industry-specific IT services with deep domain expertise.",
+  keywords: [
+    "fintech web development",
+    "healthtech devops",
+    "ecommerce web apps",
+    "saas development services",
+    "enterprise web solutions",
+    "industry specific it services",
+  ],
+  openGraph: {
+    title: "Industries We Serve | SUH Tech Private Limited",
+    description: "Specialized web development and DevOps solutions for various industries.",
+    url: "https://www.suhtech.top/industries",
+  },
+  alternates: {
+    canonical: "https://www.suhtech.top/industries",
+  },
+  icons: {
     icon: "/icons/SUHTechLogo (1).svg",
   },
 };

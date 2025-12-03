@@ -3,10 +3,25 @@ import FooterSection from "../components/FooterSection";
 import ContactFormSection from "../components/ContactForm";
 
 export const metadata = {
-  title: "Contact Us | ArtofQR",
+  title: "Contact Us - Web Development & DevOps Services | SUH Tech",
   description:
-    "Get in touch with ArtofQR. Book a consultation, request a quote, or discuss your project. We're ready to help transform your business.",
-      icons: {
+    "Contact SUH Tech Private Limited for web application development and DevOps services. Get a free consultation for your web app project, DevOps automation, or cloud infrastructure needs. Expert IT services team ready to help.",
+  keywords: [
+    "contact web development company",
+    "devops consulting contact",
+    "web app development quote",
+    "it services consultation",
+  ],
+  openGraph: {
+    title: "Contact Us - Web Development & DevOps Services | SUH Tech",
+    description:
+      "Get in touch with SUH Tech for web application development and DevOps services consultation.",
+    url: "https://www.suhtech.top/contact",
+  },
+  alternates: {
+    canonical: "https://www.suhtech.top/contact",
+  },
+  icons: {
     icon: "/icons/SUHTechLogo (1).svg",
   },
 };

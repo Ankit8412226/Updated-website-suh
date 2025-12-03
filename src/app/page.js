@@ -9,9 +9,58 @@ import WhyChooseUsSection from "./components/WhyChooseUs";
 
 
 export const metadata = {
-  title: "Home at ArtofQR | Join Our Team",
+  title: "Web App Development & DevOps Services | SUH Tech Private Limited",
   description:
-    "Build your career at ArtofQR. Work on challenging projects with cutting-edge technologies. We're hiring engineers, designers, and product leaders.",
+    "SUH Tech Private Limited - Expert IT services provider specializing in web application development and DevOps solutions. We build scalable, high-performance web apps, automate CI/CD pipelines, and modernize cloud infrastructure. Trusted by businesses worldwide for reliable web development and DevOps services.",
+  keywords: [
+    "web app development company",
+    "devops services provider",
+    "web application development",
+    "devops consulting services",
+    "CI/CD automation",
+    "cloud infrastructure services",
+    "kubernetes experts",
+    "docker containerization",
+    "aws devops services",
+    "react development company",
+    "next.js development",
+    "node.js backend services",
+    "full stack development",
+    "microservices architecture",
+    "infrastructure automation",
+    "terraform services",
+    "jenkins CI/CD setup",
+    "gitlab CI/CD implementation",
+    "container orchestration",
+    "cloud migration experts",
+  ],
+  openGraph: {
+    title: "Web App Development & DevOps Services | SUH Tech Private Limited",
+    description:
+      "Expert IT services provider specializing in web application development and DevOps solutions. Build scalable, high-performance web apps with modern cloud infrastructure.",
+    url: "https://www.suhtech.top",
+    siteName: "SUH Tech Private Limited",
+    images: [
+      {
+        url: "https://www.suhtech.top/og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: "SUH Tech - Web App Development & DevOps Services",
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Web App Development & DevOps Services | SUH Tech",
+    description:
+      "Expert IT services provider specializing in web application development and DevOps automation.",
+    images: ["https://www.suhtech.top/og-image.jpg"],
+  },
+  alternates: {
+    canonical: "https://www.suhtech.top",
+  },
   icons: {
     icon: "/icons/SUHTechLogo (1).svg",
   },
@@ -53,9 +102,9 @@ export default function Home() {
       {/* Main Content with Consistent Spacing */}
       <div className="space-y-12 md:space-y-16 lg:space-y-20 px-4 md:px-6 lg:px-8 pb-8 md:pb-12">
         <AboutUsSection />
-        
+
         <ServicesSection />
-        
+
         <Ecosystem />
 
         {/* Portfolio CTA */}
@@ -79,13 +128,13 @@ export default function Home() {
         </section>
 
         <ProcessSection />
-        
+
         <PricingSection />
-        
+
         <IndustriesSection />
-        
+
         <TestimonialsPage />
-        
+
         <WhyChooseUsSection />
 
         <section id="contact">
@@ -94,7 +143,7 @@ export default function Home() {
 
         <FAQSection />
       </div>
-      
+
       {/* Footer moved outside main content container */}
       <FooterSection />
     </main>
