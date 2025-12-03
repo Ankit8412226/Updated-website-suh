@@ -1,9 +1,47 @@
 "use client";
 
+import axios from "axios";
 import { motion } from "framer-motion";
-import { Phone, Mail, MapPin } from "lucide-react";
+import { Mail, MapPin, Phone } from "lucide-react";
+import { useState } from "react";
 
 export default function ContactSection() {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    message: "",
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState(null);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitStatus(null);
+
+    try {
+      const response = await axios.post("/api/contact", formData);
+
+      if (response.data.success) {
+        setSubmitStatus({ type: "success", message: "Message sent successfully!" });
+        setFormData({ name: "", email: "", message: "" });
+      }
+    } catch (error) {
+      setSubmitStatus({
+        type: "error",
+        message: error.response?.data?.error || "Failed to send message. Please try again.",
+      });
+    } finally {
+      setIsSubmitting(false);
+      setTimeout(() => setSubmitStatus(null), 5000);
+    }
+  };
+
   return (
     <section
       className="
@@ -92,8 +130,8 @@ export default function ContactSection() {
                 <h4 className="text-gray-900 dark:text-white font-semibold text-base lg:text-lg">
                   Email Support
                 </h4>
-                <a 
-                  href="mailto:info@suhtech.top" 
+                <a
+                  href="mailto:info@suhtech.top"
                   className="text-gray-600 dark:text-gray-400 hover:text-purple-600 dark:hover:text-purple-400 transition-colors cursor-pointer text-sm lg:text-base break-all"
                 >
                   info@suhtech.top
@@ -147,7 +185,7 @@ export default function ContactSection() {
                 "
               />
 
-              <form className="space-y-6 relative z-10">
+              <form onSubmit={handleSubmit} className="space-y-6 relative z-10">
 
                 {/* Name */}
                 <div>
@@ -156,7 +194,11 @@ export default function ContactSection() {
                   </label>
                   <input
                     type="text"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleChange}
                     placeholder="Yuvraj Singh"
+                    required
                     className="
                       w-full px-4 py-3 rounded-xl
                       bg-purple-50/60 border border-purple-200 text-gray-900
@@ -176,7 +218,11 @@ export default function ContactSection() {
                   </label>
                   <input
                     type="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
                     placeholder="yuvrajsingh200203@mail.com"
+                    required
                     className="
                       w-full px-4 py-3 rounded-xl
                       bg-purple-50/60 border border-purple-200 text-gray-900
@@ -195,8 +241,12 @@ export default function ContactSection() {
                     Message
                   </label>
                   <textarea
+                    name="message"
+                    value={formData.message}
+                    onChange={handleChange}
                     rows={5}
                     placeholder="Write your message"
+                    required
                     className="
                       w-full px-4 py-3 rounded-xl resize-none
                       bg-purple-50/60 border border-purple-200 text-gray-900
@@ -209,17 +259,32 @@ export default function ContactSection() {
                   ></textarea>
                 </div>
 
+                {/* Status Message */}
+                {submitStatus && (
+                  <div
+                    className={`p-3 rounded-lg text-sm ${
+                      submitStatus.type === "success"
+                        ? "bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-300"
+                        : "bg-red-50 dark:bg-red-900/20 text-red-700 dark:text-red-300"
+                    }`}
+                  >
+                    {submitStatus.message}
+                  </div>
+                )}
+
                 {/* Button */}
                 <button
                   type="submit"
+                  disabled={isSubmitting}
                   className="
                     w-full py-4 rounded-xl text-white font-semibold cursor-pointer
                     bg-gradient-to-r from-purple-600 to-fuchsia-500
                     hover:from-purple-700 hover:to-fuchsia-600
                     transition shadow-[0_0_25px_rgba(180,50,255,0.4)]
+                    disabled:opacity-50 disabled:cursor-not-allowed
                   "
                 >
-                  Send Message
+                  {isSubmitting ? "Sending..." : "Send Message"}
                 </button>
 
               </form>

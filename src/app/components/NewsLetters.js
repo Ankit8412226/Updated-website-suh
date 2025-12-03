@@ -1,13 +1,12 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
-import Image from "next/image";
-import Header from "../../components/commons/Header";
-import { Input } from "../../components/ui/input";
-import Button from "../../components/ui/button";
-import { motion, AnimatePresence } from "framer-motion";
-import { Send, X, CheckCircle, AlertCircle } from "lucide-react";
 import axios from "axios";
+import { AnimatePresence, motion } from "framer-motion";
+import { AlertCircle, CheckCircle, Send, X } from "lucide-react";
+import Image from "next/image";
+import { useEffect, useState } from "react";
+import Button from "../../components/ui/button";
+import { Input } from "../../components/ui/input";
 
 function Newsletter() {
   const [email, setEmail] = useState("");
@@ -109,28 +108,27 @@ function Newsletter() {
     setIsSubmitting(true);
 
     try {
-      const response = await axios.post(
-        "https://artQR-backend.vercel.app/newsletter/create-newsletter",
-        { email }
-      ); // Update endpoint as needed
-      if (response.status === 200) {
+      const response = await axios.post("/api/newsletter", { email });
+
+      if (response.data.success) {
         showToast(
           "Subscribed!",
-          "You've successfully subscribed to the newsletter.",
+          response.data.message || "You've successfully subscribed to the newsletter.",
           "success"
         );
         setEmail("");
       } else {
         showToast(
           "Oops!",
-          "Something went wrong. Please try again later.",
+          response.data.message || "Something went wrong. Please try again later.",
           "error"
         );
       }
     } catch (error) {
+      const errorMessage = error.response?.data?.error || "Subscription failed. Please try again later.";
       showToast(
         "Error",
-        "Subscription failed. Please try again later.",
+        errorMessage,
         "error"
       );
       console.error(error);

@@ -1,31 +1,17 @@
-import React, { useState, useEffect, useRef } from "react";
-import {
-  ShoppingCart,
-  Check,
-  ChevronDown,
-  MapPin,
-  CreditCard,
-  Tag,
-} from "lucide-react";
 import axios from "axios";
-import { Input } from "../../../components/ui/input";
-import { Label } from "../../../components/ui/label";
-import Button from "../../../components/ui/button";
 import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectTrigger,
-  SelectValue,
-} from "../../../components/ui/select";
+  Check,
+  CreditCard,
+  Tag
+} from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { Input } from "../../../components/ui/input";
 
 // Importing sub-components
-import CartItem from "./CartItem";
 import AddressForm from "./AddressForm";
-import OrderConfirmation from "./OrderConfirmation";
+import CartItem from "./CartItem";
 import EmptyCart from "./EmptyCart";
+import OrderConfirmation from "./OrderConfirmation";
 
 const Cart = ({ cart, setCart, setActiveTab, orderPlaced, setOrderPlaced }) => {
   const [shippingRates, setShippingRates] = useState([]);
@@ -136,7 +122,7 @@ const Cart = ({ cart, setCart, setActiveTab, orderPlaced, setOrderPlaced }) => {
       const productIds = cart.map((item) => item.product_id || "");
 
       const response = await axios.post(
-        `https://artqr-backend.vercel.app/api/validate-coupon/${couponCode}`,
+        `/api/coupons/validate/${couponCode}`,
         {
           cartTotal: cartTotal,
           productIds: productIds,
@@ -307,6 +293,42 @@ const Cart = ({ cart, setCart, setActiveTab, orderPlaced, setOrderPlaced }) => {
       );
 
       if (response.data.url) {
+        // Save order to database before redirecting
+        try {
+          const orderData = {
+            customer: {
+              name: addressForm.name,
+              email: addressForm.email,
+              phone: addressForm.phone,
+              address: {
+                line1: addressForm.address1,
+                line2: addressForm.address2 || "",
+                city: addressForm.city,
+                state: addressForm.state_code,
+                country: addressForm.country_code,
+                postal_code: addressForm.zip,
+              },
+            },
+            items: lineItems,
+            shipping: {
+              id: selectedShipping,
+              name: selectedRate?.name || "Carbon Neutral Shipping",
+              rate: 0,
+            },
+            subtotal: subtotal,
+            discount: discount,
+            total: total,
+            couponCode: couponInfo?.code || null,
+            status: "pending",
+            stripeSessionId: response.data.sessionId || null,
+          };
+
+          await axios.post("/api/orders", orderData);
+        } catch (orderError) {
+          console.error("Failed to save order:", orderError);
+          // Continue with redirect even if order save fails
+        }
+
         // Redirect to Stripe Checkout
         window.location.href = response.data.url;
       } else {
