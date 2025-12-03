@@ -111,12 +111,12 @@ function FooterSection() {
     {
       icon: <Youtube size={20} />,
       label: "YouTube",
-      href: "#",
+      href: "https://youtube.com/@suhtechpvtltd?si=-EtpjRSWZrk-v6W7",
     },
     {
       icon: <MessageSquare size={20} />,
       label: "Quora",
-      href: "https://www.quora.com/profile/Suh-Tech",
+      href: "https://www.quora.com/profile/Suhtech-Pvtltd-Buisness",
     },
   ];
 

@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import NavBar from "../../components/NavBar";
 import FooterSection from "../../components/FooterSection";
+import Image from "next/image";
 
 const projectCatalog = {
   // 🔵 ORGA
@@ -342,12 +343,16 @@ async function PortfolioDetailPage({ params }) {
 
               {data.overviewImage && (
                 <div className="relative w-full aspect-[4/3] rounded-3xl overflow-hidden shadow-xl border border-gray-200/70 dark:border-gray-700">
-                  <img
+                  <Image
                     src={data.overviewImage}
                     alt={data.title}
-                    className="w-full h-full object-cover"
+                    fill
+                    className="object-cover" 
+                    sizes="100vw"
+                    priority={true}      
                   />
                 </div>
+
               )}
             </div>
           </section>
