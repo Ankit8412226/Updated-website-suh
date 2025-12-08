@@ -28,7 +28,7 @@ function FAQSection() {
 
     try {
       const response = await fetch(
-        "https://artqr-backend.vercel.app/newsletter/submit-user-info",
+        "https://suhtech.top/api/newsletter/submit-user-info",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
