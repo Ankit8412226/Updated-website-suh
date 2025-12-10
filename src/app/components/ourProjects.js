@@ -40,6 +40,13 @@ const ourProjects = [
     image: exampleImages[3],
     slug: "viraj-jewellers-website",
   },
+  {
+    title: "Dhanganga – Naye Soch Naya Kadam",
+    subtitle:
+      "One-stop destination for services from healthcare and IT to home maintenance, education, and more.",
+    image: "/Dhanaganga.png", // apni image path rakho
+    slug: "dhanganga-naye-soch-naya-kadam",
+  },
 ];
 
 export default function OurProjectsSection() {
