@@ -207,6 +207,66 @@ const projectCatalog = {
       "Better engagement & retention from learners.",
     ],
   },
+
+  // 🔴 DHANGANGA
+  "dhanganga-naye-soch-naya-kadam": {
+    title: "Dhanganga – Naye Soch Naya Kadam",
+    subtitle:
+      "One-stop destination for services from healthcare and IT to home maintenance, education, and more.",
+    primaryCta: "Coming Soon",
+    primaryLink: "https://www.nayesochnayakadam.com/",
+    secondaryCta: "Contact Us",
+    secondaryLink: "/contact",
+
+    overviewBody:
+      "Dhanganga is a revolutionary service aggregation platform designed to bring a wide array of essential services to your doorstep. From healthcare professionals and IT experts to home maintenance workers and educational tutors, Dhanganga bridges the gap between service providers and seekers. Our mission is to empower communities by providing easy access to reliable services while creating opportunities for skilled professionals.",
+    overviewGoals: [
+      "Unify fragmented service markets into one platform",
+      "Ensure reliability and trust in service delivery",
+      "Empower local professionals with digital visibility",
+      "Simplify service booking for everyday needs",
+      "Provide transparent pricing and quality assurance",
+    ],
+    overviewImage: "/Dhanaganga.png",
+
+    problemIntro:
+      "Finding reliable local services has always been a fragmented and uncertain process:",
+    problems: [
+      "Difficulty in finding trusted professionals.",
+      "Lack of transparent pricing for unregistered services.",
+      "No centralized platform for diverse needs.",
+      "Inconsistent service quality and accountability.",
+      "Time-consuming process of verifying service providers.",
+    ],
+
+    solutionIntro:
+      "Dhanganga provides a comprehensive solution for all your service needs:",
+    solutions: [
+      "Verified profiles for all service providers.",
+      "One-stop platform for Healthcare, IT, Home, and Education.",
+      "Easy booking and scheduling system.",
+      "Transparent reviews and rating system.",
+      "Customer support for service dispute resolution.",
+    ],
+
+    technologiesIntro:
+      "Built with a robust tech stack to ensure scalability and ease of use.",
+    technologies: [
+      "React / Next.js",
+      "Node.js",
+      "MongoDB",
+      "PWA Support",
+    ],
+
+    impactIntro:
+      "Dhanganga acts as a catalyst for local economic growth and convenience.",
+    impact: [
+      "Increased earnings for local service providers.",
+      "Time saved for customers in finding help.",
+      "Improved trust in the local service economy.",
+      "Digital inclusion for non-technical workers.",
+    ],
+  },
 };
 
 // helper: simple card grid (Problem / Solution / Impact)
