@@ -108,6 +108,8 @@ const ProjectModal = dynamic(() => import("./components/ProjectModal"));
 
 
 
+const Project = dynamic(() => import("./components/Project"));
+
 export default function Home() {
   return (
     <main className="bg-white dark:bg-black selection:bg-purple-500/30">
@@ -125,6 +127,8 @@ export default function Home() {
         <AboutUsSection />
 
         <ServicesSection />
+
+        <Project />
 
         <Ecosystem />
 
