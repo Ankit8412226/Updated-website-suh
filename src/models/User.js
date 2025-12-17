@@ -25,12 +25,6 @@ const userSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Employee',
   },
-  resetPasswordToken: {
-    type: String,
-  },
-  resetPasswordExpires: {
-    type: Date,
-  },
   createdAt: {
     type: Date,
     default: Date.now,
@@ -38,11 +32,9 @@ const userSchema = new mongoose.Schema({
 });
 
 userSchema.pre('save', async function (next) {
-  if (!this.isModified('password')) {
-    return next();
-  }
+  if (!this.isModified('password')) return next();
   this.password = await bcrypt.hash(this.password, 10);
-  return next();
+  next();
 });
 
 userSchema.methods.comparePassword = async function (password) {
