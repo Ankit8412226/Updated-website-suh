@@ -1,6 +1,6 @@
 import connectDB from '@/lib/mongodb';
 import { verifyToken } from '@/middleware/auth';
-import Order from '@/models/Order';
+import Project from '@/models/Project';
 import { NextResponse } from 'next/server';
 import { corsHeaders, handleCORS } from '@/lib/cors';
 
@@ -19,18 +19,23 @@ export async function GET(request, { params }) {
     await connectDB();
     await verifyToken(request);
 
-    const order = await Order.findOne({ orderNumber: params.id });
+    const project = await Project.findOne({
+      $or: [
+        { _id: params.id },
+        { projectCode: params.id }
+      ]
+    }).populate('assignedEmployees.employeeId');
 
-    if (!order) {
+    if (!project) {
       return NextResponse.json(
-        { error: 'Order not found' },
+        { error: 'Project not found' },
         { status: 404, headers: corsHeaders() }
       );
     }
 
     return NextResponse.json({
       success: true,
-      order,
+      project,
     }, {
       headers: corsHeaders(),
     });
@@ -51,23 +56,63 @@ export async function PATCH(request, { params }) {
     await verifyToken(request);
 
     const data = await request.json();
+    const project = await Project.findOneAndUpdate(
+      {
+        $or: [
+          { _id: params.id },
+          { projectCode: params.id }
+        ]
+      },
+      data,
+      { new: true, runValidators: true }
+    ).populate('assignedEmployees.employeeId');
 
-    const order = await Order.findOneAndUpdate(
-      { orderNumber: params.id },
-      { ...data, updatedAt: new Date() },
-      { new: true }
-    );
-
-    if (!order) {
+    if (!project) {
       return NextResponse.json(
-        { error: 'Order not found' },
+        { error: 'Project not found' },
         { status: 404, headers: corsHeaders() }
       );
     }
 
     return NextResponse.json({
       success: true,
-      order,
+      project,
+    }, {
+      headers: corsHeaders(),
+    });
+  } catch (error) {
+    return NextResponse.json(
+      { error: error.message },
+      { status: 500, headers: corsHeaders() }
+    );
+  }
+}
+
+export async function DELETE(request, { params }) {
+  try {
+    const corsResponse = handleCORS(request);
+    if (corsResponse) return corsResponse;
+
+    await connectDB();
+    await verifyToken(request);
+
+    const project = await Project.findOneAndDelete({
+      $or: [
+        { _id: params.id },
+        { projectCode: params.id }
+      ]
+    });
+
+    if (!project) {
+      return NextResponse.json(
+        { error: 'Project not found' },
+        { status: 404, headers: corsHeaders() }
+      );
+    }
+
+    return NextResponse.json({
+      success: true,
+      message: 'Project deleted successfully',
     }, {
       headers: corsHeaders(),
     });

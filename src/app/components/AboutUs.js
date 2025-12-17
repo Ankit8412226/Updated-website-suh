@@ -1,10 +1,8 @@
 "use client";
 
-import React from "react";
 
-import Image from "next/image";
-import Button from "../../components/ui/button"; // adjust path if needed
 import { motion } from "framer-motion";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 
 const heroImagePath = "/download (2) 1.svg";
@@ -66,9 +64,7 @@ export default function AboutSection() {
             </h2>
 
             <p className="text-base md:text-lg lg:text-xl text-gray-600 dark:text-gray-300 mb-8 lg:mb-10 max-w-2xl md:mx-auto lg:mx-0">
-              With years of hands-on experience in SaaS development, cloud architecture, and enterprise IT
-              services, we empower businesses to adapt to changing technologies, scale operations seamlessly,
-              and thrive in an increasingly competitive digital world.
+              <strong>SUH Tech Private Limited</strong> is a premier <strong>Web Development</strong> and IT services company. With years of experience in custom web applications, SaaS development, and cloud architecture, we empower businesses to adapt to changing technologies and thrive in the digital world.
             </p>
 
             <div className="flex justify-start md:justify-center lg:justify-start">
@@ -88,23 +84,23 @@ export default function AboutSection() {
         <div className="mt-16 md:mt-20 lg:mt-24">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 md:gap-10 lg:gap-12 xl:gap-16">
             <div className="text-center px-4">
-              <div className="text-4xl sm:text-5xl md:text-6xl lg:text-6xl xl:text-7xl font-extrabold leading-none bg-gradient-to-r from-purple-600 to-blue-500 bg-clip-text text-transparent mb-3 md:mb-4">90%</div>
-              <div className="text-sm md:text-base lg:text-lg text-gray-500 dark:text-gray-400">Client satisfaction</div>
+              <div className="text-4xl sm:text-5xl md:text-6xl lg:text-6xl xl:text-7xl font-extrabold leading-none bg-gradient-to-r from-purple-600 to-blue-500 bg-clip-text text-transparent mb-3 md:mb-4">98%</div>
+              <div className="text-sm md:text-base lg:text-lg text-gray-500 dark:text-gray-400">Client Satisfaction</div>
             </div>
 
             <div className="text-center px-4">
               <div className="text-4xl sm:text-5xl md:text-6xl lg:text-6xl xl:text-7xl font-extrabold leading-none bg-gradient-to-r from-purple-600 to-blue-500 bg-clip-text text-transparent mb-3 md:mb-4">40%</div>
-              <div className="text-sm md:text-base lg:text-lg text-gray-500 dark:text-gray-400">Satisfaction</div>
+              <div className="text-sm md:text-base lg:text-lg text-gray-500 dark:text-gray-400">Efficiency Boost</div>
             </div>
 
             <div className="text-center px-4">
               <div className="text-4xl sm:text-5xl md:text-6xl lg:text-6xl xl:text-7xl font-extrabold leading-none bg-gradient-to-r from-purple-600 to-blue-500 bg-clip-text text-transparent mb-3 md:mb-4">180+</div>
-              <div className="text-sm md:text-base lg:text-lg text-gray-500 dark:text-gray-400">Project Successfully Done</div>
+              <div className="text-sm md:text-base lg:text-lg text-gray-500 dark:text-gray-400">Projects Delivered</div>
             </div>
 
             <div className="text-center px-4">
               <div className="text-4xl sm:text-5xl md:text-6xl lg:text-6xl xl:text-7xl font-extrabold leading-none bg-gradient-to-r from-purple-600 to-blue-500 bg-clip-text text-transparent mb-3 md:mb-4">10K+</div>
-              <div className="text-sm md:text-base lg:text-lg text-gray-500 dark:text-gray-400">Overall Revenue Raised</div>
+              <div className="text-sm md:text-base lg:text-lg text-gray-500 dark:text-gray-400">Hours of Coding</div>
             </div>
           </div>
         </div>

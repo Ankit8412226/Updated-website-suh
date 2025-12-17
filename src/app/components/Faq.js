@@ -28,7 +28,7 @@ function FAQSection() {
 
     try {
       const response = await fetch(
-        "https://suhtech.top/api/newsletter/submit-user-info",
+        "/api/newsletter/submit-user-info",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
