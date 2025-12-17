@@ -1,10 +1,9 @@
 "use client";
 
-import React from "react";
-import { ArrowRight, Sparkles } from "lucide-react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { useRouter } from "next/navigation";
+import { ArrowRight, Sparkles } from "lucide-react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 const HeroSection = () => {
   const router = useRouter();
@@ -57,16 +56,16 @@ const HeroSection = () => {
             >
               Build Secure, <br />
               <span className="bg-gradient-to-r from-purple-600 via-blue-600 to-cyan-500 bg-clip-text text-transparent animate-gradient">
-                Future-Ready
+                Web Applications
               </span> <br />
-              Digital Products.
+              & Future-Ready Tech.
             </motion.h1>
 
             <motion.p
               className="text-lg md:text-xl text-gray-600 dark:text-gray-300 mb-8 max-w-xl md:mx-auto lg:mx-0 leading-relaxed"
               variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}
             >
-              We transform ambitious ideas into scalable technology. From AI-driven platforms to seamless mobile experiences, we engineer growth.
+              We transform ambitious ideas into scalable technology. As a leading <strong>Web Development</strong> company, we engineer growth from AI-driven platforms to seamless mobile experiences.
             </motion.p>
 
             <motion.div
@@ -101,9 +100,9 @@ const HeroSection = () => {
             <div className="relative z-10 w-full h-auto drop-shadow-2xl">
               <Image
                 src={heroImg}
-                alt="Hero Visual"
-                width={1200}    
-                height={1200}    
+                alt="SUH Tech Web Development & DevOps Services Hero Visual"
+                width={1200}
+                height={1200}
                 priority
                 className="w-full h-auto object-contain transform hover:scale-105 transition-transform duration-700 ease-out"
               />

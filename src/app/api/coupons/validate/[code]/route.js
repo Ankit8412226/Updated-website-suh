@@ -1,8 +1,19 @@
 import connectDB from '@/lib/mongodb';
 import Coupon from '@/models/Coupon';
 import { NextResponse } from 'next/server';
+import { corsHeaders, handleCORS } from '@/lib/cors';
+
+export async function OPTIONS(request) {
+  return new Response(null, {
+    status: 200,
+    headers: corsHeaders(),
+  });
+}
 
 export async function POST(request, { params }) {
+  try {
+    const corsResponse = handleCORS(request);
+    if (corsResponse) return corsResponse;
   try {
     await connectDB();
     const { cartTotal, productIds } = await request.json();
@@ -14,6 +25,8 @@ export async function POST(request, { params }) {
       return NextResponse.json({
         valid: false,
         message: 'Invalid coupon code',
+      }, {
+        headers: corsHeaders(),
       });
     }
 
@@ -23,6 +36,8 @@ export async function POST(request, { params }) {
       return NextResponse.json({
         valid: false,
         message: 'Coupon not yet valid',
+      }, {
+        headers: corsHeaders(),
       });
     }
 
@@ -30,6 +45,8 @@ export async function POST(request, { params }) {
       return NextResponse.json({
         valid: false,
         message: 'Coupon has expired',
+      }, {
+        headers: corsHeaders(),
       });
     }
 
@@ -38,6 +55,8 @@ export async function POST(request, { params }) {
       return NextResponse.json({
         valid: false,
         message: `Minimum purchase of $${coupon.minPurchase} required`,
+      }, {
+        headers: corsHeaders(),
       });
     }
 
@@ -46,6 +65,8 @@ export async function POST(request, { params }) {
       return NextResponse.json({
         valid: false,
         message: 'Coupon usage limit reached',
+      }, {
+        headers: corsHeaders(),
       });
     }
 
@@ -58,6 +79,8 @@ export async function POST(request, { params }) {
         return NextResponse.json({
           valid: false,
           message: 'Coupon not applicable to selected products',
+        }, {
+          headers: corsHeaders(),
         });
       }
     }
@@ -70,11 +93,13 @@ export async function POST(request, { params }) {
         value: coupon.value,
         maxDiscount: coupon.maxDiscount,
       },
+    }, {
+      headers: corsHeaders(),
     });
   } catch (error) {
     return NextResponse.json(
       { valid: false, message: error.message },
-      { status: 500 }
+      { status: 500, headers: corsHeaders() }
     );
   }
 }

@@ -1,20 +1,20 @@
 import connectDB from '@/lib/mongodb';
 import UserInfo from '@/models/UserInfo';
 import { NextResponse } from 'next/server';
+import { corsHeaders, handleCORS } from '@/lib/cors';
 
-export async function OPTIONS() {
-  return new NextResponse(null, {
+export async function OPTIONS(request) {
+  return new Response(null, {
     status: 200,
-    headers: {
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Methods': 'POST, OPTIONS',
-      'Access-Control-Allow-Headers': 'Content-Type, Authorization',
-    },
+    headers: corsHeaders(),
   });
 }
 
 export async function POST(request) {
   try {
+    const corsResponse = handleCORS(request);
+    if (corsResponse) return corsResponse;
+
     await connectDB();
     const { name, interest, favorite } = await request.json();
 
@@ -23,9 +23,7 @@ export async function POST(request) {
         { error: 'All fields are required' },
         {
           status: 400,
-          headers: {
-            'Access-Control-Allow-Origin': '*',
-          }
+          headers: corsHeaders(),
         }
       );
     }
@@ -39,18 +37,14 @@ export async function POST(request) {
       userInfo,
     }, {
       status: 201,
-      headers: {
-        'Access-Control-Allow-Origin': '*',
-      }
+      headers: corsHeaders(),
     });
   } catch (error) {
     return NextResponse.json(
       { error: error.message },
       {
         status: 500,
-        headers: {
-          'Access-Control-Allow-Origin': '*',
-        }
+        headers: corsHeaders(),
       }
     );
   }

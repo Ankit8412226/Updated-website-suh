@@ -1,6 +1,6 @@
 import connectDB from '@/lib/mongodb';
 import { verifyToken } from '@/middleware/auth';
-import Order from '@/models/Order';
+import Portfolio from '@/models/Portfolio';
 import { NextResponse } from 'next/server';
 import { corsHeaders, handleCORS } from '@/lib/cors';
 
@@ -17,19 +17,21 @@ export async function POST(request) {
     if (corsResponse) return corsResponse;
 
     await connectDB();
+    await verifyToken(request);
+
     const data = await request.json();
 
-    const orderNumber = `ORD-${Date.now()}-${Math.random().toString(36).substr(2, 9).toUpperCase()}`;
+    // Generate slug from title if not provided
+    if (!data.slug && data.title) {
+      data.slug = data.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+    }
 
-    const order = new Order({
-      ...data,
-      orderNumber,
-    });
-    await order.save();
+    const portfolio = new Portfolio(data);
+    await portfolio.save();
 
     return NextResponse.json({
       success: true,
-      order,
+      portfolio,
     }, {
       headers: corsHeaders(),
     });
@@ -47,29 +49,42 @@ export async function GET(request) {
     if (corsResponse) return corsResponse;
 
     await connectDB();
-    await verifyToken(request); // Require auth
 
     const { searchParams } = new URL(request.url);
-    const email = searchParams.get('email');
+    const isActive = searchParams.get('isActive');
+    const search = searchParams.get('search');
 
-    let query = {};
-    if (email) {
-      query['customer.email'] = email;
+    const query = {};
+
+    // Public endpoint - only show active portfolios
+    const isAuthenticated = request.headers.get('authorization');
+    if (!isAuthenticated) {
+      query.isActive = true;
+    } else {
+      if (isActive !== null) {
+        query.isActive = isActive === 'true';
+      }
     }
 
-    const orders = await Order.find(query).sort({ createdAt: -1 });
+    if (search) {
+      query.$or = [
+        { title: { $regex: search, $options: 'i' } },
+        { subtitle: { $regex: search, $options: 'i' } },
+      ];
+    }
+
+    const portfolios = await Portfolio.find(query).sort({ createdAt: -1 });
 
     return NextResponse.json({
       success: true,
-      orders,
-      count: orders.length,
+      portfolios,
     }, {
       headers: corsHeaders(),
     });
   } catch (error) {
     return NextResponse.json(
       { error: error.message },
-      { status: 401, headers: corsHeaders() }
+      { status: 500, headers: corsHeaders() }
     );
   }
 }

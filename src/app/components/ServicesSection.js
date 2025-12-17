@@ -19,7 +19,7 @@ const services = [
   {
     title: "Web Development",
     description:
-      "Composable websites, portals, and platforms built with React, Next.js, and headless CMS for SEO speed.",
+      "Custom web development including composable websites, portals, and scalable web applications built with React and Next.js.",
     icon: Code2,
     slug: "web-development",
   },

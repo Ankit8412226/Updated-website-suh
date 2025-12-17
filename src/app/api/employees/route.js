@@ -1,6 +1,6 @@
 import connectDB from '@/lib/mongodb';
 import { verifyToken } from '@/middleware/auth';
-import Order from '@/models/Order';
+import Employee from '@/models/Employee';
 import { NextResponse } from 'next/server';
 import { corsHeaders, handleCORS } from '@/lib/cors';
 
@@ -11,7 +11,7 @@ export async function OPTIONS(request) {
   });
 }
 
-export async function GET(request, { params }) {
+export async function POST(request) {
   try {
     const corsResponse = handleCORS(request);
     if (corsResponse) return corsResponse;
@@ -19,18 +19,13 @@ export async function GET(request, { params }) {
     await connectDB();
     await verifyToken(request);
 
-    const order = await Order.findOne({ orderNumber: params.id });
-
-    if (!order) {
-      return NextResponse.json(
-        { error: 'Order not found' },
-        { status: 404, headers: corsHeaders() }
-      );
-    }
+    const data = await request.json();
+    const employee = new Employee(data);
+    await employee.save();
 
     return NextResponse.json({
       success: true,
-      order,
+      employee,
     }, {
       headers: corsHeaders(),
     });
@@ -42,7 +37,7 @@ export async function GET(request, { params }) {
   }
 }
 
-export async function PATCH(request, { params }) {
+export async function GET(request) {
   try {
     const corsResponse = handleCORS(request);
     if (corsResponse) return corsResponse;
@@ -50,24 +45,30 @@ export async function PATCH(request, { params }) {
     await connectDB();
     await verifyToken(request);
 
-    const data = await request.json();
+    const { searchParams } = new URL(request.url);
+    const department = searchParams.get('department');
+    const status = searchParams.get('status');
+    const search = searchParams.get('search');
+    const isActive = searchParams.get('isActive');
 
-    const order = await Order.findOneAndUpdate(
-      { orderNumber: params.id },
-      { ...data, updatedAt: new Date() },
-      { new: true }
-    );
-
-    if (!order) {
-      return NextResponse.json(
-        { error: 'Order not found' },
-        { status: 404, headers: corsHeaders() }
-      );
+    const query = {};
+    if (department) query.department = department;
+    if (status) query.status = status;
+    if (isActive !== null) query.isActive = isActive === 'true';
+    if (search) {
+      query.$or = [
+        { firstName: { $regex: search, $options: 'i' } },
+        { lastName: { $regex: search, $options: 'i' } },
+        { email: { $regex: search, $options: 'i' } },
+        { employeeId: { $regex: search, $options: 'i' } },
+      ];
     }
+
+    const employees = await Employee.find(query).sort({ createdAt: -1 });
 
     return NextResponse.json({
       success: true,
-      order,
+      employees,
     }, {
       headers: corsHeaders(),
     });
