@@ -1,18 +1,18 @@
+import { corsHeaders, handleCORS } from '@/lib/cors';
 import connectDB from '@/lib/mongodb';
 import { verifyToken } from '@/middleware/auth';
+import Blog from '@/models/Blog';
 import Contact from '@/models/Contact';
-import Newsletter from '@/models/Newsletter';
-import Order from '@/models/Order';
+import Employee from '@/models/Employee';
+import EmployeeSalary from '@/models/EmployeeSalary';
 import Expense from '@/models/Expense';
 import Invoice from '@/models/Invoice';
-import Sale from '@/models/Sale';
-import EmployeeSalary from '@/models/EmployeeSalary';
-import Blog from '@/models/Blog';
+import Newsletter from '@/models/Newsletter';
+import Order from '@/models/Order';
 import Portfolio from '@/models/Portfolio';
 import Project from '@/models/Project';
-import Employee from '@/models/Employee';
+import Sale from '@/models/Sale';
 import { NextResponse } from 'next/server';
-import { corsHeaders, handleCORS } from '@/lib/cors';
 
 export async function OPTIONS(request) {
   return new Response(null, {
@@ -106,9 +106,11 @@ export async function GET(request) {
       headers: corsHeaders(),
     });
   } catch (error) {
+    // Return 401 for authentication errors
+    const statusCode = error.statusCode || 500;
     return NextResponse.json(
       { error: error.message },
-      { status: 500, headers: corsHeaders() }
+      { status: statusCode, headers: corsHeaders() }
     );
   }
 }
