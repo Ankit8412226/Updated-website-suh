@@ -132,6 +132,119 @@ Authorization: Bearer <token>
 
 ---
 
+### 4. Forgot Password
+
+**Endpoint:** `POST /api/auth/forgot-password`
+
+**Authentication:** Not required
+
+**Request Body:**
+```json
+{
+  "email": "john@example.com"
+}
+```
+
+**Response (200 OK):**
+```json
+{
+  "success": true,
+  "message": "Password reset instructions sent to email"
+}
+```
+
+**Note:** In production, this will send an email with reset link. For development, it also returns the reset token and URL.
+
+**Error Response (400):**
+```json
+{
+  "error": "Email is required"
+}
+```
+
+---
+
+### 5. Reset Password
+
+**Endpoint:** `POST /api/auth/reset-password`
+
+**Authentication:** Not required
+
+**Request Body:**
+```json
+{
+  "token": "reset-token-from-email",
+  "password": "newSecurePassword123"
+}
+```
+
+**Response (200 OK):**
+```json
+{
+  "success": true,
+  "message": "Password has been reset successfully. You can now login with your new password."
+}
+```
+
+**Error Response (400):**
+```json
+{
+  "error": "Invalid or expired reset token"
+}
+```
+
+**Error Response (400) - Weak Password:**
+```json
+{
+  "error": "Password must be at least 6 characters long"
+}
+```
+
+---
+
+### 6. Change Password (Authenticated)
+
+**Endpoint:** `POST /api/auth/change-password`
+
+**Authentication:** Required
+
+**Headers:**
+```
+Authorization: Bearer <token>
+```
+
+**Request Body:**
+```json
+{
+  "currentPassword": "oldPassword123",
+  "newPassword": "newSecurePassword123"
+}
+```
+
+**Response (200 OK):**
+```json
+{
+  "success": true,
+  "message": "Password changed successfully"
+}
+```
+
+**Error Response (400) - Wrong Current Password:**
+```json
+{
+  "error": "Current password is incorrect"
+}
+```
+
+**Error Response (401):**
+```json
+{
+  "error": "Authentication required"
+}
+```
+
+---
+
 ## Contact APIs
 
 ### 1. Submit Contact Form
