@@ -14,7 +14,7 @@ export async function POST(request, { params }) {
   try {
     const corsResponse = handleCORS(request);
     if (corsResponse) return corsResponse;
-  try {
+
     await connectDB();
     const { cartTotal, productIds } = await request.json();
     const code = params.code.toUpperCase();
