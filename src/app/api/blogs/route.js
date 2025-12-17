@@ -1,8 +1,8 @@
+import { corsHeaders, handleCORS } from '@/lib/cors';
 import connectDB from '@/lib/mongodb';
 import { verifyToken } from '@/middleware/auth';
 import Blog from '@/models/Blog';
 import { NextResponse } from 'next/server';
-import { corsHeaders, handleCORS } from '@/lib/cors';
 
 export async function OPTIONS(request) {
   return new Response(null, {
@@ -36,9 +36,11 @@ export async function POST(request) {
       headers: corsHeaders(),
     });
   } catch (error) {
+    // Return 401 for authentication errors
+    const statusCode = error.statusCode || 500;
     return NextResponse.json(
       { error: error.message },
-      { status: 500, headers: corsHeaders() }
+      { status: statusCode, headers: corsHeaders() }
     );
   }
 }
