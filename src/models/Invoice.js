@@ -27,10 +27,64 @@ const invoiceSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  // Service Type for IT Services
+  serviceType: {
+    type: String,
+    enum: ['One-Time Project', 'AMC', 'Weekly Deliverables', 'Monthly Deliverables', 'Project Updates', 'Maintenance', 'Consulting', 'Custom'],
+    default: 'One-Time Project',
+  },
+
+  // AMC Details (Annual Maintenance Contract)
+  amcDetails: {
+    startDate: Date,
+    endDate: Date,
+    duration: String, // e.g., "12 months", "1 year"
+    renewalDate: Date,
+    coverageType: {
+      type: String,
+      enum: ['Basic', 'Standard', 'Premium', 'Enterprise'],
+    },
+    includedServices: [String], // e.g., ["Bug Fixes", "Security Updates", "Performance Monitoring"]
+    responseTime: String, // e.g., "24 hours", "48 hours"
+  },
+
+  // Weekly/Monthly Deliverables
+  deliverables: [{
+    title: String,
+    description: String,
+    deliveryDate: Date,
+    status: {
+      type: String,
+      enum: ['Pending', 'In Progress', 'Completed', 'Delayed'],
+      default: 'Pending',
+    },
+    completedDate: Date,
+    remarks: String,
+  }],
+
+  // Project Milestones (for project-based invoices)
+  milestones: [{
+    name: String,
+    description: String,
+    percentage: Number, // % of total project
+    amount: Number,
+    dueDate: Date,
+    status: {
+      type: String,
+      enum: ['Not Started', 'In Progress', 'Completed'],
+      default: 'Not Started',
+    },
+  }],
+
   services: [{
     description: {
       type: String,
       required: true,
+    },
+    serviceCategory: {
+      type: String,
+      enum: ['Development', 'Design', 'Maintenance', 'Support', 'Consulting', 'Infrastructure', 'Testing', 'Other'],
+      default: 'Development',
     },
     quantity: {
       type: Number,
@@ -39,7 +93,7 @@ const invoiceSchema = new mongoose.Schema({
     unit: {
       type: String,
       default: 'hours',
-      enum: ['hours', 'days', 'items', 'project'],
+      enum: ['hours', 'days', 'weeks', 'months', 'items', 'project', 'user', 'license'],
     },
     rate: {
       type: Number,
