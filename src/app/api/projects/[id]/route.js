@@ -25,7 +25,8 @@ export async function GET(request, { params }) {
         { _id: id },
         { projectCode: id }
       ]
-    }).populate('assignedEmployees.employeeId');
+      // }).populate('assignedEmployees.employeeId'); // TODO: Fix Employee model
+    });
 
     if (!project) {
       return NextResponse.json(
@@ -67,7 +68,8 @@ export async function PATCH(request, { params }) {
       },
       data,
       { new: true, runValidators: true }
-    ).populate('assignedEmployees.employeeId');
+      // ).populate('assignedEmployees.employeeId'); // TODO: Fix Employee model
+    );
 
     if (!project) {
       return NextResponse.json(

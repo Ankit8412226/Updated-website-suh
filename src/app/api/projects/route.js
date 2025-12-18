@@ -24,7 +24,7 @@ export async function POST(request) {
     await project.save();
 
     // Populate employee details
-    await project.populate('assignedEmployees.employeeId');
+    // await project.populate('assignedEmployees.employeeId'); // TODO: Fix Employee model registration
 
     return NextResponse.json({
       success: true,
@@ -63,7 +63,7 @@ export async function GET(request) {
     if (isActive !== null) query.isActive = isActive === 'true';
 
     const projects = await Project.find(query)
-      .populate('assignedEmployees.employeeId')
+      // .populate('assignedEmployees.employeeId') // TODO: Fix Employee model registration
       .sort({ createdAt: -1 });
 
     return NextResponse.json({
