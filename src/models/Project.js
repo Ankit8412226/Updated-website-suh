@@ -78,14 +78,13 @@ const projectSchema = new mongoose.Schema({
   },
 });
 
-projectSchema.pre('save', function (next) {
+projectSchema.pre('save', function () {
   this.updatedAt = Date.now();
   if (!this.projectCode) {
     const prefix = this.projectName.substring(0, 3).toUpperCase();
     const random = Math.floor(Math.random() * 10000).toString().padStart(4, '0');
     this.projectCode = `${prefix}-${random}`;
   }
-  next();
 });
 
 export default mongoose.models.Project || mongoose.model('Project', projectSchema);

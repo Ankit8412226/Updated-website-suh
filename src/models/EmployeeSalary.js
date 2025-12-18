@@ -76,7 +76,7 @@ const employeeSalarySchema = new mongoose.Schema({
   },
 });
 
-employeeSalarySchema.pre('save', function (next) {
+employeeSalarySchema.pre('save', function () {
   this.updatedAt = Date.now();
   if (!this.employeeId) {
     const random = Math.floor(Math.random() * 1000).toString().padStart(3, '0');
@@ -87,7 +87,6 @@ employeeSalarySchema.pre('save', function (next) {
     const { basic, allowances, deductions } = this.breakdown;
     this.breakdown.net = basic + (allowances.HRA || 0) + (allowances.Special || 0) - (deductions.PF || 0) - (deductions.Tax || 0);
   }
-  next();
 });
 
 export default mongoose.models.EmployeeSalary || mongoose.model('EmployeeSalary', employeeSalarySchema);

@@ -49,9 +49,8 @@ const saleSchema = new mongoose.Schema({
   },
 });
 
-saleSchema.pre('save', function (next) {
+saleSchema.pre('save', function () {
   this.updatedAt = Date.now();
-  next();
 });
 
 export default mongoose.models.Sale || mongoose.model('Sale', saleSchema);

@@ -1,8 +1,8 @@
+import { corsHeaders, handleCORS } from '@/lib/cors';
 import connectDB from '@/lib/mongodb';
 import { verifyToken } from '@/middleware/auth';
 import Project from '@/models/Project';
 import { NextResponse } from 'next/server';
-import { corsHeaders, handleCORS } from '@/lib/cors';
 
 export async function OPTIONS(request) {
   return new Response(null, {
@@ -19,12 +19,14 @@ export async function GET(request, { params }) {
     await connectDB();
     await verifyToken(request);
 
+    const { id } = await params;
     const project = await Project.findOne({
       $or: [
-        { _id: params.id },
-        { projectCode: params.id }
+        { _id: id },
+        { projectCode: id }
       ]
-    }).populate('assignedEmployees.employeeId');
+      // }).populate('assignedEmployees.employeeId'); // TODO: Fix Employee model
+    });
 
     if (!project) {
       return NextResponse.json(
@@ -56,16 +58,18 @@ export async function PATCH(request, { params }) {
     await verifyToken(request);
 
     const data = await request.json();
+    const { id } = await params;
     const project = await Project.findOneAndUpdate(
       {
         $or: [
-          { _id: params.id },
-          { projectCode: params.id }
+          { _id: id },
+          { projectCode: id }
         ]
       },
       data,
       { new: true, runValidators: true }
-    ).populate('assignedEmployees.employeeId');
+      // ).populate('assignedEmployees.employeeId'); // TODO: Fix Employee model
+    );
 
     if (!project) {
       return NextResponse.json(
@@ -96,10 +100,11 @@ export async function DELETE(request, { params }) {
     await connectDB();
     await verifyToken(request);
 
+    const { id } = await params;
     const project = await Project.findOneAndDelete({
       $or: [
-        { _id: params.id },
-        { projectCode: params.id }
+        { _id: id },
+        { projectCode: id }
       ]
     });
 

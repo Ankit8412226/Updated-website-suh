@@ -1,8 +1,8 @@
+import { corsHeaders, handleCORS } from '@/lib/cors';
 import connectDB from '@/lib/mongodb';
 import { verifyToken } from '@/middleware/auth';
 import Employee from '@/models/Employee';
 import { NextResponse } from 'next/server';
-import { corsHeaders, handleCORS } from '@/lib/cors';
 
 export async function OPTIONS(request) {
   return new Response(null, {
@@ -19,11 +19,12 @@ export async function GET(request, { params }) {
     await connectDB();
     await verifyToken(request);
 
+    const { id } = await params;
     const employee = await Employee.findOne({
       $or: [
-        { _id: params.id },
-        { employeeId: params.id },
-        { email: params.id }
+        { _id: id },
+        { employeeId: id },
+        { email: id }
       ]
     });
 
@@ -57,12 +58,13 @@ export async function PATCH(request, { params }) {
     await verifyToken(request);
 
     const data = await request.json();
+    const { id } = await params;
     const employee = await Employee.findOneAndUpdate(
       {
         $or: [
-          { _id: params.id },
-          { employeeId: params.id },
-          { email: params.id }
+          { _id: id },
+          { employeeId: id },
+          { email: id }
         ]
       },
       data,
@@ -98,11 +100,12 @@ export async function DELETE(request, { params }) {
     await connectDB();
     await verifyToken(request);
 
+    const { id } = await params;
     const employee = await Employee.findOneAndDelete({
       $or: [
-        { _id: params.id },
-        { employeeId: params.id },
-        { email: params.id }
+        { _id: id },
+        { employeeId: id },
+        { email: id }
       ]
     });
 

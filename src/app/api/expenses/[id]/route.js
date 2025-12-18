@@ -1,8 +1,8 @@
+import { corsHeaders, handleCORS } from '@/lib/cors';
 import connectDB from '@/lib/mongodb';
 import { verifyToken } from '@/middleware/auth';
 import Expense from '@/models/Expense';
 import { NextResponse } from 'next/server';
-import { corsHeaders, handleCORS } from '@/lib/cors';
 
 export async function OPTIONS(request) {
   return new Response(null, {
@@ -19,7 +19,8 @@ export async function GET(request, { params }) {
     await connectDB();
     await verifyToken(request);
 
-    const expense = await Expense.findById(params.id);
+    const { id } = await params;
+    const expense = await Expense.findById(id);
 
     if (!expense) {
       return NextResponse.json(
@@ -51,8 +52,9 @@ export async function PATCH(request, { params }) {
     await verifyToken(request);
 
     const data = await request.json();
+    const { id } = await params;
     const expense = await Expense.findByIdAndUpdate(
-      params.id,
+      id,
       data,
       { new: true, runValidators: true }
     );
@@ -86,7 +88,8 @@ export async function DELETE(request, { params }) {
     await connectDB();
     await verifyToken(request);
 
-    const expense = await Expense.findByIdAndDelete(params.id);
+    const { id } = await params;
+    const expense = await Expense.findByIdAndDelete(id);
 
     if (!expense) {
       return NextResponse.json(
