@@ -6,11 +6,21 @@ const invoiceSchema = new mongoose.Schema({
     required: true,
     unique: true,
   },
+
+  // Document Type
+  documentType: {
+    type: String,
+    enum: ['Invoice', 'Quotation', 'Proforma Invoice'],
+    default: 'Invoice',
+  },
+
   projectId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Project',
   },
   projectCode: String,
+  projectName: String, // For display purposes
+
   clientName: {
     type: String,
     required: true,
@@ -27,6 +37,14 @@ const invoiceSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+
+  // Payment & Validity
+  paymentTerms: {
+    type: String,
+    default: 'Net 30', // e.g., "Net 30", "Advance", "50% Advance, 50% on Delivery"
+  },
+  validUntil: Date, // For quotations
+
   // Service Type for IT Services
   serviceType: {
     type: String,
@@ -136,6 +154,7 @@ const invoiceSchema = new mongoose.Schema({
   paymentDate: Date,
   paymentMethod: String,
   notes: String,
+  termsAndConditions: String,
   invoiceDate: {
     type: Date,
     default: Date.now,
