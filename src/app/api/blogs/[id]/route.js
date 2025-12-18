@@ -1,8 +1,8 @@
+import { corsHeaders, handleCORS } from '@/lib/cors';
 import connectDB from '@/lib/mongodb';
 import { verifyToken } from '@/middleware/auth';
 import Blog from '@/models/Blog';
 import { NextResponse } from 'next/server';
-import { corsHeaders, handleCORS } from '@/lib/cors';
 
 export async function OPTIONS(request) {
   return new Response(null, {
@@ -18,10 +18,11 @@ export async function GET(request, { params }) {
 
     await connectDB();
 
+    const { id } = await params;
     const blog = await Blog.findOne({
       $or: [
-        { _id: params.id },
-        { slug: params.id }
+        { _id: id },
+        { slug: id }
       ]
     });
 
@@ -65,11 +66,12 @@ export async function PATCH(request, { params }) {
       data.slug = data.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
     }
 
+    const { id } = await params;
     const blog = await Blog.findOneAndUpdate(
       {
         $or: [
-          { _id: params.id },
-          { slug: params.id }
+          { _id: id },
+          { slug: id }
         ]
       },
       data,
@@ -105,10 +107,11 @@ export async function DELETE(request, { params }) {
     await connectDB();
     await verifyToken(request);
 
+    const { id } = await params;
     const blog = await Blog.findOneAndDelete({
       $or: [
-        { _id: params.id },
-        { slug: params.id }
+        { _id: id },
+        { slug: id }
       ]
     });
 

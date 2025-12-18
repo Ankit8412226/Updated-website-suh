@@ -1,8 +1,8 @@
+import { corsHeaders, handleCORS } from '@/lib/cors';
 import connectDB from '@/lib/mongodb';
 import { verifyToken } from '@/middleware/auth';
 import Sale from '@/models/Sale';
 import { NextResponse } from 'next/server';
-import { corsHeaders, handleCORS } from '@/lib/cors';
 
 export async function OPTIONS(request) {
   return new Response(null, {
@@ -19,7 +19,8 @@ export async function GET(request, { params }) {
     await connectDB();
     await verifyToken(request);
 
-    const sale = await Sale.findById(params.id);
+    const { id } = await params;
+    const sale = await Sale.findById(id);
 
     if (!sale) {
       return NextResponse.json(
@@ -51,8 +52,9 @@ export async function PATCH(request, { params }) {
     await verifyToken(request);
 
     const data = await request.json();
+    const { id } = await params;
     const sale = await Sale.findByIdAndUpdate(
-      params.id,
+      id,
       data,
       { new: true, runValidators: true }
     );
@@ -86,7 +88,8 @@ export async function DELETE(request, { params }) {
     await connectDB();
     await verifyToken(request);
 
-    const sale = await Sale.findByIdAndDelete(params.id);
+    const { id } = await params;
+    const sale = await Sale.findByIdAndDelete(id);
 
     if (!sale) {
       return NextResponse.json(

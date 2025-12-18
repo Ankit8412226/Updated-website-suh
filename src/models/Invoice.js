@@ -150,7 +150,7 @@ const invoiceSchema = new mongoose.Schema({
   },
 });
 
-invoiceSchema.pre('save', function (next) {
+invoiceSchema.pre('save', function () {
   this.updatedAt = Date.now();
   if (!this.invoiceNumber) {
     const year = new Date().getFullYear();
@@ -170,8 +170,6 @@ invoiceSchema.pre('save', function (next) {
   if (this.status === 'Pending' && this.dueDate && new Date() > this.dueDate) {
     this.status = 'Overdue';
   }
-
-  next();
 });
 
 export default mongoose.models.Invoice || mongoose.model('Invoice', invoiceSchema);

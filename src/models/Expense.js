@@ -40,9 +40,8 @@ const expenseSchema = new mongoose.Schema({
   },
 });
 
-expenseSchema.pre('save', function (next) {
+expenseSchema.pre('save', function () {
   this.updatedAt = Date.now();
-  next();
 });
 
 export default mongoose.models.Expense || mongoose.model('Expense', expenseSchema);

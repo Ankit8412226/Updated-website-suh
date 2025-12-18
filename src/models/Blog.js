@@ -44,7 +44,7 @@ const blogSchema = new mongoose.Schema({
   },
 });
 
-blogSchema.pre('save', function (next) {
+blogSchema.pre('save', function () {
   this.updatedAt = Date.now();
   if (!this.slug && this.title) {
     this.slug = this.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
@@ -52,7 +52,6 @@ blogSchema.pre('save', function (next) {
   if (this.isPublished && !this.publishedAt) {
     this.publishedAt = new Date();
   }
-  next();
 });
 
 export default mongoose.models.Blog || mongoose.model('Blog', blogSchema);

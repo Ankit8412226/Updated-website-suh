@@ -1,8 +1,8 @@
-import connectDB from '@/lib/mongodb';
-import Job from '@/models/Job';
-import { verifyToken } from '@/middleware/auth';
-import { NextResponse } from 'next/server';
 import { corsHeaders, handleCORS } from '@/lib/cors';
+import connectDB from '@/lib/mongodb';
+import { verifyToken } from '@/middleware/auth';
+import Job from '@/models/Job';
+import { NextResponse } from 'next/server';
 
 export async function OPTIONS(request) {
   return new Response(null, {
@@ -18,7 +18,8 @@ export async function GET(request, { params }) {
 
     await connectDB();
 
-    const job = await Job.findById(params.id);
+    const { id } = await params;
+    const job = await Job.findById(id);
 
     if (!job) {
       return NextResponse.json(
@@ -48,9 +49,10 @@ export async function PATCH(request, { params }) {
     await verifyToken(request);
 
     const data = await request.json();
+    const { id } = await params;
 
     const job = await Job.findByIdAndUpdate(
-      params.id,
+      id,
       data,
       { new: true, runValidators: true }
     );
@@ -82,7 +84,8 @@ export async function DELETE(request, { params }) {
     await connectDB();
     await verifyToken(request);
 
-    const job = await Job.findByIdAndDelete(params.id);
+    const { id } = await params;
+    const job = await Job.findByIdAndDelete(id);
 
     if (!job) {
       return NextResponse.json(
