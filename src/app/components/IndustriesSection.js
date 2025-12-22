@@ -9,130 +9,146 @@ import {
   ShoppingBag,
   Truck,
 } from "lucide-react";
-import { useState } from "react";
 
 const industries = [
   {
     name: "FinTech",
-    detail: "Payments, lending, wealth, compliance.",
+    detail: "Payments, Lending, Wealth, Compliance.",
     icon: CreditCard,
-    color: "text-blue-500",
   },
   {
     name: "EdTech",
-    detail: "LMS, cohort platforms, content marketplaces.",
+    detail: "LMS, Cohort Platforms, Content Marketplaces, Compliance.",
     icon: GraduationCap,
-    color: "text-purple-500",
   },
   {
     name: "E-commerce",
-    detail: "Headless storefronts, marketplaces, OMS.",
+    detail: "Payments, Lending, Wealth, Compliance.",
     icon: ShoppingBag,
-    color: "text-pink-500",
   },
   {
     name: "Healthcare",
-    detail: "HIPAA portals, telehealth, patient apps.",
+    detail: "HIPAA Portals, Telehealth,",
     icon: Heart,
-    color: "text-red-500",
   },
   {
     name: "Real Estate",
-    detail: "PropTech, CRMs, 3D tours, broker ops.",
+    detail: "PropTech, CRMs, 3D Tours, Broker Ops.",
     icon: Home,
-    color: "text-green-500",
   },
   {
     name: "Logistics",
-    detail: "Fleet tracking, WMS, route optimization.",
+    detail: "Fleet Tracking, WMS, Route Optimization, Compliance.",
     icon: Truck,
-    color: "text-orange-500",
   },
 ];
 
-const IndustryCard = ({ industry }) => {
-  const [isHovered, setIsHovered] = useState(false);
+const cardVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: (i) => ({
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.6,
+      ease: "easeOut",
+      delay: i * 0.08,
+    },
+  }),
+};
 
+const IndustryCard = ({ industry, index }) => {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 15 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.1 }}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-      className="relative overflow-hidden rounded-2xl border border-gray-100 dark:border-gray-800 bg-white/80 dark:bg-gray-900/50 p-6 flex flex-col justify-center items-center text-center group transition-colors duration-300 hover:shadow-xl hover:border-blue-500/30 dark:hover:border-blue-400/30"
+      custom={index}
+      variants={cardVariants}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.2 }}
+      whileHover={{
+        y: -8,
+        rotateX: -6,
+        rotateY: 6,
+      }}
+      transition={{ type: "spring", stiffness: 180, damping: 16 }}
+      style={{ perspective: 1000 }}
+      className="relative overflow-visible rounded-3xl border border-gray-100 dark:border-gray-800 bg-white dark:bg-gray-900 p-6 pt-16 pb-10 flex flex-col items-center text-center min-h-[240px] shadow-[0_8px_30px_#6E44FA33] hover:shadow-[0_14px_45px_#6E44FA55] transition-shadow duration-300 cursor-pointer"
     >
-      {/* Default State: Name Only (Centered) */}
+      {/* Glow overlay (clipped safely) */}
+      <div className="pointer-events-none absolute inset-0 rounded-3xl overflow-hidden">
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileHover={{ opacity: 1 }}
+          transition={{ duration: 0.3 }}
+          className="absolute inset-0 bg-gradient-to-br from-[#941DFB]/10 to-[#265BFB]/10"
+        />
+      </div>
+
+      {/* Icon (NO CLIPPING NOW) */}
+      <motion.div
+        initial={{ scale: 0.85, opacity: 0 }}
+        whileInView={{ scale: 1, opacity: 1 }}
+        whileHover={{ y: -6 }}
+        transition={{ type: "spring", stiffness: 260, damping: 14 }}
+        className="absolute -top-8 left-1/2 -translate-x-1/2 p-5 rounded-full bg-gradient-to-br from-[#941DFB] to-[#265BFB] shadow-lg z-10"
+      >
+        <motion.div
+          animate={{ scale: [1, 1.08, 1] }}
+          transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
+        >
+          <industry.icon className="w-8 h-8 text-white" strokeWidth={2} />
+        </motion.div>
+      </motion.div>
+
+      {/* Title */}
       <motion.h3
-        layout="position"
-        className="text-xl font-semibold text-gray-900 dark:text-white z-10 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors"
+        whileHover={{ opacity: 0.9 }}
+        transition={{ duration: 0.2 }}
+        className="text-2xl font-bold text-gray-900 dark:text-white mb-4"
       >
         {industry.name}
       </motion.h3>
 
-      {/* Hover State: Icon & Details */}
-      <motion.div
-        initial="collapsed"
-        animate={isHovered ? "expanded" : "collapsed"}
-        variants={{
-          expanded: {
-            height: "auto",
-            opacity: 1,
-            marginTop: 16,
-            transition: {
-              height: { duration: 0.3, ease: "easeOut" },
-              opacity: { duration: 0.2, delay: 0.1 },
-              marginTop: { duration: 0.3 },
-            },
-          },
-          collapsed: {
-            height: 0,
-            opacity: 0,
-            marginTop: 0,
-            transition: {
-              height: { duration: 0.3, ease: "easeIn" },
-              opacity: { duration: 0.1 },
-              marginTop: { duration: 0.3 },
-            },
-          },
-        }}
-        className="flex flex-col items-center gap-3 overflow-hidden"
+      {/* Details */}
+      <motion.p
+        whileHover={{ opacity: 0.85 }}
+        transition={{ duration: 0.2 }}
+        className="text-sm text-gray-500 dark:text-gray-400 leading-relaxed"
       >
-        <motion.div
-          animate={
-            isHovered
-              ? { scale: 1, rotate: 0 }
-              : { scale: 0.8, rotate: -10 }
-          }
-          transition={{ type: "spring", stiffness: 300 }}
-          className={`p-3 rounded-full bg-gray-50 dark:bg-gray-800 ${industry.color}`}
-        >
-          <industry.icon className="w-6 h-6" />
-        </motion.div>
-        <p className="text-sm text-gray-600 dark:text-gray-300 max-w-[200px]">
-          {industry.detail}
-        </p>
-      </motion.div>
+        {industry.detail}
+      </motion.p>
     </motion.div>
   );
 };
 
 const IndustriesSection = () => {
   return (
-    <section id="industries" className="w-full py-16 bg-white dark:bg-gray-950">
+    <section
+      id="industries"
+      className="w-full py-20 bg-gray-50 dark:bg-gray-950"
+    >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-10">
-          <p className="uppercase text-xs tracking-[0.4em] text-blue-500 dark:text-blue-400 mb-4">
+        <div className="text-center mb-20">
+          <p className="uppercase text-xs tracking-[0.4em] text-blue-400 dark:text-gray-400 mb-3 font-medium">
             Industries
           </p>
-          <h2 className="text-3xl md:text-4xl font-extrabold bg-gradient-to-r from-purple-600 to-blue-500 bg-clip-text text-transparent dark:from-purple-400 dark:to-blue-300">
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white"
+          >
             Domain Acceleration
-          </h2>
+          </motion.h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-          {industries.map((industry) => (
-            <IndustryCard key={industry.name} industry={industry} />
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-16 mt-12 ">
+          {industries.map((industry, index) => (
+            <IndustryCard
+              key={industry.name}
+              industry={industry}
+              index={index}
+            />
           ))}
         </div>
       </div>
@@ -141,4 +157,3 @@ const IndustriesSection = () => {
 };
 
 export default IndustriesSection;
-
