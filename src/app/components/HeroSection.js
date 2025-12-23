@@ -18,7 +18,7 @@ const HeroSection = () => {
   const heroImg = "/images/Hero section Img (2).png";
 
   return (
-    <section id="hero" className="relative w-full overflow-hidden pt-24 pb-12 md:pb-16 lg:pb-20">
+    <section id="hero" className="relative w-full overflow-hidden pt-0 pb-12 md:pb-16 lg:pb-20 md:-mt-8">
       {/* Background Elements */}
       <div className="absolute inset-0 -z-10 overflow-hidden">
         <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-purple-500/20 blur-[120px] animate-pulse" />
@@ -84,7 +84,8 @@ const HeroSection = () => {
 
               <button
                 onClick={handleDiscover}
-                className="px-8 py-4 rounded-full bg-white dark:bg-white/5 border border-gray-200 dark:border-white/10 text-gray-900 dark:text-white font-semibold hover:bg-gray-50 dark:hover:bg-white/10 transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer"
+                className="px-8 py-4 rounded-full  bg-white dark:bg-white/5 border border-gray-200 dark:border-white/10  text-gray-900 dark:text-white font-semibold flex items-center justify-center gap-2 cursor-pointer shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1
+                hover:bg-gradient-to-r from-purple-600 to-blue-600 hover:text-white "
               >
                 View Services
               </button>
