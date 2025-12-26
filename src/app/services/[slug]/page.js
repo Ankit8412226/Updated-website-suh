@@ -2,7 +2,12 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import NavBar from "../../components/NavBar";
 import FooterSection from "../../components/FooterSection";
+import WhyChooseUsSection from "./WhyChooseUsSection";
+import { Check } from "lucide-react";
 
+/* ===============================
+   SERVICE DATA (UNCHANGED)
+================================ */
 const serviceCatalog = {
   "web-development": {
     title: "Web Development",
@@ -30,9 +35,9 @@ const serviceCatalog = {
       "Cloudflare",
     ],
     pricing: [
-      "Sprint pod (Design + Eng + QA) from $12k/mo",
-      "Fixed-scope marketing site revamps from $25k",
-      "Design system setup from $8k",
+      "Sprint pod (Design + Eng + QA)",
+      "Marketing website revamp",
+      "Design system setup",
     ],
     faqs: [
       {
@@ -40,426 +45,512 @@ const serviceCatalog = {
         a: "Yes. We map legacy schemas, automate migration scripts, and provide editorial training.",
       },
       {
-        q: "Can you integrate with our analytics stack?",
-        a: "We wire in Segment, GA4, Amplitude, and first-party data layers with consent management.",
+        q: "Can you integrate analytics?",
+        a: "Yes, GA4, Segment, Amplitude and consent management.",
       },
     ],
   },
   "mobile-apps": {
-    title: "Mobile Apps",
-    subtitle: "Native and cross-platform experiences shipped with CI/CD rigor.",
+    title: "Mobile App Development",
+    subtitle: "High-performance iOS & Android applications.",
+         heroImage: "/images/Rectangle_Web_Development.svg",
+    featureImage: "/images/Rectangle_Growth.svg",
+
+
     overview:
-      "We deliver iOS, Android, and cross-platform apps using React Native, Swift, and Kotlin. Release trains include automated testing, app store compliance, and feature flag strategies.",
+      "We build scalable mobile apps using Flutter, React Native, and native technologies.",
+
     outcomes: [
-      "Offline-first UX with secure data sync",
-      "Performance budgets enforced via CI",
-      "Analytics and experimentation baked in",
+      "Cross-platform mobile apps",
+      "Offline-first architecture",
+      "App Store & Play Store deployment",
     ],
-    process: [
-      "Product discovery and backlog creation",
-      "Design system parity across web + mobile",
-      "Native module development + QA automation",
-      "App store submission, release orchestration, and hypercare",
-    ],
-    technologies: [
-      "React Native",
-      "Swift",
-      "Kotlin",
-      "Expo",
-      "Firebase",
-      "AppCenter",
-    ],
+
     pricing: [
-      "Cross-platform pod from $14k/mo",
-      "Native feature squads from $18k/mo",
-      "App audits and performance tuning from $6k",
+      "MVP mobile app",
+      "Enterprise mobile solution",
+      "App optimization & upgrades",
     ],
+
     faqs: [
       {
-        q: "Do you support existing codebases?",
-        a: "Yes. We start with a stability audit, set up observability, and then assume the release cadence.",
-      },
-      {
-        q: "Can you integrate with backend teams?",
-        a: "We collaborate via shared API contracts, Pact testing, and dedicated Slack channels.",
+        q: "Do you publish apps to stores?",
+        a: "Yes, we handle App Store and Play Store submissions.",
       },
     ],
   },
+
   "cloud-and-devops": {
     title: "Cloud & DevOps",
-    subtitle: "Modern infrastructure with automated releases and compliance.",
+    subtitle: "Secure, scalable, cloud-native infrastructure.",
+     heroImage: "/images/Rectangle_Web_Development.svg",
+    featureImage: "/images/Rectangle_Growth.svg",
+
     overview:
-      "Our DevOps engineers design landing zones, IaC modules, and CI/CD workflows across AWS, Azure, and GCP. We embed SRE practices, automated guardrails, and 24/7 monitoring.",
+      "We design cloud architectures on AWS, Azure, and GCP with DevOps automation.",
+
     outcomes: [
-      "GitOps pipelines with rollback automation",
-      "Policy-as-code for security and compliance",
-      "Observability dashboards for leadership and on-call",
+      "CI/CD pipelines",
+      "99.99% uptime",
+      "Infrastructure as Code",
     ],
-    process: [
-      "Current-state assessment & reliability scorecard",
-      "Reference architecture + IaC modules",
-      "Pipeline automation (GitHub Actions, ArgoCD, Atlantis)",
-      "Handover with runbooks and training",
-    ],
-    technologies: [
-      "AWS",
-      "Azure",
-      "GCP",
-      "Kubernetes",
-      "Terraform",
-      "Pulumi",
-      "GitHub Actions",
-      "ArgoCD",
-    ],
+
     pricing: [
-      "Dedicated DevOps pod from $8k/mo",
-      "Landing zone setup from $15k",
-      "SRE on-call retainers from $5k/mo",
+      "Cloud migration",
+      "DevOps automation",
+      "Monitoring & optimization",
     ],
+
     faqs: [
       {
-        q: "Do you handle SOC2 / ISO artifacts?",
-        a: "Yes, we generate architecture diagrams, access reviews, and deployment evidence for auditors.",
-      },
-      {
-        q: "Can you work with our security team?",
-        a: "We align on shared guardrails, secrets management, and change approval workflows.",
+        q: "Which cloud platforms do you support?",
+        a: "AWS, Azure, and Google Cloud.",
       },
     ],
   },
+
   "ai-and-automation": {
     title: "AI & Automation",
-    subtitle: "LLM copilots, intelligent workflows, and analytics copilots.",
+    subtitle: "Intelligent systems powered by data.",
+     heroImage: "/images/Rectangle_Web_Development.svg",
+    featureImage: "/images/Rectangle_Growth.svg",
+
     overview:
-      "We identify high-leverage automation opportunities, design ethical guardrails, and ship AI-powered tools with measurable ROI.",
+      "We build AI models, chatbots, and automation workflows to boost efficiency.",
+
     outcomes: [
-      "LLM-driven copilots embedded in existing tools",
-      "Automated decision assistance with human oversight",
-      "Dashboards that surface impact and adoption",
+      "AI chatbots",
+      "Process automation",
+      "Predictive analytics",
     ],
-    process: [
-      "Use-case ideation + data readiness audit",
-      "Prompt architecture, retrieval strategies, evaluation plans",
-      "Build, test, and deploy AI workflows",
-      "Enablement sessions + continuous improvement loops",
-    ],
-    technologies: [
-      "Python",
-      "LangChain",
-      "OpenAI",
-      "Azure OpenAI",
-      "Vertex AI",
-      "Airflow",
-    ],
+
     pricing: [
-      "Discovery + proof of concept from $10k",
-      "Production-grade copilots from $25k",
-      "Automation retainers from $9k/mo",
+      "AI proof of concept",
+      "Production ML pipelines",
+      "Automation workflows",
     ],
+
     faqs: [
       {
-        q: "How do you handle data privacy?",
-        a: "We implement encryption, masking, and private model hosting when required.",
-      },
-      {
-        q: "Do you measure model drift?",
-        a: "Yes, evaluation suites run continuously with alerts on accuracy, latency, and cost.",
+        q: "Do you use OpenAI models?",
+        a: "Yes, OpenAI, Gemini, and custom ML models.",
       },
     ],
   },
-  cybersecurity: {
+
+  "cybersecurity": {
     title: "Cybersecurity",
-    subtitle: "Zero-trust architecture, DevSecOps, and continuous compliance.",
+    subtitle: "Protecting your digital assets.",
+    heroImage: "/images/Rectangle_Web_Development.svg",
+    featureImage: "/images/Rectangle_Growth.svg",
+
     overview:
-      "Security architects evaluate your stack, patch vulnerabilities, and automate compliance with developer-friendly workflows.",
+      "We provide security audits, penetration testing, and compliance solutions.",
+
     outcomes: [
-      "Threat modeling and hardened environments",
-      "Shift-left security integrated with CI/CD",
-      "Continuous evidence collection for audits",
+      "Security audits",
+      "Threat monitoring",
+      "Compliance readiness",
     ],
-    process: [
-      "Security posture review and prioritization",
-      "Guardrail implementation (SSO, secrets, IaC policy)",
-      "DevSecOps automation + monitoring",
-      "Tabletop exercises and training",
-    ],
-    technologies: [
-      "Vault",
-      "Prisma Cloud",
-      "Snyk",
-      "Wiz",
-      "AWS Security Hub",
-      "Open Policy Agent",
-    ],
+
     pricing: [
-      "Security assessment from $12k",
-      "DevSecOps integration from $18k",
-      "Managed compliance support from $6k/mo",
+      "Security audit",
+      "Penetration testing",
+      "Ongoing monitoring",
     ],
+
     faqs: [
       {
-        q: "Can you help with SOC2 readiness?",
-        a: "We implement controls, document evidence, and coordinate with auditors.",
-      },
-      {
-        q: "Do you offer penetration testing?",
-        a: "We collaborate with accredited partners and integrate remediation plans into your backlog.",
+        q: "Do you provide compliance help?",
+        a: "Yes, ISO, SOC2, and GDPR compliance.",
       },
     ],
   },
+
   "it-consulting": {
     title: "IT Consulting",
-    subtitle: "Fractional CTO, architecture advisory, and modernization roadmaps.",
+    subtitle: "Strategic technology guidance.",
+    heroImage: "/images/Rectangle_Web_Development.svg",
+    featureImage: "/images/Rectangle_Growth.svg",
+
     overview:
-      "We act as a strategic partner for boards, CTOs, and CMOs—aligning technology choices with business goals.",
+      "We help organizations align technology with business goals.",
+
     outcomes: [
-      "Clear roadmap with investments, timelines, and dependencies",
-      "Org design recommendations and hiring plans",
-      "Vendor assessments and KPI frameworks",
+      "IT roadmaps",
+      "Cost optimization",
+      "Technology strategy",
     ],
-    process: [
-      "Stakeholder interviews and system audits",
-      "Capability maturity scoring",
-      "Roadmap + business case creation",
-      "Ongoing advisory and governance",
-    ],
-    technologies: ["Miro", "Lucid", "Jira", "Confluence", "Notion"],
+
     pricing: [
-      "Advisory blocks from $5k",
-      "Fractional CTO engagement from $12k/mo",
-      "Architecture review + playbook from $9k",
+      "IT assessment",
+      "Architecture planning",
+      "Digital transformation",
     ],
+
     faqs: [
       {
-        q: "Do you work with in-house leadership?",
-        a: "Yes, we co-create roadmaps and support change management alongside your exec team.",
-      },
-      {
-        q: "Can you help evaluate vendors?",
-        a: "We build scorecards, run bake-offs, and negotiate SLAs on your behalf.",
+        q: "Do you work with startups?",
+        a: "Yes, startups to enterprises.",
       },
     ],
   },
+
   "saas-development": {
     title: "SaaS Development",
-    subtitle: "Multi-tenant platforms with billing, provisioning, and analytics.",
+    subtitle: "Build scalable SaaS platforms.",
+    heroImage: "/images/Rectangle_Web_Development.svg",
+    featureImage: "/images/Rectangle_Growth.svg",
     overview:
-      "We build SaaS products end-to-end—covering user onboarding, entitlements, metering, and customer success dashboards.",
+      "We design and develop multi-tenant SaaS products.",
+
     outcomes: [
-      "Tenant-aware architecture with role-based access",
-      "Usage analytics and billing automation",
-      "Launch playbook with GTM instrumentation",
+      "Subscription billing",
+      "Role-based access",
+      "Scalable backend",
     ],
-    process: [
-      "Product strategy + pricing mechanics",
-      "Domain modeling, data design, and API contracts",
-      "Implementation with automated QA",
-      "Launch readiness + customer enablement",
-    ],
-    technologies: [
-      "Node.js",
-      "Nest.js",
-      "PostgreSQL",
-      "Redis",
-      "Stripe",
-      "Chargebee",
-      "Segment",
-    ],
+
     pricing: [
-      "MVP build from $45k",
-      "Feature pods from $15k/mo",
-      "SaaS ops + support from $7k/mo",
+      "SaaS MVP",
+      "Feature expansion",
+      "Scaling & optimization",
     ],
+
     faqs: [
       {
-        q: "Do you handle multi-region deployments?",
-        a: "Yes, we architect for data residency, failover, and latency budgets.",
-      },
-      {
-        q: "Can you integrate CRM and billing?",
-        a: "We connect Salesforce/HubSpot with Stripe/Chargebee, keeping ARR data consistent.",
+        q: "Do you handle SaaS scaling?",
+        a: "Yes, from MVP to enterprise scale.",
       },
     ],
   },
+
   "maintenance-and-support": {
     title: "Maintenance & Support",
-    subtitle: "On-call squads for enhancements, support, and scale.",
+    subtitle: "Reliable ongoing support.",
+   heroImage: "/images/Rectangle_Web_Development.svg",
+    featureImage: "/images/Rectangle_Growth.svg",
+
     overview:
-      "Keep your product healthy with L2/L3 engineers, QA, and DevOps technicians who monitor, fix, and optimize in the background.",
+      "We provide long-term maintenance and technical support.",
+
     outcomes: [
-      "Defined SLAs and escalation paths",
-      "Regular performance and security reviews",
-      "Roadmap suggestions backed by analytics",
+      "24/7 monitoring",
+      "Bug fixes",
+      "Performance optimization",
     ],
-    process: [
-      "Knowledge transfer and playbook creation",
-      "Monitoring + alerting setup",
-      "Weekly ops reviews and monthly reporting",
-      "Backlog grooming and optimization sprints",
-    ],
-    technologies: [
-      "Datadog",
-      "New Relic",
-      "PagerDuty",
-      "Sentry",
-      "Statuspage",
-      "Looker",
-    ],
+
     pricing: [
-      "24/7 monitoring from $6k/mo",
-      "Enhancement retainer pods from $10k/mo",
-      "One-off stabilization projects from $8k",
+      "Monthly support",
+      "Dedicated support team",
+      "On-demand fixes",
     ],
+
     faqs: [
       {
-        q: "Do you offer on-call coverage?",
-        a: "Yes, we provide follow-the-sun support with documented runbooks.",
-      },
-      {
-        q: "Can you work alongside our helpdesk?",
-        a: "We integrate with Zendesk, Jira Service Management, or Intercom for seamless escalations.",
+        q: "Do you offer 24/7 support?",
+        a: "Yes, with SLA-based plans.",
       },
     ],
   },
+
   "startup-solutions": {
     title: "Startup Solutions",
-    subtitle: "Transform ideas into scalable digital products with growth-focused technology.",
+    subtitle: "From idea to launch.",
+    heroImage: "/images/Rectangle_Web_Development.svg",
+    featureImage: "/images/Rectangle_Growth.svg",
+
     overview:
-      "We help startups transform ideas into scalable digital products. From MVP development and frontend integration to performance-optimized web solutions, we support startups with fast, reliable, and growth-oriented technology.",
+      "We help startups build MVPs, scale products, and raise funding.",
+
     outcomes: [
-      "Rapid MVP development with market validation features",
-      "Scalable architecture that grows with your user base",
-      "Cost-effective solutions optimized for startup budgets",
+      "MVP development",
+      "Tech mentoring",
+      "Scalable architecture",
     ],
-    process: [
-      "Idea validation and market research analysis",
-      "MVP scoping and technical architecture design",
-      "Agile development with weekly iterations",
-      "Launch preparation and go-to-market support",
-    ],
-    technologies: [
-      "React",
-      "Next.js",
-      "Node.js",
-      "MongoDB",
-      "Firebase",
-      "Vercel",
-      "Stripe",
-    ],
+
     pricing: [
-      "MVP development from $25k",
-      "Startup development pod from $8k/mo",
-      "Technical advisory from $3k/mo",
+      "Startup MVP",
+      "Product scaling",
+      "CTO-as-a-Service",
     ],
+
     faqs: [
       {
-        q: "Do you work with early-stage startups?",
-        a: "Yes, we specialize in helping startups from idea to market, with flexible engagement models.",
-      },
-      {
-        q: "Can you help with funding pitch preparation?",
-        a: "We provide technical documentation, architecture diagrams, and demo preparation for investor meetings.",
+        q: "Do you help with MVPs?",
+        a: "Yes, end-to-end MVP development.",
       },
     ],
   },
 };
 
-const infoBlocks = (items, title) => (
-  <div className="space-y-3">
-    <h3 className="text-lg font-semibold">{title}</h3>
-    <ul className="list-disc list-inside text-sm text-gray-600 dark:text-gray-300 space-y-2">
-      {items.map((item) => (
-        <li key={item}>{item}</li>
-      ))}
-    </ul>
-  </div>
-);
-
-async function ServiceDetailPage({ params }) {
+/* ===============================
+   PAGE
+================================ */
+export default async function ServiceDetailPage({ params }) {
   const { slug } = await params;
   const data = serviceCatalog[slug];
 
-  if (!data) {
-    notFound();
-  }
+  if (!data) notFound();
 
   return (
-    <main className="min-h-screen bg-background text-foreground">
+    <main className="bg-white text-gray-900">
       <NavBar />
-      <section className="pt-24 pb-12 border-b border-gray-100 dark:border-gray-800 mt-16 md:mt-20 lg:mt-24">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-12 space-y-6">
-          <Link
-            href="/services"
-            className="text-sm uppercase tracking-[0.4em] text-blue-500"
-          >
-            Services
-          </Link>
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white">
-            {data.title}
-          </h1>
-          <p className="text-lg text-gray-600 dark:text-gray-300 max-w-3xl">
-            {data.subtitle}
+
+      {/* ================= HERO WRAPPER ================= */}
+<section className="relative overflow-hidden">
+
+  {/* Background Glow */}
+  <img
+    src="/images/Ellipse 604 (1).svg"
+    alt="bg-glow"
+    className="absolute bottom-[-480px] right-[-120px]
+               w-[550px] md:w-[750px]
+               opacity-90 pointer-events-none z-0"
+  />
+
+  {/* ================= HERO ================= */}
+  <div className="relative pt-32 pb-20 text-center z-10">
+    <h1 className="text-5xl font-bold">{data.title}</h1>
+
+    <p className="mt-4 text-lg text-gray-600">
+      {data.subtitle}
+    </p>
+
+    <p className="mt-4 max-w-3xl mx-auto text-gray-500">
+      {data.overview}
+    </p>
+
+    <div className="mt-8 flex justify-center gap-4">
+      <Link
+        href="/#contact"
+        className="px-6 py-3 rounded-full bg-gradient-to-r from-[#9616FB] to-[#3459FB] text-white font-semibold"
+      >
+        Book A Workshop
+      </Link>
+
+      <Link
+        href="/#pricing"
+        className="px-6 py-3 rounded-full border border-purple-600 text-purple-600 font-semibold"
+      >
+        View pricing options
+      </Link>
+    </div>
+
+    {/* Hero Image */}
+    <div className="relative mt-12 max-w-5xl mx-auto z-20">
+      <img
+        src="/images/Rectangle_Web_Development.svg"
+        alt="Web Development"
+        className="rounded-2xl shadow-xl"
+      />
+    </div>
+  </div>
+</section>
+
+
+      {/* ================= LOGOS ================= */}
+      <section className="py-8 text-center text-sm text-gray-500">
+        Trusted By 100+ Famous Companies
+        <div className="mt-4 flex justify-center gap-8 opacity-70">
+          <span>Logoipsum</span>
+          <span>Logoipsum</span>
+          <span>Logoipsum</span>
+          <span>Logoipsum</span>
+        </div>
+      </section>
+
+      {/* ================= STATS ================= */}
+      <section className="bg-gradient-to-r from-[#9616FB] to-[#3459FB] text-white py-10">
+        <div className="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-4 text-center gap-6">
+          <Stat value="500K+" label="Total Active Users" />
+          <Stat value="2PB" label="Data Saved" />
+          <Stat value="50+" label="Global Data Centers" />
+          <Stat value="99.9%" label="Uptime Guarantee" />
+        </div>
+      </section>
+
+
+      {/* ================= WHY CHOOSE US ================= */}
+      <WhyChooseUsSection />
+
+      {/* ================= FEATURE ================= */}
+
+      <section className="py-20 max-w-6xl mx-auto grid md:grid-cols-2 gap-14 items-start px-6">
+
+        <div>
+          <img
+            src="/images/Rectangle_Growth.svg"
+            alt="Growth analytics"
+            className="rounded-3xl  w-full"
+          />
+        </div>
+
+        <div>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">
+            Enhance Your Capabilities With Our New Feature
+          </h2>
+
+          <p className="text-gray-600 mb-8">
+            Lorem Ipsum Is Simply Dummy Text Of The Printing And
+            Typesetting Industry.
           </p>
-          <p className="text-base text-gray-700 dark:text-gray-200 max-w-4xl">
-            {data.overview}
+
+          <ul className="space-y-5">
+            {data.outcomes.map((item) => (
+              <li key={item} className="flex items-center gap-4">
+                <div className="w-8 h-8 rounded-full bg-purple-600 flex items-center justify-center">
+                  <Check className="w-4 h-4 text-white" />
+                </div>
+                <span className="text-gray-700">{item}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+      </section>
+
+
+
+
+      {/* ================= PRICING ================= */}
+      {/* ================= PRICING ================= */}
+      <section id="pricing" className="py-24 bg-gray-50">
+        {/* Heading */}
+        <div className="text-center mb-14 px-6">
+          <h2 className="text-4xl font-bold mb-4">
+            Transparent Pricing <br /> For Your Cloud Solutions
+          </h2>
+          <p className="text-gray-600 max-w-2xl mx-auto">
+            Discover Cost-Effective Cloud Solutions With Pricing That Suitable For You
           </p>
-          <div className="flex flex-wrap gap-4">
+        </div>
+
+        {/* Cards */}
+        <div className="max-w-6xl mx-auto grid md:grid-cols-3 gap-8 px-6">
+          {data.pricing.map((p, i) => {
+            const isFeatured = i === 1;
+
+            return (
+              <div
+                key={p}
+                className={`rounded-3xl p-8 flex flex-col justify-between shadow-xl transition-all duration-300
+            ${isFeatured
+                    ? "bg-gradient-to-r from-[#9616FB] to-[#3459FB] text-white scale-105"
+                    : "bg-white/30"
+                  }`}
+              >
+                {/* Top */}
+                <div>
+                  <h3 className="text-2xl font-semibold mb-2">Basic Plan</h3>
+                  <p className={`${isFeatured ? "text-purple-100" : "text-gray-500"} mb-6`}>
+                    Individual Or Small Teams
+                  </p>
+
+                  <p className="text-3xl font-bold mb-6">
+                    ₹50000 <span className="text-base font-medium">/ Month</span>
+                  </p>
+
+                  <button
+                    className={`w-full py-3 rounded-full font-semibold mb-8
+                ${isFeatured
+                        ? "bg-white text-purple-600"
+                        : "bg-purple-600 text-white"
+                      }`}
+                  >
+                    Choose The Plan
+                  </button>
+                </div>
+
+                {/* Features */}
+                <div>
+                  <p className="font-semibold mb-4">Features Include:</p>
+                  <ul className="space-y-3 text-sm">
+                    {Array(7)
+                      .fill("Basic Cloud Storage")
+                      .map((feature, idx) => (
+                        <li
+                          key={idx}
+                          className={`flex items-center gap-3 ${isFeatured ? "text-purple-100" : "text-gray-600"
+                            }`}
+                        >
+                          <span className="text-lg leading-none">•</span>
+                          {feature}
+                        </li>
+                      ))}
+                  </ul>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </section>
+
+
+      {/* ================= FAQ ================= */}
+      <section className="py-24 bg-white">
+        <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-14 px-6 items-start">
+
+          {/* Left Content */}
+          <div>
+            <h2 className="text-4xl font-bold mb-4">
+              Frequently <br /> Asked Questions
+            </h2>
+            <p className="text-gray-500 max-w-sm">
+              Have Another Question? Please Contact Us Via Email Down Below
+            </p>
+          </div>
+
+          {/* Right Accordion */}
+          <div className="space-y-4">
+            {data.faqs.map((faq, i) => (
+              <details
+                key={faq.q}
+                open={i === 0}
+                className={`group rounded-2xl border transition-all
+            ${i === 0
+                    ? "bg-gradient-to-r from-[#9616FB] to-[#3459FB] text-white"
+                    : "bg-white"
+                  }`}
+              >
+                <summary className="flex justify-between items-center cursor-pointer px-6 py-4 font-semibold list-none">
+                  {faq.q}
+                  <span className="transition-transform group-open:rotate-180">
+                    ⌃
+                  </span>
+                </summary>
+
+                <div className={`px-6 pb-4 text-sm leading-relaxed
+            ${i === 0 ? "text-purple-100" : "text-gray-600"}
+          `}>
+                  {faq.a}
+                </div>
+              </details>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ================= CTA ================= */}
+      <section className="py-24 bg-white">
+        <div className="max-w-5xl mx-auto px-6">
+          <div className="bg-gradient-to-r from-[#9616FB] to-[#3459FB] rounded-3xl text-white text-center py-16 px-8 shadow-xl">
+
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+              Try Risk Free With 30-Day <br /> Money - Back Guarantee!
+            </h2>
+
+            <p className="text-purple-100 mb-8">
+              If You Are Not Satisfied, We Will Refund Your Payment – No Questions Asked
+            </p>
+
             <Link
               href="/#contact"
-              className="px-6 py-3 rounded-xl bg-gradient-to-r from-blue-500 to-purple-600 text-white font-semibold"
+              className="inline-flex items-center justify-center px-10 py-3 rounded-full
+                   bg-white/30 backdrop-blur text-white font-semibold
+                   hover:bg-white/40 transition"
             >
-              Book a workshop
+              Join Us Now
             </Link>
-            <Link
-              href="/#pricing"
-              className="px-6 py-3 rounded-xl border border-gray-200 dark:border-gray-700 text-sm font-semibold"
-            >
-              View pricing options
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      <section className="py-12">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-12 grid grid-cols-1 lg:grid-cols-3 gap-8">
-          <div className="lg:col-span-2 space-y-10">
-            {infoBlocks(data.outcomes, "Business outcomes")}
-            {infoBlocks(data.process, "Process playbook")}
-            {infoBlocks(data.technologies, "Tech we rely on")}
-          </div>
-          {/* <div className="space-y-8 rounded-3xl border border-gray-100 dark:border-gray-800 bg-white/80 dark:bg-gray-900/50 p-6">
-            <h3 className="text-lg font-semibold">Pricing snapshots</h3>
-            <ul className="space-y-3 text-sm text-gray-700 dark:text-gray-300">
-              {data.pricing.map((line) => (
-                <li key={line} className="flex gap-3">
-                  <span className="text-blue-500 mt-1">•</span>
-                  <span>{line}</span>
-                </li>
-              ))}
-            </ul>
-          </div> */}
-        </div>
-      </section>
-
-      <section className="py-12 border-t border-gray-100 dark:border-gray-800">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-12 space-y-6">
-          <h3 className="text-2xl font-bold text-gray-900 dark:text-white">
-            FAQ
-          </h3>
-          <div className="space-y-4">
-            {data.faqs.map((faq) => (
-              <div
-                key={faq.q}
-                className="rounded-2xl border border-gray-100 dark:border-gray-800 bg-white/80 dark:bg-gray-900/50 p-5"
-              >
-                <h4 className="text-lg font-semibold text-gray-900 dark:text-white">
-                  {faq.q}
-                </h4>
-                <p className="text-sm text-gray-600 dark:text-gray-300 mt-2">
-                  {faq.a}
-                </p>
-              </div>
-            ))}
           </div>
         </div>
       </section>
@@ -468,43 +559,32 @@ async function ServiceDetailPage({ params }) {
   );
 }
 
-export function generateStaticParams() {
-  return Object.keys(serviceCatalog).map((slug) => ({ slug }));
+      /* ===============================
+         HELPERS
+      ================================ */
+      function Stat({value, label}) {
+  return (
+      <div>
+        <div className="text-3xl font-bold">{value}</div>
+        <div className="text-sm opacity-90">{label}</div>
+      </div>
+      );
 }
 
-export async function generateMetadata({ params }) {
-  const { slug } = await params;
-  const data = serviceCatalog[slug];
-  if (!data) {
-    return {
-      title: "IT Services | SUH Tech Private Limited",
-      description: "Professional IT services including web application development and DevOps solutions by SUH Tech Private Limited.",
-      alternates: {
-        canonical: `https://www.suhtech.top/services/${slug}`,
-      },
-    };
-  }
-  return {
-    title: `${data.title} Services | SUH Tech Private Limited`,
-    description: `${data.subtitle} - Expert ${data.title.toLowerCase()} services by SUH Tech Private Limited. Professional IT services provider specializing in web app development and DevOps.`,
-    keywords: [
-      data.title.toLowerCase(),
-      "web development",
-      "devops services",
-      "it services",
-      "software development",
-      "SUH Tech",
-    ],
-    openGraph: {
-      title: `${data.title} Services | SUH Tech Private Limited`,
+
+
+      /* ===============================
+         STATIC + SEO
+      ================================ */
+      export function generateStaticParams() {
+  return [{slug: "serviceCatalog" }];
+}
+
+      export async function generateMetadata({params}) {
+      const {slug} = await params;
+      const data = serviceCatalog[slug];
+      return {
+        title: `${data.title} Services | SUH Tech`,
       description: data.subtitle,
-      url: `https://www.suhtech.top/services/${slug}`,
-    },
-    alternates: {
-      canonical: `https://www.suhtech.top/services/${slug}`,
-    },
   };
 }
-
-export default ServiceDetailPage;
-

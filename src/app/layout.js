@@ -2,6 +2,7 @@ import { Geist_Mono, Inter, Poppins } from "next/font/google";
 import localFont from "next/font/local";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
+import Script from "next/script";
 
 const geistMono = Geist_Mono({
   subsets: ["latin"],
@@ -147,8 +148,8 @@ export default function RootLayout({ children }) {
     "@context": "https://schema.org",
     "@type": "Organization",
     "name": "SUH Tech Private Limited",
-      "url": "https://www.suhtech.top",
-      "logo": "https://www.suhtech.top/icons/SUHTechLogo (1).svg",
+    "url": "https://www.suhtech.top",
+    "logo": "https://www.suhtech.top/icons/SUHTechLogo (1).svg",
     "description": "Leading IT service provider specializing in web application development and DevOps solutions",
     "address": {
       "@type": "PostalAddress",
@@ -247,10 +248,12 @@ export default function RootLayout({ children }) {
       className={`${geistMono.variable} ${inter.variable} ${poppins.variable}`}
     >
       <head>
+
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
         />
+
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceStructuredData) }}
@@ -259,6 +262,12 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistMono.variable} ${inter.variable} ${poppins.variable}`}
       >
+        <Script
+          id="contentsquare"
+          strategy="afterInteractive"
+          src="https://t.contentsquare.net/uxa/316925807530f.js"
+        />
+
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
