@@ -6,7 +6,7 @@ export default function ServicesHero() {
     return (
         <section className="pb-24">
 
-            {/* BG GLOW — UNCHANGED */}
+            
             <img
                 src="/Ellipse 604.svg"
                 alt="bg-glow"
@@ -15,7 +15,7 @@ export default function ServicesHero() {
 
             <div className="container mx-auto px-4 sm:px-6 lg:px-12 relative z-10">
 
-                {/* TOP TEXT + BUTTON */}
+               
                 <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 mb-14">
 
                     {/* LEFT TEXT */}
@@ -39,7 +39,7 @@ export default function ServicesHero() {
 
                 </div>
 
-                {/* ================= MOBILE VIEW ================= */}
+                {/* -------------------- MOBILE VIEW ------------------*/}
                 <div className="grid grid-cols-1 gap-6 md:hidden">
 
                     {/* IMAGE 1 */}
@@ -75,7 +75,7 @@ export default function ServicesHero() {
 
                 </div>
 
-                {/* ================= DESKTOP VIEW ================= */}
+                {/* ----------------DESKTOP VIEW ------------- */}
                 <div className="hidden md:flex items-stretch justify-between gap-6">
 
                     {/* IMAGE CARD 1 */}
