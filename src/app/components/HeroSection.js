@@ -18,7 +18,9 @@ const HeroSection = () => {
   const heroImg = "/images/Hero section Img (2).png";
 
   return (
-    <section id="hero" className="relative w-full overflow-hidden pt-0 pb-12 md:pb-16 lg:pb-20 md:-mt-8">
+    <section id="hero"  className="relative w-full overflow-hidden
+  pt-24 sm:pt-24 md:pt-24 lg:pt-32 xl:pt-36
+  pb-12 md:pb-16 lg:pb-20">
       {/* Background Elements */}
       <div className="absolute inset-0 -z-10 overflow-hidden">
         <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-purple-500/20 blur-[120px] animate-pulse" />
@@ -42,10 +44,12 @@ const HeroSection = () => {
           <motion.div className="order-1 lg:order-1 text-left md:text-center lg:text-left relative z-10">
             <motion.div
               variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/50 dark:bg-white/5 backdrop-blur-md border border-gray-200 dark:border-white/10 mb-8 shadow-sm md:mx-auto lg:mx-0"
-            >
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-full
+             bg-white/50 dark:bg-white/5 backdrop-blur-md
+             border border-gray-200 dark:border-white/10
+             shadow-sm mb-6">
               <Sparkles size={16} className="text-purple-600 dark:text-purple-400" />
-              <span className="text-sm font-medium text-gray-800 dark:text-gray-200">
+              <span className="text-sm font-medium text-gray-800 dark:text-gray-200 ">
                 Next-Gen IT Solutions
               </span>
             </motion.div>
