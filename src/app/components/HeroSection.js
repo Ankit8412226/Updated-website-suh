@@ -18,7 +18,7 @@ const HeroSection = () => {
   const heroImg = "/images/Hero section Img (2).png";
 
   return (
-    <section id="hero" className="relative w-full overflow-hidden pt-0 pb-12 md:pb-16 lg:pb-20 md:-mt-8">
+    <section id="hero" className="relative w-full overflow-hidden pt-8 md:pt-12 pb-12 md:pb-16 lg:pb-20">
       {/* Background Elements */}
       <div className="absolute inset-0 -z-10 overflow-hidden">
         <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-purple-500/20 blur-[120px] animate-pulse" />
