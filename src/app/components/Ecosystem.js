@@ -25,6 +25,7 @@ const techCategories = [
     technologies: ["PostgreSQL", "MongoDB", "Redis", "MySQL", "Firebase"],
     position: { desktop: "top-1/2 left-12", mobile: "top-64" }
   },
+
   {
     name: "Mobile",
     icon: Smartphone,
