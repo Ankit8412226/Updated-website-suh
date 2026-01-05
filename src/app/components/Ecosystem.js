@@ -1,164 +1,274 @@
 "use client";
 import { motion } from "framer-motion";
-import { Cloud, Code, Database, Layers, Lock, Server, Smartphone, Zap } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { Cloud, Code, Database, Globe, Lock, Server, Smartphone, Zap } from "lucide-react";
 
-// Tech categories data
 const techCategories = [
   {
     name: "Frontend",
     icon: Code,
     color: "from-blue-500 to-cyan-500",
-    description: "Responsive, interactive user interfaces.",
     technologies: ["React", "Next.js", "Vue.js", "TypeScript", "Tailwind CSS"],
+    position: { desktop: "top-20 left-1/4", mobile: "top-0" }
   },
   {
     name: "Backend",
     icon: Server,
     color: "from-purple-500 to-pink-500",
-    description: "Robust, scalable server-side systems.",
     technologies: ["Node.js", "Python", "Java", "Go", "GraphQL"],
+    position: { desktop: "top-20 right-1/4", mobile: "top-32" }
   },
   {
     name: "Database",
     icon: Database,
     color: "from-green-500 to-emerald-500",
-    description: "Secure, optimized data storage & retrieval.",
     technologies: ["PostgreSQL", "MongoDB", "Redis", "MySQL", "Firebase"],
+    position: { desktop: "top-1/2 left-12", mobile: "top-64" }
   },
   {
     name: "Mobile",
     icon: Smartphone,
     color: "from-orange-500 to-red-500",
-    description: "Native & cross-platform mobile apps.",
     technologies: ["React Native", "Flutter", "iOS", "Android", "Expo"],
+    position: { desktop: "top-1/2 right-12", mobile: "top-96" }
   },
   {
     name: "Cloud",
     icon: Cloud,
     color: "from-indigo-500 to-blue-500",
-    description: "Scalable infrastructure & automated CI/CD.",
     technologies: ["AWS", "Azure", "GCP", "Docker", "Kubernetes"],
+    position: { desktop: "bottom-32 left-1/4", mobile: "top-128" }
   },
   {
     name: "Security",
     icon: Lock,
     color: "from-red-500 to-pink-500",
-    description: "End-to-end protection & compliance.",
     technologies: ["OAuth", "JWT", "SSL/TLS", "Encryption", "Firewall"],
-  },
-];
-
-const container = {
-  hidden: { opacity: 0 },
-  show: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.1
-    }
+    position: { desktop: "bottom-32 right-1/4", mobile: "top-160" }
   }
-};
-
-const item = {
-  hidden: { opacity: 0, y: 20 },
-  show: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 50 } }
-};
+];
 
 export default function Ecosystem() {
   const router = useRouter();
 
   return (
-    <section className="relative min-h-screen bg-white dark:bg-gray-950 text-gray-900 dark:text-white py-20 lg:py-32 overflow-hidden">
+    <section className="relative min-h-screen bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-950 text-gray-900 dark:text-white overflow-hidden py-20 md:py-32">
+      {/* Background Grid */}
+      <div className="absolute inset-0 bg-grid-pattern opacity-5" style={{
+        backgroundImage: `linear-gradient(to right, currentColor 1px, transparent 1px),
+                         linear-gradient(to bottom, currentColor 1px, transparent 1px)`,
+        backgroundSize: '50px 50px'
+      }} />
 
-      {/* Background Elements */}
-      <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
-        <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-purple-500/10 rounded-full blur-[100px]" />
-        <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-blue-500/10 rounded-full blur-[100px]" />
-      </div>
+      {/* Animated Background Orbs */}
+      <motion.div
+        animate={{
+          scale: [1, 1.2, 1],
+          opacity: [0.3, 0.5, 0.3],
+        }}
+        transition={{
+          duration: 8,
+          repeat: Infinity,
+          ease: "easeInOut"
+        }}
+        className="absolute top-20 left-10 w-72 h-72 bg-purple-500 rounded-full blur-3xl opacity-30"
+      />
+      <motion.div
+        animate={{
+          scale: [1, 1.3, 1],
+          opacity: [0.3, 0.5, 0.3],
+        }}
+        transition={{
+          duration: 10,
+          repeat: Infinity,
+          ease: "easeInOut",
+          delay: 2
+        }}
+        className="absolute bottom-20 right-10 w-96 h-96 bg-blue-500 rounded-full blur-3xl opacity-30"
+      />
 
-      <div className="container mx-auto px-6 relative z-10">
-
-        {/* Header Section */}
-        <div className="text-center max-w-3xl mx-auto mb-16 lg:mb-24">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
+      <div className="container mx-auto px-6 lg:px-20 relative z-10">
+        {/* Header */}
+        <div className="text-center mb-12 md:mb-16 lg:mb-20">
+          <motion.p
+            initial={{ opacity: 0, y: -20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-100 dark:bg-purple-900/30 text-purple-600 dark:text-purple-300 text-xs font-bold uppercase tracking-widest mb-6"
+            transition={{ duration: 0.6, type: "spring", stiffness: 100 }}
+            className="text-blue-500 dark:text-blue-400 text-sm tracking-widest uppercase mb-4"
           >
-            <Layers className="w-4 h-4" />
-            Tech Ecosystem
-          </motion.div>
-
+            Technology Stack
+          </motion.p>
           <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
-            className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6"
+            transition={{ duration: 0.6, delay: 0.1, type: "spring", stiffness: 100 }}
+            className="text-3xl sm:text-4xl md:text-5xl font-bold bg-gradient-to-r from-purple-600 to-blue-500 bg-clip-text text-transparent dark:from-purple-400 dark:to-blue-300 leading-tight"
+            style={{ lineHeight: '1.1' }}
           >
-            Full-Stack <br className="hidden md:block" />
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-blue-600 dark:from-purple-400 dark:to-blue-400">
-              Solutions Mastery
-            </span>
+            Our Tech Ecosystem
           </motion.h2>
-
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
-            className="text-lg text-gray-600 dark:text-gray-400 leading-relaxed"
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="mt-4 md:mt-6 text-gray-600 dark:text-gray-400 text-base md:text-lg max-w-2xl mx-auto px-4"
           >
-            We leverage a comprehensive suite of modern technologies to build scalable, secure, and high-performance digital products.
+            Cutting-edge technologies powering scalable, secure, and innovative solutions
           </motion.p>
         </div>
 
-        {/* Central Animation & Grid */}
-        <div className="relative">
+        {/* Tablet: Grid Layout */}
+        <div className="hidden md:block lg:hidden mb-12">
+          <div className="grid grid-cols-2 gap-6 max-w-4xl mx-auto">
+            {techCategories.map((category, index) => {
+              const IconComponent = category.icon;
 
-          {/* Central Pulsing Core (Decorative Background for Grid) */}
-          <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-r from-purple-500/5 to-blue-500/5 rounded-full blur-3xl pointer-events-none -z-10" />
+              return (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, scale: 0.8, rotateY: -20 }}
+                  whileInView={{ opacity: 1, scale: 1, rotateY: 0 }}
+                  viewport={{ once: true }}
+                  transition={{
+                    duration: 0.5,
+                    delay: index * 0.1,
+                    type: "spring",
+                    stiffness: 100
+                  }}
+                  className="relative group"
+                >
+                  {/* Glow Effect */}
+                  <motion.div
+                    className={`absolute inset-0 rounded-2xl bg-gradient-to-br ${category.color} blur-xl opacity-0 group-hover:opacity-50 transition-opacity duration-300`}
+                  />
 
+                  {/* Card */}
+                  <motion.div
+                    className={`relative bg-white dark:bg-gray-950 rounded-2xl p-5 shadow-xl border-2 border-gray-200 dark:border-gray-800 group-hover:border-transparent transition-all duration-300 h-full`}
+                    whileHover={{ y: -5, scale: 1.02 }}
+                  >
+                    <div className={`absolute inset-0 rounded-2xl bg-gradient-to-br ${category.color} opacity-0 group-hover:opacity-10 transition-opacity duration-300`} />
+
+                    <div className="relative z-10">
+                      {/* Icon */}
+                      <motion.div
+                        className={`inline-flex p-3 rounded-xl bg-gradient-to-br ${category.color} mb-4 shadow-lg`}
+                        whileHover={{ rotate: [0, -10, 10, 0], scale: 1.1 }}
+                        transition={{ duration: 0.5 }}
+                      >
+                        <IconComponent className="w-7 h-7 text-white" strokeWidth={1.5} />
+                      </motion.div>
+
+                      {/* Title */}
+                      <h3 className="text-xl font-bold mb-3 text-gray-900 dark:text-white">
+                        {category.name}
+                      </h3>
+
+                      {/* Technologies */}
+                      <div className="space-y-2">
+                        {category.technologies.slice(0, 4).map((tech, i) => (
+                          <motion.div
+                            key={i}
+                            initial={{ opacity: 0, x: -10 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            transition={{ delay: 0.3 + index * 0.1 + i * 0.05 }}
+                            className="text-sm text-gray-600 dark:text-gray-400 flex items-center gap-2"
+                          >
+                            <div className={`w-1.5 h-1.5 rounded-full bg-gradient-to-r ${category.color}`} />
+                            {tech}
+                          </motion.div>
+                        ))}
+                        {category.technologies.length > 4 && (
+                          <div className="text-xs text-gray-400 dark:text-gray-500 italic pl-3.5">
+                            +{category.technologies.length - 4} more
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  </motion.div>
+                </motion.div>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Desktop: Orbital/Circular Layout */}
+        <div className="hidden lg:block relative w-full max-w-5xl mx-auto px-4" style={{ height: '600px' }}>
+          {/* Center Core */}
           <motion.div
-            variants={container}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, margin: "-100px" }}
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8"
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20"
+            initial={{ scale: 0, rotate: -180 }}
+            whileInView={{ scale: 1, rotate: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, type: "spring", stiffness: 80 }}
           >
-            {techCategories.map((category, idx) => (
+            <div className="relative">
+              {/* Outer pulsing ring */}
               <motion.div
-                key={category.name}
-                variants={item}
-                whileHover={{ y: -5 }}
-                className="group relative bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-3xl p-8 hover:shadow-2xl hover:shadow-purple-500/10 transition-all duration-300"
+                className="absolute inset-0 rounded-full border-2 border-purple-500/30"
+                style={{ width: 180, height: 180, left: '50%', top: '50%', transform: 'translate(-50%, -50%)' }}
+                animate={{
+                  scale: [1, 1.15, 1],
+                  opacity: [0.3, 0.6, 0.3]
+                }}
+                transition={{
+                  duration: 3,
+                  repeat: Infinity,
+                  ease: "easeInOut"
+                }}
+              />
+
+              {/* Rotating glow */}
+              <motion.div
+                animate={{
+                  rotate: 360,
+                  scale: [1, 1.05, 1]
+                }}
+                transition={{
+                  rotate: { duration: 30, repeat: Infinity, ease: "linear" },
+                  scale: { duration: 4, repeat: Infinity, ease: "easeInOut" }
+                }}
+                className="absolute inset-0 rounded-full bg-gradient-to-r from-purple-500 via-blue-500 to-cyan-500 blur-2xl opacity-30"
+                style={{ width: 160, height: 160, left: '-50%', top: '-50%', transform: 'translate(50%, 50%)' }}
+              />
+
+              {/* Main center circle */}
+              <motion.div
+                className="relative bg-white dark:bg-gray-950 rounded-full p-6 shadow-2xl border-4 border-purple-500/20"
+                style={{ width: 160, height: 160 }}
+                whileHover={{ scale: 1.05, borderColor: 'rgba(168, 85, 247, 0.6)' }}
+                animate={{
+                  boxShadow: [
+                    '0 20px 60px -15px rgba(168, 85, 247, 0.3)',
+                    '0 20px 80px -15px rgba(59, 130, 246, 0.4)',
+                    '0 20px 60px -15px rgba(168, 85, 247, 0.3)'
+                  ]
+                }}
+                transition={{
+                  duration: 4,
+                  repeat: Infinity,
+                  ease: "easeInOut"
+                }}
               >
-                {/* Hover Gradient Border Effect */}
-                <div className={`absolute inset-0 rounded-3xl bg-gradient-to-br ${category.color} opacity-0 group-hover:opacity-5 transition-opacity duration-500`} />
-
-                <div className="relative z-10">
-                  {/* Icon */}
-                  <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-900 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-sm`}>
-                    <category.icon className={`w-7 h-7 text-transparent bg-clip-text bg-gradient-to-br ${category.color} stroke-[2.5px]`} style={{ stroke: `url(#gradient-${idx})` }} />
-                    {/* SVG Gradient Definition for Icons */}
-                    <svg width="0" height="0">
-                      <linearGradient id={`gradient-${idx}`} x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop stopColor={idx % 2 === 0 ? '#a855f7' : '#3b82f6'} offset="0%" />
-                        <stop stopColor={idx % 2 === 0 ? '#ec4899' : '#06b6d4'} offset="100%" />
-                      </linearGradient>
-                    </svg>
-                  </div>
-
-                  <h3 className="text-xl font-bold mb-2 group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors">
-                    {category.name}
+                <div className="flex flex-col items-center justify-center h-full">
+                  <motion.div
+                    animate={{ rotate: [0, 10, -10, 0] }}
+                    transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                  >
+                    <Zap className="w-12 h-12 text-purple-500 mb-2" strokeWidth={1.5} />
+                  </motion.div>
+                  <h3 className="text-base font-bold text-center bg-gradient-to-r from-purple-600 to-blue-500 bg-clip-text text-transparent">
+                    Full Stack
                   </h3>
-                  <p className="text-sm text-gray-500 dark:text-gray-400 mb-6 min-h-[40px]">
-                    {category.description}
+                  <p className="text-xs text-gray-500 dark:text-gray-400 text-center mt-1">
+                    Solutions
                   </p>
                 </div>
               </motion.div>
-            ))}
+            </div>
           </motion.div>
 
           {/* Connecting Lines with Animation */}
@@ -565,33 +675,146 @@ export default function Ecosystem() {
                         transition={{ delay: 0.2 + index * 0.1 }}
                         className="text-xl md:text-2xl font-bold mb-3 text-gray-900 dark:text-white"
                       >
-                        {tech}
-                      </span>
-                    ))}
+                        {category.name}
+                      </motion.h3>
+
+                      {/* Technologies with Staggered Animation */}
+                      <div className="flex flex-wrap gap-2">
+                        {category.technologies.map((tech, i) => (
+                          <motion.span
+                            key={i}
+                            initial={{ opacity: 0, scale: 0.8 }}
+                            whileInView={{ opacity: 1, scale: 1 }}
+                            viewport={{ once: true }}
+                            transition={{
+                              delay: 0.3 + index * 0.1 + i * 0.05,
+                              type: "spring",
+                              stiffness: 200
+                            }}
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                            className={`px-3 py-1.5 rounded-full text-xs font-medium bg-gradient-to-r ${category.color} text-white shadow-md hover:shadow-lg transition-shadow cursor-default`}
+                          >
+                            {tech}
+                          </motion.span>
+                        ))}
+                      </div>
                     </div>
                   </div>
                 </motion.div>
-            ))}
               </motion.div>
+            );
+          })}
         </div>
 
-        {/* Bottom Call to Action */}
+        {/* Bottom CTA */}
         <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
+          className="text-center mt-20 md:mt-24 lg:mt-28"
+          initial={{ opacity: 0, y: 40, scale: 0.9 }}
+          whileInView={{ opacity: 1, y: 0, scale: 1 }}
           viewport={{ once: true }}
-          transition={{ delay: 0.6 }}
-          className="mt-20 text-center"
+          transition={{ duration: 0.7, delay: 0.4, type: "spring", stiffness: 80 }}
         >
-          <button
-            onClick={() => router.push('/services')}
-            className="inline-flex items-center gap-2 px-8 py-4 bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-full font-bold hover:scale-105 active:scale-95 transition-all shadow-lg hover:shadow-xl"
+          {/* Decorative line above button */}
+          <motion.div
+            className="flex items-center justify-center gap-4 mb-6"
+            initial={{ opacity: 0, width: 0 }}
+            whileInView={{ opacity: 1, width: "auto" }}
+            transition={{ delay: 0.5, duration: 0.8 }}
           >
-            <Zap className="w-5 h-5" />
-            Explore All Capabilities
-          </button>
-        </motion.div>
+            <motion.div
+              className="h-px bg-gradient-to-r from-transparent via-purple-500 to-purple-500"
+              style={{ width: 60 }}
+              animate={{ opacity: [0.3, 0.7, 0.3] }}
+              transition={{ duration: 2, repeat: Infinity }}
+            />
+            <motion.div
+              className="w-2 h-2 rounded-full bg-gradient-to-r from-purple-500 to-blue-500"
+              animate={{
+                scale: [1, 1.3, 1],
+                opacity: [0.5, 1, 0.5]
+              }}
+              transition={{ duration: 2, repeat: Infinity }}
+            />
+            <motion.div
+              className="h-px bg-gradient-to-r from-purple-500 to-transparent"
+              style={{ width: 60 }}
+              animate={{ opacity: [0.3, 0.7, 0.3] }}
+              transition={{ duration: 2, repeat: Infinity }}
+            />
+          </motion.div>
 
+          <motion.button
+            onClick={() => router.push('/services')}
+            whileHover={{
+              scale: 1.08,
+              boxShadow: "0 25px 35px -10px rgba(168, 85, 247, 0.4), 0 15px 15px -10px rgba(59, 130, 246, 0.4)"
+            }}
+            whileTap={{ scale: 0.96 }}
+            animate={{
+              y: [0, -6, 0]
+            }}
+            transition={{
+              y: {
+                duration: 2.5,
+                repeat: Infinity,
+                ease: "easeInOut"
+              }
+            }}
+            className="relative px-10 py-5 bg-gradient-to-r from-purple-600 via-indigo-600 to-blue-500 text-white rounded-full font-bold text-lg shadow-xl hover:shadow-2xl transition-all duration-300 flex items-center gap-3 mx-auto overflow-hidden group cursor-pointer"
+          >
+            {/* Shimmer Effect */}
+            <motion.div
+              className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
+              initial={{ x: '-100%' }}
+              animate={{ x: '200%' }}
+              transition={{
+                duration: 2,
+                repeat: Infinity,
+                repeatDelay: 1,
+                ease: "easeInOut"
+              }}
+            />
+
+            <motion.div
+              animate={{ rotate: 360 }}
+              transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+            >
+              <Globe className="w-5 h-5 relative z-10" />
+            </motion.div>
+            <span className="relative z-10">Explore Our Services</span>
+
+            {/* Particle Effects on Hover */}
+            <motion.div
+              className="absolute inset-0 opacity-0 group-hover:opacity-100"
+              transition={{ duration: 0.3 }}
+            >
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full">
+                {[...Array(6)].map((_, i) => (
+                  <motion.div
+                    key={i}
+                    className="absolute w-1 h-1 bg-white rounded-full"
+                    style={{
+                      top: '50%',
+                      left: '50%'
+                    }}
+                    animate={{
+                      x: [0, Math.cos(i * 60 * Math.PI / 180) * 40],
+                      y: [0, Math.sin(i * 60 * Math.PI / 180) * 40],
+                      opacity: [1, 0],
+                      scale: [1, 0]
+                    }}
+                    transition={{
+                      duration: 1,
+                      repeat: Infinity,
+                      repeatDelay: 0.5
+                    }}
+                  />
+                ))}
+              </div>
+            </motion.div>
+          </motion.button>
+        </motion.div>
       </div>
     </section>
   );
