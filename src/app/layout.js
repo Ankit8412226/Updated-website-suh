@@ -1,8 +1,7 @@
-import { Geist_Mono, Inter, Poppins } from "next/font/google";
-import localFont from "next/font/local";
-import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
+import { Geist_Mono, Inter, Poppins } from "next/font/google";
 import Script from "next/script";
+import "./globals.css";
 
 const geistMono = Geist_Mono({
   subsets: ["latin"],
@@ -29,7 +28,7 @@ export const metadata = {
     template: "%s | SUH Tech Private Limited"
   },
   description:
-    "SUH Tech Private Limited - Leading IT service provider specializing in web application development and DevOps solutions. Expert team delivering scalable, high-performance web apps, cloud infrastructure, CI/CD automation, and modern DevOps practices.",
+    "SUH Tech Private Limited - India's leading website development company serving Mumbai, Bangalore, Delhi, Hyderabad, Chennai, Pune & all major cities. Expert web application development, DevOps solutions, cloud infrastructure, and digital transformation services. Trusted by 500+ businesses across India.",
   keywords: [
     "web app development",
     "web application development company",
@@ -66,27 +65,92 @@ export const metadata = {
     "database optimization",
     "performance optimization",
     "scalable web applications",
-    // Long-tail keywords for Delhi NCR
-    "web app development company in delhi ncr",
-    "devops services provider in noida",
-    "custom web application development delhi",
-    "react development company in gurgaon",
-    "next.js development services delhi",
-    "ci/cd pipeline automation services ncr",
-    "kubernetes deployment services delhi",
-    "docker containerization services noida",
-    "cloud infrastructure setup delhi ncr",
-    "microservices architecture development delhi",
-    "full stack web development company ncr",
-    "node.js backend development services delhi",
-    "enterprise web application development delhi",
-    "scalable web app development services ncr",
-    "devops consulting services in delhi",
-    "aws devops services provider delhi ncr",
-    "jenkins ci/cd setup services delhi",
-    "terraform infrastructure automation delhi",
-    "web app development cost in delhi",
-    "best web development company in noida",
+    // Location-based keywords - All Major Indian Cities
+    // Delhi NCR
+    "website development company in delhi",
+    "web development company in noida",
+    "web development services in gurgaon",
+    "website design company delhi ncr",
+    "best web development company in delhi",
+    // Mumbai
+    "website development company in mumbai",
+    "web development services mumbai",
+    "web design company in mumbai",
+    "best website development company mumbai",
+    "website development company in navi mumbai",
+    // Bangalore
+    "website development company in bangalore",
+    "web development services bangalore",
+    "web design company in bangalore",
+    "best web development company bangalore",
+    "website development company in bengaluru",
+    // Hyderabad
+    "website development company in hyderabad",
+    "web development services hyderabad",
+    "web design company in hyderabad",
+    "best website development company hyderabad",
+    // Chennai
+    "website development company in chennai",
+    "web development services chennai",
+    "web design company in chennai",
+    "best web development company chennai",
+    // Pune
+    "website development company in pune",
+    "web development services pune",
+    "web design company in pune",
+    "best website development company pune",
+    // Kolkata
+    "website development company in kolkata",
+    "web development services kolkata",
+    "web design company in kolkata",
+    "best web development company kolkata",
+    // Ahmedabad
+    "website development company in ahmedabad",
+    "web development services ahmedabad",
+    "web design company in ahmedabad",
+    "best website development company ahmedabad",
+    // Jaipur
+    "website development company in jaipur",
+    "web development services jaipur",
+    "web design company in jaipur",
+    // Chandigarh
+    "website development company in chandigarh",
+    "web development services chandigarh",
+    "web design company in chandigarh",
+    // Lucknow
+    "website development company in lucknow",
+    "web development services lucknow",
+    // Kochi
+    "website development company in kochi",
+    "web development services kochi",
+    "web design company in kerala",
+    // Indore
+    "website development company in indore",
+    "web development services indore",
+    // Bhopal
+    "website development company in bhopal",
+    "web development services bhopal",
+    // Coimbatore
+    "website development company in coimbatore",
+    "web development services coimbatore",
+    // Visakhapatnam
+    "website development company in visakhapatnam",
+    "web development services vizag",
+    // Surat
+    "website development company in surat",
+    "web development services surat",
+    // Nagpur
+    "website development company in nagpur",
+    "web development services nagpur",
+    // Generic India keywords
+    "website development company in india",
+    "best web development company in india",
+    "top website development companies india",
+    "affordable web development services india",
+    "custom website development india",
+    "ecommerce website development india",
+    "responsive web design company india",
+    "professional website development services",
   ],
   authors: [{ name: "SUH Tech Private Limited" }],
   creator: "SUH Tech Private Limited",
@@ -160,34 +224,30 @@ export default function RootLayout({ children }) {
       "addressCountry": "IN"
     },
     "areaServed": [
-      {
-        "@type": "City",
-        "name": "Delhi"
-      },
-      {
-        "@type": "City",
-        "name": "Noida"
-      },
-      {
-        "@type": "City",
-        "name": "Gurgaon"
-      },
-      {
-        "@type": "City",
-        "name": "Ghaziabad"
-      },
-      {
-        "@type": "GeoCircle",
-        "geoMidpoint": {
-          "@type": "GeoCoordinates",
-          "latitude": "28.5355",
-          "longitude": "77.3910"
-        },
-        "geoRadius": {
-          "@type": "Distance",
-          "name": "Delhi NCR"
-        }
-      }
+      { "@type": "City", "name": "Delhi" },
+      { "@type": "City", "name": "Noida" },
+      { "@type": "City", "name": "Gurgaon" },
+      { "@type": "City", "name": "Ghaziabad" },
+      { "@type": "City", "name": "Mumbai" },
+      { "@type": "City", "name": "Navi Mumbai" },
+      { "@type": "City", "name": "Bangalore" },
+      { "@type": "City", "name": "Bengaluru" },
+      { "@type": "City", "name": "Hyderabad" },
+      { "@type": "City", "name": "Chennai" },
+      { "@type": "City", "name": "Pune" },
+      { "@type": "City", "name": "Kolkata" },
+      { "@type": "City", "name": "Ahmedabad" },
+      { "@type": "City", "name": "Jaipur" },
+      { "@type": "City", "name": "Chandigarh" },
+      { "@type": "City", "name": "Lucknow" },
+      { "@type": "City", "name": "Kochi" },
+      { "@type": "City", "name": "Indore" },
+      { "@type": "City", "name": "Bhopal" },
+      { "@type": "City", "name": "Coimbatore" },
+      { "@type": "City", "name": "Visakhapatnam" },
+      { "@type": "City", "name": "Surat" },
+      { "@type": "City", "name": "Nagpur" },
+      { "@type": "Country", "name": "India" }
     ],
     "contactPoint": {
       "@type": "ContactPoint",

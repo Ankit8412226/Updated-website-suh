@@ -1,4 +1,10 @@
+"use client";
+
+import { useRouter } from "next/navigation";
+
 export default function ServicesBanner() {
+  const router = useRouter();
+
   return (
     <section className="py-20">
       <div className="container mx-auto px-4 sm:px-6 lg:px-12">
@@ -6,7 +12,7 @@ export default function ServicesBanner() {
         <div
           className="
             mx-auto
-            max-w-[943px]
+
             w-full
             rounded-[42px]
             bg-gradient-to-r
@@ -30,17 +36,20 @@ export default function ServicesBanner() {
             {/* LEFT CONTENT */}
             <div className="max-w-[420px] text-white">
               <h2 className="text-[34px] md:text-[38px] font-bold leading-[1.15] mb-4">
-                Lorem ipsum dolor sit{" "}
-                <span className="text-[#D6CBFF]">amet consectetur</span>
+                Ready to Transform Your{" "}
+                <span className="text-[#D6CBFF]">Digital Presence?</span>
               </h2>
 
               <p className="text-white/80 text-sm leading-relaxed mb-6">
-                Lorem ipsum dolor sit amet consectetur.
-                kshi uemnamet consectetur. kshi uemnamet
+                Join 500+ businesses across India who trust SUH Tech for their digital transformation.
+                Let's build something amazing together.
               </p>
 
-              <button className="px-8 py-3 rounded-full bg-white text-[#6F44FB] text-sm font-semibold">
-                Btn1
+              <button
+                onClick={() => router.push('/contact')}
+                className="px-8 py-3 rounded-full bg-white text-[#6F44FB] text-sm font-semibold hover:bg-gray-100 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 cursor-pointer"
+              >
+                Start Your Project
               </button>
             </div>
 
