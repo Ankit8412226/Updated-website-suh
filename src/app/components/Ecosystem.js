@@ -158,7 +158,7 @@ export default function Ecosystem() {
                   </p>
                 </div>
               </motion.div>
-            </div>
+            ))}
           </motion.div>
 
           {/* Connecting Lines with Animation */}
@@ -568,11 +568,11 @@ export default function Ecosystem() {
                         {tech}
                       </span>
                     ))}
+                    </div>
                   </div>
-                </div>
-              </motion.div>
+                </motion.div>
             ))}
-          </motion.div>
+              </motion.div>
         </div>
 
         {/* Bottom Call to Action */}
