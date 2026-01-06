@@ -1,13 +1,43 @@
-import NavBar from "../components/NavBar";
 import FooterSection from "../components/FooterSection";
+import NavBar from "../components/NavBar";
+import ServicesBanner from "./ServicesBanner";
 import ServicesCards from "./ServicesCards";
 import ServicesHero from "./ServicesHero";
-import ServicesBanner from "./ServicesBanner";
 
 export const metadata = {
-  title: "IT Services - Web Development & DevOps Solutions | SUH Tech",
+  title: "IT Services - Website Development & DevOps Solutions | SUH Tech",
   description:
-    "Comprehensive IT services by SUH Tech Private Limited: Web application development, DevOps automation, cloud infrastructure, CI/CD pipelines, mobile app development, and enterprise solutions.",
+    "Comprehensive IT services across India - Website Development, Mobile Apps, Cloud & DevOps, AI Automation, Cybersecurity, and IT Consulting. Serving Mumbai, Bangalore, Delhi, Hyderabad, Chennai, Pune & 20+ cities. 500+ successful projects delivered.",
+  keywords: [
+    "it services company india",
+    "website development services",
+    "web development company",
+    "mobile app development",
+    "cloud services india",
+    "devops services",
+    "ai automation services",
+    "cybersecurity services",
+    "it consulting services",
+    "saas development",
+    "website development mumbai",
+    "website development bangalore",
+    "website development delhi",
+    "website development hyderabad",
+    "website development chennai",
+    "website development pune",
+    "it services provider india",
+    "custom software development",
+    "digital transformation services",
+    "enterprise it solutions",
+  ],
+  openGraph: {
+    title: "IT Services - Website Development & DevOps Solutions | SUH Tech",
+    description: "Comprehensive IT services across India - Website Development, Mobile Apps, Cloud & DevOps, AI Automation. Serving 20+ major cities.",
+    url: "https://www.suhtech.top/services",
+  },
+  alternates: {
+    canonical: "https://www.suhtech.top/services",
+  },
 };
 
 export default function ServicesPage() {
@@ -25,25 +55,6 @@ export default function ServicesPage() {
           <div className="pt-24">
             {/* 🔥 IMAGE SECTION */}
             <ServicesHero />
-          </div>
-
-          <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 mb-8 pt-14">
-            <div className="max-w-3xl">
-              <h2 className="text-4xl md:text-5xl font-bold leading-tight mb-3">
-                Lorem ipsum dolor sit{" "}
-                <span className="text-[#6F44FB]">amet consectetur</span>. kshi
-              </h2>
-            </div>
-
-            <div className="flex flex-col gap-4">
-              <p className="text-gray-500 max-w-md">
-                Lorem ipsum dolor sit amet consectetur. kshi uemnamet consectetur. hello
-              </p>
-
-              <button className="px-7 py-3 w-fit rounded-full bg-gradient-to-r from-[#9616FB] to-[#3459FB] text-white font-medium shadow-md">
-                Btn1
-              </button>
-            </div>
           </div>
         </div>
       </section>

@@ -1,9 +1,9 @@
+import { Check } from "lucide-react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import NavBar from "../../components/NavBar";
 import FooterSection from "../../components/FooterSection";
+import NavBar from "../../components/NavBar";
 import WhyChooseUsSection from "./WhyChooseUsSection";
-import { Check } from "lucide-react";
 
 /* ===============================
    SERVICE DATA (UNCHANGED)
@@ -53,7 +53,7 @@ const serviceCatalog = {
   "mobile-apps": {
     title: "Mobile App Development",
     subtitle: "High-performance iOS & Android applications.",
-         heroImage: "/images/Rectangle_Web_Development.svg",
+    heroImage: "/images/Rectangle_Web_Development.svg",
     featureImage: "/images/Rectangle_Growth.svg",
 
 
@@ -83,7 +83,7 @@ const serviceCatalog = {
   "cloud-and-devops": {
     title: "Cloud & DevOps",
     subtitle: "Secure, scalable, cloud-native infrastructure.",
-     heroImage: "/images/Rectangle_Web_Development.svg",
+    heroImage: "/images/Rectangle_Web_Development.svg",
     featureImage: "/images/Rectangle_Growth.svg",
 
     overview:
@@ -112,7 +112,7 @@ const serviceCatalog = {
   "ai-and-automation": {
     title: "AI & Automation",
     subtitle: "Intelligent systems powered by data.",
-     heroImage: "/images/Rectangle_Web_Development.svg",
+    heroImage: "/images/Rectangle_Web_Development.svg",
     featureImage: "/images/Rectangle_Growth.svg",
 
     overview:
@@ -227,7 +227,7 @@ const serviceCatalog = {
   "maintenance-and-support": {
     title: "Maintenance & Support",
     subtitle: "Reliable ongoing support.",
-   heroImage: "/images/Rectangle_Web_Development.svg",
+    heroImage: "/images/Rectangle_Web_Development.svg",
     featureImage: "/images/Rectangle_Growth.svg",
 
     overview:
@@ -297,55 +297,55 @@ export default async function ServiceDetailPage({ params }) {
       <NavBar />
 
       {/* ================= HERO WRAPPER ================= */}
-<section className="relative overflow-hidden">
+      <section className="relative overflow-hidden">
 
-  {/* Background Glow */}
-  <img
-    src="/images/Ellipse 604 (1).svg"
-    alt="bg-glow"
-    className="absolute bottom-[-480px] right-[-120px]
+        {/* Background Glow */}
+        <img
+          src="/images/Ellipse 604 (1).svg"
+          alt="bg-glow"
+          className="absolute bottom-[-480px] right-[-120px]
                w-[550px] md:w-[750px]
                opacity-90 pointer-events-none z-0"
-  />
+        />
 
-  {/* ================= HERO ================= */}
-  <div className="relative pt-32 pb-20 text-center z-10">
-    <h1 className="text-5xl font-bold">{data.title}</h1>
+        {/* ================= HERO ================= */}
+        <div className="relative pt-32 pb-20 text-center z-10">
+          <h1 className="text-5xl font-bold">{data.title}</h1>
 
-    <p className="mt-4 text-lg text-gray-600">
-      {data.subtitle}
-    </p>
+          <p className="mt-4 text-lg text-gray-600">
+            {data.subtitle}
+          </p>
 
-    <p className="mt-4 max-w-3xl mx-auto text-gray-500">
-      {data.overview}
-    </p>
+          <p className="mt-4 max-w-3xl mx-auto text-gray-500">
+            {data.overview}
+          </p>
 
-    <div className="mt-8 flex justify-center gap-4">
-      <Link
-        href="/#contact"
-        className="px-6 py-3 rounded-full bg-gradient-to-r from-[#9616FB] to-[#3459FB] text-white font-semibold"
-      >
-        Book A Workshop
-      </Link>
+          <div className="mt-8 flex justify-center gap-4">
+            <Link
+              href="/#contact"
+              className="px-6 py-3 rounded-full bg-gradient-to-r from-[#9616FB] to-[#3459FB] text-white font-semibold"
+            >
+              Book A Workshop
+            </Link>
 
-      <Link
-        href="/#pricing"
-        className="px-6 py-3 rounded-full border border-purple-600 text-purple-600 font-semibold"
-      >
-        View pricing options
-      </Link>
-    </div>
+            <Link
+              href="/#pricing"
+              className="px-6 py-3 rounded-full border border-purple-600 text-purple-600 font-semibold"
+            >
+              View pricing options
+            </Link>
+          </div>
 
-    {/* Hero Image */}
-    <div className="relative mt-12 max-w-5xl mx-auto z-20">
-      <img
-        src="/images/Rectangle_Web_Development.svg"
-        alt="Web Development"
-        className="rounded-2xl shadow-xl"
-      />
-    </div>
-  </div>
-</section>
+          {/* Hero Image */}
+          <div className="relative mt-12 max-w-5xl mx-auto z-20">
+            <img
+              src="/images/Rectangle_Web_Development.svg"
+              alt="Web Development"
+              className="rounded-2xl shadow-xl"
+            />
+          </div>
+        </div>
+      </section>
 
 
       {/* ================= LOGOS ================= */}
@@ -559,32 +559,40 @@ export default async function ServiceDetailPage({ params }) {
   );
 }
 
-      /* ===============================
-         HELPERS
-      ================================ */
-      function Stat({value, label}) {
+/* ===============================
+   HELPERS
+================================ */
+function Stat({ value, label }) {
   return (
-      <div>
-        <div className="text-3xl font-bold">{value}</div>
-        <div className="text-sm opacity-90">{label}</div>
-      </div>
-      );
+    <div>
+      <div className="text-3xl font-bold">{value}</div>
+      <div className="text-sm opacity-90">{label}</div>
+    </div>
+  );
 }
 
 
 
-      /* ===============================
-         STATIC + SEO
-      ================================ */
-      export function generateStaticParams() {
-  return [{slug: "serviceCatalog" }];
+/* ===============================
+   STATIC + SEO
+================================ */
+export function generateStaticParams() {
+  return Object.keys(serviceCatalog).map((slug) => ({ slug }));
 }
 
-      export async function generateMetadata({params}) {
-      const {slug} = await params;
-      const data = serviceCatalog[slug];
-      return {
-        title: `${data.title} Services | SUH Tech`,
-      description: data.subtitle,
+export async function generateMetadata({ params }) {
+  const { slug } = await params;
+  const data = serviceCatalog[slug];
+
+  if (!data) {
+    return {
+      title: 'Service Not Found | SUH Tech',
+      description: 'The requested service could not be found.',
+    };
+  }
+
+  return {
+    title: `${data.title} Services | SUH Tech`,
+    description: data.subtitle,
   };
 }

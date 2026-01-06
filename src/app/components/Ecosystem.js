@@ -25,6 +25,7 @@ const techCategories = [
     technologies: ["PostgreSQL", "MongoDB", "Redis", "MySQL", "Firebase"],
     position: { desktop: "top-1/2 left-12", mobile: "top-64" }
   },
+
   {
     name: "Mobile",
     icon: Smartphone,
@@ -303,10 +304,10 @@ export default function Ecosystem() {
 
               {/* Glow filter */}
               <filter id="glow">
-                <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+                <feGaussianBlur stdDeviation="2" result="coloredBlur" />
                 <feMerge>
-                  <feMergeNode in="coloredBlur"/>
-                  <feMergeNode in="SourceGraphic"/>
+                  <feMergeNode in="coloredBlur" />
+                  <feMergeNode in="SourceGraphic" />
                 </feMerge>
               </filter>
             </defs>
@@ -412,8 +413,13 @@ export default function Ecosystem() {
             const angle = (index * 60 - 90) * (Math.PI / 180); // 360/6 = 60 degrees apart
             // Frontend (0) and Mobile (3) use 45%, others use 42%
             const radius = (index === 0 || index === 3) ? 45 : 42;
-            const x = 50 + radius * Math.cos(angle);
-            const y = 50 + radius * Math.sin(angle);
+            // Move Cloud (4) and Security (5) slightly left and upward
+            // Move Frontend (0) and Mobile (3) slightly left
+            const xOffset = (index === 4 || index === 5) ? -2 : (index === 0 || index === 3) ? -2 : 0;
+            // Move Cloud (4) and Security (5) upward, also move Frontend (0), Backend (1), and Database (2) upward
+            const yOffset = (index === 4 || index === 5) ? -3 : (index === 0 || index === 1 || index === 2) ? -2 : 0;
+            const x = 50 + radius * Math.cos(angle) + xOffset;
+            const y = 50 + radius * Math.sin(angle) + yOffset;
 
             // Determine tooltip position based on node location
             const isTop = y < 50;
@@ -422,7 +428,7 @@ export default function Ecosystem() {
             return (
               <motion.div
                 key={index}
-                className="absolute"
+                className="absolute group"
                 style={{
                   left: `${x}%`,
                   top: `${y}%`,
@@ -438,8 +444,9 @@ export default function Ecosystem() {
                   type: "spring",
                   stiffness: 100
                 }}
+                whileHover={{ zIndex: 9999 }}
               >
-                <div className="relative group cursor-pointer">
+                <div className="relative cursor-pointer">
                   {/* Connection Point Glow */}
                   <motion.div
                     className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 -z-10"
@@ -518,11 +525,9 @@ export default function Ecosystem() {
                   </motion.div>
 
                   {/* Tooltip Card - Appears on Hover */}
-                  <motion.div
-                    className={`absolute ${tooltipPosition === 'top' ? 'bottom-full mb-4' : 'top-full mt-4'} left-1/2 -translate-x-1/2 opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-opacity duration-300`}
-                    style={{ zIndex: 1000 }}
-                    initial={{ y: tooltipPosition === 'top' ? 10 : -10, opacity: 0 }}
-                    whileHover={{ y: 0, opacity: 1 }}
+                  <div
+                    className={`absolute ${tooltipPosition === 'top' ? 'bottom-full mb-4' : 'top-full mt-4'} left-1/2 -translate-x-1/2 opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-all duration-200`}
+                    style={{ zIndex: 9999 }}
                   >
                     {/* Arrow pointing to node */}
                     <div
@@ -580,7 +585,7 @@ export default function Ecosystem() {
                         </div>
                       </div>
                     </div>
-                  </motion.div>
+                  </div>
                 </div>
               </motion.div>
             );
