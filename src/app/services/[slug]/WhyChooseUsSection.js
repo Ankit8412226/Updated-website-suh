@@ -18,54 +18,54 @@ import {
 ================================ */
 const headerContent = {
   "web-development": {
-    title: "Why Choose Us ",
+    title: "Why Choose Us",
     description:
-      "Your Cloud Journey Deserves the Right Partner We don’t just move workloads—we build secure, scalable, and future-ready cloud platforms.Our expertise blends modern architecture, proactive security, and dedicated support to ensure your transformation is smooth, cost-efficient, and results-driven. With us, your cloud journey becomes a strategic advantage.",
+      "Your Cloud Journey Deserves the Right Partner. We don’t just move workloads—we build secure, scalable, and future-ready cloud platforms. Our expertise blends modern architecture, proactive security, and dedicated support.",
   },
   "mobile-apps": {
     title: "Why Choose Us",
     description:
-      "We deliver cost-effective and secure cloud environments crafted to enhance performance and reliability.Our solutions are powered by modern technology, industry-leading security standards, and expert assistance.With strategic planning and dedicated support, we create digital platforms ready for sustainable innovation.",
+      "We deliver cost-effective and secure cloud environments crafted to enhance performance and reliability using modern technology and expert assistance.",
   },
   "cloud-and-devops": {
     title: "Why We Are the Best Choice for Your Cloud Journey",
     description:
-      "We transform businesses with robust cloud strategies that deliver speed, security, and flexibility.Our solutions are powered by modern DevOps automation, strong governance, and advanced infrastructure design.We build scalable digital platforms that enhance efficiency and prepare you fortomorrow’s challenges.",
+      "We transform businesses with robust cloud strategies powered by DevOps automation, strong governance, and scalable infrastructure.",
   },
   "ai-and-automation": {
-    title: "Why Choose Us ",
+    title: "Why Choose Us",
     description:
-      "Gain hands-on expertise with the latest AI and automation technologies.Our curriculum combines practical labs, industry-standard tools, and real-world projects to ensure you are job-ready.Learn from experienced instructors and master skills that scale with your career ambitions.",
+      "Gain hands-on expertise with AI and automation through real-world projects, practical labs, and industry-standard tools.",
   },
   cybersecurity: {
-    title: "Why Choose Us ",
+    title: "Why Choose Us",
     description:
-      "We combine advanced security technologies, proactive monitoring, and expert guidance to keep your digital assets safe.terms and real-time intelligence, we protect your business today and prepare you for future threats.",
+      "We combine advanced security technologies, proactive monitoring, and expert guidance to protect your business today and tomorrow.",
   },
   "it-consulting": {
     title: "Why Choose Us",
     description:
-      "We provide expert IT consulting that bridges business needs with technology solutions.Our strategies improve efficiency, reduce costs, and ensure your IT infrastructure supports growth.With actionable roadmaps and scalable guidance, we prepare organizations to succeed in a digital-first world.",
+      "We bridge business needs with technology solutions to improve efficiency, reduce costs, and support growth.",
   },
   "saas-development": {
     title: "Why Choose Us",
     description:
-      "We deliver SaaS solutions combining modern technology, enterprise-grade security, and dedicated support.Our platforms scale seamlessly from MVPs to enterprise-grade products.With robust architecture and expert guidance, we help businesses launch, grow, and optimize SaaS solutions.",
+      "We build scalable SaaS platforms with enterprise-grade security and modern architecture from MVP to production.",
   },
   "maintenance-and-support": {
-    title: "Why Choose Us ",
+    title: "Why Choose Us",
     description:
-      "We provide expert maintenance and support services that combine modern technology, proactive monitoring, and dedicated assistance.Our approach ensures system stability, prevents downtime, and maximizes performance.With scalable support strategies and real-time issue resolution, we keep your business operations smooth and future-ready.",
+      "Proactive monitoring, expert support, and scalable maintenance strategies to keep your systems stable and future-ready.",
   },
   "startup-solutions": {
     title: "Why Choose Us",
     description:
-      "We partner with startups to build secure and scalable digital products.Our expertise helps you launch faster with the right technology stack.From MVP to growth stage, we deliver platforms engineered for success.",
+      "We help startups launch fast with secure, scalable technology—from MVP to growth stage.",
   },
 };
 
 /* ===============================
-   SAME CARDS (YOUR CONTENT)
+   CARDS DATA
 ================================ */
 const items = [
   {
@@ -110,23 +110,23 @@ export default function WhyChooseUsSection({ slug }) {
   };
 
   return (
-    <section className="py-20 bg-gray-50">
+    <section className="py-20 bg-white dark:bg-gray-950 text-gray-900 dark:text-gray-100">
       <div className="max-w-6xl mx-auto px-6">
 
-        {/* Header */}
+        {/* HEADER */}
         <div className="grid md:grid-cols-[1fr_auto_1fr] gap-10 mb-14 items-start">
           <h2 className="text-3xl md:text-4xl font-bold leading-tight">
             {header.title}
           </h2>
 
-          <div className="hidden md:block w-px h-full bg-white" />
+          <div className="hidden md:block w-px h-full bg-gray-200 dark:bg-gray-800" />
 
-          <p className="text-gray-600 max-w-md">
+          <p className="text-gray-600 dark:text-gray-400 max-w-md">
             {header.description}
           </p>
         </div>
 
-        {/* Cards */}
+        {/* CARDS */}
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
           {items.map((item, i) => {
             const Icon = item.icon;
@@ -139,16 +139,18 @@ export default function WhyChooseUsSection({ slug }) {
                 onMouseEnter={() => setActive(i)}
                 className={
                   isActive
-                    ? "p-[2px] rounded-2xl bg-gradient-to-b from-white via-purple-600 to-white"
+                    ? "p-[2px] rounded-2xl bg-gradient-to-b from-purple-500 via-purple-600 to-purple-500"
                     : "rounded-2xl"
                 }
               >
                 <div
-                  className={`h-full rounded-2xl p-6 bg-white flex flex-col transition-all ${
-                    isActive
-                      ? "shadow-[0_20px_45px_rgba(124,58,237,0.25)]"
-                      : "border border-gray-200 shadow-sm"
-                  }`}
+                  className={`h-full rounded-2xl p-6 flex flex-col transition-all
+                    ${
+                      isActive
+                        ? "bg-white dark:bg-gray-900 shadow-[0_20px_45px_rgba(124,58,237,0.35)]"
+                        : "bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 shadow-sm"
+                    }
+                  `}
                 >
                   <div className="w-12 h-12 mb-5 rounded-full flex items-center justify-center border border-purple-600 text-purple-600">
                     <Icon size={20} />
@@ -158,7 +160,7 @@ export default function WhyChooseUsSection({ slug }) {
                     {item.title}
                   </h3>
 
-                  <p className="text-sm text-gray-600 flex-1">
+                  <p className="text-sm text-gray-600 dark:text-gray-300 flex-1">
                     {item.description}
                   </p>
 

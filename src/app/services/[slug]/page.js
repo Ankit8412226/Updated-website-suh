@@ -982,11 +982,11 @@ export default async function ServiceDetailPage({ params }) {
   if (!data) notFound();
 
   return (
-    <main className="bg-white text-gray-900">
+    <main className=" bg-white dark:bg-gray-950 text-gray-900 dark:text-gray-100 ">
       <NavBar />
 
       {/* ================= HERO WRAPPER ================= */}
-      <section className="relative overflow-hidden">
+      <section className="relative overflow-hidden  ">
 
         {/* Background Glow */}
         <img
@@ -998,18 +998,18 @@ export default async function ServiceDetailPage({ params }) {
         />
 
         {/* ================= HERO ================= */}
-        <div className="relative pt-32 pb-20 text-center z-10">
-          <h1 className="text-5xl font-bold">{data.title}</h1>
+        <div className="relative pt-24 md:pt-32 pb-16 md:pb-20 text-center z-10 px-4">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold">{data.title}</h1>
 
-          <p className="mt-4 text-lg text-gray-600">
+          <p className="mt-4 text-sm sm:text-base md:text-lg text-gray-600">
             {data.subtitle}
           </p>
 
-          <p className="mt-4 max-w-3xl mx-auto text-gray-500">
+          <p className="mt-4 max-w-3xl mx-auto text-sm md:text-base text-gray-500">
             {data.overview}
           </p>
 
-          <div className="mt-8 flex justify-center gap-4">
+          <div className="mt-8 flex flex-col sm:flex-row justify-center gap-4">
             <Link
               href="/#contact"
               className="px-6 py-3 rounded-full bg-gradient-to-r from-[#9616FB] to-[#3459FB] text-white font-semibold"
@@ -1026,12 +1026,12 @@ export default async function ServiceDetailPage({ params }) {
           </div>
 
           {/* Hero Image */}
-          <div className="relative mt-12 max-w-5xl mx-auto z-20">
-            <img
-              src="/images/Rectangle_Web_Development.svg"
-              alt="Web Development"
-              className="rounded-2xl shadow-xl"
-            />
+          <div className="relative mt-10 md:mt-12 max-w-full md:max-w-5xl mx-auto z-20 px-4">
+           <img
+  src="/images/Rectangle_Web_Development.svg"
+  alt="Web Development"
+  className="rounded-2xl shadow-xl w-full"
+/>
           </div>
         </div>
       </section>
@@ -1040,7 +1040,7 @@ export default async function ServiceDetailPage({ params }) {
       {/* ================= LOGOS ================= */}
       <section className="py-8 text-center text-sm text-gray-500">
         Trusted By 100+ Famous Companies
-        <div className="mt-4 flex justify-center gap-8 opacity-70">
+        <div className="mt-4 flex flex-wrap justify-center gap-6 opacity-70">
           <span>Logoipsum</span>
           <span>Logoipsum</span>
           <span>Logoipsum</span>
@@ -1049,7 +1049,7 @@ export default async function ServiceDetailPage({ params }) {
       </section>
 
       {/* ================= STATS ================= */}
-      <section className="bg-gradient-to-r from-[#9616FB] to-[#3459FB] text-white py-10">
+      <section className="bg-gradient-to-r from-[#9616FB] to-[#3459FB] text-white py-10 px-4">
         <div className="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-4 text-center gap-6">
           <Stat value="500K+" label="Total Active Users" />
           <Stat value="2PB" label="Data Saved" />
@@ -1065,7 +1065,7 @@ export default async function ServiceDetailPage({ params }) {
 
       {/* ================= FEATURE ================= */}
 
-      <section className="py-20 max-w-6xl mx-auto grid md:grid-cols-2 gap-14 items-start px-6">
+      <section className="py-20 max-w-6xl mx-auto grid md:grid-cols-2 gap-14 items-start px-6  bg-white dark:bg-gray-950 text-gray-900 dark:text-gray-100">
 
         <div>
           <img
@@ -1080,7 +1080,7 @@ export default async function ServiceDetailPage({ params }) {
             {data.featureHeading}
           </h2>
 
-          <p className="text-gray-600 mb-8">
+          <p className=" mb-8  bg-white dark:bg-gray-950 text-gray-900 dark:text-gray-100">
             {data.featureDescription}
           </p>
 
@@ -1090,7 +1090,7 @@ export default async function ServiceDetailPage({ params }) {
                 <div className="w-8 h-8 rounded-full bg-purple-600 flex items-center justify-center">
                   <Check className="w-4 h-4 text-white" />
                 </div>
-                <span className="text-gray-700">{item}</span>
+                <span className=" bg-white dark:bg-gray-950 text-gray-900 dark:text-gray-100">{item}</span>
               </li>
             ))}
           </ul>
@@ -1103,127 +1103,177 @@ export default async function ServiceDetailPage({ params }) {
 
 
       {/* ================= PRICING ================= */}
-      <section id="pricing" className="py-24 bg-gray-50">
-        <div className="text-center mb-14 px-6">
-          <h2 className="text-4xl font-bold mb-4">
-            {data.pricingHeading}
-          </h2>
+    <section
+  id="pricing"
+  className="py-24 bg-white dark:bg-gray-950 text-gray-900 dark:text-gray-100"
+>
+  {/* HEADING */}
+  <div className="text-center mb-14 px-6">
+    <h2 className="text-4xl font-bold mb-4">
+      {data.pricingHeading}
+    </h2>
 
-          <p className="text-gray-600 max-w-2xl mx-auto">
-            {data.pricingDescription}
-          </p>
-        </div>
+    <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+      {data.pricingDescription}
+    </p>
+  </div>
 
-        <div className="max-w-6xl mx-auto grid md:grid-cols-3 gap-8 px-6">
-          {data.pricing.map((plan, i) => {
-            const isFeatured = plan.featured || i === 1;
+  {/* PRICING CARDS */}
+  <div className="max-w-6xl mx-auto grid md:grid-cols-3 gap-8 px-6">
+    {data.pricing.map((plan, i) => {
+      const isFeatured = plan.featured || i === 1;
 
-            return (
-              <div
-                key={plan.title}
-                className={`rounded-3xl p-8 flex flex-col justify-between shadow-xl transition-all duration-300
-                ${isFeatured
-                    ? "bg-gradient-to-r from-[#9616FB] to-[#3459FB] text-white scale-105"
-                    : "bg-white/30"
-                  }`}
+      return (
+        <div
+          key={plan.title}
+          className={`rounded-3xl p-8 flex flex-col justify-between shadow-xl
+            transition-all duration-300
+            ${
+              isFeatured
+                ? "bg-gradient-to-r from-[#9616FB] to-[#3459FB] text-white scale-105"
+                : "bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100"
+            }
+          `}
+        >
+          {/* TOP */}
+          <div>
+            <h3 className="text-2xl font-semibold mb-2">
+              {plan.title}
+            </h3>
+
+            <p
+              className={`mb-6
+                ${
+                  isFeatured
+                    ? "text-purple-100"
+                    : "text-gray-500 dark:text-gray-400"
+                }
+              `}
+            >
+              Best for: {plan.bestFor}
+            </p>
+
+            <p className="text-3xl font-bold mb-6">
+              {plan.price}{" "}
+              <span
+                className={`text-base font-medium
+                  ${
+                    isFeatured
+                      ? "text-purple-100"
+                      : "text-gray-600 dark:text-gray-400"
+                  }
+                `}
               >
-                {/* TOP */}
-                <div>
-                  <h3 className="text-2xl font-semibold mb-2">
-                    {plan.title}
-                  </h3>
+                ({plan.billing})
+              </span>
+            </p>
 
-                  <p className={`mb-6 ${isFeatured ? "text-purple-100" : "text-gray-500"}`}>
-                    Best for: {plan.bestFor}
-                  </p>
+            <button
+              className={`w-full py-3 rounded-full font-semibold mb-8 transition
+                ${
+                  isFeatured
+                    ? "bg-white text-purple-600 hover:bg-gray-100"
+                    : "bg-purple-600 text-white hover:bg-purple-700"
+                }
+              `}
+            >
+              Choose The Plan
+            </button>
+          </div>
 
-                  <p className="text-3xl font-bold mb-6">
-                    {plan.price}{" "}
-                    <span className="text-base font-medium">
-                      ({plan.billing})
-                    </span>
-                  </p>
+          {/* FEATURES */}
+          <div>
+            <p className="font-semibold mb-4">
+              Features Include:
+            </p>
 
-                  <button
-                    className={`w-full py-3 rounded-full font-semibold mb-8
-                    ${isFeatured
-                        ? "bg-white text-purple-600"
-                        : "bg-purple-600 text-white"
-                      }`}
-                  >
-                    Choose The Plan
-                  </button>
-                </div>
-
-                {/* FEATURES */}
-                <div>
-                  <p className="font-semibold mb-4">Features Include:</p>
-                  <ul className="space-y-3 text-sm">
-                    {plan.features.map((feature, idx) => (
-                      <li
-                        key={idx}
-                        className={`flex items-center gap-3 ${isFeatured ? "text-purple-100" : "text-gray-600"
-                          }`}
-                      >
-                        <Check className="w-4 h-4" />
-                        {feature}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-            );
-          })}
+            <ul className="space-y-3 text-sm">
+              {plan.features.map((feature, idx) => (
+                <li
+                  key={idx}
+                  className={`flex items-center gap-3
+                    ${
+                      isFeatured
+                        ? "text-purple-100"
+                        : "text-gray-600 dark:text-gray-300"
+                    }
+                  `}
+                >
+                  <Check className="w-4 h-4" />
+                  {feature}
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
-      </section>
+      );
+    })}
+  </div>
+</section>
+
 
 
       {/* ================= FAQ ================= */}
-      <section className="py-24 bg-white">
-        <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-14 px-6 items-start">
+      <section className="py-24 bg-white dark:bg-gray-950 text-gray-900 dark:text-gray-100">
+  <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-14 px-6 items-start">
 
-          {/* Left Content */}
-          <div>
-            <h2 className="text-4xl font-bold mb-4">
-              Frequently <br /> Asked Questions
-            </h2>
-            <p className="text-gray-500 max-w-sm">
-              Have Another Question? Please Contact Us Via Email Down Below
-            </p>
-          </div>
+    {/* LEFT CONTENT */}
+    <div>
+      <h2 className="text-4xl font-bold mb-4">
+        Frequently <br /> Asked Questions
+      </h2>
 
-          {/* Right Accordion */}
-          <div className="space-y-4">
-            {data.faqs.map((faq, i) => (
-              <details
-                key={faq.q}
-                open={i === 0}
-                className={`group rounded-2xl border transition-all
-            ${i === 0
-                    ? "bg-gradient-to-r from-[#9616FB] to-[#3459FB] text-white"
-                    : "bg-white"
-                  }`}
-              >
-                <summary className="flex justify-between items-center cursor-pointer px-6 py-4 font-semibold list-none">
-                  {faq.q}
-                  <span className="transition-transform group-open:rotate-180">
-                    ⌃
-                  </span>
-                </summary>
+      <p className="text-gray-500 dark:text-gray-400 max-w-sm">
+        Have Another Question? Please Contact Us Via Email Down Below
+      </p>
+    </div>
 
-                <div className={`px-6 pb-4 text-sm leading-relaxed
-            ${i === 0 ? "text-purple-100" : "text-gray-600"}
-          `}>
-                  {faq.a}
-                </div>
-              </details>
-            ))}
-          </div>
-        </div>
-      </section>
+    {/* RIGHT ACCORDION */}
+    <div className="space-y-4">
+      {data.faqs.map((faq, i) => {
+        const isOpen = i === 0;
+
+        return (
+          <details
+            key={faq.q}
+            open={isOpen}
+            className={`group rounded-2xl border transition-all
+              ${
+                isOpen
+                  ? "bg-gradient-to-r from-[#9616FB] to-[#3459FB] text-white border-transparent"
+                  : "bg-white dark:bg-gray-900 border-gray-200 dark:border-gray-800"
+              }
+            `}
+          >
+            <summary className="flex justify-between items-center cursor-pointer px-6 py-4 font-semibold list-none">
+              {faq.q}
+              <span className="transition-transform group-open:rotate-180">
+                ⌃
+              </span>
+            </summary>
+
+            <div
+              className={`px-6 pb-4 text-sm leading-relaxed
+                ${
+                  isOpen
+                    ? "text-purple-100"
+                    : "text-gray-600 dark:text-gray-300"
+                }
+              `}
+            >
+              {faq.a}
+            </div>
+          </details>
+        );
+      })}
+    </div>
+
+  </div>
+</section>
+
 
       {/* ================= CTA ================= */}
-      <section className="py-24 bg-white">
+      <section className="py-24 bg-white dark:bg-gray-950 text-gray-900 dark:text-gray-100">
         <div className="max-w-5xl mx-auto px-6">
           <div className="bg-gradient-to-r from-[#9616FB] to-[#3459FB] rounded-3xl text-white text-center py-16 px-8 shadow-xl">
 
