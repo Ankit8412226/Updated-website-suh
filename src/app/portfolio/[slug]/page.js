@@ -220,11 +220,11 @@ async function PortfolioDetailPage({ params }) {
   if (!data) notFound();
 
   return (
-    <main className="min-h-screen bg-white dark:to-gray-950 overflow-x-hidden">
+    <main className="min-h-screen bg-white dark:bg-gray-950 text-gray-900 dark:text-gray-100 overflow-x-hidden">
       <NavBar />
 
       {/* Hero Section */}
-      <section className="relative pt-32 pb-16 px-4 sm:px-6 lg:px-12 overflow-hidden">
+      <section className="relative pt-32 pb-16 px-4 sm:px-6 lg:px-12 overflow-hidden bg-white dark:bg-gray-950 text-gray-900 dark:text-gray-100">
 
         {/* Background Glow - Top Right Corner */}
         <div className="absolute -top-24 -right-32 w-[500px] md:w-[700px] opacity-80 pointer-events-none z-0">
@@ -281,7 +281,7 @@ async function PortfolioDetailPage({ params }) {
       
       {/* Main Content Section */}
           {/* Main Content Section */}
-<section className="relative py-20 px-4 sm:px-6 lg:px-12 overflow-hidden">
+<section className="relative py-20 px-4 sm:px-6 lg:px-12 overflow-hidden bg-white dark:bg-gray-950 text-gray-900 dark:text-gray-100">
 
   {/* Background Glow */}
   <img
@@ -299,86 +299,116 @@ async function PortfolioDetailPage({ params }) {
       <div className="absolute left-5 top-0 bottom-0 w-[4px] bg-gray-300 rounded-full"></div>
 
       {/* PURPLE SEGMENTS */}
-      <div className="absolute left-5 top-6 h-24 w-[4px] bg-purple-600 rounded-full"></div>
-      <div className="absolute left-5 top-[430px] h-24 w-[4px] bg-purple-600 rounded-full"></div>
-      <div className="absolute left-5 top-[830px] h-24 w-[4px] bg-purple-600 rounded-full"></div>
+     <div
+  className="
+    absolute left-5 h-24 w-[4px] bg-purple-600 rounded-full
+    top-6
+    max-md:top-6
+  "
+></div>
+
+{/* Line 2 */}
+<div
+  className="
+    absolute left-5 h-24 w-[4px] bg-purple-600 rounded-full
+    top-[430px]
+    max-md:top-[580px]
+  "
+></div>
+
+{/* Line 3 */}
+<div
+  className="
+    absolute left-5 h-24 w-[4px] bg-purple-600 rounded-full
+    top-[830px]
+    max-md:top-[1250px]
+  "
+></div>
 
       {/* -----CHALLENGE -------------*/}
       <div className="mb-28">
-        <h2 className="text-3xl font-bold text-gray-900 mb-3">
-          {data.challenge.title}
-        </h2>
+  <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-3">
+    {data.challenge.title}
+  </h2>
 
-        <p className="text-gray-600 max-w-3xl mb-6">
-          {data.challenge.description}
-        </p>
+  <p className="text-gray-600 dark:text-gray-300 max-w-3xl mb-6">
+    {data.challenge.description}
+  </p>
 
-        <p className="font-semibold text-gray-900 mb-3">
-          Key Challenges Included:
-        </p>
+  <p className="font-semibold text-gray-900 dark:text-gray-100 mb-3">
+    Key Challenges Included:
+  </p>
 
-        <ul className="space-y-2 max-w-3xl">
-          {data.challenge.points.map((point, i) => (
-            <li key={i} className="flex gap-3 text-gray-600">
-              <span className="text-purple-600 mt-1">•</span>
-              <span>{point}</span>
-            </li>
-          ))}
-        </ul>
-      </div>
+  <ul className="space-y-2 max-w-3xl">
+    {data.challenge.points.map((point, i) => (
+      <li
+        key={i}
+        className="flex gap-3 text-gray-600 dark:text-gray-300"
+      >
+        <span className="text-purple-600 mt-1">•</span>
+        <span>{point}</span>
+      </li>
+    ))}
+  </ul>
+</div>
+
 
       {/* -------------------- SOLUTION ------------------ */}
-      <div className="mb-28">
-        <h2 className="text-3xl font-bold text-gray-900 mb-3">
-          {data.solution.title}
-        </h2>
+<div className="mb-28">
+  <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-3">
+    {data.solution.title}
+  </h2>
 
-        <p className="text-gray-600 max-w-3xl mb-6">
-          {data.solution.description}
-        </p>
+  <p className="text-gray-600 dark:text-gray-300 max-w-3xl mb-6">
+    {data.solution.description}
+  </p>
 
-        <ul className="space-y-2 max-w-3xl">
-          {data.solution.points.map((point, i) => (
-            <li key={i} className="flex gap-3 text-gray-600">
-              <span className="text-purple-600 mt-1">•</span>
-              <span>{point}</span>
-            </li>
-          ))}
-        </ul>
-      </div>
+  <ul className="space-y-2 max-w-3xl">
+    {data.solution.points.map((point, i) => (
+      <li
+        key={i}
+        className="flex gap-3 text-gray-600 dark:text-gray-300"
+      >
+        <span className="text-purple-600 mt-1">•</span>
+        <span>{point}</span>
+      </li>
+    ))}
+  </ul>
+</div>
 
-      {/* ------------------- IMPACT ------------------ */}
-      <div>
-        <h2 className="text-3xl font-bold text-gray-900 mb-10">
-          Impact
-        </h2>
+{/* ------------------- IMPACT ------------------ */}
+<div>
+  <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-10">
+    Impact
+  </h2>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-3xl">
-          {data.impact.map((item, i) => (
-            <div
-              key={i}
-              className="bg-white rounded-2xl p-6 shadow-md border border-purple-100"
-            >
-              <div className="text-4xl font-bold text-gray-900 mb-2">
-                {item.value}
-              </div>
-              <p className="text-sm text-gray-600 leading-relaxed">
-                {item.description}
-              </p>
-            </div>
-          ))}
+  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-3xl">
+    {data.impact.map((item, i) => (
+      <div
+        key={i}
+        className="bg-white dark:bg-gray-900 rounded-2xl p-6 shadow-md border border-purple-100 dark:border-gray-700"
+      >
+        <div className="text-4xl font-bold text-gray-900 dark:text-white mb-2">
+          {item.value}
         </div>
+        <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed">
+          {item.description}
+        </p>
       </div>
-            <div className="text-center pt-10">
-        <Link
-          href="/portfolio"
-          className="inline-flex items-center gap-2 px-8 py-3 bg-gradient-to-r from-purple-600 to-blue-600 text-white font-semibold rounded-lg hover:shadow-lg transition-all duration-300"
-        >
-          <span>←</span>
-          <span>Back to Portfolio</span>
-        </Link>
-      </div>
-    </div>
+    ))}
+  </div>
+</div>
+
+<div className="text-center pt-10">
+  <Link
+    href="/portfolio"
+    className="inline-flex items-center gap-2 px-8 py-3 bg-gradient-to-r from-purple-600 to-blue-600 text-white font-semibold rounded-lg hover:shadow-lg transition-all duration-300"
+  >
+    <span>←</span>
+    <span>Back to Portfolio</span>
+  </Link>
+</div>
+</div>
   </div>
 </section>
 

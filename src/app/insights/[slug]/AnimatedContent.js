@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowLeft, Calendar, Clock, Facebook, Linkedin, Twitter } from 'lucide-react';
+import { ArrowLeft, Calendar, Clock, Facebook, Linkedin, Twitter, Instagram } from 'lucide-react';
 import Link from 'next/link';
 import { useEffect, useState } from "react";
 
@@ -128,19 +128,43 @@ export default function AnimatedContent({ blog, formattedDate }) {
 
               {/* Share Section */}
               <div className="mt-16 pt-8 border-t border-gray-100 dark:border-gray-800 flex items-center justify-between">
-                <span className="font-bold text-gray-900 dark:text-white">Share this article</span>
-                <div className="flex gap-4">
-                  <button className="w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center text-gray-600 dark:text-gray-400 hover:bg-[#0077b5] hover:text-white transition-all">
-                    <Linkedin className="w-5 h-5" />
-                  </button>
-                  <button className="w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center text-gray-600 dark:text-gray-400 hover:bg-[#1DA1F2] hover:text-white transition-all">
-                    <Twitter className="w-5 h-5" />
-                  </button>
-                  <button className="w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center text-gray-600 dark:text-gray-400 hover:bg-[#4267B2] hover:text-white transition-all">
-                    <Facebook className="w-5 h-5" />
-                  </button>
-                </div>
-              </div>
+  <span className="font-bold text-gray-900 dark:text-white">
+    Share this article
+  </span>
+
+  <div className="flex gap-4">
+    {/* LinkedIn */}
+    <Link
+      href="https://www.linkedin.com/company/suh-tech/"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center text-gray-600 dark:text-gray-400 hover:bg-[#0077b5] hover:text-white transition-all"
+    >
+      <Linkedin className="w-5 h-5" />
+    </Link>
+
+    {/* Instagram */}
+    <Link
+      href="https://www.instagram.com/suhtechpvtltd/"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center text-gray-600 dark:text-gray-400 hover:bg-gradient-to-tr hover:from-yellow-400 hover:via-pink-500 hover:to-purple-600 hover:text-white transition-all"
+    >
+      <Instagram className="w-5 h-5" />
+    </Link>
+
+    {/* Facebook */}
+    <Link
+      href="https://www.facebook.com/profile.php?id=61571524414304#"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center text-gray-600 dark:text-gray-400 hover:bg-[#4267B2] hover:text-white transition-all"
+    >
+      <Facebook className="w-5 h-5" />
+    </Link>
+  </div>
+</div>
+
             </motion.div>
           </div>
 
