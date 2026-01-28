@@ -1,73 +1,107 @@
 "use client";
 
-import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 export default function ServicesBanner() {
-  const router = useRouter();
-
   return (
-    <section className="py-20">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-12">
-        {/* Banner Wrapper */}
+    <section className="py-24 bg-white dark:bg-gray-950">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6">
+        {/* CARD */}
         <div
           className="
-            mx-auto
-
-            w-full
-            rounded-[42px]
+            relative
             bg-gradient-to-r
             from-[#9616FB]
             to-[#3459FB]
-            overflow-hidden
+            rounded-3xl
+            text-white
+            shadow-xl
+            overflow-visible
           "
         >
-          {/* Content */}
+          {/* CONTENT WRAPPER */}
           <div
             className="
               flex
               flex-col
               md:flex-row
               items-center
-              justify-between
-              gap-[57px]
-              p-[42px]
+              px-8
+              py-14
+              md:px-12
+              md:py-16
             "
           >
-            {/* LEFT CONTENT */}
-            <div className="max-w-[420px] text-white">
-              <h2 className="text-[34px] md:text-[38px] font-bold leading-[1.15] mb-4">
-                Ready to Transform Your{" "}
-                <span className="text-[#D6CBFF]">Digital Presence?</span>
+            {/* LEFT CONTENT – 50% */}
+            <div className="w-full md:w-1/2 z-10">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 leading-tight">
+                Try Risk Free With 30-Day <br />
+                <span className="text-[#D6CBFF]">Money-Back Guarantee!</span>
               </h2>
 
-              <p className="text-white/80 text-sm leading-relaxed mb-6">
-                Join 500+ businesses across India who trust SUH Tech for their digital transformation.
-                Let's build something amazing together.
+              <p className="text-purple-100 mb-8 text-sm sm:text-base">
+                If You Are Not Satisfied, We Will Refund Your Payment – No Questions Asked
               </p>
 
-              <button
-                onClick={() => router.push('/contact')}
-                className="px-8 py-3 rounded-full bg-white text-[#6F44FB] text-sm font-semibold hover:bg-gray-100 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 cursor-pointer"
+              <Link
+                href="/#contact"
+                className="
+                  inline-flex
+                  items-center
+                  justify-center
+                  px-8
+                  py-3
+                  rounded-full
+                  bg-white/30
+                  backdrop-blur
+                  text-white
+                  font-semibold
+                  hover:bg-white/40
+                  transition
+                "
               >
-                Start Your Project
-              </button>
+                Join Us Now
+              </Link>
             </div>
 
-            {/* RIGHT IMAGE */}
-            <div className="relative flex-shrink-0">
-              <img
-                src="/images/Men_Image.svg"
-                alt="Service Banner"
-                className="
-                  w-[280px]
-                  h-[280px]
-                  md:w-[474px]
-                  md:h-[474px]
-                  object-contain
-                "
-              />
-            </div>
+            {/* RIGHT IMAGE SLOT – 50% (space holder only) */}
+            <div className="w-full md:w-1/2" />
           </div>
+
+          {/* IMAGE (DESKTOP – does NOT affect card height) */}
+          <img
+            src="/images/Men_Image.svg"
+            alt="CTA Illustration"
+            className="
+              hidden
+              md:block
+              absolute
+              right-2
+              bottom-0
+              w-[380px]
+              lg:w-[480px]
+              pointer-events-none
+              select-none
+            "
+          />
+
+          {/* IMAGE (MOBILE/TABLET – normal flow) */}
+          <img
+  src="/images/Men_Image.svg"
+  alt="CTA Illustration"
+  className="
+    md:hidden
+    mx-auto
+    mt-8
+    w-[70%]          /* fluid base */
+    max-w-[280px]    /* cap on very small phones */
+    sm:w-[60%]
+    sm:max-w-[340px]
+    pointer-events-none
+    select-none
+  "
+/>
+
         </div>
       </div>
     </section>
