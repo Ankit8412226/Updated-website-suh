@@ -28,7 +28,7 @@ export default function ServicesHero() {
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 mb-14">
           {/* LEFT TEXT */}
           <div className="max-w-3xl">
-            <h2 className="text-4xl md:text-5xl font-bold leading-tight mb-3">
+            <h2 className="text-4xl md:text-5xl font-bold leading-tight mb-3 ml-[-180px]">
               Comprehensive IT Services for{" "}
               <span className="text-[#6F44FB]">Modern Businesses</span> Across India
             </h2>
@@ -38,7 +38,7 @@ export default function ServicesHero() {
           <div className="flex flex-col gap-4">
             <button
               onClick={() => router.push("/contact")}
-              className="px-7 py-3 w-fit rounded-full bg-gradient-to-r from-[#9616FB] to-[#3459FB] text-white font-medium shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
+              className="px-7 py-3 w-fit rounded-full bg-gradient-to-r from-[#9616FB] to-[#3459FB] text-white font-medium shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 mr-[-75px]"
             >
               Get Started
             </button>
@@ -85,47 +85,52 @@ export default function ServicesHero() {
         </div>
 
         {/* ---------------- DESKTOP VIEW ---------------- */}
-        <div className="hidden md:flex items-stretch justify-between gap-6">
-          {/* IMAGE CARD 1 */}
-          <div className="w-[548px] h-[292px] rounded-[24px] overflow-hidden bg-white shrink-0">
-            <Image
-              src="/images/Service_Hero_Teams.svg"
-              alt="Team"
-              width={548}
-              height={292}
-              className="w-full h-full object-cover"
-              priority
-            />
-          </div>
+     <div className="hidden md:flex justify-center">
+  <div className="flex items-stretch gap-6 max-w-[1320px] w-full px-6 ml-[-240px]">
+    
+    {/* IMAGE CARD 1 */}
+    <div className="w-[548px] h-[292px] rounded-[24px] overflow-hidden bg-white shrink-0">
+      <Image
+        src="/images/Service_Hero_Teams.svg"
+        alt="Team"
+        width={548}
+        height={292}
+        className="w-full h-full object-cover"
+        priority
+      />
+    </div>
 
-          {/* STATS CARD */}
-          <div className="w-[301px] h-[292px] rounded-[24px] bg-gradient-to-br from-[#D5BFFF] to-[#F4F4F4] p-4 flex flex-col justify-between shrink-0">
-            <div>
-              <p className="text-sm text-gray-600">Satisfied</p>
-              <p className="text-sm text-gray-600">Customers</p>
-            </div>
+    {/* STATS CARD */}
+    <div className="w-[301px] h-[292px] rounded-[24px] bg-gradient-to-br from-[#D5BFFF] to-[#F4F4F4] p-4 flex flex-col justify-between shrink-0">
+      <div>
+        <p className="text-sm text-gray-600">Satisfied</p>
+        <p className="text-sm text-gray-600">Customers</p>
+      </div>
 
-            <h3 className="text-3xl font-bold">200K+</h3>
+      <h3 className="text-3xl font-bold">200K+</h3>
 
-            <img
-              src="/images/Avatar Group.svg"
-              alt="Avatars"
-              className="h-8"
-            />
-          </div>
+      <img
+        src="/images/Avatar Group.svg"
+        alt="Avatars"
+        className="h-8"
+      />
+    </div>
 
-          {/* IMAGE CARD 2 */}
-          <div className="w-[407px] h-[292px] rounded-[24px] overflow-hidden bg-white shrink-0">
-            <Image
-              src="/images/Service_Hero_Meetings.svg"
-              alt="Meeting"
-              width={407}
-              height={292}
-              className="w-full h-full object-cover"
-              priority
-            />
-          </div>
-        </div>
+    {/* IMAGE CARD 2 */}
+    <div className="w-[407px] h-[292px] rounded-[24px] overflow-hidden bg-white shrink-0">
+      <Image
+        src="/images/Service_Hero_Meetings.svg"
+        alt="Meeting"
+        width={407}
+        height={292}
+        className="w-full h-full object-cover"
+        priority
+      />
+    </div>
+
+  </div>
+</div>
+
       </div>
     </section>
   );

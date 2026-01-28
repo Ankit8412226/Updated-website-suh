@@ -45,7 +45,7 @@ export default function AnimatedContent({ blog, formattedDate }) {
         <motion.div
           initial={{ scale: 1.1 }}
           animate={{ scale: 1 }}
-          transition={{ duration: 10, ease: "linear" }}
+          transition={{ duration: 0.1, ease: "linear" }}
           className="absolute inset-0"
         >
           <img
@@ -86,17 +86,17 @@ export default function AnimatedContent({ blog, formattedDate }) {
 
             <motion.h1
               variants={fadeInUp}
-              className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-8 leading-tight tracking-tight"
+              className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-24 leading-tight tracking-tight"
             >
               {blog.title}
             </motion.h1>
 
-            <motion.p
+            {/* <motion.p
               variants={fadeInUp}
               className="text-xl md:text-2xl text-gray-200 max-w-3xl leading-relaxed font-light"
             >
               {blog.excerpt}
-            </motion.p>
+            </motion.p> */}
           </motion.div>
         </div>
       </div>
