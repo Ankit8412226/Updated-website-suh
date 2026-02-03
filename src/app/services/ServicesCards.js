@@ -139,7 +139,7 @@ export default function ServicesCards() {
                 {/* Read More */}
                 <Link
                   href={`/services/${service.slug}`}
-                  className="group inline-flex items-center gap-2 text-sm font-medium text-black mt-6"
+                  className="group inline-flex items-center gap-2 text-sm font-medium text-black dark:text-white mt-6"
                 >
                   Read More
                   <span className="w-7 h-7 rounded-full flex items-center justify-center bg-[#6F44FB] text-white transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1">
