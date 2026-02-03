@@ -18,7 +18,7 @@ export default function AnimatedContent({ blog, formattedDate }) {
 
   const fadeInUp = {
     hidden: { opacity: 0, y: 30 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
+    visible: { opacity: 1, y: 0, transition: { duration: 0.1, ease: "easeOut" } }
   };
 
   const staggerContainer = {
@@ -90,7 +90,7 @@ export default function AnimatedContent({ blog, formattedDate }) {
             >
               {blog.title}
             </motion.h1>
-
+            
             {/* <motion.p
               variants={fadeInUp}
               className="text-xl md:text-2xl text-gray-200 max-w-3xl leading-relaxed font-light"
@@ -111,7 +111,7 @@ export default function AnimatedContent({ blog, formattedDate }) {
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.8 }}
+              transition={{ duration: 0.1 }}
               className="bg-white dark:bg-gray-900 rounded-3xl p-8 md:p-12 shadow-xl border border-gray-100 dark:border-gray-800"
             >
               <div

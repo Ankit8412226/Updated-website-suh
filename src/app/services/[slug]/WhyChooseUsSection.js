@@ -164,7 +164,7 @@ export default function WhyChooseUsSection({ slug }) {
                     {item.description}
                   </p>
 
-                  <Link
+                  {/* <Link
                     href="#"
                     className="group inline-flex items-center gap-2 mt-6 text-sm font-medium"
                   >
@@ -172,7 +172,7 @@ export default function WhyChooseUsSection({ slug }) {
                     <span className="w-7 h-7 rounded-full bg-purple-600 text-white flex items-center justify-center transition-transform group-hover:translate-x-1 group-hover:-translate-y-1">
                       <ArrowUpRight size={15} />
                     </span>
-                  </Link>
+                  </Link> */}
                 </div>
               </motion.div>
             );
